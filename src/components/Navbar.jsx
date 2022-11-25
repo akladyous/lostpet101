@@ -41,11 +41,18 @@ export default function Navbar() {
                             </li>
                         </ul>
                         <div className='navbar-nav align-content-center justify-content-center gap-2'>
-                            <button className='btn d-block text-dark fw-bold rounded-5'>join now</button>
-                            <button className='btn d-block btn-box'>sign in</button>
-                            <div className='d-none d-md-block'>
-                                <img src={avatar} alt="av" className='avatar' />
-                            </div>
+                            {
+                                currentUser ?
+                                    <div className='d-none d-md-block'>
+                                        <img src={avatar} alt="av" className='avatar' />
+                                    </div>
+                                    :
+                                    <>
+                                        <button className='btn d-block text-dark fw-bold rounded-5'>join now</button>
+                                        <button className='btn d-block btn-box'>sign in</button>
+                                    </>
+
+                            }
                         </div>
                     </div>
                 </div>
