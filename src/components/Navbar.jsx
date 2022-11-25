@@ -1,8 +1,6 @@
 import logo from '../assets/images/logo.svg'
 import React from 'react'
-Array.prototype.random = function () {
-    return this[Math.floor((Math.random() * this.length))];
-}
+
 export default function Navbar() {
     const currentUser = null;
     const userStatus = [true, false]
