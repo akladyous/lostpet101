@@ -16,9 +16,15 @@ header {
     /* background-color: lightgray !important; */
 }
 
-.btn {
+.btn-box {
     border-radius: 1rem !important;
+    text-transform: capitalize;
+    color: var(--cs-orange) !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border-color: var(--cs-orange) !important;
 }
+
 .btn:hover {
     /* border: 3px solid darkcyan; */
     /* color: white; */
@@ -27,11 +33,15 @@ header {
     /* padding: 5px 5px; */
     /* border-radius: 15px; */
     /* outline: 1px solid blue; */
-    outline-style: inset;
-    box-shadow: inset 0 0 0 1px white;
+    /* outline-style: inset; */
+    /* box-shadow: inset 0 0 0 1px white; */
 }
 #mainNavbar ul li a {
     text-transform: capitalize;
     font-family: sans-serif "Poppins";
     font-weight: 600;
+}
+.avatar {
+    display: block;
+    width: 40px;
 }

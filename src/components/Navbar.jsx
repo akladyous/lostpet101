@@ -1,13 +1,14 @@
 import React from 'react'
 import '../assets/css/navbar.css'
 import logo from '../assets/images/icons/logo.png'
+import avatar from '../assets/images/avatars/avatar1.png'
 
 export default function Navbar() {
     const currentUser = null;
     const userStatus = [true, false]
     return (
         <header>
-            <nav className="navbar navbar-expand-lg h-100">
+            <nav className="navbar navbar-expand-lg">
                 <div className="container-fluid">
                     <a className="navbar-brand" href="/">
                         <img src={logo} alt="logo" className='logo' />
@@ -16,7 +17,7 @@ export default function Navbar() {
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
-                    <div className="collapse navbar-collapse" id="mainNavbar">
+                    <div className="collapse navbar-collapse h-100" id="mainNavbar">
                         <ul className="navbar-nav me-auto mb-1 mb-lg-0 mx-auto gap-1">
                             <li className="nav-item">
                                 <a className="nav-link ps-2 active" aria-current="page" href="/">Home</a>
@@ -40,9 +41,11 @@ export default function Navbar() {
                             </li>
                         </ul>
                         <div className='navbar-nav align-content-center justify-content-center gap-2'>
-                            <button className='btn btn-primary d-block '>logout</button>
-                            <button className='btn btn-primary d-block '>login</button>
-
+                            <button className='btn d-block text-dark fw-bold rounded-5'>join now</button>
+                            <button className='btn d-block btn-box'>sign in</button>
+                            <div className='d-none d-md-block'>
+                                <img src={avatar} alt="av" className='avatar' />
+                            </div>
                         </div>
                     </div>
                 </div>
