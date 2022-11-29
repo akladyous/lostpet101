@@ -21,8 +21,8 @@
     text-decoration: none;
 }
 a:focus,
-.button:focus,
 button:focus {
     text-decoration: none;
     outline: none;
+    color: #202942 !important;
 }
