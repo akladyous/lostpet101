@@ -21,14 +21,27 @@
     }
 }
 .single-service {
-    height: 100%;
+    padding: 4rem 1.5rem;
+    border: 1px solid #ffc5c2;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -o-transition: 0.5s;
+    transition: 0.5s;
+}
+.icon-area {
+    height: 140px;
+    width: 160px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    margin: auto;
+    background-image: url("../images/service/service_icon_bg_1.png");
 }
 .service-bg {
-    background-image: url("../images/service/service_icon_bg_1.png");
     background-size: cover;
     background-position: center center;
-    background-position: bottom;
     background-repeat: no-repeat;
-    border: 1px solid black;
-    /* width: auto; */
 }

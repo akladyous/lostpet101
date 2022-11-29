@@ -17,16 +17,62 @@ export default function ServiceArea() {
             </div>
             <div className="row justify-content-center">
                 <div className="col-md-4">
-                    <div className="single-service d-flex flex-column align-items-center justify-content-between">
-                        <div className='service-bg'>
-                            <img src={logo1} alt="logo-1" />
+                    <div className="single-service">
+                        <div className="icon-area d-flex align-items-center justify-content-center">
+                            <div className='service-bg'>
+                                <img src={logo1} alt="logo-1" />
+                            </div>
                         </div>
-                        <div className='service_content text-center'>
+                        <div className='service-content text-center my-4'>
                             <h3>Pet Boarding</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut</p>
+                            <p className='py-1'>
+                                Create a free lost or found pet listing that
+                                is emailed faxed to over 25 local shelters,
+                                vets and rescue groups.
+                            </p>
                         </div>
                     </div>
                 </div>
+
+
+                <div className="col-md-4">
+                    <div className="single-service">
+                        <div className="icon-area d-flex align-items-center justify-content-center">
+                            <div className='service-bg'>
+                                <img src={logo2} alt="logo-1" />
+                            </div>
+                        </div>
+                        <div className='service-content text-center my-4'>
+                            <h3>FREE LISTING</h3>
+                            <p className='py-1'>
+                                Speak with neighbors, about your missing
+                                pet. Put your lost pet flyer in local vet
+                                offices and other community establishments.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div className="col-md-4">
+                    <div className="single-service">
+                        <div className="icon-area d-flex align-items-center justify-content-center">
+                            <div className='service-bg'>
+                                <img src={logo3} alt="logo-1" />
+                            </div>
+                        </div>
+                        <div className='service-content text-center my-4'>
+                            <h3>FLYER GENERATOR</h3>
+                            <p className='py-1'>
+                                Create a lost or found pet flyer with all
+                                pertinent information will make it easy to
+                                help tracking down your pet.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
     )
