@@ -20,3 +20,15 @@
         margin-block-start: 1rem;
     }
 }
+.single-service {
+    height: 100%;
+}
+.service-bg {
+    background-image: url("../images/service/service_icon_bg_1.png");
+    background-size: cover;
+    background-position: center center;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    border: 1px solid black;
+    /* width: auto; */
+}
