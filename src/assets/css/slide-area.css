@@ -5,6 +5,7 @@
     /* padding: 160px; */
     background-position: bottom;
     background-repeat: no-repeat;
+    margin-bottom: 100px;
 }
 .slide-bg {
     height: 100%;
@@ -22,8 +23,8 @@
     }
 }
 .slide-text h2,
-h3,
-p {
+.slide-text h3,
+.slide-text p {
     color: #ffffff;
     font-family: "Poppins", sans-serif;
     margin-bottom: 4px;
@@ -36,7 +37,9 @@ p {
 }
 .dog-area > img {
     position: absolute;
-    top: 15%;
+    top: 20%;
+    /* left: 0; */
+    right: 10%;
     /* transform: translate(-50%, 10%); */
-    width: 80%;
+    width: 100%;
 }

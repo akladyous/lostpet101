@@ -6,7 +6,7 @@ export default function SlideArea() {
         <div className="slide-area">
             <div className="slide-bg">
                 <div className="row h-100">
-                    <div className="col-sm-12 col-md-4">
+                    <div className="col-sm-12 col-md-5">
                         <div className="h-100 d-flex flex-column justify-content-center gap-md-3">
                             <div className='slide-text text-center'>
                                 <h4 className="text-light display-1 fw-bold">
@@ -28,7 +28,7 @@ export default function SlideArea() {
                             </div>
                         </div>
                     </div>
-                    <div className="d-none d-md-block col-md-8">
+                    <div className="d-none d-md-block col-md-7">
                         <div className='dog-area h-100'>
                             <img src={dog} alt="dog" />
                         </div>
