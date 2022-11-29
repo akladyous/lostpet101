@@ -6,3 +6,23 @@
     --cs-light: #edf5ff;
     --cs-dark: #202942;
 }
+.btn-boxed {
+    background: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    border: 1px solid transparent;
+    color: #ff3500;
+    padding: 17px 50px;
+    font-family: "Poppins", sans-serif;
+    display: inline-block;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    text-decoration: none;
+}
+a:focus,
+.button:focus,
+button:focus {
+    text-decoration: none;
+    outline: none;
+}

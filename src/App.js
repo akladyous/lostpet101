@@ -1,9 +1,9 @@
-import Navbar from "./components/ui/Navbar.jsx";
+import Home from "./components/ui/Home.jsx";
 
 function App() {
     return (
         <div className="App">
-            <Navbar />
+            <Home />
         </div>
     );
 }

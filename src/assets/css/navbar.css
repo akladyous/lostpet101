@@ -1,14 +1,10 @@
-header {
-    height: 4rem;
-}
 .bg-main {
     background-color: var(--cs-orange);
 }
-
 .logo {
     width: 50px;
 }
-#mainNavbar .navbar-nav > li > a:hover {
+Navbar .navbar-nav > li > a:hover {
     /* color: var(--cs-orange) !important; */
     /* outline: 1px solid lightgray; */
     /* border-radius: 0.5rem; */

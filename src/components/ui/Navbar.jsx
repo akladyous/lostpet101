@@ -1,4 +1,3 @@
-import React from 'react'
 import '../../assets/css/navbar.css'
 import logo from '../../assets/images/icons/logo.png'
 import avatar from '../../assets/images/avatars/avatar1.png'
@@ -6,7 +5,7 @@ import avatar from '../../assets/images/avatars/avatar1.png'
 export default function Navbar() {
     const currentUser = null;
     return (
-        <header>
+        <header className='h-auto'>
             <nav className="navbar navbar-expand-lg">
                 <div className="container-fluid">
                     <a className="navbar-brand" href="/">
