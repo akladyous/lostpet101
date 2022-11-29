@@ -21,7 +21,7 @@
     }
 }
 .single-service {
-    padding: 4rem 1.5rem;
+    padding: 70px 25px 65px 25px;
     border: 1px solid #ffc5c2;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
@@ -44,4 +44,12 @@
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
+}
+.service-area .single-service .service-content h3 {
+    font-size: 25px;
+    font-weight: 500;
+    margin-block: 1.5rem;
+}
+.service-area .single-service .service-content {
+    height: 10rem;
 }

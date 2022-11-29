@@ -16,6 +16,7 @@ export default function ServiceArea() {
                 </div>
             </div>
             <div className="row justify-content-center">
+
                 <div className="col-md-4">
                     <div className="single-service">
                         <div className="icon-area d-flex align-items-center justify-content-center">
@@ -23,9 +24,9 @@ export default function ServiceArea() {
                                 <img src={logo1} alt="logo-1" />
                             </div>
                         </div>
-                        <div className='service-content text-center my-4'>
+                        <div className='service-content text-center'>
                             <h3>Pet Boarding</h3>
-                            <p className='py-1'>
+                            <p className='py-2'>
                                 Create a free lost or found pet listing that
                                 is emailed faxed to over 25 local shelters,
                                 vets and rescue groups.
@@ -34,7 +35,6 @@ export default function ServiceArea() {
                     </div>
                 </div>
 
-
                 <div className="col-md-4">
                     <div className="single-service">
                         <div className="icon-area d-flex align-items-center justify-content-center">
@@ -42,9 +42,9 @@ export default function ServiceArea() {
                                 <img src={logo2} alt="logo-1" />
                             </div>
                         </div>
-                        <div className='service-content text-center my-4'>
-                            <h3>FREE LISTING</h3>
-                            <p className='py-1'>
+                        <div className='service-content text-center'>
+                            <h3>Free Listing</h3>
+                            <p className='py-2'>
                                 Speak with neighbors, about your missing
                                 pet. Put your lost pet flyer in local vet
                                 offices and other community establishments.
@@ -53,7 +53,6 @@ export default function ServiceArea() {
                     </div>
                 </div>
 
-
                 <div className="col-md-4">
                     <div className="single-service">
                         <div className="icon-area d-flex align-items-center justify-content-center">
@@ -61,9 +60,9 @@ export default function ServiceArea() {
                                 <img src={logo3} alt="logo-1" />
                             </div>
                         </div>
-                        <div className='service-content text-center my-4'>
-                            <h3>FLYER GENERATOR</h3>
-                            <p className='py-1'>
+                        <div className='service-content text-center'>
+                            <h3>Flyer Generator</h3>
+                            <p className='mb-0'>
                                 Create a lost or found pet flyer with all
                                 pertinent information will make it easy to
                                 help tracking down your pet.
@@ -71,7 +70,6 @@ export default function ServiceArea() {
                         </div>
                     </div>
                 </div>
-
 
             </div>
         </div>
