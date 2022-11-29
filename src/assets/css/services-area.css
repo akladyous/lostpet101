@@ -1,7 +1,22 @@
+.service-area {
+    margin-block-start: 5rem;
+}
 .section_title h1 {
     font-size: 50px;
-    font-weight: 700;
-    line-height: 60px;
+    font-weight: 600;
+    /* line-height: 60px; */
     color: #191d34;
     font-family: "Poppins", sans-serif;
+}
+@media (max-width: 767px) {
+    .section_title h1 {
+        font-size: 20px;
+    }
+    .section_title p {
+        color: gray;
+        padding-inline: 1rem;
+    }
+    .service-area {
+        margin-block-start: 1rem;
+    }
 }

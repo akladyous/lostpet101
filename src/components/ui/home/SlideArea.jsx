@@ -23,7 +23,7 @@ export default function SlideArea() {
                                     vets and rescue groups.
                                 </p>
                             </div>
-                            <div className='text-center my-2'>
+                            <div className='d-none d-md-block text-center my-2'>
                                 <a href="contact.html" class="btn-boxed">Contact Us</a>
                             </div>
                         </div>

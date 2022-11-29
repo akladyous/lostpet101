@@ -2,7 +2,7 @@ import '../../../assets/css/services-area.css'
 
 export default function ServiceArea() {
     return (
-        <div className='container'>
+        <div className='container service-area'>
             <div className="row justify-content-center">
                 <div class="col-md-10">
                     <div className="section_title text-center">
