@@ -1,6 +1,8 @@
+.pet_care_area {
+    padding-block-end: 2rem;
+}
 .pet_care_area .pet_thumb {
-    /* max-width: 430px; */
-    max-height: 600px;
+    max-height: 450px;
 }
 
 .pet_care_area .pet_thumb img {
