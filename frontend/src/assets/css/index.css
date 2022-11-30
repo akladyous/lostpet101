@@ -6,6 +6,15 @@
     --cs-light: #edf5ff;
     --cs-dark: #202942;
     --cs-light: #66666f;
+    height: 100%;
+}
+.content {
+    height: min(100vh, 768px);
+}
+@media (min-width: 768px) {
+    .content {
+        height: min(100vh, 1024px);
+    }
 }
 .btn-boxed {
     background: #fff;

@@ -4,11 +4,14 @@
     background-repeat: no-repeat;
     background-size: cover;
     /* background: #f8f8f8; */
-    position: relative;
+    /* position: relative; */
     z-index: 0;
     width: 100%;
     height: 250px;
     background-color: var(--bs-gray-100);
+    /* position: fixed; */
+    /* bottom: 0; */
+    /* padding-top: 100%; */
 }
 .footer * {
     background-color: var(--bs-gray-100);

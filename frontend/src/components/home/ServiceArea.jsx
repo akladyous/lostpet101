@@ -1,7 +1,7 @@
-import '../../../assets/css/services-area.css'
-const logo1 = require('../../../assets/images/service/service_icon_1.png')
-const logo2 = require('../../../assets/images/service/service_icon_2.png')
-const logo3 = require('../../../assets/images/service/service_icon_3.png')
+import '../../assets/css/services-area.css'
+const logo1 = require('../../assets/images/service/service_icon_1.png')
+const logo2 = require('../../assets/images/service/service_icon_2.png')
+const logo3 = require('../../assets/images/service/service_icon_3.png')
 
 export default function ServiceArea() {
     return (

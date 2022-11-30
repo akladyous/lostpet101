@@ -1,5 +1,5 @@
-import '../../../assets/css/slide-area.css'
-import dog from '../../../assets/images/banner/dog.png'
+import '../../assets/css/slide-area.css'
+import dog from '../../assets/images/banner/dog.png'
 
 export default function SlideArea() {
     return (

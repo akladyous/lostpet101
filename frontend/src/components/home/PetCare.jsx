@@ -1,5 +1,5 @@
-import '../../../assets/css/pet-care.css'
-const petCare = require('../../../assets/images/about/pet_care.png')
+import '../../assets/css/pet-care.css'
+const petCare = require('../../assets/images/about/pet_care.png')
 
 export default function PetCare() {
     return (

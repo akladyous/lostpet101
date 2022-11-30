@@ -1,4 +1,4 @@
-import '../../../assets/css/team-area.css'
+import '../../assets/css/team-area.css'
 
 export default function TeamArea() {
     return (
