@@ -2,6 +2,7 @@ import Navbar from './home/Navbar.jsx'
 import SlideArea from './home/SlideArea.jsx'
 import ServiceArea from './home/ServiceArea.jsx'
 import PetCare from './home/PetCare.jsx'
+import TeamArea from './home/TeamArea.jsx'
 
 export default function Home() {
     return (
@@ -10,6 +11,7 @@ export default function Home() {
             <SlideArea />
             <ServiceArea />
             <PetCare />
+            <TeamArea />
 
         </div>
     )
