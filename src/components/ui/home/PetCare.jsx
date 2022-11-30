@@ -12,7 +12,7 @@ export default function PetCare() {
                         </div>
                     </div>
                     <div className="col-sm-12 col-md-6 offset-md-1">
-                        <div className="pet_info py-3">
+                        <div className="pet_info">
                             <div className="section_title">
                                 <h2 className='display-4'>
                                     We care your pet

@@ -4,7 +4,6 @@
     background-position: center center;
     background-position: bottom;
     background-repeat: no-repeat;
-    /* padding: 160px; */
 }
 .slide-bg {
     height: 100%;
@@ -18,6 +17,7 @@
 @media (min-width: 768px) {
     .slide-area {
         height: 600px;
+        /* padding-block-end: 200px; */
     }
 }
 .slide-text h2,
