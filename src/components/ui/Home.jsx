@@ -10,6 +10,7 @@ export default function Home() {
             <SlideArea />
             <ServiceArea />
             <PetCare />
+
         </div>
     )
 }

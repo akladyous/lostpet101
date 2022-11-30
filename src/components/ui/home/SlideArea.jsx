@@ -24,7 +24,7 @@ export default function SlideArea() {
                                 </p>
                             </div>
                             <div className='d-none d-md-block text-center my-2'>
-                                <a href="contact.html" class="btn-boxed">Contact Us</a>
+                                <a href="contact.html" className="btn-boxed">Contact Us</a>
                             </div>
                         </div>
                     </div>

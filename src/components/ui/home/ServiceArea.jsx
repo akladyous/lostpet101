@@ -7,7 +7,7 @@ export default function ServiceArea() {
     return (
         <div className='container service-area'>
             <div className="row justify-content-center">
-                <div class="col-md-10">
+                <div className="col-md-10">
                     <div className="section_title text-center">
                         <h1>Services for every dog</h1>
                         <p>Match with highly rated local dog boarding kennels near you</p>
