@@ -1,6 +1,6 @@
 .contact_area.contact_area_bg {
     background-image: url("../images/banner/contact_bg.png");
-    width: 100%;
+    /* width: 100%; */
 }
 .contact_area {
     background-position: center center;
