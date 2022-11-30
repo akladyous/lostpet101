@@ -12,7 +12,6 @@
 }
 @media (max-width: 767px) {
     .slide-area {
-        /* height: 40%; */
         height: 300px;
     }
 }
