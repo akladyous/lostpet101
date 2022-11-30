@@ -1,0 +1,38 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300i,400,400i,600,700|Poppins:200,200i,300,300i,400,500,500i,600,700,800,900&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300i,400,400i,600,700|Poppins:200,200i,300,300i,400,500,500i,600,700,800,900&display=swap");
+
+:root {
+    --cs-orange: #ed5b0d;
+    --cs-light: #edf5ff;
+    --cs-dark: #202942;
+    --cs-light: #66666f;
+}
+.btn-boxed {
+    background: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    border: 1px solid transparent;
+    color: #ff3500;
+    padding: 17px 40px;
+    font-family: "Poppins", sans-serif;
+    display: inline-block;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    text-decoration: none;
+}
+.cs-primary {
+    background-color: var(--cs-orange);
+}
+.cs-border-orange {
+    border: 1px solid #ffc5c2;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+a:focus,
+button:focus {
+    text-decoration: none;
+    outline: none;
+    color: #202942 !important;
+}
