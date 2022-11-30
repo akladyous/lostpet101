@@ -8,6 +8,7 @@
     padding-block: 5rem;
     background-size: 100% 100%;
     background-repeat: no-repeat;
+    margin-bottom: 4rem;
 }
 @media (max-width: 767px) {
     .contact_area {
