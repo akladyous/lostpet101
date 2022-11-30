@@ -1,6 +1,7 @@
 import Navbar from './home/Navbar.jsx'
 import SlideArea from './home/SlideArea.jsx'
 import ServiceArea from './home/ServiceArea.jsx'
+import PetCare from './home/PetCare.jsx'
 
 export default function Home() {
     return (
@@ -8,6 +9,7 @@ export default function Home() {
             <Navbar />
             <SlideArea />
             <ServiceArea />
+            <PetCare />
         </div>
     )
 }
