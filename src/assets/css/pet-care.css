@@ -2,9 +2,11 @@
     padding-block-end: 2rem;
 }
 .pet_care_area .pet_thumb {
-    max-height: 450px;
+    max-height: 550px;
 }
-
+.pet_care_area .section_title {
+    padding-block: 1rem;
+}
 .pet_care_area .pet_thumb img {
     width: 100%;
     height: 100%;
@@ -19,5 +21,8 @@
     }
     .pet_info .section_title h1 {
         font-size: xx-large;
+    }
+    .pet_care_area .pet_thumb {
+        max-height: 450px;
     }
 }
