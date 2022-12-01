@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { useEffect, memo } from 'react'
 const capitalize = str => str.charAt(0).toUpperCase().concat(str.slice(1))
 const camelCaseToString = str => str.split(/(?=[A-Z])/).join(' ')
@@ -31,13 +30,3 @@ function Element(props) {
 }
 
 export const MemoizedComponent = memo(Element)
-MemoizedComponent.propTypes = {
-    name: PropTypes.string,
-    type: PropTypes.string,
-    value: PropTypes.string,
-    label: PropTypes.string,
-    options: PropTypes.object,
-    onChange: PropTypes.func,
-
-
-}

@@ -1,6 +1,5 @@
 import { useReducer, useEffect } from 'react'
 import { MemoizedComponent } from '../../lib/Element.jsx'
-const camelCaseToString = str => str.split(/(?=[A-Z])/).join(' ')
 
 function initialState(initialValue) {
     return { ...initialValue }
@@ -71,7 +70,7 @@ export default function SignUp(props) {
                         <MemoizedComponent
                             name='passwordConfirmation'
                             type='password'
-                            value={state.passwordConfirmation}
+                            value={1234}
                             label='password confirmation'
                             onChange={handleChange}
                             options={{ placeholder: 'password Confirmation', disabled: false }}
