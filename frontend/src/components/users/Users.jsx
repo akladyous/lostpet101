@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom"
 
 export default function Users() {
     return (
-        <div className="users h-100 bg-light">
+        <div className="users min-vh-100">
             <Outlet />
         </div>
     )
