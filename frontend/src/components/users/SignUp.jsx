@@ -45,36 +45,45 @@ export default function SignUp(props) {
             <div className="container w-50">
                 <form action="/users/signup">
                     <div className="mb-3">
-                        <label htmlFor="email" className='form-label'>Email address</label>
-                        <input
-                            type="email"
-                            name="email"
-                            id='email'
-                            className='form-control'
-                            value={state.email}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="password" className='form-label'>Password</label>
-                        <input
-                            name="password"
-                            type="password"
-                            value={state.password}
-                            id='password'
-                            className='form-control'
+                        <MemoizedComponent
+                            attributes={{
+                                name: 'email',
+                                type: 'email',
+                                value: state.email,
+                                id: "email",
+                                className: "form-control",
+                            }}
+                            label={{ value: 'email Address', htmlFor: 'email', className: 'form-label' }}
+                            options={{ placeholder: 'email', disabled: false }}
                             onChange={handleChange}
                         />
                     </div>
                     <div className="mb-3">
                         <MemoizedComponent
-                            name='passwordConfirmation'
-                            type='password'
-                            value={state.passwordConfirmation}
-                            id="passwordConfirmation"
-                            label={{ value: 'password confirmation', htmlFor: 'passwordConfirmation', className: 'form-label' }}
+                            attributes={{
+                                name: 'password',
+                                type: 'password',
+                                value: state.password,
+                                id: "password",
+                                className: "form-control",
+                            }}
+                            label={{ value: 'password', htmlFor: 'password', className: 'form-label' }}
+                            options={{ placeholder: 'password', disabled: false }}
                             onChange={handleChange}
+                        />
+                    </div>
+                    <div className="mb-3">
+                        <MemoizedComponent
+                            attributes={{
+                                name: 'passwordConfirmation',
+                                type: 'password',
+                                value: state.passwordConfirmation,
+                                id: "passwordConfirmation",
+                                className: "form-control",
+                            }}
+                            label={{ value: 'password confirmation', htmlFor: 'passwordConfirmation', className: 'form-label' }}
                             options={{ placeholder: 'password Confirmation', disabled: false }}
+                            onChange={handleChange}
                         />
                     </div>
                 </form>
