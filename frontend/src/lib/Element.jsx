@@ -2,6 +2,7 @@ import { useEffect, memo } from 'react'
 const capitalize = str => str.charAt(0).toUpperCase().concat(str.slice(1))
 const camelCaseToString = str => str.split(/(?=[A-Z])/).join(' ')
 function Element(props) {
+    console.log(props)
     const {
         name,
         type,
@@ -10,12 +11,16 @@ function Element(props) {
         options,
         onChange
     } = props || {};
-    useEffect(() => { console.log('memoized update') }, [])
+
     return (
         <>
-            <label htmlFor={name} className='form-label'>
-                {capitalize(label) || capitalize(name)}
-            </label>
+            {props.label ?
+                <label htmlFor={label.htmlFor} className={label.className}>
+                    {capitalize(label.value)}
+                </label>
+                : ''
+            }
+
             <input
                 type={type}
                 name={name}

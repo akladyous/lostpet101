@@ -58,11 +58,11 @@ export default function SignUp(props) {
                     <div className="mb-3">
                         <label htmlFor="password" className='form-label'>Password</label>
                         <input
-                            type="password"
                             name="password"
+                            type="password"
+                            value={state.password}
                             id='password'
                             className='form-control'
-                            value={state.password}
                             onChange={handleChange}
                         />
                     </div>
@@ -70,8 +70,9 @@ export default function SignUp(props) {
                         <MemoizedComponent
                             name='passwordConfirmation'
                             type='password'
-                            value={1234}
-                            label='password confirmation'
+                            value={state.passwordConfirmation}
+                            id="passwordConfirmation"
+                            label={{ value: 'password confirmation', htmlFor: 'passwordConfirmation', className: 'form-label' }}
                             onChange={handleChange}
                             options={{ placeholder: 'password Confirmation', disabled: false }}
                         />
