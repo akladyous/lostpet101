@@ -1,5 +1,4 @@
 import { useReducer, useEffect } from 'react'
-import PropTypes from 'prop-types'
 import { MemoizedComponent } from '../../lib/Element.jsx'
 const camelCaseToString = str => str.split(/(?=[A-Z])/).join(' ')
 
