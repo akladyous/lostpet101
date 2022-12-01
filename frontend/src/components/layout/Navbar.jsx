@@ -5,7 +5,7 @@ import avatar from '../../assets/images/avatars/avatar1.png'
 export default function Navbar() {
     const currentUser = null;
     return (
-        <header className='h-auto'>
+        <header>
             <nav className="navbar navbar-expand-lg">
                 <div className="container-fluid">
                     <a className="navbar-brand" href="/">
