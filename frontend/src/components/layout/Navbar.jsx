@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import '../../assets/css/navbar.css'
 import logo from '../../assets/images/icons/logo.png'
 import avatar from '../../assets/images/avatars/avatar1.png'
@@ -46,10 +47,13 @@ export default function Navbar() {
                                     </div>
                                     :
                                     <>
-                                        <button className='btn d-block text-dark fw-bold rounded-5'>join now</button>
-                                        <button className='btn d-block btn-box'>sign in</button>
+                                        <Link to='users/signup' state={'User SignUp'} className='btn d-block text-dark fw-bold rounded-5'>
+                                            join now
+                                        </Link>
+                                        <Link to='users/signin' state='User SignIn' className='btn d-block btn-box'>
+                                            sign in
+                                        </Link>
                                     </>
-
                             }
                         </div>
                     </div>

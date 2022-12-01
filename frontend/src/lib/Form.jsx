@@ -1,35 +1,13 @@
-import { useReducer, useEffect } from 'react'
-import PropTypes from 'prop-types'
-import { MemoizedComponent } from '../../lib/Element.jsx'
+import { useReducer } from 'react'
+import { MemoizedComponent } from './Element.jsx'
 const camelCaseToString = str => str.split(/(?=[A-Z])/).join(' ')
-
-function formData(modelName, columnsName, url, handler) {
-    this.modelName = modelName
-    this.columnsName = columnsName
-    this.url = url
-    this.handler = handler
-}
-formData.prototype.get = function () { }
-var prop = ''
-const userData = {
-    model: 'user',
-    url: 'users/signup',
-    columns: {
-        email: {
-            attributes: { type: 'text', name: 'email', className: 'form-control', id: 'email', value: '' },
-            handler: function () { },
-        }
-    },
-
-    get [prop]() {
-        this.columns.forEach(col => { })
-    }
-}
 
 function initialState(initialValue) {
     return { ...initialValue }
 }
-
+const userData = {
+    email: { value: '', type: 'text', label: '', options: {} }
+}
 const initialValue = {
     email: '',
     password: '',
@@ -53,9 +31,7 @@ function reducer(state, action) {
             break;
     }
 }
-
-export default function SignUp(props) {
-
+export default function Form({ initialValue }) {
     const [state, dispatch] = useReducer(reducer, initialValue, initialState)
     const handleChange = e => {
         dispatch({
@@ -63,7 +39,6 @@ export default function SignUp(props) {
             payload: { inputName: e.target.name, value: e.target.value }
         })
     };
-    useEffect(() => { console.log('signup update') }, [])
     return (
         <div>
             <h1>Form</h1>
@@ -73,7 +48,6 @@ export default function SignUp(props) {
                         <label htmlFor="email" className='form-label'>Email address</label>
                         <input
                             type="email"
-                            name="email"
                             id='email'
                             className='form-control'
                             value={state.email}
@@ -84,7 +58,6 @@ export default function SignUp(props) {
                         <label htmlFor="password" className='form-label'>Password</label>
                         <input
                             type="password"
-                            name="password"
                             id='password'
                             className='form-control'
                             value={state.password}
@@ -93,12 +66,11 @@ export default function SignUp(props) {
                     </div>
                     <div className="mb-3">
                         <MemoizedComponent
-                            name='passwordConfirmation'
-                            type='password'
-                            value={state.passwordConfirmation}
-                            label='password confirmation'
-                            onChange={handleChange}
-                            options={{ placeholder: 'password Confirmation', disabled: false }}
+                            name='firstName'
+                            type='text'
+                            value=''
+                            label='first name'
+                            options={{ placeholder: 'first name', disabled: false }}
                         />
                     </div>
                 </form>
