@@ -1,10 +1,27 @@
 import { useReducer, useEffect } from 'react'
 import { MemoizedComponent } from '../../lib/Element.jsx'
 
+var prop = ''
+const userData = {
+    model: 'user',
+    url: 'users/signup',
+    columns: {
+        email: {
+            attributes: { type: 'text', name: 'email', className: 'form-control', id: 'email', value: '' },
+            handler: function () { },
+            validation: {},
+        }
+    },
+
+    get [prop]() {
+        this.columns.forEach(col => { })
+    }
+}
+
+
 function initialState(initialValue) {
     return { ...initialValue }
 }
-
 const initialValue = {
     email: '',
     password: '',

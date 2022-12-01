@@ -13,7 +13,7 @@ function Element(props) {
                 </label>
                 : ''
             }
-            <input {...props.attributes} onChange={onChange} {...options} />
+            <input {...attributes} onChange={onChange} {...options} />
         </>
     )
 }
