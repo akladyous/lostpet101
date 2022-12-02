@@ -1,45 +1,7 @@
-import { useReducer, useEffect } from "react";
+import { useReducer } from "react";
 import { MemoizedComponent } from "../../lib/Element.jsx";
 
-const signupForm = {
-    columns: {
-        email: {
-            attributes: {
-                type: "text",
-                name: "email",
-                value: "",
-            },
-            handler: function () { },
-            constrains: {},
-        },
-        password: {
-            attributes: {
-                type: "password",
-                name: "password",
-                value: "",
-            },
-            handler: function () { },
-            constrains: {},
-        },
-        passwordConfirmation: {
-            attributes: {
-                type: "password",
-                name: "passwordConfirmation",
-                value: "",
-            },
-            handler: function () { },
-            constrains: {},
-        },
-    },
-    getColumnsName() { return Object.keys(this.columns) }
-};
 
-function initialState(columns) {
-    return columns.reduce((acc, value) => {
-        acc[value] = "";
-        return acc;
-    }, {});
-}
 const initialValue = {
     email: "",
     password: "",
@@ -68,32 +30,21 @@ function reducer(state, action) {
 }
 
 export default function SignUp(props) {
-    const [state, dispatch] = useReducer(reducer, initialValue, initialState);
+    const [state, dispatch] = useReducer(reducer, initialValue);
     const handleChange = (e) => {
         dispatch({
             type: ACTION.CHANGE_VALUE,
             payload: { inputName: e.target.name, value: e.target.value },
         });
     };
-    useEffect(() => {
-        console.log("signup update");
-    }, []);
+    function handleForm(e) {
+        e.preventDefault();
+    }
     return (
         <div>
             <h1>Form</h1>
             <div className="container w-50">
-                <form action="/users/signup">
-                    {(() => {
-                        for (let column in signupForm) {
-                            return (
-                                <div className="mb-3">
-                                    <MemoizedComponent
-
-                                    />
-                                </div>
-                            )
-                        }
-                    })()}
+                <form action="/users/signup" onSubmit={handleForm}>
                     <div className="mb-3">
                         <MemoizedComponent
                             attributes={{
@@ -153,6 +104,9 @@ export default function SignUp(props) {
                             }}
                             onChange={handleChange}
                         />
+                    </div>
+                    <div className="mb-3">
+                        <button className="btn-boxed cs-primary text-white">Submit</button>
                     </div>
                 </form>
             </div>
