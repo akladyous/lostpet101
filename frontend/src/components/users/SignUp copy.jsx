@@ -63,7 +63,7 @@ function reducer(state, action) {
         case ACTION.RESET:
             return initialValue;
         default:
-            return state;
+            break;
     }
 }
 
@@ -83,17 +83,6 @@ export default function SignUp(props) {
             <h1>Form</h1>
             <div className="container w-50">
                 <form action="/users/signup">
-                    {(() => {
-                        for (let column in signupForm) {
-                            return (
-                                <div className="mb-3">
-                                    <MemoizedComponent
-
-                                    />
-                                </div>
-                            )
-                        }
-                    })()}
                     <div className="mb-3">
                         <MemoizedComponent
                             attributes={{
