@@ -3,7 +3,6 @@ class Users::RegistrationController < UsersController
 
   def create
     @user = User.new(user_params)
-    # debugger
     if @user.save
       login @user
       render json: @user, status: :created
