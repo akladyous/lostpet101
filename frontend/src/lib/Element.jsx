@@ -2,7 +2,6 @@ import { memo, useEffect } from 'react'
 
 function Element(props) {
     const { attributes, label, options, onChange } = props || {};
-    console.log(props)
 
     useEffect(() => {
         console.log('element updated/mounted : ', attributes.name)

@@ -5,17 +5,17 @@ import { useCallback } from "react";
 
 const columns = [
     {
-        attributes: { name: 'email', type: 'email' },
+        attributes: { name: 'email', type: 'email', value: '' },
         label: { value: 'Email Address', className: 'form-label' },
         options: {}
     },
     {
-        attributes: { name: 'password', type: 'password' },
+        attributes: { name: 'password', type: 'password', value: '' },
         label: { value: 'password', className: 'form-label' },
         options: {}
     },
     {
-        attributes: { name: 'password_confirmation', type: 'password' },
+        attributes: { name: 'password_confirmation', type: 'password', value: '' },
         label: { value: 'password confirmation', className: 'form-label' },
         options: {}
     },
@@ -63,12 +63,7 @@ export default function SignUp(props) {
             payload: { inputName: e.target.name, value: e.target.value },
         });
     }, [])
-    const handleChange1 = (e) => {
-        dispatch({
-            type: ACTION.CHANGE_VALUE,
-            payload: { inputName: e.target.name, value: e.target.value },
-        });
-    };
+
     function handleForm(e) {
         e.preventDefault();
         handler({ method: 'post', url: 'users/signup', data: state }, true)
