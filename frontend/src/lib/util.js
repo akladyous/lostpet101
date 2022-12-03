@@ -1,4 +1,4 @@
-const camelCaseToString = str => str.split(/(?=[A-Z])/).join(' ')
+export const camelCaseToString = str => str.split(/(?=[A-Z])/).join(' ')
 
 export default (() => {
     Object.defineProperty(String, 'capitalize', {

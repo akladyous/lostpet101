@@ -19,7 +19,6 @@ export default function usePostData(url, resourceData, submitting) {
         try {
             const response = await axios(config)
             setData(response.data)
-            console.log('response.data : ', response.data)
         } catch (error) {
             if (error.response) {
                 setError(error.response.data.error)

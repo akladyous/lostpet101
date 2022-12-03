@@ -1,7 +1,7 @@
-import { useReducer, useState } from "react";
+import { useReducer, } from "react";
 import { MemoizedComponent } from "../../lib/Element.jsx";
-import usePostData from "../../hocs/usePostData.jsx";
 import useAxios from "../../hocs/useAxios.jsx";
+
 const initialValue = {
     email: "",
     password: "",
@@ -31,9 +31,7 @@ function reducer(state, action) {
 
 export default function SignUp(props) {
     const [state, dispatch] = useReducer(reducer, initialValue);
-    const [submitting, setSubmitting] = useState(false)
 
-    // const { loading, error, data, handler } = usePostData(undefined, {}, submitting)
     const { loading, error, data, handler } = useAxios({}, false)
 
     const handleChange = (e) => {
@@ -44,10 +42,6 @@ export default function SignUp(props) {
     };
     function handleForm(e) {
         e.preventDefault();
-        // const controller = new AbortController();
-        // const postUrl = 'https://jsonplaceholder.typicode.com/posts'
-        const postData = { title: 'foo', body: 'bar', userId: 1 }
-        const rData = { user: state }
         handler({ method: 'post', url: 'users/signup', data: state }, true)
         console.log('data: ', data)
     }
