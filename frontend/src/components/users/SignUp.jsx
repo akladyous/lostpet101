@@ -1,7 +1,7 @@
 import { useReducer, useState } from "react";
 import { MemoizedComponent } from "../../lib/Element.jsx";
 import usePostData from "../../hocs/usePostData.jsx";
-
+import useAxios from "../../hocs/useAxios.jsx";
 const initialValue = {
     email: "",
     password: "",
@@ -33,7 +33,8 @@ export default function SignUp(props) {
     const [state, dispatch] = useReducer(reducer, initialValue);
     const [submitting, setSubmitting] = useState(false)
 
-    const { loading, error, data, handler } = usePostData(undefined, {}, submitting)
+    // const { loading, error, data, handler } = usePostData(undefined, {}, submitting)
+    const { loading, error, data, handler } = useAxios({}, false)
 
     const handleChange = (e) => {
         dispatch({
@@ -48,9 +49,10 @@ export default function SignUp(props) {
         const postData = { title: 'foo', body: 'bar', userId: 1 }
         const rData = { user: state }
         console.log('data : ', state)
-        handler('http://localhost:3000/users/signup', state)
+        handler({ method: 'post', url: 'users/signup', data: state }, true)
         console.log('data: ', data)
     }
+
     return (
         <div>
             <h1>Form</h1>

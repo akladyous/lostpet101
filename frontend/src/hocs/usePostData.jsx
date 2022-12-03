@@ -13,8 +13,8 @@ export default function usePostData(url, resourceData, submitting) {
             method: 'post',
             url: url,
             data: data,
-            signal: controller.signal
-            // ...(controller && { signal: controller.signal })
+            signal: controller.signal,
+            // ...(controller ??     { signal: controller.signal })
         };
         try {
             const response = await axios(config)
@@ -40,7 +40,7 @@ export default function usePostData(url, resourceData, submitting) {
         return () => {
             controller.abort();
         };
-    }, [url, submitting])
+    }, [url, submitting, resourceData])
 
     return { data, loading, error, handler: postData }
 

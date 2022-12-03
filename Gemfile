@@ -19,7 +19,9 @@ group :development, :test do
 end
 
 group :development do
-  # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
-  # gem "spring"
+  gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'main', require: false
+  gem 'ruby-progressbar', '~> 1.8', '>= 1.8.1'
+  gem 'solargraph', '~> 0.45.0'
+  gem 'solargraph-rails', '~> 0.3.1'
 end
 
