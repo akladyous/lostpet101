@@ -2,7 +2,6 @@ import { memo } from 'react'
 
 function Element(props) {
     const { attributes, label, options, onChange } = props || {};
-
     return (
         <>
             {props.label ?
