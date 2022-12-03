@@ -1,9 +1,8 @@
-import React, { useReducer, } from "react";
-import { MemoizedComponent } from "../../lib/Element.jsx";
+import React, { useReducer, useCallback, useRef, useEffect } from "react";
+import Item from "../../lib/Item.jsx";
 import useAxios from "../../hocs/useAxios.jsx";
-import { useCallback } from "react";
 
-const columns = [
+const formColumns = [
     {
         attributes: { name: 'email', type: 'email' },
         label: { value: 'Email Address', className: 'form-label' },
@@ -20,68 +19,78 @@ const columns = [
         options: {}
     },
 ];
-const initColumns = (obj) => {
+const initializeState = (obj) => {
     return obj.reduce(
-        (acc, value) => { acc[value.attributes.name] = value.attributes.value; return acc }, {}
-    )
+        (acc, value) => {
+            acc[value.attributes.name] = '';
+            return acc
+        },
+        {})
 }
 
-const initialValue = {
+const __initialValue = {
     email: "",
     password: "",
     password_confirmation: "",
 };
+
 const ACTION = {
-    CHANGE_VALUE: "changeValue",
+    UPDATE_FIELD: "changeValue",
     SUBMIT_FORM: "submitForm",
     RESET: "reset",
 };
 
 function reducer(state, action) {
     switch (action.type) {
-        case ACTION.CHANGE_VALUE:
-            return {
-                ...state,
-                [action.payload.inputName]: action.payload.value,
-            };
+        case ACTION.UPDATE_FIELD:
+            return { ...state, [action.field]: action.value, };
         case ACTION.SUBMIT_FORM:
             return state;
         case ACTION.RESET:
-            return initialValue;
+            return initializeState(formColumns);
         default:
-            return state;
+            break;
     }
 }
 
 export default function SignUp(props) {
-    const [state, dispatch] = useReducer(reducer, initialValue);
+    const [state, dispatch] = useReducer(reducer, formColumns, initializeState);
+    const isMounted = useRef(false)
 
     const { loading, error, data, handler } = useAxios({}, false)
 
     const handleChange = useCallback((e) => {
+        if (!isMounted.current) return
         dispatch({
-            type: ACTION.CHANGE_VALUE,
-            payload: { inputName: e.target.name, value: e.target.value },
+            field: e.target.name,
+            type: ACTION.UPDATE_FIELD,
+            value: e.target.value
         });
     }, [])
 
-    function handleForm(e) {
+    const handleForm = useCallback((e) => {
         e.preventDefault();
         handler({ method: 'post', url: 'users/signup', data: state }, true)
         console.log('data: ', data)
-    }
+    }, [])
+
+    useEffect(() => {
+        isMounted.current = true
+        console.log('signup updated/mounted : ')
+
+        return () => { console.log('signup unmounted : '); isMounted.current = false }
+    }, [])
 
     return (
         <div>
             <h1>Form</h1>
             <div className="container w-50">
                 <form action="/users/signup" onSubmit={handleForm}>
-
-                    {
-                        columns.map(col => {
+                    {/* {
+                        formColumns.map(col => {
                             return (
                                 <div className="mb-3" key={window.crypto.randomUUID()}>
-                                    <MemoizedComponent
+                                    <Item
                                         attributes={{
                                             ...col.attributes,
                                             className: 'form-control',
@@ -89,12 +98,74 @@ export default function SignUp(props) {
                                         }}
                                         label={col.label}
                                         option={col.options}
-                                        onChange={handleChange}
+                                        state={state}
+                                        handleChange={handleChange}
                                     />
                                 </div>
                             )
                         })
-                    }
+                    } */}
+
+                    <div className="mb-3">
+                        <Item
+                            attributes={{
+                                name: "email",
+                                type: "email",
+                                value: state.email,
+                                className: "form-control",
+                            }}
+                            label={{
+                                value: "email Address",
+                                htmlFor: "email",
+                                className: "form-label",
+                            }}
+                            options={{ placeholder: "email", disabled: false }}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className="mb-3">
+                        <Item
+                            attributes={{
+                                name: "password",
+                                type: "password",
+                                value: state.password,
+                                className: "form-control",
+                            }}
+                            label={{
+                                value: "password",
+                                htmlFor: "password",
+                                className: "form-label",
+                            }}
+                            options={{
+                                placeholder: "password",
+                                disabled: false,
+                                minLength: 5,
+                                maxLength: 64
+                            }}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className="mb-3">
+                        <Item
+                            attributes={{
+                                name: "password_confirmation",
+                                type: "password",
+                                value: state.password_confirmation,
+                                className: "form-control",
+                            }}
+                            label={{
+                                value: "password confirmation",
+                                htmlFor: "password_confirmation",
+                                className: "form-label",
+                            }}
+                            options={{
+                                placeholder: "password Confirmation",
+                                disabled: false,
+                            }}
+                            onChange={handleChange}
+                        />
+                    </div>
+
 
                     <div className="mb-3">
                         <p>{error}</p>
@@ -106,7 +177,7 @@ export default function SignUp(props) {
                         {/* <p>{data}</p> */}
                     </div>
                     <div className="mb-3">
-                        <button className="btn-boxed cs-primary text-white">Submit</button>
+                        <button className="btn-boxed cs-primary text-white" type="submit">Submit</button>
                     </div>
                 </form>
             </div>

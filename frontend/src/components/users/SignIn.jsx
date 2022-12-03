@@ -1,5 +1,5 @@
 import { useReducer, } from "react";
-import { MemoizedComponent } from "../../lib/Element.jsx";
+import Item from "../../lib/Item.jsx";
 import useAxios from "../../hocs/useAxios.jsx";
 
 const initialValue = {
@@ -51,7 +51,7 @@ export default function SignIn(props) {
             <div className="container w-50">
                 <form action="/users/signup" onSubmit={handleForm}>
                     <div className="mb-3">
-                        <MemoizedComponent
+                        <Item
                             attributes={{
                                 name: "email",
                                 type: "email",
@@ -69,7 +69,7 @@ export default function SignIn(props) {
                         />
                     </div>
                     <div className="mb-3">
-                        <MemoizedComponent
+                        <Item
                             attributes={{
                                 name: "password",
                                 type: "password",
