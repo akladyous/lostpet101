@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  namespace :users do
+  namespace :users, defaults: {format: :json} do
     post 'signin', to: 'session#create'
     delete 'signout', to: 'session#destroy'
 

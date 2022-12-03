@@ -1,11 +1,10 @@
-import { useReducer, useState } from "react";
+import { useReducer, } from "react";
 import { MemoizedComponent } from "../../lib/Element.jsx";
-import usePostData from "../../hocs/usePostData.jsx";
 
 const initialValue = {
     email: "",
     password: "",
-    password_confirmation: "",
+    passwordConfirmation: "",
 };
 const ACTION = {
     CHANGE_VALUE: "changeValue",
@@ -29,12 +28,8 @@ function reducer(state, action) {
     }
 }
 
-export default function SignUp(props) {
+export default function SignUpForm(props) {
     const [state, dispatch] = useReducer(reducer, initialValue);
-    const [submitting, setSubmitting] = useState(false)
-
-    const { loading, error, data, handler } = usePostData(undefined, {}, submitting)
-
     const handleChange = (e) => {
         dispatch({
             type: ACTION.CHANGE_VALUE,
@@ -43,14 +38,8 @@ export default function SignUp(props) {
     };
     function handleForm(e) {
         e.preventDefault();
-        // const controller = new AbortController();
-        // const postUrl = 'https://jsonplaceholder.typicode.com/posts'
-        const postData = { title: 'foo', body: 'bar', userId: 1 }
-        const rData = { user: state }
-        console.log('data : ', state)
-        handler('http://localhost:3000/users/signup', state)
-        console.log('data: ', data)
     }
+
     return (
         <div>
             <h1>Form</h1>
@@ -98,15 +87,15 @@ export default function SignUp(props) {
                     <div className="mb-3">
                         <MemoizedComponent
                             attributes={{
-                                name: "password_confirmation",
+                                name: "passwordConfirmation",
                                 type: "password",
-                                value: state.password_confirmation,
-                                id: "password_confirmation",
+                                value: state.passwordConfirmation,
+                                id: "passwordConfirmation",
                                 className: "form-control",
                             }}
                             label={{
                                 value: "password confirmation",
-                                htmlFor: "password_confirmation",
+                                htmlFor: "passwordConfirmation",
                                 className: "form-label",
                             }}
                             options={{
@@ -115,15 +104,6 @@ export default function SignUp(props) {
                             }}
                             onChange={handleChange}
                         />
-                    </div>
-                    <div className="mb-3">
-                        <p>{error}</p>
-                    </div>
-                    <div className="mb-3">
-                        <p>{loading}</p>
-                    </div>
-                    <div className="mb-3">
-                        {/* <p>{data}</p> */}
                     </div>
                     <div className="mb-3">
                         <button className="btn-boxed cs-primary text-white">Submit</button>
