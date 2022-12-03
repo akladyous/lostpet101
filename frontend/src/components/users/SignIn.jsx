@@ -2,31 +2,6 @@ import { useReducer, } from "react";
 import { MemoizedComponent } from "../../lib/Element.jsx";
 import useAxios from "../../hocs/useAxios.jsx";
 
-
-const columns = {
-    email: {
-        attributes: { value: '', type: 'email' },
-        label: { value: 'Email Address', className: 'form-label' },
-        options: {}
-    },
-    password: {
-        attributes: { value: '', type: 'password' },
-        label: { value: 'password', className: 'form-label' },
-        options: {}
-    },
-    password_confirmation: {
-        attributes: { value: '', type: 'password' },
-        label: { value: 'password confirmation', className: 'form-label' },
-        options: {}
-    },
-}
-const initColumns = (obj) => {
-    return Object.keys(obj).reduce(
-        (acc, value) => {
-            acc[value] = obj[value].attributes.value; return acc
-        }, {}
-    )
-}
 const initialValue = {
     email: "",
     password: "",
