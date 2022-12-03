@@ -5,7 +5,6 @@ import useAxios from "../../hocs/useAxios.jsx";
 const initialValue = {
     email: "",
     password: "",
-    password_confirmation: "",
 };
 const ACTION = {
     CHANGE_VALUE: "changeValue",
@@ -42,7 +41,7 @@ export default function SignIn(props) {
     };
     function handleForm(e) {
         e.preventDefault();
-        handler({ method: 'post', url: 'users/signup', data: state }, true)
+        handler({ method: 'post', url: 'users/signin', data: state }, true)
         console.log('data: ', data)
     }
 
@@ -90,36 +89,14 @@ export default function SignIn(props) {
                             onChange={handleChange}
                         />
                     </div>
-                    <div className="mb-3">
-                        <MemoizedComponent
-                            attributes={{
-                                name: "password_confirmation",
-                                type: "password",
-                                value: state.password_confirmation,
-                                id: "password_confirmation",
-                                className: "form-control",
-                            }}
-                            label={{
-                                value: "password confirmation",
-                                htmlFor: "password_confirmation",
-                                className: "form-label",
-                            }}
-                            options={{
-                                placeholder: "password Confirmation",
-                                disabled: false,
-                            }}
-                            onChange={handleChange}
-                        />
-                    </div>
+
                     <div className="mb-3">
                         <p>{error}</p>
                     </div>
                     <div className="mb-3">
                         <p>{loading}</p>
                     </div>
-                    <div className="mb-3">
-                        {/* <p>{data}</p> */}
-                    </div>
+
                     <div className="mb-3">
                         <button className="btn-boxed cs-primary text-white">Submit</button>
                     </div>
