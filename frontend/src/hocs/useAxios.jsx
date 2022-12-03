@@ -1,59 +1,34 @@
-import axios from 'axios';
 import { api } from '../lib/api/api.js'
 import { useState, useEffect, useMemo } from "react";
 import { useRef } from 'react';
 import { useCallback } from 'react';
 
-const DEFAULT_CONFIG = {
-    method: 'get',
-    controller: null,
-    data: null,
-}
 
-export default function useAxios(_config) {
-
+export default function useAxios(axiosParams) {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const config = useMemo(
-        () => {
-            if (typeof config === 'string') {
-                return { url: config }
-            }
-            var configuration = { ...DEFAULT_CONFIG };
-            if (!_config.controller) {
-                Object.assign(configuration, { controller: new AbortController() })
-            }
-            if (_config.data) {
-                Object.assign(configuration, { data: JSON.stringify(_config.data) })
-            }
-        }
-        , [])
-
-    const request = async (url, data, controller) => {
+    const fetchData = async (axiosParams) => {
         debugger
         try {
-            const response = await api(config)
+            const response = await api.request(axiosParams)
             setData(response.data)
         } catch (error) {
-            setError(error.message)
+            if (error.response) {
+                setError(error.response.data.error)
+            } else {
+                setError(error.message)
+            }
         } finally {
             setLoading(false)
-            config.signal.abort()
+            axiosParams.signal.abort()
         }
     }
     useEffect(() => {
-        if (!submitting) return
-        setLoading(true)
-        const controller = new AbortController();
-        postData(url, resourceData, controller)
 
-        return () => {
-            controller.abort();
-        };
     }, [url, submitting])
 
-    return { data, loading, error, handler: postData }
+    return { data, loading, error, handler: fetchData }
 
 };
