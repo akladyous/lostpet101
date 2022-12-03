@@ -1,20 +1,20 @@
-import { useReducer, } from "react";
+import React, { useReducer, } from "react";
 import { MemoizedComponent } from "../../lib/Element.jsx";
 import useAxios from "../../hocs/useAxios.jsx";
 
 const columns = [
     {
-        attributes: { name: 'email', type: 'email', value: '' },
+        attributes: { name: 'email', type: 'email' },
         label: { value: 'Email Address', className: 'form-label' },
         options: {}
     },
     {
-        attributes: { name: 'password', type: 'password', value: '' },
+        attributes: { name: 'password', type: 'password' },
         label: { value: 'password', className: 'form-label' },
         options: {}
     },
     {
-        attributes: { name: 'password_confirmation', type: 'password', value: '' },
+        attributes: { name: 'password_confirmation', type: 'password' },
         label: { value: 'password confirmation', className: 'form-label' },
         options: {}
     },
@@ -58,7 +58,6 @@ export default function SignUp(props) {
     const { loading, error, data, handler } = useAxios({}, false)
 
     const handleChange = (e) => {
-        debugger
         dispatch({
             type: ACTION.CHANGE_VALUE,
             payload: { inputName: e.target.name, value: e.target.value },
@@ -77,14 +76,21 @@ export default function SignUp(props) {
                 <form action="/users/signup" onSubmit={handleForm}>
                     {
                         columns.map(col => (
-                            <div className="mb-3">
-                                <MemoizedComponent
-                                    attributes={{ ...col.attributes, className: 'form-control' }}
-                                    label={col.label}
-                                    option={col.options}
-                                    onChange={handleChange}
-                                />
-                            </div>
+                            <React.Fragment key={window.crypto.randomUUID()}>
+                                <div className="mb-3">
+                                    <MemoizedComponent
+                                        attributes={{
+                                            ...col.attributes,
+                                            className: 'form-control',
+                                            value: state[col.attributes.name]
+                                        }}
+                                        label={col.label}
+                                        option={col.options}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                            </React.Fragment>
+
                         ))
                     }
                     <div className="mb-3">

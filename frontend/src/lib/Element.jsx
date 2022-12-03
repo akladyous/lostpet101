@@ -13,8 +13,8 @@ function Element(props) {
             <input
                 {...attributes}
                 id={attributes.name}
-                onChange={onChange}
                 {...options}
+                onChange={onChange}
             />
         </>
     )
