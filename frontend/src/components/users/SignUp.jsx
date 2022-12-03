@@ -5,17 +5,17 @@ import { useCallback } from "react";
 
 const columns = [
     {
-        attributes: { name: 'email', type: 'email', value: '' },
+        attributes: { name: 'email', type: 'email' },
         label: { value: 'Email Address', className: 'form-label' },
         options: {}
     },
     {
-        attributes: { name: 'password', type: 'password', value: '' },
+        attributes: { name: 'password', type: 'password' },
         label: { value: 'password', className: 'form-label' },
         options: {}
     },
     {
-        attributes: { name: 'password_confirmation', type: 'password', value: '' },
+        attributes: { name: 'password_confirmation', type: 'password' },
         label: { value: 'password confirmation', className: 'form-label' },
         options: {}
     },
@@ -57,6 +57,7 @@ export default function SignUp(props) {
     const [state, dispatch] = useReducer(reducer, initialValue);
 
     const { loading, error, data, handler } = useAxios({}, false)
+
     const handleChange = useCallback((e) => {
         dispatch({
             type: ACTION.CHANGE_VALUE,
@@ -75,63 +76,26 @@ export default function SignUp(props) {
             <h1>Form</h1>
             <div className="container w-50">
                 <form action="/users/signup" onSubmit={handleForm}>
-                    <div className="mb-3">
-                        <MemoizedComponent
-                            attributes={{
-                                name: "email",
-                                type: "email",
-                                value: state.email,
-                                className: "form-control",
-                            }}
-                            label={{
-                                value: "email Address",
-                                htmlFor: "email",
-                                className: "form-label",
-                            }}
-                            options={{ placeholder: "email", disabled: false }}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div className="mb-3">
-                        <MemoizedComponent
-                            attributes={{
-                                name: "password",
-                                type: "password",
-                                value: state.password,
-                                className: "form-control",
-                            }}
-                            label={{
-                                value: "password",
-                                className: "form-label",
-                            }}
-                            options={{
-                                placeholder: "password",
-                                disabled: false,
-                                minLength: 5,
-                                maxLength: 64
-                            }}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div className="mb-3">
-                        <MemoizedComponent
-                            attributes={{
-                                name: "password_confirmation",
-                                type: "password",
-                                value: state.password_confirmation,
-                                className: "form-control",
-                            }}
-                            label={{
-                                value: "password confirmation",
-                                className: "form-label",
-                            }}
-                            options={{
-                                placeholder: "password Confirmation",
-                                disabled: false,
-                            }}
-                            onChange={handleChange}
-                        />
-                    </div>
+
+                    {
+                        columns.map(col => {
+                            return (
+                                <div className="mb-3" key={window.crypto.randomUUID()}>
+                                    <MemoizedComponent
+                                        attributes={{
+                                            ...col.attributes,
+                                            className: 'form-control',
+                                            value: state[col.attributes.name]
+                                        }}
+                                        label={col.label}
+                                        option={col.options}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                            )
+                        })
+                    }
+
                     <div className="mb-3">
                         <p>{error}</p>
                     </div>

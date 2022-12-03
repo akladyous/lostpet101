@@ -10,11 +10,12 @@ function Element(props) {
     }, [])
     return (
         <>
-            {props.label ?
-                <label htmlFor={attributes.name} className={label.className}>
-                    {label.value}
-                </label>
-                : ''
+            {
+                props.label ?
+                    <label htmlFor={attributes.name} className={label.className}>
+                        {label.value}
+                    </label>
+                    : ''
             }
             <input
                 {...attributes}
