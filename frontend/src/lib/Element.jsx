@@ -1,17 +1,21 @@
 import { memo } from 'react'
 
 function Element(props) {
-    debugger
     const { attributes, label, options, onChange } = props || {};
     return (
         <>
             {props.label ?
-                <label htmlFor={label.htmlFor} className={label.className}>
+                <label htmlFor={attributes.name} className={label.className}>
                     {label.value}
                 </label>
                 : ''
             }
-            <input {...attributes} onChange={onChange} {...options} />
+            <input
+                {...attributes}
+                id={attributes.name}
+                onChange={onChange}
+                {...options}
+            />
         </>
     )
 }

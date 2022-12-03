@@ -4,17 +4,17 @@ import useAxios from "../../hocs/useAxios.jsx";
 
 const columns = [
     {
-        attributes: { name: 'email', type: 'email', value: '', },
+        attributes: { name: 'email', type: 'email', value: '' },
         label: { value: 'Email Address', className: 'form-label' },
         options: {}
     },
     {
-        attributes: { name: 'password', type: 'password', value: '', },
+        attributes: { name: 'password', type: 'password', value: '' },
         label: { value: 'password', className: 'form-label' },
         options: {}
     },
     {
-        attributes: { name: 'password_confirmation', type: 'password', value: '', },
+        attributes: { name: 'password_confirmation', type: 'password', value: '' },
         label: { value: 'password confirmation', className: 'form-label' },
         options: {}
     },
@@ -76,19 +76,16 @@ export default function SignUp(props) {
             <div className="container w-50">
                 <form action="/users/signup" onSubmit={handleForm}>
                     {
-                        columns.map(col => {
-                            return (
-                                <div className="mb-3">
-                                    <MemoizedComponent
-                                        name={obj[0]}
-                                        {...columns[obj[0]]}
-                                        onChange={handleChange}
-                                    // attributes={columns[obj[0]].attributes}
-                                    // label={columns[obj[0]].attributes}
-                                    />
-                                </div>
-                            )
-                        })
+                        columns.map(col => (
+                            <div className="mb-3">
+                                <MemoizedComponent
+                                    attributes={{ ...col.attributes, className: 'form-control' }}
+                                    label={col.label}
+                                    option={col.options}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                        ))
                     }
                     <div className="mb-3">
                         <p>{error}</p>
