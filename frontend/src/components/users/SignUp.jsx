@@ -35,6 +35,7 @@ export default function SignUp(props) {
     const { loading, error, data, handler } = useAxios({}, false)
 
     const handleChange = (e) => {
+        debugger
         dispatch({
             type: ACTION.CHANGE_VALUE,
             payload: { inputName: e.target.name, value: e.target.value },
@@ -86,6 +87,8 @@ export default function SignUp(props) {
                             options={{
                                 placeholder: "password",
                                 disabled: false,
+                                minLength: 5,
+                                maxLength: 64
                             }}
                             onChange={handleChange}
                         />
