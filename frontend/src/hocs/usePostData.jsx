@@ -1,4 +1,3 @@
-import { api } from '../lib/api/api.js'
 import axios from 'axios';
 import { useState, useEffect, } from "react";
 
