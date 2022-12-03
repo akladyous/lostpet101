@@ -2,28 +2,26 @@ import { useReducer, } from "react";
 import { MemoizedComponent } from "../../lib/Element.jsx";
 import useAxios from "../../hocs/useAxios.jsx";
 
-const columns = {
-    email: {
-        attributes: { value: '', type: 'email' },
+const columns = [
+    {
+        attributes: { name: 'email', type: 'email', value: '', },
         label: { value: 'Email Address', className: 'form-label' },
         options: {}
     },
-    password: {
-        attributes: { value: '', type: 'password' },
+    {
+        attributes: { name: 'password', type: 'password', value: '', },
         label: { value: 'password', className: 'form-label' },
         options: {}
     },
-    password_confirmation: {
-        attributes: { value: '', type: 'password' },
+    {
+        attributes: { name: 'password_confirmation', type: 'password', value: '', },
         label: { value: 'password confirmation', className: 'form-label' },
         options: {}
     },
-}
+];
 const initColumns = (obj) => {
-    return Object.keys(obj).reduce(
-        (acc, value) => {
-            acc[value] = obj[value].attributes.value; return acc
-        }, {}
+    return obj.reduce(
+        (acc, value) => { acc[value.attributes.name] = value.attributes.value; return acc }, {}
     )
 }
 
@@ -77,68 +75,21 @@ export default function SignUp(props) {
             <h1>Form</h1>
             <div className="container w-50">
                 <form action="/users/signup" onSubmit={handleForm}>
-                    <div className="mb-3">
-                        <MemoizedComponent
-                            attributes={{
-                                name: "email",
-                                type: "email",
-                                value: state.email,
-                                id: "email",
-                                className: "form-control",
-                            }}
-                            label={{
-                                value: "email Address",
-                                htmlFor: "email",
-                                className: "form-label",
-                            }}
-                            options={{ placeholder: "email", disabled: false }}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div className="mb-3">
-                        <MemoizedComponent
-                            attributes={{
-                                name: "password",
-                                type: "password",
-                                value: state.password,
-                                id: "password",
-                                className: "form-control",
-                            }}
-                            label={{
-                                value: "password",
-                                htmlFor: "password",
-                                className: "form-label",
-                            }}
-                            options={{
-                                placeholder: "password",
-                                disabled: false,
-                                minLength: 5,
-                                maxLength: 64
-                            }}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div className="mb-3">
-                        <MemoizedComponent
-                            attributes={{
-                                name: "password_confirmation",
-                                type: "password",
-                                value: state.password_confirmation,
-                                id: "password_confirmation",
-                                className: "form-control",
-                            }}
-                            label={{
-                                value: "password confirmation",
-                                htmlFor: "password_confirmation",
-                                className: "form-label",
-                            }}
-                            options={{
-                                placeholder: "password Confirmation",
-                                disabled: false,
-                            }}
-                            onChange={handleChange}
-                        />
-                    </div>
+                    {
+                        columns.map(col => {
+                            return (
+                                <div className="mb-3">
+                                    <MemoizedComponent
+                                        name={obj[0]}
+                                        {...columns[obj[0]]}
+                                        onChange={handleChange}
+                                    // attributes={columns[obj[0]].attributes}
+                                    // label={columns[obj[0]].attributes}
+                                    />
+                                </div>
+                            )
+                        })
+                    }
                     <div className="mb-3">
                         <p>{error}</p>
                     </div>

@@ -1,6 +1,7 @@
 import { memo } from 'react'
 
 function Element(props) {
+    debugger
     const { attributes, label, options, onChange } = props || {};
     return (
         <>
