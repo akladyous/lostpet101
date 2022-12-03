@@ -16,7 +16,7 @@ export default function useAxios(axiosParams, executeOnMount) {
             const response = await api.request(axiosParams)
             setData(response.data)
         } catch (error) {
-            if (error.name === 'AbortError') return
+
             if (error.response) {
                 setError(error.response.data.error)
             } else {

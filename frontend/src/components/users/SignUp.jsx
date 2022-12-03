@@ -48,7 +48,6 @@ export default function SignUp(props) {
         // const postUrl = 'https://jsonplaceholder.typicode.com/posts'
         const postData = { title: 'foo', body: 'bar', userId: 1 }
         const rData = { user: state }
-        console.log('data : ', state)
         handler({ method: 'post', url: 'users/signup', data: state }, true)
         console.log('data: ', data)
     }
