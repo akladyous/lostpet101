@@ -1,42 +1,85 @@
 import { api } from '../lib/api/api.js'
-import { useState, useEffect, useCallback } from "react";
-import { useRef } from 'react';
+import React from 'react';
 
-export default function useAxios(axiosParams, executeOnMount) {
-    const [data, setData] = useState(undefined);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(false);
-    const isMounted = useRef(false)
+function configToObject(config) {
+    if (typeof config === 'string') {
+        return { url: config }
+    }
+    return Object.assign({}, config);
+};
+const DEFAULT_OPTIONS = {
+    manual: false,
+    autoCancel: true
+}
 
-    const fetchData = useCallback(async (axiosParams) => {
-        const controller = new AbortController();
-        Object.assign(axiosParams, { signal: controller.signal })
+const actions = {
+    START: 'START',
+    END: 'END',
+    SUCCESS: 'SUCCESS',
+    ERROR: 'ERROR'
+}
+const initializeState = {
+    loading: false,
+    error: null,
+    data: null
+}
+function reducer(state, action) {
+    switch (action.type) {
+        case actions.START:
+            return { ...state, loading: true, error: null }
+        case actions.END:
+            return { ...state, loading: false }
+        case actions.SUCCESS:
+            return { ...state, data: action.payload }
+        case actions.ERROR:
+            return { ...state, error: action.payload }
+        default:
+            break;
+    }
+}
+export default function useAxios(_config, _options) {
+    const [state, dispatch] = React.useReducer(reducer, initializeState)
 
+    const controller = React.useRef(new AbortController());
+
+    const config = React.useMemo(() => {
+        return Object.assign(configToObject(_config), { signal: controller.signal })
+    }, [_config]);
+
+    const options = React.useMemo(() => {
+        return { ...DEFAULT_OPTIONS, ..._options }
+    }, [_options]);
+
+    const cancelOutstandingRequest = React.useCallback(
+        config => {
+            if (options.signal) {
+                controller.current.abort();
+            }
+        }, [options.signal]
+    );
+    async function request(_config, _options) {
         try {
-            const response = await api.request(axiosParams)
-            setData(response.data)
+            dispatch({ type: actions.START })
+            const response = await api.request(config)
+            dispatch({ type: actions.SUCCESS, payload: response.data })
         } catch (error) {
             if (error.response) {
-                setError(error.response.data.error)
+                dispatch({ type: actions.ERROR, payload: error.response.data.error })
             } else {
-                setError(error.message)
+                dispatch({ type: actions.ERROR, payload: error.message })
             }
         } finally {
-            setLoading(false)
+            dispatch({ type: actions.END })
             controller.abort();
-            return { data, loading, error }
         }
+    }
+
+    React.useEffect(() => {
+
+        request();
+
     }, [])
 
-    useEffect(() => {
-        isMounted.current = true
-
-        if (!executeOnMount) return
-        fetchData();
-
-        return () => { isMounted.current = false }
-    }, [executeOnMount, fetchData])
-
-    return { data, loading, error, handler: fetchData }
+    return { state, cancelOutstandingRequest, handler: request }
 
 };
