@@ -8,7 +8,7 @@ class Users::RegistrationController < UsersController
       render json: @user, status: :created
       # render json: {message: "Account successfully created", date_time: Time.now, email: current_user.email}, status: :ok
     else
-      render json: { error: @user.errors.full_messages.to_sentence}, status: :unprocessable_entity
+      render json: { error: @user.errors.to_json}, status: :unprocessable_entity
     end
 
   end

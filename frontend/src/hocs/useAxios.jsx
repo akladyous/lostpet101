@@ -55,7 +55,6 @@ export default function useAxios(_config, _options) {
     }, [_options]);
 
     const cancelOutstandingRequest = React.useCallback(() => {
-        debugger
         if (controller.current) {
             controller.current.abort();
         }

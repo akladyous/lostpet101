@@ -34,7 +34,7 @@ export default function SignUp() {
     const [{ loading, error, data }, handler, cancelOutstandingRequest] =
         useAxios(
             { method: "post", url: "users/signup", data: state },
-            // { manual: true }
+            { manual: true }
         );
 
     const handleChange = useCallback((e) => {
@@ -50,7 +50,7 @@ export default function SignUp() {
             e.preventDefault();
             handler({ method: "post", url: "users/signup", data: state, });
             if (error) {
-                console.log('error : ', error)
+                console.log('error : ', JSON.parse(error))
             }
         },
         [error, handler, state]
