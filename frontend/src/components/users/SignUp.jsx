@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useReducer, useCallback } from 'react'
 import useAxios from '../../hocs/useAxios.jsx';
 import { MemoizedComponent } from '../../lib/InputField.jsx';
@@ -39,12 +40,21 @@ export default function SignUp() {
         })
     }, [])
 
-    const handleForm = useCallback((e) => {
+    const handleForm = useCallback(async (e) => {
         e.preventDefault();
-        handler({ method: 'post', url: 'users/signup', data: state }, true)
-        console.log('data: ', data)
+        console.log('loading before : ', loading)
+        console.log('error   before : ', error)
+        console.log('data    before : ', data)
+        const response = await handler({ method: 'post', url: 'users/signup', data: state }, true)
+        console.log('loading after : ', loading)
+        console.log('error   after : ', error)
+        console.log('data    after : ', data)
+        debugger
     }, [data, handler, state])
 
+    useEffect(() => {
+        console.log('signUp update - data: ', data)
+    }, [data])
     return (
         <div className='container w-50'>
             <form action="/users/signup" onSubmit={handleForm}>

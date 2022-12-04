@@ -24,6 +24,7 @@ export default function useAxios(axiosParams, executeOnMount) {
         } finally {
             setLoading(false)
             controller.abort();
+            return { data, loading, error }
         }
     }, [])
 
