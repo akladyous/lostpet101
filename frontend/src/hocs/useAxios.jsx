@@ -11,7 +11,7 @@ export default function useAxios(axiosParams, executeOnMount) {
     const fetchData = useCallback(async (axiosParams) => {
         const controller = new AbortController();
         Object.assign(axiosParams, { signal: controller.signal })
-        debugger
+
         try {
             const response = await api.request(axiosParams)
             setData(response.data)
