@@ -34,7 +34,7 @@ export default function SignUp() {
     const [{ loading, error, data }, handler, cancelOutstandingRequest] =
         useAxios(
             { method: "post", url: "users/signup", data: state },
-            { manual: true }
+            // { manual: true }
         );
 
     const handleChange = useCallback((e) => {

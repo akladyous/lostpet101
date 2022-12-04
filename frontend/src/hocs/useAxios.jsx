@@ -54,12 +54,12 @@ export default function useAxios(_config, _options) {
         return { ...DEFAULT_OPTIONS, ..._options }
     }, [_options]);
 
-    const cancelOutstandingRequest = React.useCallback(
-        config => {
-            if (config.signal) {
-                controller.current.abort();
-            }
-        }, []
+    const cancelOutstandingRequest = React.useCallback(() => {
+        debugger
+        if (controller.current) {
+            controller.current.abort();
+        }
+    }, []
     );
 
     const request = React.useCallback(async function (config) {
@@ -79,11 +79,17 @@ export default function useAxios(_config, _options) {
     }, [])
 
     React.useEffect(() => {
-        if (options.manual) return
-        request(config);
+        console.log('useAxios useeffect')
+        if (!options.manual) {
+            request(config);
+        }
 
-        return () => { cancelOutstandingRequest() }
-    }, [config, options, cancelOutstandingRequest, request])
+        return () => {
+            if (options.autoCancel) {
+                cancelOutstandingRequest()
+            }
+        }
+    }, [options.manual, options.autoCancel])
 
     return [state, request, cancelOutstandingRequest]
 
