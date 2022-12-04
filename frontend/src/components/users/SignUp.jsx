@@ -1,23 +1,7 @@
 import { useReducer, useCallback } from 'react'
 import { MemoizedComponent } from '../../lib/InputField.jsx';
+import { SignUpSchema } from './model/signUpSchema.js';
 
-const formColumns = [
-    {
-        attributes: { name: 'email', type: 'email', className: 'form-control' },
-        label: { value: 'Email Address', className: 'form-label' },
-        options: {}
-    },
-    {
-        attributes: { name: 'password', type: 'password', className: 'form-control' },
-        label: { value: 'password', className: 'form-label' },
-        options: {}
-    },
-    {
-        attributes: { name: 'password_confirmation', type: 'password', className: 'form-control' },
-        label: { value: 'password confirmation', className: 'form-label' },
-        options: {}
-    },
-];
 const initializeState = (obj) => {
     return obj.reduce(
         (acc, value) => {
@@ -25,11 +9,6 @@ const initializeState = (obj) => {
             return acc
         },
         {})
-}
-const initialValue = {
-    email: '',
-    password: '',
-    password_confirmation: ''
 }
 const ACTION = {
     CHANGE_VALUE: "changeValue",
@@ -41,14 +20,14 @@ const reducer = (state, action) => {
         case ACTION.CHANGE_VALUE:
             return { ...state, [action.field]: action.payload };
         case ACTION.RESET:
-            return initialValue;
+            return initializeState(SignUpSchema);
         default:
             break;
     }
 }
 
 export default function SignUp() {
-    const [state, dispatch] = useReducer(reducer, formColumns, initializeState);
+    const [state, dispatch] = useReducer(reducer, SignUpSchema, initializeState);
     const handleChange = useCallback(e => {
         dispatch({
             type: ACTION.CHANGE_VALUE,
@@ -60,7 +39,7 @@ export default function SignUp() {
     return (
         <div className='container w-50'>
             {
-                formColumns.map((obj, idx) => {
+                SignUpSchema.map((obj, idx) => {
                     return (
                         <MemoizedComponent
                             key={idx}
