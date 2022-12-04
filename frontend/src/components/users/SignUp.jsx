@@ -3,7 +3,6 @@ import { useReducer, useCallback } from "react";
 import useAxios from "../../hocs/useAxios.jsx";
 import { MemoizedComponent } from "../../lib/InputField.jsx";
 import { SignUpSchema } from "./model/signUpSchema.js";
-import '../../assets/css/spinner.css'
 
 const initializeState = (obj) => {
     return obj.reduce((acc, value) => {
@@ -26,15 +25,6 @@ const reducer = (state, action) => {
             break;
     }
 };
-const Spinner = () => {
-    return (
-        <>
-            <svg className="spinner" viewBox="0 0 50 50">
-                <circle className="path" cx="25" cy="25" r="20" fill="none" strokeWidth={"5"}></circle>
-            </svg>
-        </>
-    )
-}
 export default function SignUp() {
     const [state, dispatch] = useReducer(
         reducer,
@@ -63,7 +53,7 @@ export default function SignUp() {
                 console.log('error : ', error)
             }
         },
-        [data, error, handler, loading, state]
+        [error, handler, state]
     );
 
     useEffect(() => {
