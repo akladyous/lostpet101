@@ -30,7 +30,7 @@ const reducer = (state, action) => {
 
 export default function SignUp() {
     const [state, dispatch] = useReducer(reducer, SignUpSchema, initializeState);
-    const { loading, error, data, handler, cancelOutstandingRequest } = useAxios({}, { manual: true })
+    const [{ loading, error, data }, handler, cancelOutstandingRequest] = useAxios({}, { manual: true })
 
     const handleChange = useCallback(e => {
         dispatch({

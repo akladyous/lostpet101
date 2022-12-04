@@ -84,6 +84,6 @@ export default function useAxios(_config, _options) {
         return () => { cancelOutstandingRequest() }
     }, [config, options, cancelOutstandingRequest, request])
 
-    return { ...state, handler: request, cancelOutstandingRequest }
+    return [state, request, cancelOutstandingRequest]
 
 };
