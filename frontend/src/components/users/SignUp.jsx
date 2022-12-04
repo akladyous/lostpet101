@@ -1,5 +1,5 @@
 import { useReducer, useCallback } from 'react'
-import Item from '../../lib/Item.jsx';
+import { MemoizedComponent } from '../../lib/InputField.jsx';
 
 const formColumns = [
     {
@@ -62,7 +62,7 @@ export default function SignUp() {
             {
                 formColumns.map((obj, idx) => {
                     return (
-                        <Item
+                        <MemoizedComponent
                             key={idx}
                             attributes={obj.attributes}
                             label={obj.label}

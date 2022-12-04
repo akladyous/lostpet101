@@ -1,5 +1,5 @@
 import React, { useReducer, useCallback, useRef, useEffect, useState } from "react";
-import Item from "../../lib/Item.jsx";
+import { MemoizedComponent } from "../../lib/InputField.jsx";
 import useAxios from "../../hocs/useAxios.jsx";
 
 const formColumns = [
@@ -93,7 +93,7 @@ export default function SignUp(props) {
                     let col = formColumns.find(item => item.attributes.name === 'email')
                     return (
                         <div className="mb-3" key={window.crypto.randomUUID()}>
-                            <Item
+                            <MemoizedComponent
                                 attributes={{
                                     ...col.attributes,
                                     className: 'form-control',
