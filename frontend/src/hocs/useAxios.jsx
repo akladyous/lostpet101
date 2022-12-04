@@ -43,7 +43,10 @@ export default function useAxios(_config, _options) {
     const controller = React.useRef(new AbortController());
 
     const config = React.useMemo(() => {
-        return Object.assign(configToObject(_config), { signal: controller.signal })
+        return Object.assign(
+            configToObject(_config),
+            { signal: controller.signal }
+        )
     }, [_config]);
 
     const options = React.useMemo(() => {
@@ -52,12 +55,13 @@ export default function useAxios(_config, _options) {
 
     const cancelOutstandingRequest = React.useCallback(
         config => {
-            if (options.signal) {
+            if (config.signal) {
                 controller.current.abort();
             }
-        }, [options.signal]
+        }, []
     );
-    async function request(_config, _options) {
+
+    const request = React.useCallback(async function (config) {
         try {
             dispatch({ type: actions.START })
             const response = await api.request(config)
@@ -70,15 +74,15 @@ export default function useAxios(_config, _options) {
             }
         } finally {
             dispatch({ type: actions.END })
-            controller.abort();
         }
-    }
+    }, [])
 
     React.useEffect(() => {
+        if (!options.manual) return
+        request(config);
 
-        request();
-
-    }, [])
+        return () => { cancelOutstandingRequest() }
+    }, [config, options, cancelOutstandingRequest, request])
 
     return { state, cancelOutstandingRequest, handler: request }
 
