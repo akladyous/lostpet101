@@ -38,6 +38,7 @@ function reducer(state, action) {
     }
 }
 export default function useAxios(_config, _options) {
+
     const [state, dispatch] = React.useReducer(reducer, initializeState)
 
     const controller = React.useRef(new AbortController());
@@ -45,7 +46,7 @@ export default function useAxios(_config, _options) {
     const config = React.useMemo(() => {
         return Object.assign(
             configToObject(_config),
-            { signal: controller.signal }
+            { signal: controller.current.signal }
         )
     }, [_config]);
 
@@ -78,7 +79,7 @@ export default function useAxios(_config, _options) {
     }, [])
 
     React.useEffect(() => {
-        if (!options.manual) return
+        if (options.manual) return
         request(config);
 
         return () => { cancelOutstandingRequest() }
