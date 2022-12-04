@@ -1,38 +1,24 @@
-import { memo, useEffect, useRef } from 'react'
+import { memo, useEffect } from 'react'
 
 const Item = memo((props) => {
-
-    const { attributes, label, options, onChange } = props || {}
-    const isMounted = useRef(false)
-
+    const { attributes, label, options, value, onChange } = props || {}
 
     useEffect(() => {
-        isMounted.current = true
-        console.log('element updated/mounted : ', attributes.name)
-
-        return () => {
-            isMounted.current = false
-            console.log('element unmounted : ', attributes.name)
-        }
-    }, [attributes.name])
-    // debugger
-
+        console.log(`Child mount/update `)
+        return () => { console.log(`Child unmount`) }
+    }, [value])
     return (
         <>
-            {
-                label ?
-                    <label htmlFor={attributes.name} className={label.className}>
-                        {label.value}
-                    </label>
-                    : ''
-            }
+            <label htmlFor={attributes.name} className={label.className}>
+                {label.value}
+            </label>
             <input
                 name={attributes.name}
                 type={attributes.type}
-                value={attributes.value}
                 id={attributes.name}
                 className={attributes.className}
                 {...options}
+                value={value}
                 onChange={onChange}
             />
         </>
