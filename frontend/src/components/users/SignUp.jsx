@@ -18,6 +18,14 @@ const formColumns = [
         options: {}
     },
 ];
+const initializeState = (obj) => {
+    return obj.reduce(
+        (acc, value) => {
+            acc[value.attributes.name] = '';
+            return acc
+        },
+        {})
+}
 const initialValue = {
     email: '',
     password: '',
@@ -40,7 +48,7 @@ const reducer = (state, action) => {
 }
 
 export default function SignUp() {
-    const [state, dispatch] = useReducer(reducer, initialValue);
+    const [state, dispatch] = useReducer(reducer, formColumns, initializeState);
     const handleChange = useCallback(e => {
         dispatch({
             type: ACTION.CHANGE_VALUE,
