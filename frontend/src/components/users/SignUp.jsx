@@ -52,8 +52,8 @@ export default function SignUp() {
     );
 
     useEffect(() => {
-        console.log("signUp update - data: ", data);
-    }, [data, loading, error]);
+        console.log("signUp update - data: ",);
+    }, []);
     return (
         <div className="container w-50">
             <form action="/users/signup" onSubmit={handleForm}>
@@ -70,10 +70,10 @@ export default function SignUp() {
                     );
                 })}
                 <div className="mb-3">
-                    <p>{loading ? 'loading...' : ''}</p>
+                    <p>{userState.loading ? 'loading...' : ''}</p>
                 </div>
                 <div className="mb-3">
-                    <p>{error}</p>
+                    <p>{userState.error}</p>
                 </div>
                 <div className="mb-3">{/* <p>{data}</p> */}</div>
                 <div className="mb-3">
