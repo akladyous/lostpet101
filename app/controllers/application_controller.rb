@@ -7,6 +7,7 @@ class ApplicationController < ActionController::API
   protected
     def login(user)
         session[:user_id] = user.id
+        user.touch :last_login_at
     end
 
     def logout(user)
