@@ -1,6 +1,6 @@
-import { useSelector, useDispatch } from "react-redux";
-import { useReducer, useCallback, useEffect } from "react";
-import { usersSignUp } from "../../app/api/ThunkAPI/users/usersSignUp.js";
+import { useEffect } from "react";
+import { useReducer, useCallback } from "react";
+import useAxios from "../../hocs/useAxios.jsx";
 import { MemoizedComponent } from "../../lib/InputField.jsx";
 import { SignUpSchema } from "./model/signUpSchema.js";
 
@@ -26,16 +26,19 @@ const reducer = (state, action) => {
     }
 };
 export default function SignUp() {
-    const dispatch = useDispatch()
-    const userState = useSelector(state => state.users)
-    const [state, dispatcher] = useReducer(
+    const [state, dispatch] = useReducer(
         reducer,
         SignUpSchema,
         initializeState
     );
+    const [{ loading, error, data }, handler, cancelOutstandingRequest] =
+        useAxios(
+            { method: "post", url: "users/signup", data: state },
+            { manual: true }
+        );
 
     const handleChange = useCallback((e) => {
-        dispatcher({
+        dispatch({
             type: ACTION.CHANGE_VALUE,
             field: e.target.name,
             payload: e.target.value,
@@ -45,10 +48,12 @@ export default function SignUp() {
     const handleForm = useCallback(
         async (e) => {
             e.preventDefault();
-            dispatch(usersSignUp({ state }))
-            debugger
+            handler({ method: "post", url: "users/signup", data: state, });
+            if (error) {
+                console.log('error : ', JSON.parse(error))
+            }
         },
-        [state, dispatch]
+        [error, handler, state]
     );
 
     useEffect(() => {
