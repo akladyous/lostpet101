@@ -1,6 +1,6 @@
 import { memo, } from 'react'
 
-const InputField = (props) => {
+export const InputField = (props) => {
     const { attributes, label, options, value, onChange } = props || {}
     return (
         <>

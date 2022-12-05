@@ -4,12 +4,13 @@ import {
     isRejected,
     isFulfilled,
 } from "@reduxjs/toolkit";
-import { usersSignIn } from "../api/ThunkAPI/users/usersSignIn.js";
 import { usersSignUp } from "../api/ThunkAPI/users/usersSignUp.js";
+import { usersSignOut } from "../api/ThunkAPI/users/usersSignOut.js";
+import { usersSignIn } from '../api/ThunkAPI/users/usersSignIn.js'
 
-const isPendingAction = isPending(usersSignIn);
-const isRejectedAction = isRejected(usersSignIn);
-const isFulfilledAction = isFulfilled(usersSignIn);
+const isPendingAction = isPending(usersSignUp, usersSignIn, usersSignOut);
+const isRejectedAction = isRejected(usersSignUp, usersSignIn, usersSignOut);
+const isFulfilledAction = isFulfilled(usersSignUp, usersSignIn, usersSignOut);
 
 const initialState = {
     isAuthenticated: false,
@@ -40,14 +41,19 @@ const usersSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            // .addCase(usersSignIn.fulfilled, (state, action) => {
-            //     state.isAuthenticated = true;
-            //     state.message = "login successfully completed";
-            //     state.user = { ...action.payload };
-            // })
             .addCase(usersSignUp.fulfilled, (state, action) => {
                 state.isAuthenticated = true;
                 state.message = "Account successfully created";
+                state.user = { ...action.payload };
+            })
+            .addCase(usersSignIn.fulfilled, (state, action) => {
+                state.isAuthenticated = true;
+                state.message = "login successfully completed";
+                state.user = { ...action.payload };
+            })
+            .addCase(usersSignOut.fulfilled, (state, action) => {
+                state.isAuthenticated = true;
+                state.message = "login successfully completed";
                 state.user = { ...action.payload };
             })
             .addMatcher(isPendingAction, state => {

@@ -1,8 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useReducer, useCallback, useEffect } from "react";
 import { usersSignUp } from "../../app/api/ThunkAPI/users/usersSignUp.js";
-import { MemoizedComponent } from "../../lib/InputField.jsx";
-import { SignUpSchema } from "./model/signUpSchema.js";
+import { MemoizedComponent } from "../layout/form/InputField.jsx";
+import { SignUpSchema } from "./form/signUpSchema.js";
 
 const initializeState = (obj) => {
     return obj.reduce((acc, value) => {

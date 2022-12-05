@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { Axios } from "../../Axios.js";
 
 export const usersSignIn = createAsyncThunk(
-    "users/signup",
+    "users/signin",
     async (data, thunkAPI) => {
         const { user, controller } = data;
         try {
