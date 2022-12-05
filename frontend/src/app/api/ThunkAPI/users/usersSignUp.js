@@ -1,26 +1,24 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { Axios } from '../../Axios.js'
+import { Axios } from "../../Axios.js";
 
 export const usersSignUp = createAsyncThunk(
-    'users/signup',
-    async (userData, thunkAPI) => {
-        debugger
-        // const controller = new AbortController()
-        thunkAPI.signal.addEventListener('abort', () => {
-            console.log('aborted by ThnunkAPI signal')
-        })
+    "users/signup",
+    async (data, thunkAPI) => {
+        const { user, controller } = data;
         try {
-            const response = await Axios.post({ data: userData, signal: thunkAPI.signal })
-            thunkAPI.fulfillWithValue(response)
+            const response = await Axios({
+                method: "post",
+                url: "users/signup",
+                data: user,
+                ...(controller ?? { signal: controller.signal })
+            });
+            return thunkAPI.fulfillWithValue(response.data);
         } catch (error) {
             if (error.response) {
-                thunkAPI.rejectWithValue(error.response.data.error)
+                return thunkAPI.rejectWithValue(error.response.data.error);
             } else {
-                thunkAPI.rejectWithValue(error.message)
+                return thunkAPI.rejectWithValue(error.message);
             }
-        } finally {
-            thunkAPI.abort();
         }
     }
-)
-createAsyncThunk('')
+);

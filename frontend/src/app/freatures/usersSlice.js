@@ -40,11 +40,11 @@ const usersSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(usersSignIn.fulfilled, (state, action) => {
-                state.isAuthenticated = true;
-                state.message = "login successfully completed";
-                state.user = { ...action.payload };
-            })
+            // .addCase(usersSignIn.fulfilled, (state, action) => {
+            //     state.isAuthenticated = true;
+            //     state.message = "login successfully completed";
+            //     state.user = { ...action.payload };
+            // })
             .addCase(usersSignUp.fulfilled, (state, action) => {
                 state.isAuthenticated = true;
                 state.message = "Account successfully created";
@@ -58,7 +58,7 @@ const usersSlice = createSlice({
             })
             .addMatcher(isRejectedAction, (state, action) => {
                 state.status = 'faild'
-                state.error = action.error.message
+                state.error = action.payload;
             })
     },
 });
