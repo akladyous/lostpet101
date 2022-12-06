@@ -1,20 +1,32 @@
-import { memo, } from 'react'
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 export const InputField = (props) => {
+    const state = useSelector(state => state.users)
     const { attributes, label, options, value, onChange } = props || {}
     return (
-        <>
+        <div>
             <label htmlFor={attributes.name} className={label.className}>
                 {label.value}
             </label>
-            <input
-                {...attributes}
-                {...options}
-                id={attributes.name}
-                value={value}
-                onChange={onChange}
-            />
-        </>
+            <div className="mt-1">
+                <input
+                    {...attributes}
+                    {...options}
+                    id={attributes.name}
+                    value={value}
+                    onChange={onChange}
+                />
+                {
+                    state.error[attributes?.name]
+                        ? <p className='text-red-600 text-sm'>
+                            {`${attributes?.name} ${state.error[attributes?.name][0]}`}
+                        </p>
+                        : null
+
+                }
+            </div>
+        </div >
     )
 };
-export const MemoizedComponent = memo(InputField)
+export const MemoizedComponent = React.memo(InputField)

@@ -14,10 +14,10 @@ const isFulfilledAction = isFulfilled(usersSignUp, usersSignIn, usersSignOut);
 
 const initialState = {
     isAuthenticated: false,
-    user: null,
+    user: undefined,
     status: "idle", // idle | loading | succeeded | failed
-    error: null,
-    message: null,
+    error: {},
+    message: undefined,
 };
 const usersSlice = createSlice({
     name: "users",
@@ -64,7 +64,15 @@ const usersSlice = createSlice({
             })
             .addMatcher(isRejectedAction, (state, action) => {
                 state.status = 'faild'
-                state.error = action.payload;
+                state.error = (() => {
+                    let errorsParsed;
+                    try {
+                        errorsParsed = JSON.parse(action.payload)
+                    } catch (error) {
+                        errorsParsed = null
+                    }
+                    return errorsParsed
+                })()
             })
     },
 });
