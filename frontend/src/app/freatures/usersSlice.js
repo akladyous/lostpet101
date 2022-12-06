@@ -69,7 +69,7 @@ const usersSlice = createSlice({
                     try {
                         errorsParsed = JSON.parse(action.payload)
                     } catch (error) {
-                        errorsParsed = null
+                        errorsParsed = {}
                     }
                     return errorsParsed
                 })()

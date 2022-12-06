@@ -12,7 +12,7 @@ export default function Layout() {
             <div className="content min-vh-100">
                 <Outlet />
             </div>
-            {/* <Footer /> */}
+            <Footer />
         </div>
     )
 }
