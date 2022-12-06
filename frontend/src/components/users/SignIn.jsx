@@ -56,7 +56,28 @@ export default function SignIn() {
         console.log("signUp update - data: ",);
     }, []);
     return (
-        <div className="container w-50">
+        <div className="container w-50 cs-border-orange shadow-lg bg-light">
+            {/* <img className="avatar" src={require('../../assets/images/avatars/user_placeholder.png')} alt="" /> */}
+
+            <div className="container py-2 my-4 text-center avatar-area">
+                <label className="d-flex" htmlFor="input-file">
+                    <img className="mx-auto avatar"
+                        src={require('../../assets/images/avatars/user_placeholder.png')}
+                        alt="user_placeholder"
+
+                    />
+                    <input
+                        id="input-file"
+                        type="file"
+                        name="image_file"
+                        title="upload Pet image"
+                        accept="image/*"
+                        multiple={false}
+                        style={{ display: "none" }}
+                    // onChange={loadImageFile}
+                    />
+                </label>
+            </div>
             <form action="/users/signup" onSubmit={handleForm}>
                 {SignInSchema.map((obj, idx) => {
                     return (
@@ -73,9 +94,13 @@ export default function SignIn() {
                 <div className="mb-3">
                     <p>{state?.loading === 'loading' && 'loading...'}</p>
                 </div>
-                <div className="mb-3">
-                    {/* <p>{userState.error}</p> */}
-                </div>
+                {
+                    state.error ?
+                        <div className="mb-3">
+                            <p>{state.error}</p>
+                        </div>
+                        : ''
+                }
                 <div className="mb-3">{/* <p>{data}</p> */}</div>
                 <div className="mb-3">
                     <button
