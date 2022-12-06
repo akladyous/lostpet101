@@ -61,7 +61,7 @@ export default function SignIn() {
 
             <div className="container py-2 my-4 text-center avatar-area">
                 <label className="d-flex" htmlFor="input-file">
-                    <img className="mx-auto avatar"
+                    <img className="mx-auto  avatar"
                         src={require('../../assets/images/avatars/user_placeholder.png')}
                         alt="user_placeholder"
 
