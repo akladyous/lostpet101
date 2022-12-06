@@ -8,11 +8,11 @@ export default function Layout() {
     return (
         <div className="app">
             <Navbar />
-            {window.location.pathname !== '/' ? <Header /> : ''}
+            {/* {window.location.pathname !== '/' ? <Header /> : ''}
             <div className="content min-vh-100">
                 <Outlet />
             </div>
-            <Footer />
+            <Footer /> */}
         </div>
     )
 }
