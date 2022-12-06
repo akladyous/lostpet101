@@ -1,11 +1,11 @@
 const navigation = {
     main: [
-        { name: 'About', href: '#' },
-        { name: 'Blog', href: '#' },
-        { name: 'Jobs', href: '#' },
-        { name: 'Press', href: '#' },
-        { name: 'Accessibility', href: '#' },
-        { name: 'Partners', href: '#' },
+        { name: 'Home', href: '/' },
+        { name: 'Testimonial', href: '#' },
+        { name: 'Lost & Found', href: '/listing' },
+        { name: 'Report Lost Pet', href: '/report' },
+        { name: 'About Us', href: '/about' },
+        { name: 'Contact Us', href: '/contact' },
     ],
     social: [
         {
