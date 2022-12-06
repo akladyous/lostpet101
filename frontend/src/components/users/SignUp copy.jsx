@@ -1,8 +1,8 @@
-import { useSelector, useDispatch } from "react-redux";
-import { useReducer, useCallback, useEffect } from "react";
-import { usersSignUp } from "../../app/api/ThunkAPI/users/usersSignUp.js";
-import { MemoizedComponent } from "../layout/form/InputField.jsx";
-import { SignUpSchema } from "./form/signUpSchema.js";
+import { useEffect } from "react";
+import { useReducer, useCallback } from "react";
+import useAxios from "../../hocs/useAxios.jsx";
+import { MemoizedComponent } from "../../lib/InputField.jsx";
+import { SignUpSchema } from "./model/signUpSchema.js";
 
 const initializeState = (obj) => {
     return obj.reduce((acc, value) => {
@@ -26,16 +26,19 @@ const reducer = (state, action) => {
     }
 };
 export default function SignUp() {
-    const dispatch = useDispatch()
-    const state = useSelector(state => state.users)
-    const [formState, formDispatch] = useReducer(
+    const [state, dispatch] = useReducer(
         reducer,
         SignUpSchema,
         initializeState
     );
+    const [{ loading, error, data }, handler, cancelOutstandingRequest] =
+        useAxios(
+            { method: "post", url: "users/signup", data: state },
+            { manual: true }
+        );
 
     const handleChange = useCallback((e) => {
-        formDispatch({
+        dispatch({
             type: ACTION.CHANGE_VALUE,
             field: e.target.name,
             payload: e.target.value,
@@ -45,16 +48,17 @@ export default function SignUp() {
     const handleForm = useCallback(
         async (e) => {
             e.preventDefault();
-            const controller = new AbortController();
-            dispatch(usersSignUp({ user: formState, controller }))
-            controller.abort()
+            handler({ method: "post", url: "users/signup", data: state, });
+            if (error) {
+                console.log('error : ', JSON.parse(error))
+            }
         },
-        [formState, dispatch]
+        [error, handler, state]
     );
 
     useEffect(() => {
-        console.log("signUp update - data: ",);
-    }, []);
+        console.log("signUp update - data: ", data);
+    }, [data, loading, error]);
     return (
         <div className="container w-50">
             <form action="/users/signup" onSubmit={handleForm}>
@@ -65,16 +69,16 @@ export default function SignUp() {
                             attributes={obj.attributes}
                             label={obj.label}
                             options={obj.options}
-                            value={formState[obj.attributes.name]}
+                            value={state[obj.attributes.name]}
                             onChange={handleChange}
                         />
                     );
                 })}
                 <div className="mb-3">
-                    <p>{state?.loading === 'loading' && 'loading...'}</p>
+                    <p>{loading ? 'loading...' : ''}</p>
                 </div>
                 <div className="mb-3">
-                    {/* <p>{userState.error}</p> */}
+                    <p>{error}</p>
                 </div>
                 <div className="mb-3">{/* <p>{data}</p> */}</div>
                 <div className="mb-3">

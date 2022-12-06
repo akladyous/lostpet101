@@ -4,7 +4,7 @@ class Users::RegistrationController < UsersController
   def create
     @user = User.new(user_params)
     if @user.save
-      login @user
+      login(@user)
       render json: @user, status: :created
       # render json: {message: "Account successfully created", date_time: Time.now, email: current_user.email}, status: :ok
     else

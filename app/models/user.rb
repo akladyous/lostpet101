@@ -6,5 +6,7 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { in: 5..64 }, confirmation: { case_sensitive: true }
   validates :password_confirmation, presence: true, length: { in: 5..64 }
 
-  before_save { email.downcase! if email }
+  enum :role, {user: 0, guest: 1, admin: 2}
+
+  before_save { email&.downcase }
 end
