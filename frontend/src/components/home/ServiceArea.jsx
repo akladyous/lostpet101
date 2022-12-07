@@ -42,7 +42,7 @@ export default function ServiceArea() {
                     services.map((service, idx) => {
                         return (
                             <div
-                                className="border border-orange-200 rounded-xl flex flex-col  justify-items-center items-center h-full py-14 px-7"
+                                className="border border-orange-200 rounded-xl flex flex-col  justify-items-center items-center h-full py-14 px-7 hover:border-none hover:shadow-lg ease-linear transition-all duration-300"
                             >
                                 <div
                                     className="bg-service-icon bg-no-repeat object-center bg-cover w-[165px] h-[145px] relative mb-5"
@@ -57,8 +57,6 @@ export default function ServiceArea() {
                                 <p className=' text-slate-500'>
                                     {service.content}
                                 </p>
-                                {/* <div className='service-content text-center'>
-                                </div> */}
                             </div>
                         )
                     })
