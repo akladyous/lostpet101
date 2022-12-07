@@ -7,17 +7,7 @@ const formClasses = {
     textField: 'block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-orange-300 focus:outline-none focus:ring-orange-500 sm:text-sm'
 
 }
-const InputError = ({ name, error }) => {
-    if (error !== null || error !== undefined) {
-        return (
-            <div className='pt-2'>
-                <p className='text-red-600 text-sm'>
-                    {`${name} ${error[name][0]}`}
-                </p>
-            </div>
-        )
-    }
-}
+
 export const InputField = (props) => {
     console.log(props.input.name, ' : ', props)
     const state = useSelector(state => state.users)
