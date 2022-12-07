@@ -9,7 +9,7 @@ export default function Layout() {
         <div className="app">
             <Navbar />
             {window.location.pathname !== '/' ? <Header /> : ''}
-            <div className="content min-vh-100">
+            <div className="content min-h-screen">
                 <Outlet />
             </div>
             <Footer />

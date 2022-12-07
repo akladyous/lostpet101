@@ -6,7 +6,8 @@ module.exports = {
     theme: {
         extend: {
             backgroundImage: {
-                'header-image': "url('../images/banner/bradcam.png')"
+                'header-image': "url('../images/banner/bradcam.png')",
+                'slide-area': "url('../images/banner/banner.png')"
             }
         },
     },

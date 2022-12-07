@@ -24,7 +24,7 @@ export default function Navbar({ title, subTitle }) {
                             <div className="flex">
                                 <div className="flex flex-shrink-0 items-center">
                                     <img
-                                        className="block h-8 w-auto mr-2"
+                                        className="block h-9 w-auto mr-2"
                                         src={require('../../assets/images/icons/logo2.png')}
                                         alt="Pet Finder"
                                     />

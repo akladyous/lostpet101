@@ -7,9 +7,9 @@ export default function Home() {
     return (
         <div className="home">
             <SlideArea />
-            <ServiceArea />
-            <PetCare />
-            <TeamArea />
+            {/* <ServiceArea /> */}
+            {/* <PetCare /> */}
+            {/* <TeamArea /> */}
         </div>
     )
 }
