@@ -1,37 +1,39 @@
-import '../../assets/css/pet-care.css'
-const petCare = require('../../assets/images/about/pet_care.png')
+import { Container } from "../Container.jsx";
+import { Link } from 'react-router-dom'
 
 export default function PetCare() {
     return (
-        <div className="pet_care_area">
-            <div className="container">
-                <div className="row align-items-center">
-                    <div className="col-sm-12 col-md-5">
-                        <div className="pet_thumb d-flex justify-content-center">
-                            <img src={petCare} alt="" />
-                        </div>
+        <Container>
+            <div className="grid grid-cols-2">
+                <div className="">
+                    <div className="">
+                        <img src={require('../../assets/images/about/pet_care.png')} alt="" />
                     </div>
-                    <div className="col-sm-12 col-md-6 offset-md-1">
-                        <div className="pet_info">
-                            <div className="section_title">
-                                <h2 className='display-4'>
-                                    We care your pet
-                                </h2>
-                                <h1 className=''>
-                                    As you care
-                                </h1>
-                                <p>
-                                    Help reuniting lost pets by placing lost and
-                                    found pet flyers in your neghbourhood.
-                                    <br />
-                                    Get your pet home sooner.
-                                </p>
-                                <a href="about.html" className="btn-boxed cs-primary text-white">About Us</a>
-                            </div>
-                        </div>
+                </div>
+                <div className="flex flex-col py-36 h-full">
+                    <h2 className='text-lg font-medium tracking-tight text-slate-600 md:text-4xl py-1'>
+                        We care your pet
+                    </h2>
+                    <h1 className='text-lg font-semibold tracking-tight text-slate-600 md:text-7xl py-3'>
+                        As you care
+                    </h1>
+                    <p className=" py-3">
+                        Help reuniting lost pets by placing lost and
+                        found pet flyers in your neghbourhood.
+                        <br />
+                        Supporting our mission, we collaborate with Pet finder to help ensure more animals find their forever homes.
+                        {/* Get your pet home sooner. */}
+                    </p>
+                    <div className="py-5">
+                        <Link to='users/about'
+                            state={'About Us'}
+                            className="btn-primary px-9 text-lg"
+                        >
+                            About Us
+                        </Link>
                     </div>
                 </div>
             </div>
-        </div>
+        </Container>
     )
 }

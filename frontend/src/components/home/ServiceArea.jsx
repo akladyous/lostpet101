@@ -19,7 +19,7 @@ export default function ServiceArea() {
         <Container className="text-center py-8">
             {/* <div className='container mx-auto mt-10 bg-slate-400'> */}
             <div className="py-11">
-                <h1 className="mx-auto max-w-4xl font-display text-5xl font-medium tracking-tight text-slate-900 sm:text-7xl">
+                <h1 className="mx-auto max-w-4xl text-5xl font-medium tracking-tight text-slate-600 sm:text-7xl">
                     Services{" "}
                     <span className="relative whitespace-nowrap text-slate-900">
                         <svg

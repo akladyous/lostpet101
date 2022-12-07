@@ -8,7 +8,7 @@ export default function Home() {
         <div className="home">
             <SlideArea />
             <ServiceArea />
-            {/* <PetCare /> */}
+            <PetCare />
             {/* <TeamArea /> */}
         </div>
     )
