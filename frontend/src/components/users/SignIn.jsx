@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useReducer, useCallback } from "react";
-import { usersSignUp } from "../../app/api/ThunkAPI/users/usersSignUp.js";
+import { usersSignIn } from '../../app/api/ThunkAPI/users/usersSignIn.js'
 import { MemoizedComponent } from "../layout/form/InputField.jsx";
 import { SignInSchema } from './form/SignInSchema.js'
-import AuthenticateWithProvider from "./form/AuthenticateWithProvider.jsx";
+// import AuthenticateWithProvider from "./form/AuthenticateWithProvider.jsx";
 
 const initializeState = (obj) => {
     return obj.reduce((acc, value) => {
-        acc[value.attributes.name] = "";
+        acc[value.input.name] = "";
         return acc;
     }, {});
 };
@@ -48,7 +48,7 @@ export default function SignIn() {
         async (e) => {
             e.preventDefault();
             const controller = new AbortController();
-            dispatch(usersSignUp({ user: formState, controller }));
+            dispatch(usersSignIn({ user: formState, controller }));
             controller.abort();
         },
         [formState, dispatch]
@@ -73,7 +73,7 @@ export default function SignIn() {
                         alt="Your Company"
                     />
                     <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-                        Sign up a new account
+                        Sign in to your account
                     </h2>
 
                 </div>
@@ -85,15 +85,23 @@ export default function SignIn() {
                                 return (
                                     <MemoizedComponent
                                         key={idx}
-                                        attributes={obj.attributes}
+                                        input={{ ...obj.input, required: true }}
                                         label={obj.label}
-                                        options={obj.options}
-                                        value={formState[obj.attributes.name]}
+                                        value={formState[obj.input.name]}
                                         onChange={handleChange}
-                                        inputError={handleInputsError}
                                     />
                                 );
                             })}
+                            {
+                                state.error?.message && Object.keys(state.error).length === 0
+                                    ?
+                                    <div>
+                                        <p className="text-red-600 text-sm pt-2">
+                                            {state.error.message}
+                                        </p>
+                                    </div>
+                                    : null
+                            }
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center">
                                     <input

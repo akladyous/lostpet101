@@ -7,7 +7,7 @@ export default function Home() {
     return (
         <div className="home">
             <SlideArea />
-            {/* <ServiceArea /> */}
+            <ServiceArea />
             {/* <PetCare /> */}
             {/* <TeamArea /> */}
         </div>

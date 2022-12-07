@@ -7,9 +7,9 @@ class Users::SessionController < UsersController
         if @user.present? && auth
             login @user
             @user.touch :updated_at
-            render json: {message: "Login successfully completed"}, status: :ok
+            render json: @user, status: :ok
         else
-            render json: {error: "Invalid Email or Password"}, status: :unauthorized
+            render json: {message: "Invalid Email or Password"}, status: :unauthorized
         end
     end
 
@@ -20,5 +20,9 @@ class Users::SessionController < UsersController
     else
         render json: {message: "User not signed in"}, status: :unprocessable_entity
     end
+  end
+
+  def user_params
+    params.permit(:email, :password)
   end
 end

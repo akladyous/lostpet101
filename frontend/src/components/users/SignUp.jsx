@@ -4,11 +4,11 @@ import { useReducer, useCallback } from "react";
 import { usersSignUp } from "../../app/api/ThunkAPI/users/usersSignUp.js";
 import { MemoizedComponent } from "../layout/form/InputField.jsx";
 import { SignUpSchema } from "./form/signUpSchema.js";
-import AuthenticateWithProvider from "./form/AuthenticateWithProvider.jsx";
+// import AuthenticateWithProvider from "./form/AuthenticateWithProvider.jsx";
 
 const initializeState = (obj) => {
     return obj.reduce((acc, value) => {
-        acc[value.attributes.name] = "";
+        acc[value.input.name] = "";
         return acc;
     }, {});
 };
@@ -61,7 +61,6 @@ export default function SignUp() {
         return ''
     }, [state.error])
 
-
     return (
         <>
             <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -85,15 +84,24 @@ export default function SignUp() {
                                 return (
                                     <MemoizedComponent
                                         key={idx}
-                                        attributes={obj.attributes}
+                                        input={{ ...obj.input, required: true }}
                                         label={obj.label}
-                                        options={obj.options}
-                                        value={formState[obj.attributes.name]}
+                                        value={formState[obj.input.name]}
                                         onChange={handleChange}
-                                        inputError={handleInputsError}
+                                        handleInputsError={handleInputsError}
                                     />
                                 );
                             })}
+                            {
+                                state.error?.message
+                                    ?
+                                    <div className="">
+                                        <p className="text-red-600 text-sm">
+                                            {state.error.message}
+                                        </p>
+                                    </div>
+                                    : null
+                            }
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center">
                                     <input
