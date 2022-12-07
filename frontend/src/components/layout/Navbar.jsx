@@ -2,10 +2,10 @@
 import { Link } from 'react-router-dom';
 import { Disclosure } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import MobileMenu from './form/navbar/MobileMenu.jsx';
 import { useSelector } from "react-redux";
-import MainMenu from './form/navbar/MainMenu.jsx';
-import IsAuthenticated from './form/navbar/IsAuthenticated.jsx';
+import MainMenu from './navbar/MainMenu.jsx';
+import MobileMenu from './navbar/MobileMenu.jsx';
+import IsAuthenticated from './navbar/IsAuthenticated.jsx';
 
 
 function classNames(...classes) {

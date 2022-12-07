@@ -9,9 +9,12 @@ const formClasses = {
 }
 
 export const InputField = (props) => {
-    console.log(props.input.name, ' : ', props)
+    // console.log(props.input.name, ' : ', props)
     const state = useSelector(state => state.users)
     const { input, label, value, onChange } = props || {}
+    React.useEffect(() => {
+        console.log('useEffect : ', input.name)
+    }, [])
     return (
         <div>
             {

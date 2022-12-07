@@ -88,7 +88,6 @@ export default function SignUp() {
                                         label={obj.label}
                                         value={formState[obj.input.name]}
                                         onChange={handleChange}
-                                        handleInputsError={handleInputsError}
                                     />
                                 );
                             })}
