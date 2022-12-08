@@ -1,13 +1,12 @@
 
+//
 export const SignInSchema = [
     {
-        attributes: { name: 'email', type: 'email', className: 'form-control' },
-        label: { value: 'Email Address', className: 'form-label' },
-        options: {}
+        input: { name: "email", type: "email", },
+        label: { name: "Email Address", },
     },
     {
-        attributes: { name: 'password', type: 'password', className: 'form-control' },
-        label: { value: 'password', className: 'form-label' },
-        options: {}
+        input: { name: "password", type: "password", },
+        label: { name: "password", },
     },
 ];

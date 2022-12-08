@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Layout from "./components/layout/Layout.jsx";
 import Home from "./components/home/Home.jsx";
 import Users from './components/users/Users.jsx'
-import SignIn from './components/users/SignIn.jsx'
+import SignIn from "./components/users/SignIn.jsx";
 import SignOut from './components/users/SignOut.jsx'
 import SignUp from './components/users/SignUp.jsx'
 import Profile from './components/users/Profile.jsx'

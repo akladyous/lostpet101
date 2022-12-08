@@ -1,18 +1,14 @@
-
 export const SignUpSchema = [
     {
-        attributes: { name: 'email', type: 'email', className: 'form-control' },
-        label: { value: 'Email Address', className: 'form-label' },
-        options: {}
+        input: { name: "email", type: "email", },
+        label: { name: "Email Address", },
     },
     {
-        attributes: { name: 'password', type: 'password', className: 'form-control' },
-        label: { value: 'password', className: 'form-label' },
-        options: {}
+        input: { name: "password", type: "password", },
+        label: { name: "password", },
     },
     {
-        attributes: { name: 'password_confirmation', type: 'password', className: 'form-control' },
-        label: { value: 'password confirmation', className: 'form-label' },
-        options: {}
+        input: { name: "password_confirmation", type: "password", },
+        label: { name: "password confirmation", },
     },
 ];

@@ -1,59 +1,12 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:300i,400,400i,600,700|Poppins:200,200i,300,300i,400,500,500i,600,700,800,900&display=swap");
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:300i,400,400i,600,700|Poppins:200,200i,300,300i,400,500,500i,600,700,800,900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-    --cs-orange: #ed5b0d;
-    --cs-light: #edf5ff;
-    --cs-dark: #202942;
-    --cs-light: #66666f;
-    height: 100%;
-}
-.content {
-    height: min(100vh, 768px);
-}
-@media (min-width: 768px) {
-    .content {
-        height: min(100vh, 1024px);
+@layer components {
+    .btn-primary {
+        @apply capitalize px-5 py-3 inline-flex items-center border border-transparent text-sm font-medium rounded-full shadow-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 ease-linear transition-all duration-300;
     }
-}
-.btn-boxed {
-    background: #fff;
-    font-size: 16px;
-    font-weight: 500;
-    border: 1px solid transparent;
-    color: #ff3500;
-    padding: 12px 35px;
-    font-family: "Poppins", sans-serif;
-    display: inline-block;
-    -webkit-border-radius: 30px;
-    -moz-border-radius: 30px;
-    border-radius: 30px;
-    text-decoration: none;
-}
-.btn-boxed:hover {
-    filter: brightness(95%);
-}
-.cs-primary {
-    background-color: var(--cs-orange);
-}
-.cs-border-orange {
-    border: 1px solid #ffc5c2;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
-}
-a:focus,
-button:focus {
-    text-decoration: none;
-    outline: none;
-    color: #202942 !important;
-}
-.avatar-area {
-    height: 6.25rem;
-}
-.avatar {
-    width: 7rem !important;
-    /* height: 100% !important; */
-    /* border-radius: 50%; */
-    /* background-size: cover; */
+    .btn-secondary {
+        @apply capitalize px-5 py-3 inline-flex items-center border border-transparent text-sm font-medium rounded-full shadow-md bg-white text-orange-600 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-100 ease-linear transition-all duration-300;
+    }
 }

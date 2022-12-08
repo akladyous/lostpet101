@@ -16,7 +16,7 @@ const initialState = {
     isAuthenticated: false,
     user: null,
     status: "idle", // idle | loading | succeeded | failed
-    error: null,
+    error: {},
     message: null,
 };
 const usersSlice = createSlice({
@@ -63,8 +63,19 @@ const usersSlice = createSlice({
                 state.status = 'succeeded'
             })
             .addMatcher(isRejectedAction, (state, action) => {
-                state.status = 'faild'
-                state.error = action.payload;
+                // debugger
+                // usersSlice.caseReducers.resetState()
+                // state.status = 'faild'
+                // state.error = (() => {
+                //     let errorsParsed;
+                //     try {
+                //         errorsParsed = JSON.parse(action.payload)
+                //     } catch (error) {
+                //         errorsParsed = {}
+                //     }
+                //     return errorsParsed
+                // })()
+                return { ...initialState, status: 'faild', error: action.payload }
             })
     },
 });

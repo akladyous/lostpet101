@@ -1,64 +1,78 @@
+// import '../../assets/css/header.css'
 import { Link } from 'react-router-dom';
-import '../../assets/css/navbar.css'
-import logo from '../../assets/images/icons/logo.png'
-import avatar from '../../assets/images/avatars/avatar1.png'
+import { Disclosure } from '@headlessui/react'
+import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { useSelector } from "react-redux";
+import MainMenu from './navbar/MainMenu.jsx';
+import MobileMenu from './navbar/MobileMenu.jsx';
+import IsAuthenticated from './navbar/IsAuthenticated.jsx';
 
-export default function Navbar() {
-    const currentUser = null;
+
+function classNames(...classes) {
+    return classes.filter(Boolean).join(' ')
+}
+
+export default function Navbar({ title, subTitle }) {
+    const state = useSelector(state => state.users)
+
     return (
-        <header>
-            <nav className="navbar navbar-expand-lg">
-                <div className="container-fluid">
-                    <a className="navbar-brand" href="/">
-                        <img src={logo} alt="logo" className='logo' />
-                        My App
-                    </a>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse h-100" id="mainNavbar">
-                        <ul className="navbar-nav me-auto mb-1 mb-lg-0 mx-auto gap-1">
-                            <li className="nav-item">
-                                <a className="nav-link ps-2 active" aria-current="page" href="/">Home</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link ps-2" href="/">Link</a>
-                            </li>
-                            <li className="nav-item dropdown">
-                                <a className="nav-link ps-2 dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Dropdown
-                                </a>
-                                <ul className="dropdown-menu">
-                                    <li><a className="dropdown-item " href="/">Action</a></li>
-                                    <li><a className="dropdown-item " href="/">Another action</a></li>
-                                    <li><hr className="dropdown-divider " /></li>
-                                    <li><a className="dropdown-item " href="/">Something else here</a></li>
-                                </ul>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link ps-2" href='/'>Disabled</a>
-                            </li>
-                        </ul>
-                        <div className='navbar-nav align-content-center justify-content-center gap-2'>
-                            {
-                                currentUser ?
-                                    <div className='d-none d-md-block'>
-                                        <img src={avatar} alt="av" className='avatar' />
-                                    </div>
-                                    :
-                                    <>
-                                        <Link to='users/signup' state={'User SignUp'} className='btn d-block text-dark fw-bold rounded-5'>
+        <Disclosure as="nav" className="bg-white shadow">
+            {({ open }) => (
+                <>
+                    <div className="w-full px-4 mx-auto sm:px-6 ">
+                        <div className="flex h-16 justify-between">
+                            <div className="flex">
+                                <div className="flex flex-shrink-0 items-center">
+                                    <img
+                                        className="block h-9 w-auto mr-2"
+                                        src={require('../../assets/images/icons/logo2.png')}
+                                        alt="Pet Finder"
+                                    />
+                                    <h4 className='text-xl'>Pet Finder</h4>
+                                </div>
+
+                            </div>
+                            <MainMenu />
+                            <div className="hidden sm:ml-6 sm:flex sm:items-center justify-between">
+                                <button
+                                    type="button"
+                                    className="disabled rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                >
+                                    <span className="sr-only">View notifications</span>
+                                    <BellIcon className="h-6 w-6" aria-hidden="true" />
+                                </button>
+
+                                {
+                                    state.IsAuthenticated ?
+                                        < IsAuthenticated /> :
+                                        <Link
+                                            to='users/signup'
+                                            state={'User SignUp'}
+                                            className="ml-3 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+                                        >
                                             join now
                                         </Link>
-                                        <Link to='users/signin' state='User SignIn' className='btn d-block btn-box'>
-                                            sign in
-                                        </Link>
-                                    </>
-                            }
+                                }
+
+
+                            </div>
+                            <div className="-mr-2 flex items-center sm:hidden">
+                                {/* Mobile menu button */}
+                                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                                    <span className="sr-only">Open main menu</span>
+                                    {open ? (
+                                        <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+                                    ) : (
+                                        <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+                                    )}
+                                </Disclosure.Button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </nav>
-        </header>
+
+                    <MobileMenu />
+                </>
+            )}
+        </Disclosure>
     )
 }
