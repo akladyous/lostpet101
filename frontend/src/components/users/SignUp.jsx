@@ -28,7 +28,7 @@ export default function SignUp() {
         console.log(values);
         console.log(formikBag);
         // const controller = new AbortController();
-        // dispatch(usersSignUp({values, controller }));
+        dispatch(usersSignUp({ user: values }));
         // controller.abort();
     }, []);
     const formik = useFormik({
@@ -76,7 +76,7 @@ export default function SignUp() {
                                             {obj.label.name}
                                         </label>
                                         <input
-                                            type={obj.input.name}
+                                            type={obj.input.type}
                                             name={obj.input.name}
                                             id={obj.input.name}
                                             className={formClasses.textField}
@@ -96,20 +96,28 @@ export default function SignUp() {
                                     </div>
                                 );
                             })}
+                            {state.error?.message ? (
+                                <div className="">
+                                    <p className="text-sm text-red-600">
+                                        {state.error.message}
+                                    </p>
+                                </div>
+                            ) : null}
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center">
-                                    {/* <input
+                                    <input
                                         id="remember-me"
                                         name="remember-me"
                                         type="checkbox"
                                         className="h-4 w-4 rounded border-gray-300 text-orange-600 focus:ring-orange-500"
+                                        disabled
                                     />
                                     <label
                                         htmlFor="remember-me"
                                         className="ml-2 block text-sm text-gray-900"
                                     >
                                         Remember me
-                                    </label> */}
+                                    </label>
                                 </div>
 
                                 <div className="text-sm">
