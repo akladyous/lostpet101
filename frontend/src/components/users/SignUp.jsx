@@ -1,21 +1,21 @@
-import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { useReducer, useCallback } from "react";
-import { usersSignUp } from "../../app/api/ThunkAPI/users/usersSignUp.js";
-import { MemoizedComponent } from "../layout/form/InputField.jsx";
-import { SignUpSchema } from "./form/signUpSchema.js";
+import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { useReducer, useCallback } from 'react';
+import { usersSignUp } from '../../app/api/ThunkAPI/users/usersSignUp.js';
+import { MemoizedComponent } from '../layout/form/InputField.jsx';
+import { SignUpSchema } from './form/signUpSchema.js';
 // import AuthenticateWithProvider from "./form/AuthenticateWithProvider.jsx";
 
 const initializeState = (obj) => {
     return obj.reduce((acc, value) => {
-        acc[value.input.name] = "";
+        acc[value.input.name] = '';
         return acc;
     }, {});
 };
 const ACTION = {
-    CHANGE_VALUE: "changeValue",
-    SUBMIT_FORM: "submitForm",
-    RESET: "reset",
+    CHANGE_VALUE: 'changeValue',
+    SUBMIT_FORM: 'submitForm',
+    RESET: 'reset',
 };
 const reducer = (state, action) => {
     switch (action.type) {
@@ -54,17 +54,19 @@ export default function SignUp() {
         [formState, dispatch]
     );
 
-    const handleInputsError = useCallback((attributeName) => {
-        if (state?.error?.attributeName) {
-            return state.error.attributeName
-        }
-        return ''
-    }, [state.error])
+    const handleInputsError = useCallback(
+        (attributeName) => {
+            if (state?.error?.attributeName) {
+                return state.error.attributeName;
+            }
+            return '';
+        },
+        [state.error]
+    );
 
     return (
         <>
             <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
-
                 <div className="sm:mx-auto sm:w-full sm:max-w-md">
                     <img
                         className="mx-auto h-20 w-auto"
@@ -74,12 +76,16 @@ export default function SignUp() {
                     <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
                         Sign up a new account
                     </h2>
-
                 </div>
 
-                <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md mx-3">
-                    <div className="bg-slate brightness-100 py-8 px-4 shadow-xl sm:rounded-lg sm:px-10">
-                        <form className="space-y-6" action="#" method="POST" onSubmit={handleForm}>
+                <div className="mx-3 mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+                    <div className="bg-slate py-8 px-4 shadow-xl brightness-100 sm:rounded-lg sm:px-10">
+                        <form
+                            className="space-y-6"
+                            action="#"
+                            method="POST"
+                            onSubmit={handleForm}
+                        >
                             {SignUpSchema.map((obj, idx) => {
                                 return (
                                     <MemoizedComponent
@@ -91,16 +97,13 @@ export default function SignUp() {
                                     />
                                 );
                             })}
-                            {
-                                state.error?.message
-                                    ?
-                                    <div className="">
-                                        <p className="text-red-600 text-sm">
-                                            {state.error.message}
-                                        </p>
-                                    </div>
-                                    : null
-                            }
+                            {state.error?.message ? (
+                                <div className="">
+                                    <p className="text-sm text-red-600">
+                                        {state.error.message}
+                                    </p>
+                                </div>
+                            ) : null}
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center">
                                     <input
@@ -109,14 +112,17 @@ export default function SignUp() {
                                         type="checkbox"
                                         className="h-4 w-4 rounded border-gray-300 text-orange-600 focus:ring-orange-500"
                                     />
-                                    <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+                                    <label
+                                        htmlFor="remember-me"
+                                        className="ml-2 block text-sm text-gray-900"
+                                    >
                                         Remember me
                                     </label>
                                 </div>
 
                                 <div className="text-sm">
                                     <Link
-                                        to='/users/signin'
+                                        to="/users/signin"
                                         state={'User SignUp'}
                                         className="font-medium text-orange-600 hover:text-orange-500"
                                     >
