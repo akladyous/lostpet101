@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 export default function TeamArea() {
     return (
-        <div className="mx-0 bg-team-area bg-cover bg-center h-[25rem] flex flex-col justify-between py-20">
+        <div className="bg-team-area bg-cover bg-center h-[25rem] flex flex-col justify-between py-20 mb-14">
             <div className="text-center text-white">
                 <h2 className='text-6xl mb-3'>Pet Finder</h2>
             </div>

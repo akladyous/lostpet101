@@ -37,7 +37,7 @@ export default function ServiceArea() {
                     Match with highly rated local dog boarding kennels near you
                 </p>
             </div>
-            <div className="grid grid-cols-3 gap-10">
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-10">
                 {
                     services.map((service, idx) => {
                         return (

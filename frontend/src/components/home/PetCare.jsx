@@ -4,20 +4,20 @@ import { Link } from 'react-router-dom'
 export default function PetCare() {
     return (
         <Container>
-            <div className="grid grid-cols-2">
+            <div className="grid grid-col-1 border border-orange-200 rounded-xl md:border-none md:grid-cols-2">
                 <div className="">
                     <div className="">
                         <img src={require('../../assets/images/about/pet_care.png')} alt="" />
                     </div>
                 </div>
-                <div className="flex flex-col py-36 h-full">
-                    <h2 className='text-lg font-medium tracking-tight text-slate-600 md:text-4xl py-1'>
+                <div className="flex flex-col items-center md:items-start md:py-36 h-full">
+                    <h2 className='text-3xl font-medium tracking-tight text-slate-600 md:text-4xl py-1'>
                         We care your pet
                     </h2>
-                    <h1 className='text-lg font-semibold tracking-tight text-slate-600 md:text-7xl py-3'>
+                    <h1 className='text-5xl font-semibold tracking-tight text-slate-600 md:text-7xl py-3'>
                         As you care
                     </h1>
-                    <p className=" py-3">
+                    <p className="py-3 text-center md:text-start">
                         Help reuniting lost pets by placing lost and
                         found pet flyers in your neghbourhood.
                         <br />
