@@ -80,12 +80,7 @@ export default function SignUp() {
 
                 <div className="mx-3 mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                     <div className="bg-slate py-8 px-4 shadow-xl brightness-100 sm:rounded-lg sm:px-10">
-                        <form
-                            className="space-y-6"
-                            action="#"
-                            method="POST"
-                            onSubmit={handleForm}
-                        >
+                        <form className="space-y-6" onSubmit={handleForm}>
                             {SignUpSchema.map((obj, idx) => {
                                 return (
                                     <MemoizedComponent

@@ -64,8 +64,6 @@ export default function SignUp() {
                     <div className="bg-slate py-8 px-4 shadow-xl brightness-100 sm:rounded-lg sm:px-10">
                         <form
                             className="space-y-6"
-                            // action="#"
-                            // method="POST"
                             onSubmit={formik.handleSubmit}
                         >
                             {signUpSchema.map((obj, idx) => {
@@ -98,17 +96,9 @@ export default function SignUp() {
                                     </div>
                                 );
                             })}
-
-                            {/* {state.error?.message ? (
-                                    <div className="">
-                                        <p className="text-sm text-red-600">
-                                            {state.error.message}
-                                        </p>
-                                    </div>
-                                ) : null} */}
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center">
-                                    <input
+                                    {/* <input
                                         id="remember-me"
                                         name="remember-me"
                                         type="checkbox"
@@ -119,7 +109,7 @@ export default function SignUp() {
                                         className="ml-2 block text-sm text-gray-900"
                                     >
                                         Remember me
-                                    </label>
+                                    </label> */}
                                 </div>
 
                                 <div className="text-sm">
