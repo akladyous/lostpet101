@@ -1,69 +1,51 @@
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { useReducer, useCallback } from 'react';
+import { useCallback } from 'react';
 import { usersSignUp } from '../../app/api/ThunkAPI/users/usersSignUp.js';
-import { MemoizedComponent } from '../layout/form/InputField.jsx';
-import { SignUpSchema } from './form/signUpSchema.js';
+import {
+    signUpSchema,
+    initializeState,
+    formClasses,
+} from './form/signUpSchema.js';
 // import AuthenticateWithProvider from "./form/AuthenticateWithProvider.jsx";
+import { Field, Form, Formik, FormikProps, useFormik } from 'formik';
+import * as Yup from 'yup';
 
-const initializeState = (obj) => {
-    return obj.reduce((acc, value) => {
-        acc[value.input.name] = '';
-        return acc;
-    }, {});
-};
-const ACTION = {
-    CHANGE_VALUE: 'changeValue',
-    SUBMIT_FORM: 'submitForm',
-    RESET: 'reset',
-};
-const reducer = (state, action) => {
-    switch (action.type) {
-        case ACTION.CHANGE_VALUE:
-            return { ...state, [action.field]: action.payload };
-        case ACTION.RESET:
-            return initializeState(SignUpSchema);
-        default:
-            break;
-    }
-};
 export default function SignUp() {
     const dispatch = useDispatch();
     const state = useSelector((state) => state.users);
-    const [formState, formDispatch] = useReducer(
-        reducer,
-        SignUpSchema,
-        initializeState
-    );
 
-    const handleChange = useCallback((e) => {
-        formDispatch({
-            type: ACTION.CHANGE_VALUE,
-            field: e.target.name,
-            payload: e.target.value,
-        });
+    // const handleForm = useCallback(
+    //     async (e) => {
+    //         e.preventDefault();
+    //         const controller = new AbortController();
+    //         dispatch(usersSignUp({ user: formState, controller }));
+    //         controller.abort();
+    //     },
+    //     [dispatch]
+    // );
+    const handleSubmit = useCallback((values, formikBag) => {
+        console.log(values);
+        console.log(formikBag);
+        // const controller = new AbortController();
+        // dispatch(usersSignUp({values, controller }));
+        // controller.abort();
     }, []);
-
-    const handleForm = useCallback(
-        async (e) => {
-            e.preventDefault();
-            const controller = new AbortController();
-            dispatch(usersSignUp({ user: formState, controller }));
-            controller.abort();
-        },
-        [formState, dispatch]
-    );
-
-    const handleInputsError = useCallback(
-        (attributeName) => {
-            if (state?.error?.attributeName) {
-                return state.error.attributeName;
-            }
-            return '';
-        },
-        [state.error]
-    );
-
+    const formik = useFormik({
+        initialValues: initializeState(signUpSchema),
+        onSubmit: handleSubmit,
+        validationSchema: Yup.object({
+            email: Yup.string()
+                .email('Invalid email address')
+                .required('Required'),
+            password: Yup.string()
+                .min(5, 'Must be 5 and 32 characters')
+                .max(64, 'Must be 5 and 32 characters'),
+            password_confirmation: Yup.string()
+                .min(5, 'Must be 5 and 32 characters')
+                .max(64, 'Must be 5 and 32 characters'),
+        }),
+    });
     return (
         <>
             <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -82,28 +64,48 @@ export default function SignUp() {
                     <div className="bg-slate py-8 px-4 shadow-xl brightness-100 sm:rounded-lg sm:px-10">
                         <form
                             className="space-y-6"
-                            action="#"
-                            method="POST"
-                            onSubmit={handleForm}
+                            // action="#"
+                            // method="POST"
+                            onSubmit={formik.handleSubmit}
                         >
-                            {SignUpSchema.map((obj, idx) => {
+                            {signUpSchema.map((obj, idx) => {
                                 return (
-                                    <MemoizedComponent
-                                        key={idx}
-                                        input={{ ...obj.input, required: true }}
-                                        label={obj.label}
-                                        value={formState[obj.input.name]}
-                                        onChange={handleChange}
-                                    />
+                                    <div key={idx} className="">
+                                        <label
+                                            htmlFor={obj.input.name}
+                                            className={formClasses.label}
+                                        >
+                                            {obj.label.name}
+                                        </label>
+                                        <input
+                                            type={obj.input.name}
+                                            name={obj.input.name}
+                                            id={obj.input.name}
+                                            className={formClasses.textField}
+                                            onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
+                                            value={
+                                                formik.values[obj.input.name]
+                                            }
+                                        />
+                                        {formik.touched &&
+                                        formik.errors[obj.input.name] ? (
+                                            <p className="text-sm text-red-600">
+                                                {' '}
+                                                {formik.errors[obj.input.name]}
+                                            </p>
+                                        ) : null}
+                                    </div>
                                 );
                             })}
-                            {state.error?.message ? (
-                                <div className="">
-                                    <p className="text-sm text-red-600">
-                                        {state.error.message}
-                                    </p>
-                                </div>
-                            ) : null}
+
+                            {/* {state.error?.message ? (
+                                    <div className="">
+                                        <p className="text-sm text-red-600">
+                                            {state.error.message}
+                                        </p>
+                                    </div>
+                                ) : null} */}
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center">
                                     <input
@@ -140,7 +142,6 @@ export default function SignUp() {
                                 </button>
                             </div>
                         </form>
-
                         {/* <AuthenticateWithProvider /> */}
                     </div>
                 </div>
