@@ -26,8 +26,8 @@ const formConstrains = Yup.object({
         .max(64, 'Must be 5 and 32 characters'),
     password_confirmation: Yup.string()
         .min(5, 'Must be 5 and 32 characters')
-        .max(64, 'Must be 5 and 32 characters'),
-    // .oneOf([Yup.ref('password')], "Password confirmation doesn't match"),
+        .max(64, 'Must be 5 and 32 characters')
+        .oneOf([Yup.ref('password')], "Password confirmation doesn't match"),
 });
 
 export const signUpSchema = () => {
