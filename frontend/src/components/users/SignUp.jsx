@@ -1,51 +1,63 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { useCallback } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { usersSignUp } from '../../app/api/ThunkAPI/users/usersSignUp.js';
-import {
-    signUpSchema,
-    initializeState,
-    formClasses,
-} from './form/signUpSchema.js';
+import { signUpSchema } from './form/signUpSchema.js';
+import { Formik } from 'formik';
+import { InputField } from './form/InputField.jsx';
+import { FormMessages } from './form/FormMessages.jsx';
 // import AuthenticateWithProvider from "./form/AuthenticateWithProvider.jsx";
-import { Field, Form, Formik, FormikProps, useFormik } from 'formik';
-import * as Yup from 'yup';
+
+const [formFields, formInitialState, formClasses, formConstrains] =
+    signUpSchema();
 
 export default function SignUp() {
     const dispatch = useDispatch();
     const state = useSelector((state) => state.users);
+    const formMessageRef = useRef(null);
+    const navigate = useNavigate();
 
-    // const handleForm = useCallback(
-    //     async (e) => {
-    //         e.preventDefault();
-    //         const controller = new AbortController();
-    //         dispatch(usersSignUp({ user: formState, controller }));
-    //         controller.abort();
-    //     },
-    //     [dispatch]
-    // );
-    const handleSubmit = useCallback((values, formikBag) => {
-        console.log(values);
-        console.log(formikBag);
-        // const controller = new AbortController();
-        dispatch(usersSignUp({ user: values }));
-        // controller.abort();
+    const handleSubmit = useCallback(
+        async (values, actions) => {
+            // const controller = new AbortController();
+            const response = await dispatch(usersSignUp({ user: values }));
+            // controller.abort();
+
+            // debugger;
+            if (usersSignUp.fulfilled.match(response)) {
+                setTimeout(() => {
+                    navigate(-1, { replace: true });
+                }, 2000);
+            } else {
+                switch (true) {
+                    case response.payload.hasOwnProperty('message'):
+                        formMessageRef.current.textContent =
+                            response.payload.message;
+                        break;
+                    case response.payload.hasOwnProperty('validation'):
+                        actions.setErrors(response.payload.validation);
+                        break;
+                    case response.payload.hasOwnProperty('error'):
+                        formMessageRef.current.textContent =
+                            response.payload.message;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            // if (
+            //     response?.error?.message === 'Rejected' &&
+            //     !response.payload?.message
+            // ) {
+            //     actions.setErrors(response.payload);
+            // }
+        },
+        [dispatch]
+    );
+
+    useEffect(() => {
+        console.log('useEffect');
     }, []);
-    const formik = useFormik({
-        initialValues: initializeState(signUpSchema),
-        onSubmit: handleSubmit,
-        validationSchema: Yup.object({
-            email: Yup.string()
-                .email('Invalid email address')
-                .required('Required'),
-            password: Yup.string()
-                .min(5, 'Must be 5 and 32 characters')
-                .max(64, 'Must be 5 and 32 characters'),
-            password_confirmation: Yup.string()
-                .min(5, 'Must be 5 and 32 characters')
-                .max(64, 'Must be 5 and 32 characters'),
-        }),
-    });
     return (
         <>
             <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -62,84 +74,75 @@ export default function SignUp() {
 
                 <div className="mx-3 mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                     <div className="bg-slate py-8 px-4 shadow-xl brightness-100 sm:rounded-lg sm:px-10">
-                        <form
-                            className="space-y-6"
-                            onSubmit={formik.handleSubmit}
+                        <Formik
+                            initialValues={formInitialState}
+                            onSubmit={handleSubmit}
+                            validationSchema={formConstrains}
                         >
-                            {signUpSchema.map((obj, idx) => {
-                                return (
-                                    <div key={idx} className="">
-                                        <label
-                                            htmlFor={obj.input.name}
-                                            className={formClasses.label}
-                                        >
-                                            {obj.label.name}
-                                        </label>
-                                        <input
-                                            type={obj.input.type}
-                                            name={obj.input.name}
-                                            id={obj.input.name}
-                                            className={formClasses.textField}
-                                            onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur}
-                                            value={
-                                                formik.values[obj.input.name]
-                                            }
-                                        />
-                                        {formik.touched &&
-                                        formik.errors[obj.input.name] ? (
-                                            <p className="text-sm text-red-600">
-                                                {' '}
-                                                {formik.errors[obj.input.name]}
-                                            </p>
-                                        ) : null}
-                                    </div>
-                                );
-                            })}
-                            {state.error?.message ? (
-                                <div className="">
-                                    <p className="text-sm text-red-600">
-                                        {state.error.message}
-                                    </p>
-                                </div>
-                            ) : null}
-                            <div className="flex items-center justify-between">
-                                <div className="flex items-center">
-                                    <input
-                                        id="remember-me"
-                                        name="remember-me"
-                                        type="checkbox"
-                                        className="h-4 w-4 rounded border-gray-300 text-orange-600 focus:ring-orange-500"
-                                        disabled
-                                    />
-                                    <label
-                                        htmlFor="remember-me"
-                                        className="ml-2 block text-sm text-gray-900"
-                                    >
-                                        Remember me
-                                    </label>
-                                </div>
-
-                                <div className="text-sm">
-                                    <Link
-                                        to="/users/signin"
-                                        state={'User SignUp'}
-                                        className="font-medium text-orange-600 hover:text-orange-500"
-                                    >
-                                        have account already?
-                                    </Link>
-                                </div>
-                            </div>
-
-                            <div>
-                                <button
-                                    type="submit"
-                                    className="flex w-full justify-center rounded-md border border-transparent bg-orange-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+                            {(props) => (
+                                <form
+                                    className="space-y-6"
+                                    onSubmit={props.handleSubmit}
                                 >
-                                    Sign in
-                                </button>
-                            </div>
-                        </form>
+                                    {formFields.map((obj, idx) => {
+                                        return (
+                                            <InputField
+                                                key={idx}
+                                                InputField={obj}
+                                                classes={formClasses}
+                                                {...props}
+                                            />
+                                        );
+                                    })}
+                                    <FormMessages ref={formMessageRef} />
+                                    {/* state.error?.message ? (
+                                        <div className="">
+                                            <p className="text-sm text-red-600">
+                                                {state.error.message}
+                                            </p>
+                                        </div>
+                                    ) : null */}
+                                    <div className="flex items-center justify-between">
+                                        <div className="flex items-center">
+                                            <input
+                                                id="remember-me"
+                                                name="remember-me"
+                                                type="checkbox"
+                                                className="h-4 w-4 rounded border-gray-300 text-orange-600 focus:ring-orange-500"
+                                                disabled
+                                            />
+                                            <label
+                                                htmlFor="remember-me"
+                                                className="ml-2 block text-sm text-gray-900"
+                                            >
+                                                Remember me
+                                            </label>
+                                        </div>
+
+                                        <div className="text-sm">
+                                            <Link
+                                                to="/users/signin"
+                                                state={'User SignUp'}
+                                                className="font-medium text-orange-600 hover:text-orange-500"
+                                            >
+                                                have account already?
+                                            </Link>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <button
+                                            type="submit"
+                                            disabled={props.isSubmitting}
+                                            className="flex w-full justify-center rounded-md border border-transparent bg-orange-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+                                        >
+                                            Sign in
+                                        </button>
+                                    </div>
+                                </form>
+                            )}
+                        </Formik>
+
                         {/* <AuthenticateWithProvider /> */}
                     </div>
                 </div>

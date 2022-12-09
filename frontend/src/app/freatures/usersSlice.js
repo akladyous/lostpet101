@@ -3,10 +3,10 @@ import {
     isPending,
     isRejected,
     isFulfilled,
-} from "@reduxjs/toolkit";
-import { usersSignUp } from "../api/ThunkAPI/users/usersSignUp.js";
-import { usersSignOut } from "../api/ThunkAPI/users/usersSignOut.js";
-import { usersSignIn } from '../api/ThunkAPI/users/usersSignIn.js'
+} from '@reduxjs/toolkit';
+import { usersSignUp } from '../api/ThunkAPI/users/usersSignUp.js';
+import { usersSignOut } from '../api/ThunkAPI/users/usersSignOut.js';
+import { usersSignIn } from '../api/ThunkAPI/users/usersSignIn.js';
 
 const isPendingAction = isPending(usersSignUp, usersSignIn, usersSignOut);
 const isRejectedAction = isRejected(usersSignUp, usersSignIn, usersSignOut);
@@ -15,12 +15,12 @@ const isFulfilledAction = isFulfilled(usersSignUp, usersSignIn, usersSignOut);
 const initialState = {
     isAuthenticated: false,
     user: null,
-    status: "idle", // idle | loading | succeeded | failed
+    status: 'idle', // idle | loading | succeeded | failed
     error: {},
     message: null,
 };
 const usersSlice = createSlice({
-    name: "users",
+    name: 'users',
     initialState,
     reducers: {
         setUser: (state, action) => {
@@ -43,24 +43,27 @@ const usersSlice = createSlice({
         builder
             .addCase(usersSignUp.fulfilled, (state, action) => {
                 state.isAuthenticated = true;
-                state.message = "Account successfully created";
+                state.message = 'Account successfully created';
                 state.user = { ...action.payload };
+                state.error = {};
             })
             .addCase(usersSignIn.fulfilled, (state, action) => {
                 state.isAuthenticated = true;
-                state.message = "login successfully completed";
+                state.message = 'login successfully completed';
                 state.user = { ...action.payload };
+                state.error = {};
             })
             .addCase(usersSignOut.fulfilled, (state, action) => {
                 state.isAuthenticated = true;
-                state.message = "login successfully completed";
+                state.message = 'login successfully completed';
                 state.user = { ...action.payload };
+                state.error = {};
             })
-            .addMatcher(isPendingAction, state => {
-                state.status = 'loading'
+            .addMatcher(isPendingAction, (state) => {
+                state.status = 'loading';
             })
-            .addMatcher(isFulfilledAction, state => {
-                state.status = 'succeeded'
+            .addMatcher(isFulfilledAction, (state) => {
+                state.status = 'succeeded';
             })
             .addMatcher(isRejectedAction, (state, action) => {
                 // debugger
@@ -75,8 +78,12 @@ const usersSlice = createSlice({
                 //     }
                 //     return errorsParsed
                 // })()
-                return { ...initialState, status: 'faild', error: action.payload }
-            })
+                return {
+                    ...initialState,
+                    status: 'faild',
+                    error: action.payload,
+                };
+            });
     },
 });
 

@@ -13,7 +13,7 @@ export const usersSignUp = createAsyncThunk(
                 data: user,
                 signal: controller.signal,
             });
-            return thunkAPI.fulfillWithValue(response.data);
+            return thunkAPI.fulfillWithValue(await response.data);
         } catch (error) {
             if (error.response) {
                 return thunkAPI.rejectWithValue(error.response.data);
