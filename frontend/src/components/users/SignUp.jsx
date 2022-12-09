@@ -1,12 +1,12 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import { usersSignUp } from '../../app/api/ThunkAPI/users/usersSignUp.js';
 import { signUpSchema } from './form/signUpSchema.js';
 import { Formik } from 'formik';
 import { InputField } from './form/InputField.jsx';
 import { FormMessages } from './form/FormMessages.jsx';
-// import AuthenticateWithProvider from "./form/AuthenticateWithProvider.jsx";
+import AuthenticateWithProvider from './form/AuthenticateWithProvider.jsx';
 
 const [formFields, formInitialState, formClasses, formConstrains] =
     signUpSchema();
@@ -53,12 +53,9 @@ export default function SignUp() {
             }
             actions.setSubmitting(false);
         },
-        [dispatch]
+        [dispatch, navigate]
     );
 
-    useEffect(() => {
-        console.log('useEffect');
-    }, []);
     return (
         <>
             <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -164,7 +161,7 @@ export default function SignUp() {
                             )}
                         </Formik>
 
-                        {/* <AuthenticateWithProvider /> */}
+                        <AuthenticateWithProvider />
                     </div>
                 </div>
             </div>
