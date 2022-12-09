@@ -45,12 +45,6 @@ export default function SignUp() {
                         break;
                 }
             }
-            // if (
-            //     response?.error?.message === 'Rejected' &&
-            //     !response.payload?.message
-            // ) {
-            //     actions.setErrors(response.payload);
-            // }
         },
         [dispatch]
     );
