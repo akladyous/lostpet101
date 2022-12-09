@@ -12,6 +12,7 @@ class Users::RegistrationController < UsersController
         acc[k] = "#{k.to_s.split('_').join(' ')} #{v.join}"
         acc
       }
+      sleep 1
       render json: {validation: errors}, status: :unprocessable_entity
     end
 
