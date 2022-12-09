@@ -62,7 +62,7 @@ export default function SignUp() {
                 <div className="sm:mx-auto sm:w-full sm:max-w-md">
                     <img
                         className="mx-auto h-20 w-auto"
-                        src={require('../../assets/images/avatars/user_placeholder.png')}
+                        src={require('../../assets/images/icons/user_placeholder.png')}
                         alt="Your Company"
                     />
                     <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
@@ -93,13 +93,6 @@ export default function SignUp() {
                                         );
                                     })}
                                     <FormMessages ref={formMessageRef} />
-                                    {/* state.error?.message ? (
-                                        <div className="">
-                                            <p className="text-sm text-red-600">
-                                                {state.error.message}
-                                            </p>
-                                        </div>
-                                    ) : null */}
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center">
                                             <input
@@ -137,7 +130,7 @@ export default function SignUp() {
                                             {props.isSubmitting ? (
                                                 <svg
                                                     role="status"
-                                                    class="mr-3 inline h-4 w-4 animate-spin text-white"
+                                                    className="mr-3 inline h-4 w-4 animate-spin text-white"
                                                     viewBox="0 0 100 101"
                                                     fill="none"
                                                     xmlns="http://www.w3.org/2000/svg"

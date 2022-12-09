@@ -1,20 +1,23 @@
-import React from 'react'
-import { Menu, Transition } from '@headlessui/react'
+import React from 'react';
+import { Menu, Transition } from '@headlessui/react';
+import { useSelector } from 'react-redux';
+import userAvatar from '../../../assets/images/icons/user_placeholder.png';
 
 function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
+    return classes.filter(Boolean).join(' ');
 }
 
 export default function IsAuthenticated() {
+    const state = useSelector((state) => state.users);
     return (
         <Menu as="div" className="relative ml-3">
             <div>
-                <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2">
                     <span className="sr-only">Open user menu</span>
                     <img
                         className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
+                        src={state?.user?.photo_url ?? userAvatar}
+                        alt="user-avatar"
                     />
                 </Menu.Button>
             </div>
@@ -32,7 +35,10 @@ export default function IsAuthenticated() {
                         {({ active }) => (
                             <a
                                 href="/"
-                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                className={classNames(
+                                    active ? 'bg-gray-100' : '',
+                                    'block px-4 py-2 text-sm text-gray-700'
+                                )}
                             >
                                 Your Profile
                             </a>
@@ -42,7 +48,10 @@ export default function IsAuthenticated() {
                         {({ active }) => (
                             <a
                                 href="/"
-                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                className={classNames(
+                                    active ? 'bg-gray-100' : '',
+                                    'block px-4 py-2 text-sm text-gray-700'
+                                )}
                             >
                                 Settings
                             </a>
@@ -52,7 +61,10 @@ export default function IsAuthenticated() {
                         {({ active }) => (
                             <a
                                 href="/"
-                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                className={classNames(
+                                    active ? 'bg-gray-100' : '',
+                                    'block px-4 py-2 text-sm text-gray-700'
+                                )}
                             >
                                 Sign out
                             </a>
@@ -61,5 +73,5 @@ export default function IsAuthenticated() {
                 </Menu.Items>
             </Transition>
         </Menu>
-    )
+    );
 }

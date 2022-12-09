@@ -1,21 +1,21 @@
-import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { useReducer, useCallback } from "react";
-import { usersSignIn } from '../../app/api/ThunkAPI/users/usersSignIn.js'
-import { MemoizedComponent } from "../layout/form/InputField.jsx";
-import { SignInSchema } from './form/SignInSchema.js'
+import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { useReducer, useCallback } from 'react';
+import { usersSignIn } from '../../app/api/ThunkAPI/users/usersSignIn.js';
+import { MemoizedComponent } from '../layout/form/InputField.jsx';
+import { SignInSchema } from './form/SignInSchema.js';
 // import AuthenticateWithProvider from "./form/AuthenticateWithProvider.jsx";
 
 const initializeState = (obj) => {
     return obj.reduce((acc, value) => {
-        acc[value.input.name] = "";
+        acc[value.input.name] = '';
         return acc;
     }, {});
 };
 const ACTION = {
-    CHANGE_VALUE: "changeValue",
-    SUBMIT_FORM: "submitForm",
-    RESET: "reset",
+    CHANGE_VALUE: 'changeValue',
+    SUBMIT_FORM: 'submitForm',
+    RESET: 'reset',
 };
 const reducer = (state, action) => {
     switch (action.type) {
@@ -54,33 +54,38 @@ export default function SignIn() {
         [formState, dispatch]
     );
 
-    const handleInputsError = useCallback((attributeName) => {
-        if (state?.error?.attributeName) {
-            return state.error.attributeName
-        }
-        return ''
-    }, [state.error])
-
+    const handleInputsError = useCallback(
+        (attributeName) => {
+            if (state?.error?.attributeName) {
+                return state.error.attributeName;
+            }
+            return '';
+        },
+        [state.error]
+    );
 
     return (
         <>
             <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
-
                 <div className="sm:mx-auto sm:w-full sm:max-w-md">
                     <img
                         className="mx-auto h-20 w-auto"
-                        src={require('../../assets/images/avatars/user_placeholder.png')}
+                        src={require('../../assets/images/icons/user_placeholder.png')}
                         alt="Your Company"
                     />
                     <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
                         Sign in to your account
                     </h2>
-
                 </div>
 
-                <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md mx-3">
-                    <div className="bg-slate brightness-100 py-8 px-4 shadow-xl sm:rounded-lg sm:px-10">
-                        <form className="space-y-6" action="#" method="POST" onSubmit={handleForm}>
+                <div className="mx-3 mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+                    <div className="bg-slate py-8 px-4 shadow-xl brightness-100 sm:rounded-lg sm:px-10">
+                        <form
+                            className="space-y-6"
+                            action="#"
+                            method="POST"
+                            onSubmit={handleForm}
+                        >
                             {SignInSchema.map((obj, idx) => {
                                 return (
                                     <MemoizedComponent
@@ -92,16 +97,14 @@ export default function SignIn() {
                                     />
                                 );
                             })}
-                            {
-                                state.error?.message && Object.keys(state.error).length === 0
-                                    ?
-                                    <div>
-                                        <p className="text-red-600 text-sm pt-2">
-                                            {state.error.message}
-                                        </p>
-                                    </div>
-                                    : null
-                            }
+                            {state.error?.message &&
+                            Object.keys(state.error).length === 0 ? (
+                                <div>
+                                    <p className="pt-2 text-sm text-red-600">
+                                        {state.error.message}
+                                    </p>
+                                </div>
+                            ) : null}
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center">
                                     <input
@@ -110,14 +113,17 @@ export default function SignIn() {
                                         type="checkbox"
                                         className="h-4 w-4 rounded border-gray-300 text-orange-600 focus:ring-orange-500"
                                     />
-                                    <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+                                    <label
+                                        htmlFor="remember-me"
+                                        className="ml-2 block text-sm text-gray-900"
+                                    >
                                         Remember me
                                     </label>
                                 </div>
 
                                 <div className="text-sm">
                                     <Link
-                                        to='/users/sigin'
+                                        to="/users/sigin"
                                         state={'User SignUp'}
                                         className="font-medium text-orange-600 hover:text-orange-500"
                                     >
