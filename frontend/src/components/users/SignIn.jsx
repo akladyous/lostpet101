@@ -2,14 +2,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useCallback, useRef } from 'react';
 import { usersSignIn } from '../../app/api/ThunkAPI/users/usersSignIn.js';
-import { signUpSchema } from './form/signUpSchema.js';
+import { signInSchema } from './form/signInSchema.js';
 import { Formik } from 'formik';
 import { InputField } from './form/InputField.jsx';
 import { FormMessages } from './form/FormMessages.jsx';
 import AuthenticateWithProvider from './form/AuthenticateWithProvider.jsx';
 
 const [formFields, formInitialState, formClasses, formConstrains] =
-    signUpSchema();
+    signInSchema();
 
 export default function SignIn() {
     const dispatch = useDispatch();
