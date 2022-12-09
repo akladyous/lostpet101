@@ -24,14 +24,12 @@ export default function SignUp() {
             // controller.abort();
 
             if (usersSignUp.fulfilled.match(response)) {
-                if (response.type.endsWith('fulfilled')) {
-                    formMessageRef.current.textContent =
-                        'account successfully created';
-                    actions.resetForm(formInitialState);
-                    setTimeout(() => {
-                        navigate('/', { replace: true });
-                    }, 5000);
-                }
+                formMessageRef.current.textContent =
+                    'account successfully created';
+                actions.resetForm(formInitialState);
+                setTimeout(() => {
+                    navigate('/', { replace: true });
+                }, 5000);
             } else {
                 switch (true) {
                     case response.payload.hasOwnProperty('message'):

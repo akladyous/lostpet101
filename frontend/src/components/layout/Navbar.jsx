@@ -1,4 +1,3 @@
-// import '../../assets/css/header.css'
 import { Link } from 'react-router-dom';
 import { Disclosure } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
@@ -7,9 +6,9 @@ import MainMenu from './navbar/MainMenu.jsx';
 import MobileMenu from './navbar/MobileMenu.jsx';
 import IsAuthenticated from './navbar/IsAuthenticated.jsx';
 
-export default function Navbar({ title, subTitle }) {
+export default function Navbar() {
     const state = useSelector((state) => state.users);
-    console.log(state);
+
     return (
         <Disclosure as="nav" className="bg-white shadow">
             {({ open }) => (
