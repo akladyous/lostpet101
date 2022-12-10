@@ -4,9 +4,9 @@ import {
     isRejected,
     isFulfilled,
 } from '@reduxjs/toolkit';
-import { usersSignUp } from '../api/ThunkAPI/users/usersSignUp.js';
-import { usersSignOut } from '../api/ThunkAPI/users/usersSignOut.js';
-import { usersSignIn } from '../api/ThunkAPI/users/usersSignIn.js';
+import { usersSignUp } from '../thunks/users/usersSignUp.js';
+import { usersSignOut } from '../thunks/users/usersSignOut.js';
+import { usersSignIn } from '../thunks/users/usersSignIn.js';
 
 const isPendingAction = isPending(usersSignUp, usersSignIn, usersSignOut);
 const isRejectedAction = isRejected(usersSignUp, usersSignIn, usersSignOut);

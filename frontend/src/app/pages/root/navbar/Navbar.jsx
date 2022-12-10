@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom';
 import { Disclosure } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useSelector } from 'react-redux';
-import MainMenu from './navbar/MainMenu.jsx';
-import MobileMenu from './navbar/MobileMenu.jsx';
-import IsAuthenticated from './navbar/IsAuthenticated.jsx';
+import MainMenu from './MainMenu.jsx';
+import MobileMenu from './MobileMenu.jsx';
+import IsAuthenticated from './IsAuthenticated.jsx';
 
 export default function Navbar() {
     const state = useSelector((state) => state.users);
@@ -19,7 +19,7 @@ export default function Navbar() {
                                 <div className="flex flex-shrink-0 items-center">
                                     <img
                                         className="mr-2 block h-9 w-auto"
-                                        src={require('../../assets/images/icons/logo2.png')}
+                                        src={require('../../../../assets/images/icons/logo2.png')}
                                         alt="Pet Finder"
                                     />
                                     <h4 className="text-xl">Pet Finder</h4>

@@ -1,11 +1,11 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useCallback, useRef } from 'react';
-import { usersSignUp } from '../../app/api/ThunkAPI/users/usersSignUp.js';
-import { signUpSchema } from './form/signUpSchema.js';
 import { Formik } from 'formik';
 import { InputField } from './form/InputField.jsx';
+import { signUpSchema } from './form/signUpSchema.js';
 import { FormMessages } from './form/FormMessages.jsx';
+import { usersSignUp } from '../../../state/thunks/users/usersSignUp.js';
 import AuthenticateWithProvider from './form/AuthenticateWithProvider.jsx';
 
 const [formFields, formInitialState, formClasses, formConstrains] =
@@ -60,7 +60,7 @@ export default function SignUp() {
                 <div className="sm:mx-auto sm:w-full sm:max-w-md">
                     <img
                         className="mx-auto h-20 w-auto"
-                        src={require('../../assets/images/icons/user_placeholder.png')}
+                        src={require('../../../assets/images/icons/user_placeholder.png')}
                         alt="Your Company"
                     />
                     <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">

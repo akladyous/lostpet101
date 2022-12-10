@@ -1,4 +1,4 @@
-import { Container } from '../Container.jsx';
+import { Container } from '../../../components/ui/Container.jsx';
 import { Link } from 'react-router-dom';
 
 export default function PetCare() {
@@ -8,8 +8,8 @@ export default function PetCare() {
                 <div className="">
                     <div className="">
                         <img
-                            src={require('../../assets/images/about/pet_care.png')}
-                            alt=""
+                            src={require('../../../assets/images/about/pet_care.png')}
+                            alt="pet-care"
                         />
                     </div>
                 </div>

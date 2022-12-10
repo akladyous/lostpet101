@@ -1,10 +1,10 @@
-import { Outlet } from "react-router-dom"
-import Navbar from './Navbar.jsx'
-import Footer from "./Footer.jsx"
-import Header from "./Header.jsx"
+import React from 'react';
+import { Outlet } from 'react-router-dom';
+import Navbar from './navbar/Navbar.jsx';
+import Header from './Header.jsx';
+import Footer from './Footer.jsx';
 
-export default function Layout() {
-
+export default function Root() {
     return (
         <div className="app">
             <Navbar />
@@ -14,5 +14,5 @@ export default function Layout() {
             </div>
             <Footer />
         </div>
-    )
+    );
 }

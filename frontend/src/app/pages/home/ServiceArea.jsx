@@ -1,4 +1,4 @@
-import { Container } from '../Container.jsx';
+import { Container } from '../../../components/ui/Container.jsx';
 const services = [
     {
         title: 'Pet Boarding',
@@ -50,7 +50,7 @@ export default function ServiceArea() {
                             <div className="relative mb-5 h-[145px] w-[165px] bg-service-icon bg-cover bg-no-repeat object-center">
                                 <img
                                     className="absolute top-0 left-0 translate-x-1/2 translate-y-1/2 transform"
-                                    src={require(`../../assets/images/service/service_icon_${
+                                    src={require(`../../../assets/images/service/service_icon_${
                                         idx + 1
                                     }.png`)}
                                     alt="service"

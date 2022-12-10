@@ -1,17 +1,17 @@
-import { Routes, Route } from "react-router-dom";
-import Layout from "./components/layout/Layout.jsx";
-import Home from "./components/home/Home.jsx";
-import Users from './components/users/Users.jsx'
-import SignIn from "./components/users/SignIn.jsx";
-import SignOut from './components/users/SignOut.jsx'
-import SignUp from './components/users/SignUp.jsx'
-import Profile from './components/users/Profile.jsx'
+import { Routes, Route } from 'react-router-dom';
+import Root from './pages/root/Root.jsx';
+import Home from './pages/home/Home.jsx';
+import Users from './freatures/users/Users.jsx';
+import SignIn from './freatures/users/SignIn.jsx';
+import SignOut from './freatures/users/SignOut.jsx';
+import SignUp from './freatures/users/SignUp.jsx';
+import Profile from './freatures/users/Profile.jsx';
 
 function App() {
     return (
         <div className="main">
             <Routes>
-                <Route path="/" element={<Layout />}>
+                <Route path="/" element={<Root />}>
                     <Route path="/" element={<Home />} />
                     <Route path="about" element={<Home />} />
                     <Route path="feedback" element={<Home />} />

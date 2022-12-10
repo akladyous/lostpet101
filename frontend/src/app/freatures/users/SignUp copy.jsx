@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useReducer, useCallback } from 'react';
-import { usersSignUp } from '../../app/api/ThunkAPI/users/usersSignUp.js';
-import { MemoizedComponent } from '../layout/form/InputField.jsx';
+import { usersSignUp } from '../../../state/thunks/users/usersSignUp.js';
+import { MemoizedComponent } from '../../../components/form/InputField.jsx';
 import { SignUpSchema } from './form/signUpSchema.js';
 // import AuthenticateWithProvider from "./form/AuthenticateWithProvider.jsx";
 

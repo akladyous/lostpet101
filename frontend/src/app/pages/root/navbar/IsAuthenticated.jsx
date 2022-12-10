@@ -1,7 +1,7 @@
 import React from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { useSelector } from 'react-redux';
-import userAvatar from '../../../assets/images/icons/user_placeholder.png';
+import userAvatar from '../../../../assets/images/icons/user_placeholder.png';
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ');
