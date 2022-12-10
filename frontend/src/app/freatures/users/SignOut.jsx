@@ -12,13 +12,10 @@ export default function SignOut() {
         if (state.isAuthenticated) {
             dispatch(usersSignOut())
                 .then((res) => {
-                    console.log(res);
-                    setTimeout(() => {
-                        navigate('/', { replace: true });
-                    }, 2000);
+                    navigate('/', { replace: true });
                 })
                 .catch((err) => {
-                    console.log(err);
+                    return;
                 });
         }
     }, [dispatch, navigate, state.isAuthenticated]);
