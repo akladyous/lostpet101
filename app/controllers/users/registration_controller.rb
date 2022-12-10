@@ -8,7 +8,12 @@ class Users::RegistrationController < UsersController
       render json: @user, status: :created
       # render json: {message: "Account successfully created", date_time: Time.now, email: current_user.email}, status: :ok
     else
-      render json: @user.errors, status: :unprocessable_entity
+      errors = @user.errors.to_hash.inject({}) { |acc, (k,v)|
+        acc[k] = "#{k.to_s.split('_').join(' ')} #{v.first}"
+        acc
+      }
+      sleep 1
+      render json: {validation: errors}, status: :unprocessable_entity
     end
 
   end
