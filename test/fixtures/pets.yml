@@ -1,0 +1,33 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  species: 1
+  gender: 1
+  size: 1
+  breed: MyString
+  color: MyString
+  coat: MyString
+  age: 9.99
+  height: 9.99
+  weight: 9.99
+  microchip: 1
+  collar: false
+  description: MyText
+  report: one
+
+two:
+  name: MyString
+  species: 1
+  gender: 1
+  size: 1
+  breed: MyString
+  color: MyString
+  coat: MyString
+  age: 9.99
+  height: 9.99
+  weight: 9.99
+  microchip: 1
+  collar: false
+  description: MyText
+  report: two

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_05_181349) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_10_191420) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,38 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_05_181349) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "pets", force: :cascade do |t|
+    t.string "name"
+    t.integer "species", default: 0
+    t.integer "gender", default: 0
+    t.integer "size", default: 0
+    t.string "breed"
+    t.string "color"
+    t.string "coat"
+    t.decimal "age", precision: 4, scale: 2
+    t.decimal "height", precision: 5, scale: 2
+    t.decimal "weight", precision: 5, scale: 2
+    t.integer "microchip"
+    t.boolean "collar", default: false
+    t.text "description"
+    t.bigint "report_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["report_id"], name: "index_pets_on_report_id"
+  end
+
+  create_table "reports", force: :cascade do |t|
+    t.integer "type", limit: 2, default: 0
+    t.datetime "lost_found_date", default: -> { "CURRENT_TIMESTAMP" }
+    t.string "address"
+    t.string "crossroads"
+    t.string "comment"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_reports_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "password_digest"
@@ -55,4 +87,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_05_181349) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "pets", "reports"
+  add_foreign_key "reports", "users"
 end
