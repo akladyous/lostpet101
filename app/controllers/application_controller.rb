@@ -7,12 +7,17 @@ class ApplicationController < ActionController::API
 
   protected
     def login(user)
-        session[:user_id] = user.id
-        user.touch(:last_signin_at)
+      session[:user_id] = user.id
+      user.touch(:last_signin_at)
     end
 
     def logout(user)
-        session.delete :user_id
+      session.delete :user_id
+      reset_session
+      # request.session_options = request.session_options.dup
+      # request.session_options[:expire_after]= 20.seconds
+      # request.session_options.freeze
+      # session[:expire_at] = 20.seconds.from_now
     end
 
   def authenticate_user

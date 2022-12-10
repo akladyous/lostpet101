@@ -4,20 +4,20 @@ import { Axios } from '../../../lib/api/Axios.js';
 export const usersSignOut = createAsyncThunk(
     'users/signout',
     async (data, thunkAPI) => {
-        const { user, controller } = data;
+        var { user, controller } = data || {};
+        controller ??= new AbortController();
         try {
             const response = await Axios({
-                method: 'post',
-                url: 'users/signup',
-                data: user,
-                ...(controller ?? { signal: controller.signal }),
+                method: 'delete',
+                url: 'users/signout',
+                signal: controller.signal,
             });
-            return thunkAPI.fulfillWithValue(response.data);
+            return thunkAPI.fulfillWithValue(await response.data);
         } catch (error) {
             if (error.response) {
-                return thunkAPI.rejectWithValue(error.response.data.error);
+                return thunkAPI.rejectWithValue(error.response.data);
             } else {
-                return thunkAPI.rejectWithValue(error.message);
+                return thunkAPI.rejectWithValue({ message: error.message });
             }
         }
     }

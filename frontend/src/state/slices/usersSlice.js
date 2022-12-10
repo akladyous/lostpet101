@@ -35,17 +35,15 @@ const usersSlice = createSlice({
         builder
             .addCase(usersSignUp.fulfilled, (state, action) => {
                 state.isAuthenticated = true;
-                state.message = 'Account successfully created';
                 state.user = { ...action.payload };
-                state.error = {};
             })
             .addCase(usersSignIn.fulfilled, (state, action) => {
                 state.isAuthenticated = true;
                 state.user = { ...action.payload };
             })
             .addCase(usersSignOut.fulfilled, (state, action) => {
-                state.isAuthenticated = true;
-                state.user = { ...action.payload };
+                state.isAuthenticated = false;
+                state.user = null;
             })
             .addMatcher(isPendingAction, (state) => {
                 state.status = 'loading';
