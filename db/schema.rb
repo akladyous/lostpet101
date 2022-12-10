@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_10_191420) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_10_202907) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -63,7 +63,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_10_191420) do
   end
 
   create_table "reports", force: :cascade do |t|
-    t.integer "type", limit: 2, default: 0
+    t.integer "report_type", limit: 2, default: 0
     t.datetime "lost_found_date", default: -> { "CURRENT_TIMESTAMP" }
     t.string "address"
     t.string "crossroads"
