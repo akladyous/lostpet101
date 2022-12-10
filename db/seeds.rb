@@ -16,12 +16,14 @@ images = proc { |avatars_folder|
 }
 
 1.upto(USERS_TO_CREATE) do |idx|
-  User.create do |user|
+  image = -> { "https://raw.githubusercontent.com/akladyous/petfinder-assets/main/avatars/avatar#{idx}.jpg" }
+  downloaded_image = URI.parse(image.()).open
+  User.new do |user|
     email = Faker::Internet.unique.email
     user.email = email
     user.password = '000000'
     user.password_confirmation = '000000'
-    user.avatar.attach(io: File.open("app/assets/images/avatars/#{idx}.jpg"), filename: "#{idx}.jpg")
+    user.avatar.attach(io: downloaded_image, filename: "avatar#{idx}.jpg")
     user.save
     user_progress.increment
   end
