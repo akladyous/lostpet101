@@ -67,7 +67,7 @@ export default function SignUp() {
     const formik = useFormik({
         initialValues: Object.assign(formInitialState, { avatar: null }),
         onSubmit: handleSubmit,
-        onReset: (event) => {},
+        onReset: (values, actions) => {},
         validationSchema: formConstrains,
         validateOnChange: false,
     });
