@@ -25,8 +25,6 @@ export default function SignUp() {
 
     const handleSubmit = useCallback(
         async (values, actions) => {
-            // debugger;
-
             const signupValues = new FormData(document.forms['signupForm']);
             // const controller = new AbortController();
             const response = await dispatch(
@@ -68,9 +66,7 @@ export default function SignUp() {
     const formik = useFormik({
         initialValues: Object.assign(formInitialState, { avatar: null }),
         onSubmit: handleSubmit,
-        onReset: (event) => {
-            // debugger;
-        },
+        onReset: (event) => {},
         validationSchema: formConstrains,
         validateOnChange: false,
     });
