@@ -11,7 +11,6 @@ import RememberMe from './form/RememberMe.jsx';
 import FieldErrors from './form/FieldErrors.jsx';
 import avatarPlaceholder from '../../../assets/images/icons/avatarPlaceholder.png';
 import Image from '../../../components/ui/Image.jsx';
-import spinner from '../../../assets/images/icons/spinner.svg';
 import Button from '../../../components/ui/Button.jsx';
 
 const [formFields, formInitialState, formClasses, formConstrains] =

@@ -21,9 +21,11 @@ const formClasses = {
 const formConstrains = Yup.object({
     email: Yup.string().email('Invalid email address').required('Required'),
     password: Yup.string()
+        .required('Required')
         .min(5, 'Must be 5 and 32 characters')
         .max(64, 'Must be 5 and 32 characters'),
     password_confirmation: Yup.string()
+        .required('Required')
         .min(5, 'Must be 5 and 32 characters')
         .max(64, 'Must be 5 and 32 characters')
         .oneOf([Yup.ref('password')], "Password confirmation doesn't match"),

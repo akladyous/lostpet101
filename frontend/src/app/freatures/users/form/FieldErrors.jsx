@@ -5,10 +5,7 @@ export default function FieldErrors(props) {
     return error && touched
         ? React.createElement(
               'p',
-              {
-                  className: 'pt-2 text-sm text-red-600',
-                  ...rest,
-              },
+              { className: 'pt-2 text-sm text-red-600', ...rest },
               error,
               props.children
           )
