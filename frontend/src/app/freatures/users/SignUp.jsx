@@ -25,9 +25,13 @@ export default function SignUp() {
 
     const handleSubmit = useCallback(
         async (values, actions) => {
-            debugger;
+            // debugger;
+
+            const signupValues = new FormData(document.forms['signupForm']);
             // const controller = new AbortController();
-            const response = await dispatch(usersSignUp({ user: values }));
+            const response = await dispatch(
+                usersSignUp({ user: signupValues })
+            );
             // controller.abort();
 
             if (usersSignUp.fulfilled.match(response)) {
@@ -63,34 +67,19 @@ export default function SignUp() {
 
     const formik = useFormik({
         initialValues: Object.assign(formInitialState, { avatar: null }),
-        handleSubmit: handleSubmit,
+        onSubmit: handleSubmit,
+        onReset: (event) => {
+            // debugger;
+        },
         validationSchema: formConstrains,
         validateOnChange: false,
     });
-
-    const imgageLoader = async (file) =>
-        new Promise((resolve, reject) => {
-            let reader = new FileReader();
-            reader.onload = () => {
-                resolve(reader.result);
-            };
-            reader.onerror = reject;
-            reader.readAsDataURL(file);
-        });
 
     const loadImage = (e) => {
         e.preventDefault();
         avatarRef.current.click();
         const file = avatarRef.current?.files[0];
         if (file) {
-            // const reader = new FileReader();
-            // reader.onload = (e) => {
-            //     setImage(reader.result);
-            //     e.target.src = reader.result;
-            //     formik.setFieldValue('avatar', reader.result);
-            // };
-            // reader.readAsDataURL(file);
-            // -----------------------------
             const objectUrl = URL.createObjectURL(file);
             setImage(objectUrl);
             e.target.src = objectUrl;
@@ -110,11 +99,6 @@ export default function SignUp() {
             <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
                 <div className="sm:mx-auto sm:w-full sm:max-w-md">
                     <button className="mx-auto block" onClick={loadImage}>
-                        {/* <img
-                            className="mx-auto h-20 w-auto rounded-full"
-                            src={image ?? avatarPlaceholder}
-                            alt="avatar"
-                        /> */}
                         <Image
                             sourceImage={image}
                             fallBackImage={avatarPlaceholder}
@@ -130,9 +114,9 @@ export default function SignUp() {
                 <div className="mx-3 mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                     <div className="bg-slate py-8 px-4 shadow-xl brightness-100 sm:rounded-lg sm:px-10">
                         <form
-                            name="signup"
+                            name="signupForm"
                             className="space-y-6"
-                            onSubmit={handleSubmit}
+                            onSubmit={formik.handleSubmit}
                             onReset={formik.handleReset}
                         >
                             <input
@@ -146,6 +130,7 @@ export default function SignUp() {
                                 style={{ display: 'none' }}
                                 onChange={(e) => {
                                     loadImage(e);
+                                    formik.handleChange(e);
                                     formik.setFieldValue(
                                         'avatar',
                                         e.currentTarget.files[0]

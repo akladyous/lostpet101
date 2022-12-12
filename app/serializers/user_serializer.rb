@@ -3,7 +3,8 @@ class UserSerializer < ActiveModel::Serializer
 
   def photo_url
         if object.avatar.attached?
-            Rails.application.routes.url_helpers.rails_blob_url(self.object.avatar.blob, only_path: true)
+            # Rails.application.routes.url_helpers.rails_blob_url(self.object.avatar.blob, only_path: true)
+            object.avatar.blob.url
         else
             nil
         end

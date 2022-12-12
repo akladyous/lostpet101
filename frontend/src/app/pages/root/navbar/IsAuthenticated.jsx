@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Menu, Transition } from '@headlessui/react';
 import { useSelector } from 'react-redux';
 import avatarPlaceholder from '../../../../assets/images/icons/avatarPlaceholder.png';
+import Image from '../../../../components/ui/Image.jsx';
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ');
@@ -15,10 +16,11 @@ export default function IsAuthenticated() {
             <div>
                 <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2">
                     <span className="sr-only">Open user menu</span>
-                    <img
-                        className="h-8 w-8 rounded-full"
-                        src={state?.user?.photo_url ?? avatarPlaceholder}
+                    <Image
+                        sourceImage={state?.user?.photo_url}
+                        fallBackImage={avatarPlaceholder}
                         alt="user-avatar"
+                        className="h-9 w-9 rounded-full"
                     />
                 </Menu.Button>
             </div>

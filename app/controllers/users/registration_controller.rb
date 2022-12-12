@@ -3,6 +3,7 @@ class Users::RegistrationController < UsersController
 
   def create
     @user = User.new(user_params)
+    # debugger
     if @user.save
       login(@user)
       render json: @user, status: :created
@@ -26,6 +27,6 @@ class Users::RegistrationController < UsersController
 
   private
   def user_params
-    params.permit(:email, :password, :password_confirmation)
+    params.permit(:email, :password, :password_confirmation, :avatar)
   end
 end
