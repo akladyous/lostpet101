@@ -1,20 +1,22 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import React, { useCallback, useRef } from 'react';
-import { Formik, ErrorMessage } from 'formik';
+import { useDispatch } from 'react-redux';
+import { useCallback, useRef, useState, useEffect } from 'react';
+import { Formik, ErrorMessage, useFormik } from 'formik';
 import { InputField } from './form/InputField.jsx';
 import { signUpSchema } from './form/signUpSchema.js';
 import { FormMessages } from './form/FormMessages.jsx';
 import { usersSignUp } from '../../../state/thunks/users/usersSignUp.js';
 import AuthenticateWithProvider from './form/AuthenticateWithProvider.jsx';
 import RememberMe from './form/RememberMe.jsx';
+// import placeholder from '../../../assets/images/icons/user_placeholder.png';
 
 const [formFields, formInitialState, formClasses, formConstrains] =
     signUpSchema();
 
 export default function SignUp() {
+    const [image, setImage] = useState(null);
     const dispatch = useDispatch();
-    const state = useSelector((state) => state.users);
+    const avatarRef = useRef();
     const formMessageRef = useRef(null);
     const navigate = useNavigate();
 
@@ -55,15 +57,70 @@ export default function SignUp() {
         [dispatch, navigate]
     );
 
+    // const formik = useFormik({
+    //     initialValues: Object.assign(formInitialState, { avatar: null }),
+    //     handleSubmit: handleSubmit,
+    //     validationSchema: formConstrains,
+    //     validateOnChange: false,
+    // });
+
+    const imgageLoader = async (file) =>
+        new Promise((resolve, reject) => {
+            let reader = new FileReader();
+            reader.onload = () => {
+                resolve(reader.result);
+            };
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+        });
+
+    const loadImage = (e) => {
+        e.preventDefault();
+        avatarRef.current.click();
+        if (avatarRef.current.files && avatarRef.current.files[0]) {
+            //e.target.files[0]
+            // const reader = new FileReader();
+            // reader.onload = (e) => {
+            //     setImage(e.target.result);
+            // };
+            // reader.readAsDataURL(avatarRef.current.files[0]);
+            imgageLoader(avatarRef.current.files[0])
+                .then((buffer) => {
+                    setImage(buffer);
+                    e.target.src = buffer;
+                })
+                .catch((err) => console.log(err));
+        }
+        e.target.src = { image };
+    };
+    useEffect(() => {
+        console.log('signup update');
+    }, [image]);
     return (
         <>
             <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
                 <div className="sm:mx-auto sm:w-full sm:max-w-md">
-                    <img
-                        className="mx-auto h-20 w-auto"
-                        src={require('../../../assets/images/icons/user_placeholder.png')}
-                        alt="Your Company"
-                    />
+                    <button className="mx-auto block" onClick={loadImage}>
+                        {/* <img
+                            className="mx-auto h-20 w-auto rounded-full"
+                            src={placeholder}
+                            alt="avatar"
+                        /> */}
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="h-32 w-32 fill-orange-600 text-white"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
+                            />
+                        </svg>
+                    </button>
                     <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
                         Sign up a new account
                     </h2>
@@ -72,7 +129,9 @@ export default function SignUp() {
                 <div className="mx-3 mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                     <div className="bg-slate py-8 px-4 shadow-xl brightness-100 sm:rounded-lg sm:px-10">
                         <Formik
-                            initialValues={formInitialState}
+                            initialValues={Object.assign(formInitialState, {
+                                avatar: null,
+                            })}
                             onSubmit={handleSubmit}
                             validationSchema={formConstrains}
                             validateOnChange={false}
@@ -85,6 +144,24 @@ export default function SignUp() {
                                         onSubmit={_formikProps.handleSubmit}
                                         onReset={_formikProps.handleReset}
                                     >
+                                        <input
+                                            ref={avatarRef}
+                                            id="avatar"
+                                            type="file"
+                                            name="avatar"
+                                            title="upload Pet image"
+                                            accept="image/*"
+                                            multiple={false}
+                                            style={{ display: 'none' }}
+                                            onChange={(e) => {
+                                                loadImage(e);
+                                                _formikProps.setFieldValue(
+                                                    'avatar',
+                                                    e.currentTarget.files[0]
+                                                );
+                                            }}
+                                            onBlur={_formikProps.handleBlur}
+                                        />
                                         {formFields.map((field, idx) => {
                                             return (
                                                 <div key={idx}>
