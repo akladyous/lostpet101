@@ -4,9 +4,15 @@
 
 @layer components {
     .btn-primary {
-        @apply capitalize px-5 py-3 inline-flex items-center border border-transparent text-sm font-medium rounded-full shadow-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 ease-linear transition-all duration-300;
+        @apply inline-flex items-center rounded-full border border-transparent bg-orange-600 px-5 py-3 text-sm font-medium capitalize text-white shadow-md transition-all duration-300 ease-linear hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2;
     }
     .btn-secondary {
-        @apply capitalize px-5 py-3 inline-flex items-center border border-transparent text-sm font-medium rounded-full shadow-md bg-white text-orange-600 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-100 ease-linear transition-all duration-300;
+        @apply inline-flex items-center rounded-full border border-transparent bg-white px-5 py-3 text-sm font-medium capitalize text-orange-600 shadow-md transition-all duration-300 ease-linear hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-100 focus:ring-offset-2;
     }
 }
+
+/*
+focus:outline-none
+
+
+*/
