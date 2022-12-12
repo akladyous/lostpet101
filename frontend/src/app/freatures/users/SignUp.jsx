@@ -25,6 +25,7 @@ export default function SignUp() {
 
     const handleSubmit = useCallback(
         async (values, actions) => {
+            debugger;
             // const controller = new AbortController();
             const response = await dispatch(usersSignUp({ user: values }));
             // controller.abort();
@@ -80,26 +81,22 @@ export default function SignUp() {
     const loadImage = (e) => {
         e.preventDefault();
         avatarRef.current.click();
-        if (avatarRef.current?.files[0]) {
-            //e.target.files[0]
+        const file = avatarRef.current?.files[0];
+        if (file) {
             // const reader = new FileReader();
             // reader.onload = (e) => {
-            //     setImage(e.target.result);
+            //     setImage(reader.result);
+            //     e.target.src = reader.result;
+            //     formik.setFieldValue('avatar', reader.result);
             // };
-            // reader.readAsDataURL(avatarRef.current.files[0]);
-            imgageLoader(avatarRef.current.files[0])
-                .then((buffer) => {
-                    setImage(buffer);
-                    e.target.src = buffer;
-                })
-                .catch((err) => {
-                    console.log('error loading image : ', err);
-                    setImage(avatarPlaceholder);
-                });
+            // reader.readAsDataURL(file);
+            // -----------------------------
+            const objectUrl = URL.createObjectURL(file);
+            setImage(objectUrl);
+            e.target.src = objectUrl;
         }
-        // debugger;
-        // e.target.src = { image };
     };
+
     useEffect(() => {
         isMounted.current = true;
 
@@ -135,7 +132,7 @@ export default function SignUp() {
                         <form
                             name="signup"
                             className="space-y-6"
-                            onSubmit={formik.handleSubmit}
+                            onSubmit={handleSubmit}
                             onReset={formik.handleReset}
                         >
                             <input
