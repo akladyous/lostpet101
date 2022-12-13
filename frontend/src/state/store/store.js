@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { saveState, loadState } from './localStorage.js';
+import { loadState } from './localStorage.js';
 import usersSlice, {
     initialState as userInitialState,
 } from '../slices/usersSlice.js';
