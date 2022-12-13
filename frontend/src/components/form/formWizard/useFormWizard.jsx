@@ -1,12 +1,13 @@
-import { useRef, useMemo, useState, useReducer, useCallback } from 'react';
+import { useRef, useMemo, useState, useCallback } from 'react';
 
-export function useSteps({ titles }) {
+export function useFormWizard({ titles }) {
     const lastIndex = useRef(titles.length - 1);
-    const currentIndex = useRef(0);
+    const [currentIndex, setCurrentIndex] = useState(0);
+    // const currentIndex = useRef(0);
 
     const next = useCallback((data) => {
-        if (currentIndex.current < lastIndex.current) {
-            currentIndex.current += 1;
+        if (currentIndex < lastIndex.current) {
+            setCurrentIndex(currentIndex + 1);
         } else if (currentIndex.current === lastIndex.current) {
             onFinish();
         }
@@ -14,8 +15,8 @@ export function useSteps({ titles }) {
 
     const previous = useCallback((e) => {
         e.preventDefault();
-        if (currentIndex.current > 0) {
-            currentIndex.current -= 1;
+        if (currentIndex > 0) {
+            setCurrentIndex(currentIndex - 1);
         }
     }, []);
 
