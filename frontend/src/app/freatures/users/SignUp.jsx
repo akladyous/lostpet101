@@ -78,8 +78,10 @@ export default function SignUp() {
         const file = avatarRef.current?.files[0];
         if (file) {
             const objectUrl = URL.createObjectURL(file);
-            setImage(objectUrl);
-            e.target.src = objectUrl;
+            if (isMounted.current) {
+                setImage(objectUrl);
+                e.target.src = objectUrl;
+            }
         }
     };
 

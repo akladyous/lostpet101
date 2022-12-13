@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { store } from './state/store/store.js';
 import { BrowserRouter } from 'react-router-dom';
 import App from './app/App.js';
-import { loadState, saveState } from './state/store/localStorage.js';
+import { saveState } from './state/store/localStorage.js';
 import './assets/css/index.css';
 
 store.subscribe(() => {
