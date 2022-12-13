@@ -21,7 +21,6 @@ export function useSteps({ titles }) {
 
     const onFinish = () => {
         //
-        //
     };
     const isFirstStep = currentIndex.current === 0;
     const isLastStep = currentIndex.current === lastIndex.current;
