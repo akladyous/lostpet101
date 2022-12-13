@@ -2,9 +2,10 @@ import { Outlet } from 'react-router-dom';
 import { useSteps } from '../../../hooks/useSteps.jsx';
 
 export default function Listings() {
-    const { activeIndex, lastIndex, next, previous } = useSteps({
+    const _props = useSteps({
         titles: ['report details', 'pet details'],
     });
+    debugger;
     return (
         <div className="content min-h-screen">
             <div>
