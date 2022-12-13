@@ -12,7 +12,7 @@ const isPendingAction = isPending(usersSignUp, usersSignIn, usersSignOut);
 const isRejectedAction = isRejected(usersSignUp, usersSignIn, usersSignOut);
 const isFulfilledAction = isFulfilled(usersSignUp, usersSignIn, usersSignOut);
 
-const initialState = {
+export const initialState = {
     isAuthenticated: false,
     user: null,
     status: 'idle', // idle | loading | succeeded | failed
@@ -56,6 +56,6 @@ const usersSlice = createSlice({
             });
     },
 });
-
+export const userState = (state) => state.users;
 export const userActions = usersSlice.actions;
 export default usersSlice.reducer;
