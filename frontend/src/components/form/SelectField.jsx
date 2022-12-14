@@ -19,7 +19,17 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ');
 }
 
-export default function SelectField() {
+export default function SelectField(props) {
+    const {
+        fieldName,
+        fieldType,
+        fieldClasses,
+        label,
+        labelClasses,
+        handleChange,
+        handleBlur,
+        value,
+    } = props || {};
     const [selected, setSelected] = useState(people[3]);
 
     return (
