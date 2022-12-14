@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useCallback, useRef, useState, useEffect } from 'react';
 import { useFormik } from 'formik';
-import { InputField } from './form/InputField.jsx';
+import { TextField } from '../../../components/form/TextField.jsx';
 import { signUpSchema } from './form/signUpSchema.js';
 import { FormMessages } from './form/FormMessages.jsx';
 import { usersSignUp } from '../../../state/thunks/users/usersSignUp.js';
@@ -140,7 +140,7 @@ export default function SignUp() {
                             {formFields.map((field, idx) => {
                                 return (
                                     <div key={idx}>
-                                        <InputField
+                                        <TextField
                                             fieldName={field.input.name}
                                             fieldType={field.input.type}
                                             fieldClasses={formClasses.input}
@@ -166,7 +166,7 @@ export default function SignUp() {
                                                     }
                                                 />
                                             }
-                                        </InputField>
+                                        </TextField>
                                     </div>
                                 );
                             })}

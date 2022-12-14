@@ -175,16 +175,25 @@ export default function NewPet() {
                                         htmlFor="first-name"
                                         className="block text-sm font-medium text-gray-900"
                                     >
-                                        First name
+                                        Listing Type
                                     </label>
                                     <div className="mt-1">
-                                        <input
-                                            type="text"
-                                            name="first-name"
-                                            id="first-name"
-                                            autoComplete="given-name"
-                                            className="block w-full rounded-md border-gray-300 py-3 px-4 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                                        />
+                                        <select
+                                            id="location"
+                                            name="location"
+                                            className="mt-1 block w-full rounded-md border-gray-300 py-3 px-4 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                            defaultValue="Canada"
+                                        >
+                                            <option className="top-0 left-0">
+                                                United States
+                                            </option>
+                                            <option className="top-0 left-0">
+                                                Canada
+                                            </option>
+                                            <option className="top-0 left-0">
+                                                Mexico
+                                            </option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div>
