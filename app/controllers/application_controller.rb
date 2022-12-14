@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::API
     include ActionController::Cookies
     include ActionController::RequestForgeryProtection
+    include ActiveStorage::SetCurrent
     protect_from_forgery with: :exception, unless: -> { request.format.json? }
 
 

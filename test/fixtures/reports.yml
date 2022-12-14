@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 1
+  lost_found_date: 2022-12-10 14:05:28
+  address: MyString
+  crossroads: MyString
+  comment: MyString
+  user: one
+
+two:
+  type: 1
+  lost_found_date: 2022-12-10 14:05:28
+  address: MyString
+  crossroads: MyString
+  comment: MyString
+  user: two

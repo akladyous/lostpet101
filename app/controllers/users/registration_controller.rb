@@ -1,4 +1,7 @@
 class Users::RegistrationController < UsersController
+  before_action do
+      ActiveStorage::Current.url_options = { protocol: request.protocol, host: request.host, port: request.port }
+  end
   skip_before_action :authenticate_user, only: :create
 
   def create
@@ -6,7 +9,6 @@ class Users::RegistrationController < UsersController
     if @user.save
       login(@user)
       render json: @user, status: :created
-      # render json: {message: "Account successfully created", date_time: Time.now, email: current_user.email}, status: :ok
     else
       errors = @user.errors.to_hash.inject({}) { |acc, (k,v)|
         acc[k] = "#{k.to_s.split('_').join(' ')} #{v.first}"
@@ -26,6 +28,6 @@ class Users::RegistrationController < UsersController
 
   private
   def user_params
-    params.permit(:email, :password, :password_confirmation)
+    params.permit(:email, :password, :password_confirmation, :avatar)
   end
 end

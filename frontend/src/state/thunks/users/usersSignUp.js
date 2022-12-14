@@ -10,6 +10,7 @@ export const usersSignUp = createAsyncThunk(
             const response = await Axios({
                 method: 'post',
                 url: 'users/signup',
+                headers: { 'content-type': 'multipart/form-data' },
                 data: user,
                 signal: controller.signal,
             });

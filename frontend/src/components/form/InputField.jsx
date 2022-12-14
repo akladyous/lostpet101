@@ -8,6 +8,7 @@ const formClasses = {
 };
 
 export const InputField = (props) => {
+    debugger;
     // console.log(props.input.name, ' : ', props)
     const state = useSelector((state) => state.users);
     const { input, label, value, onChange } = props || {};
