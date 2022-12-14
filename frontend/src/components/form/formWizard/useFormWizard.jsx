@@ -1,7 +1,7 @@
 import { useRef, useMemo, useState, useCallback } from 'react';
 
-export function useFormWizard({ titles }) {
-    const lastIndex = useRef(titles.length - 1);
+export function useFormWizard({ steps }) {
+    const lastIndex = useRef(steps.length - 1);
     const [currentIndex, setCurrentIndex] = useState(0);
     // const currentIndex = useRef(0);
 

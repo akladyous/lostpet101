@@ -5,6 +5,9 @@ module.exports = {
     content: ['./src/**/*.{js,jsx,ts,tsx}'],
     theme: {
         extend: {
+            colors: {
+                csOrange: '#ed5b0d',
+            },
             backgroundImage: {
                 'header-image': "url('../images/banner/bradcam.png')",
                 'slide-area': "url('../images/banner/banner.png')",
@@ -26,6 +29,8 @@ module.exports = {
         },
     },
     plugins: [
+        require('@tailwindcss/forms'),
+
         plugin(function ({ addVariant }) {
             addVariant('optional', '&:optional');
             addVariant('group-optional', ':merge(.group):optional &');
