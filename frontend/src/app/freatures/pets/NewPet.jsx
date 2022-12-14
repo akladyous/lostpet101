@@ -1,10 +1,25 @@
+import { useCallback } from 'react';
+import { useFormik } from 'formik';
 import { newPetSchema } from './form/newPetSchema.js';
-import { SelectField } from '../../../components/form/SelectField.jsx';
 import Select from '../../../components/form/Select.jsx';
 import SideInfo from './form/newPet/SideInfo.jsx';
+
 const [formFields, formInitialState, formClasses, formConstrains] =
     newPetSchema();
+
 export default function NewPet() {
+    const handleSubmit = useCallback(async () => {
+        // ...
+    }, []);
+
+    const formik = useFormik({
+        initialValues: Object.assign(formInitialState),
+        onSubmit: handleSubmit,
+        onReset: (values, actions) => {},
+        validationSchema: formConstrains,
+        validateOnChange: false,
+    });
+
     return (
         <div className="rounded-md">
             <div className="mx-auto max-w-7xl py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
@@ -12,10 +27,8 @@ export default function NewPet() {
                     <h2 className="sr-only">Pet Information</h2>
 
                     <div className="grid grid-cols-1 md:grid-cols-3">
-                        {/* Contact information */}
                         <SideInfo />
 
-                        {/* Contact form */}
                         <div className="py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12">
                             <h3 className="text-lg font-medium text-gray-900">
                                 Send us a message

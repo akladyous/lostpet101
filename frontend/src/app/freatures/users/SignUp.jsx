@@ -88,7 +88,6 @@ export default function SignUp() {
     useEffect(() => {
         isMounted.current = true;
 
-        console.log('signup update');
         return function () {
             isMounted.current = false;
         };
