@@ -5,8 +5,8 @@ const formFields = [
             name: 'report_type',
             type: 'select',
             options: [
-                { id: 1, name: 'lost', status: true },
-                { id: 2, name: 'found', status: true },
+                { value: 'lost', label: 'lost' },
+                { value: 'found', label: 'found' },
             ],
             defaultValue: '',
         },
@@ -34,7 +34,7 @@ const formClasses = {
     input: 'peer mt-1 block w-full rounded-md border-gray-300 py-3 px-4 h-12 text-base focus:border-orange-500 focus:outline-none focus:ring-orange-500 sm:text-sm',
 };
 const formConstrains = Yup.object({
-    report_type: Yup.string().required('Required'),
+    report_type: Yup.string().required('Required').oneOf(['lost', 'found']),
     lost_found_date: Yup.date().required('Required'),
     address: Yup.string().required('Required'),
     crossroads: Yup.string().required('Required'),

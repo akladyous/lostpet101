@@ -1,7 +1,8 @@
 import { useCallback } from 'react';
 import { useFormik } from 'formik';
 import { newPetSchema } from './form/newPetSchema.js';
-import Select from '../../../components/form/Select.jsx';
+// import Select from '../../../components/form/Select.jsx';
+import { SelectField } from '../../../components/form/SelectField.jsx';
 import SideInfo from './form/newPet/SideInfo.jsx';
 
 const [formFields, formInitialState, formClasses, formConstrains] =
@@ -34,72 +35,35 @@ export default function NewPet() {
                                 Send us a message
                             </h3>
                             <form
-                                name="signupForm"
+                                name="newPetForm"
                                 onSubmit={formik.handleSubmit}
                                 onReset={formik.handleReset}
                                 className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8"
                             >
                                 {/* ----------------------------------------------- */}
                                 <div>
-                                    <Select
-                                        // fieldName="report_type"
-                                        // fieldClasses={'xxx'}
-                                        // label={'...'}
-                                        // labelClasses={'...'}
-                                        handleChange={formik.setFieldValue}
-                                        // handleBlur={formik.handleBlur}
-                                        // currentValue={
-                                        //     formik.values['report_type']
-                                        // }
-                                        options={formFields[0].input.options}
-                                        // prova={formik}
-                                    />
-                                    {/* <SelectField
+                                    <SelectField
                                         fieldName="report_type"
                                         fieldClasses={formClasses.input}
                                         label="listing type"
                                         labelClasses={formClasses.label}
-                                        // handleChange={}
-                                        // handleBlur={}
-                                        // value={}
-                                        options={['lost', 'found']}
-                                        defaultValue="lost"
-                                    /> */}
-                                    {/* <label
-                                        htmlFor="first-name"
-                                        className="block text-sm font-medium text-gray-900"
-                                    >
-                                        Listing Type
-                                    </label>
-                                    <div className="mt-1">
-                                        <select
-                                            id="location"
-                                            name="location"
-                                            className="peer mt-1 block w-full rounded-md border-gray-300 py-3 px-4 pr-10 text-base focus:border-orange-500 focus:outline-none focus:ring-orange-500 sm:text-sm"
-                                            defaultValue="Canada"
-                                        >
-                                            <option className="top-0 left-0">
-                                                United States
-                                            </option>
-                                            <option className="top-0 left-0">
-                                                Canada
-                                            </option>
-                                            <option className="top-0 left-0">
-                                                Mexico
-                                            </option>
-                                        </select>
-                                    </div> */}
+                                        handleChange={formik.handleChange}
+                                        handleBlur={formik.handleBlur}
+                                        value={formik.values['report_type']}
+                                        options={formFields[0].input.options}
+                                        defaultValue="select"
+                                    />
                                 </div>
                                 <div>
                                     <label
-                                        htmlFor="last-name"
+                                        htmlFor="last seen"
                                         className="block text-sm font-medium text-gray-900"
                                     >
-                                        Last name
+                                        last seen
                                     </label>
                                     <div className="mt-1">
                                         <input
-                                            type="text"
+                                            type="date"
                                             name="last-name"
                                             id="last-name"
                                             autoComplete="family-name"
@@ -107,46 +71,20 @@ export default function NewPet() {
                                         />
                                     </div>
                                 </div>
-                                <div>
+
+                                <div className="sm:col-span-2">
                                     <label
-                                        htmlFor="email"
+                                        htmlFor="subject"
                                         className="block text-sm font-medium text-gray-900"
                                     >
-                                        Email
+                                        Subject
                                     </label>
                                     <div className="mt-1">
                                         <input
-                                            id="email"
-                                            name="email"
-                                            type="email"
-                                            autoComplete="email"
-                                            className="block w-full rounded-md border-gray-300 py-3 px-4 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                                        />
-                                    </div>
-                                </div>
-                                <div>
-                                    <div className="flex justify-between">
-                                        <label
-                                            htmlFor="phone"
-                                            className="block text-sm font-medium text-gray-900"
-                                        >
-                                            Phone
-                                        </label>
-                                        <span
-                                            id="phone-optional"
-                                            className="text-sm text-gray-500"
-                                        >
-                                            Optional
-                                        </span>
-                                    </div>
-                                    <div className="mt-1">
-                                        <input
                                             type="text"
-                                            name="phone"
-                                            id="phone"
-                                            autoComplete="tel"
+                                            name="subject"
+                                            id="subject"
                                             className="block w-full rounded-md border-gray-300 py-3 px-4 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                                            aria-describedby="phone-optional"
                                         />
                                     </div>
                                 </div>
@@ -166,6 +104,7 @@ export default function NewPet() {
                                         />
                                     </div>
                                 </div>
+
                                 <div className="sm:col-span-2">
                                     <div className="flex justify-between">
                                         <label

@@ -8,30 +8,42 @@ export const SelectField = (props) => {
         handleBlur,
         value,
         options,
-        defaultValue,
     } = props || {};
 
     return (
         <>
             {label ? (
-                <label htmlFor={fieldName} className={labelClasses}>
-                    {label}
-                </label>
+                <div className="flex justify-between">
+                    <label htmlFor={fieldName} className={labelClasses}>
+                        {label}
+                    </label>
+                    <span id="phone-optional" className="text-xs text-gray-500">
+                        {!props?.required && 'Optional'}
+                    </span>
+                </div>
             ) : null}
 
-            <select
-                name={fieldName}
-                id={fieldName}
-                className={fieldClasses}
-                defaultValue={defaultValue}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={value}
-            >
-                {options.map((option) => (
-                    <option className="capitalize">{option}</option>
-                ))}
-            </select>
+            <div className="mt-1">
+                <select
+                    name={fieldName}
+                    id={fieldName}
+                    className={fieldClasses}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={value}
+                >
+                    <option value=""></option>
+                    {options.map((option, idx) => (
+                        <option
+                            key={idx}
+                            className="capitalize"
+                            value={option.value}
+                        >
+                            {option.label}
+                        </option>
+                    ))}
+                </select>
+            </div>
             {props.children}
         </>
     );
