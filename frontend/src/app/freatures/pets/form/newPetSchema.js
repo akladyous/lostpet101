@@ -1,11 +1,13 @@
 import * as Yup from 'yup';
-
 const formFields = [
     {
         input: {
             name: 'report_type',
             type: 'select',
-            options: ['lost', 'found'],
+            options: [
+                { id: 1, name: 'lost', status: true },
+                { id: 2, name: 'found', status: true },
+            ],
             defaultValue: '',
         },
         label: { name: 'listing type' },

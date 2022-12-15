@@ -8,18 +8,18 @@ const [formFields, formInitialState, formClasses, formConstrains] =
     newPetSchema();
 
 export default function NewPet() {
-    const handleSubmit = useCallback(async () => {
-        // ...
+    const handleSubmit = useCallback(async (values, actions) => {
+        debugger;
     }, []);
 
     const formik = useFormik({
-        initialValues: Object.assign(formInitialState),
+        initialValues: formInitialState,
         onSubmit: handleSubmit,
-        onReset: (values, actions) => {},
-        validationSchema: formConstrains,
+        // onReset: (values, actions) => {},
+        // validationSchema: formConstrains,
         validateOnChange: false,
     });
-
+    // debugger;
     return (
         <div className="rounded-md">
             <div className="mx-auto max-w-7xl py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
@@ -34,12 +34,26 @@ export default function NewPet() {
                                 Send us a message
                             </h3>
                             <form
-                                action="#"
-                                method="POST"
+                                name="signupForm"
+                                onSubmit={formik.handleSubmit}
+                                onReset={formik.handleReset}
                                 className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8"
                             >
+                                {/* ----------------------------------------------- */}
                                 <div>
-                                    <Select />
+                                    <Select
+                                        // fieldName="report_type"
+                                        // fieldClasses={'xxx'}
+                                        // label={'...'}
+                                        // labelClasses={'...'}
+                                        handleChange={formik.setFieldValue}
+                                        // handleBlur={formik.handleBlur}
+                                        // currentValue={
+                                        //     formik.values['report_type']
+                                        // }
+                                        options={formFields[0].input.options}
+                                        // prova={formik}
+                                    />
                                     {/* <SelectField
                                         fieldName="report_type"
                                         fieldClasses={formClasses.input}
@@ -186,6 +200,7 @@ export default function NewPet() {
                                         Submit
                                     </button>
                                 </div>
+                                {/* ----------------------------------------------- */}
                             </form>
                         </div>
                     </div>

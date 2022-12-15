@@ -113,9 +113,9 @@ export default function SignUp() {
                     <div className="bg-slate py-8 px-4 shadow-xl brightness-100 sm:rounded-lg sm:px-10">
                         <form
                             name="signupForm"
-                            className="space-y-6"
                             onSubmit={formik.handleSubmit}
                             onReset={formik.handleReset}
+                            className="space-y-6"
                         >
                             <input
                                 ref={avatarRef}
