@@ -1,12 +1,9 @@
 import { useCallback } from 'react';
 import { useFormik } from 'formik';
-import { newPetSchema } from './form/newPetSchema.js';
-// import Select from '../../../components/form/Select.jsx';
+// import { newReportSchema } from './form/newReportSchema1.js';
+import { newReportSchema } from '../reports/form/newReportSchema.js';
 import { SelectField } from '../../../components/form/SelectField.jsx';
 import SideInfo from './form/newPet/SideInfo.jsx';
-
-const [formFields, formInitialState, formClasses, formConstrains] =
-    newPetSchema();
 
 export default function NewPet() {
     const handleSubmit = useCallback(async (values, actions) => {
@@ -14,10 +11,10 @@ export default function NewPet() {
     }, []);
 
     const formik = useFormik({
-        initialValues: formInitialState,
+        initialValues: newReportSchema.initialValues,
         onSubmit: handleSubmit,
         // onReset: (values, actions) => {},
-        // validationSchema: formConstrains,
+        validationSchema: newReportSchema.validations,
         validateOnChange: false,
     });
     // debugger;
@@ -42,17 +39,31 @@ export default function NewPet() {
                             >
                                 {/* ----------------------------------------------- */}
                                 <div>
-                                    <SelectField
-                                        fieldName="report_type"
-                                        fieldClasses={formClasses.input}
-                                        label="listing type"
-                                        labelClasses={formClasses.label}
+                                    {/* <SelectField
+                                        fieldName={
+                                            newReportSchema.fields.reportType
+                                                .name
+                                        }
+                                        fieldClasses={
+                                            newReportSchema.classes.input
+                                        }
+                                        label={
+                                            newReportSchema.fields.reportType
+                                                .label.name
+                                        }
+                                        labelClasses={
+                                            newReportSchema.fields.reportType
+                                                .label.className ??
+                                            newReportSchema.classes.label
+                                        }
                                         handleChange={formik.handleChange}
                                         handleBlur={formik.handleBlur}
                                         value={formik.values['report_type']}
-                                        options={formFields[0].input.options}
-                                        defaultValue="select"
-                                    />
+                                        options={
+                                            newReportSchema.fields.reportType
+                                                .options
+                                        }
+                                    /> */}
                                 </div>
                                 <div>
                                     <label
@@ -77,7 +88,7 @@ export default function NewPet() {
                                         htmlFor="subject"
                                         className="block text-sm font-medium text-gray-900"
                                     >
-                                        Subject
+                                        address
                                     </label>
                                     <div className="mt-1">
                                         <input
@@ -93,7 +104,7 @@ export default function NewPet() {
                                         htmlFor="subject"
                                         className="block text-sm font-medium text-gray-900"
                                     >
-                                        Subject
+                                        crossroads
                                     </label>
                                     <div className="mt-1">
                                         <input
@@ -111,7 +122,7 @@ export default function NewPet() {
                                             htmlFor="message"
                                             className="block text-sm font-medium text-gray-900"
                                         >
-                                            Message
+                                            comment
                                         </label>
                                         <span
                                             id="message-max"

@@ -41,7 +41,7 @@ const formConstrains = Yup.object({
     comment: Yup.string().required('Required'),
 });
 
-export const newPetSchema = () => {
+export const newReportSchema = () => {
     const formInitialState = formFields.reduce((acc, value) => {
         acc[value.input.name] = '';
         return acc;

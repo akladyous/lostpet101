@@ -11,7 +11,7 @@ export const SelectField = (props) => {
     } = props || {};
 
     return (
-        <>
+        <div>
             {label ? (
                 <div className="flex justify-between">
                     <label htmlFor={fieldName} className={labelClasses}>
@@ -45,6 +45,6 @@ export const SelectField = (props) => {
                 </select>
             </div>
             {props.children}
-        </>
+        </div>
     );
 };
