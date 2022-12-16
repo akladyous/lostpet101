@@ -127,11 +127,11 @@ export default function NewPetForm() {
                                         content={schema.fields.comment.label.content}
                                     />
                                     <TextAreaField
-                                        name={schema.fields.comment.name}
+                                        name={schema.fields.comment.attributes.name}
                                         className={schema.classes.textarea}
                                         handleChange={formik.handleChange}
                                         handleBlur={formik.handleBlur}
-                                        value={formik.values['comment']}
+                                        value={formik.values[schema.fields.comment.attributes.name]}
                                         rows={5}
                                     />
                                     <ErrorField
