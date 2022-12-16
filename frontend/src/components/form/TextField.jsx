@@ -1,5 +1,5 @@
 export function TextField(props) {
-    const { type, name, className, handleChange, handleBlur, value, ...others } = props || {};
+    const { type, name, className, handleChange, handleBlur, value, ...rest } = props || {};
 
     return (
         <>
@@ -11,7 +11,7 @@ export function TextField(props) {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={value}
-                {...others}
+                {...rest}
             />
         </>
     );

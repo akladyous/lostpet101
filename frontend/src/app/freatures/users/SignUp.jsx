@@ -129,9 +129,6 @@ export default function SignUp() {
                                 onBlur={formik.handleBlur}
                             />
                             {formFields.map((field, idx) => {
-                                {
-                                    /* debugger; */
-                                }
                                 return (
                                     <div key={idx}>
                                         <Label
