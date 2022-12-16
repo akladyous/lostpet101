@@ -1,23 +1,23 @@
+import Label from './Label.jsx';
 export function TextField(props) {
     const {
         fieldName,
         fieldType,
-        fieldClasses,
         label,
+        fieldClasses,
         labelClasses,
+        labelInfo,
         handleChange,
         handleBlur,
         value,
+        ...others
     } = props || {};
 
     return (
         <div>
             {label ? (
-                <label htmlFor={fieldName} className={labelClasses}>
-                    {label}
-                </label>
+                <Label htmlFor={fieldName} className={labelClasses} />
             ) : null}
-
             <input
                 name={fieldName}
                 type={fieldType}
@@ -26,6 +26,7 @@ export function TextField(props) {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={value}
+                {...others}
             />
             {props.children}
         </div>

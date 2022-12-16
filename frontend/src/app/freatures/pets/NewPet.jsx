@@ -1,9 +1,10 @@
 import { useCallback } from 'react';
-import { useFormik } from 'formik';
-// import { newReportSchema } from './form/newReportSchema1.js';
-import { newReportSchema } from '../reports/form/newReportSchema.js';
+import { useFormik, Field } from 'formik';
+import { reportFormSchema as schema } from '../reports/form/reportFormSchema.js';
 import { SelectField } from '../../../components/form/SelectField.jsx';
+import { TextField } from '../../../components/form/TextField.jsx';
 import SideInfo from './form/newPet/SideInfo.jsx';
+import InputField from '../../../components/form/InputField.jsx';
 
 export default function NewPet() {
     const handleSubmit = useCallback(async (values, actions) => {
@@ -11,13 +12,13 @@ export default function NewPet() {
     }, []);
 
     const formik = useFormik({
-        initialValues: newReportSchema.initialValues,
+        initialValues: schema.initialValues,
         onSubmit: handleSubmit,
         // onReset: (values, actions) => {},
-        validationSchema: newReportSchema.validations,
+        validationSchema: schema.validations,
         validateOnChange: false,
     });
-    // debugger;
+
     return (
         <div className="rounded-md">
             <div className="mx-auto max-w-7xl py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
@@ -37,87 +38,106 @@ export default function NewPet() {
                                 onReset={formik.handleReset}
                                 className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8"
                             >
-                                {/* ----------------------------------------------- */}
                                 <div>
-                                    {/* <SelectField
-                                        fieldName={
-                                            newReportSchema.fields.reportType
-                                                .name
+                                    <InputField
+                                        type={schema.fields.report_type.type}
+                                        htmlAttributes={
+                                            schema.fields.report_type
+                                                .htmlAttributes
                                         }
-                                        fieldClasses={
-                                            newReportSchema.classes.input
+                                        label={schema.fields.report_type.label}
+                                        container={
+                                            schema.fields.report_type.container
+                                        }
+                                    />
+                                    <SelectField
+                                        fieldName={
+                                            schema.fields.report_type.name
                                         }
                                         label={
-                                            newReportSchema.fields.reportType
-                                                .label.name
-                                        }
-                                        labelClasses={
-                                            newReportSchema.fields.reportType
-                                                .label.className ??
-                                            newReportSchema.classes.label
+                                            schema.fields.report_type.label
+                                                .value
                                         }
                                         handleChange={formik.handleChange}
                                         handleBlur={formik.handleBlur}
                                         value={formik.values['report_type']}
                                         options={
-                                            newReportSchema.fields.reportType
-                                                .options
+                                            schema.fields.report_type.options
                                         }
-                                    /> */}
+                                        labelClasses={schema.classes.label}
+                                        fieldClasses={schema.classes.input}
+                                    />
                                 </div>
                                 <div>
-                                    <label
-                                        htmlFor="last seen"
-                                        className="block text-sm font-medium text-gray-900"
-                                    >
-                                        last seen
-                                    </label>
-                                    <div className="mt-1">
-                                        <input
-                                            type="date"
-                                            name="last-name"
-                                            id="last-name"
-                                            autoComplete="family-name"
-                                            className="block w-full rounded-md border-gray-300 py-3 px-4 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                                        />
-                                    </div>
+                                    <TextField
+                                        fieldName={
+                                            schema.fields.lost_found_date.name
+                                        }
+                                        fieldType={
+                                            schema.fields.lost_found_date.type
+                                        }
+                                        label={
+                                            schema.fields.lost_found_date.label
+                                                .value
+                                        }
+                                        fieldClasses={schema.classes.input}
+                                        labelClasses={schema.classes.label}
+                                        handleChange={formik.handleChange}
+                                        handleBlur={formik.handleBlur}
+                                        value={formik.values['lost_found_date']}
+                                    />
                                 </div>
 
                                 <div className="sm:col-span-2">
-                                    <label
-                                        htmlFor="subject"
-                                        className="block text-sm font-medium text-gray-900"
-                                    >
-                                        address
-                                    </label>
-                                    <div className="mt-1">
-                                        <input
-                                            type="text"
-                                            name="subject"
-                                            id="subject"
-                                            className="block w-full rounded-md border-gray-300 py-3 px-4 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                                        />
-                                    </div>
+                                    <TextField
+                                        fieldName={schema.fields.address.name}
+                                        fieldType={schema.fields.address.type}
+                                        label={
+                                            schema.fields.address.label.value
+                                        }
+                                        fieldClasses={schema.classes.input}
+                                        labelClasses={schema.classes.label}
+                                        handleChange={formik.handleChange}
+                                        handleBlur={formik.handleBlur}
+                                        value={formik.values['address']}
+                                    />
                                 </div>
                                 <div className="sm:col-span-2">
-                                    <label
-                                        htmlFor="subject"
-                                        className="block text-sm font-medium text-gray-900"
-                                    >
-                                        crossroads
-                                    </label>
-                                    <div className="mt-1">
-                                        <input
-                                            type="text"
-                                            name="subject"
-                                            id="subject"
-                                            className="block w-full rounded-md border-gray-300 py-3 px-4 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                                        />
-                                    </div>
+                                    <TextField
+                                        fieldName={
+                                            schema.fields.crossroads.name
+                                        }
+                                        fieldType={
+                                            schema.fields.crossroads.type
+                                        }
+                                        label={
+                                            schema.fields.crossroads.label.value
+                                        }
+                                        fieldClasses={schema.classes.input}
+                                        labelClasses={schema.classes.label}
+                                        handleChange={formik.handleChange}
+                                        handleBlur={formik.handleBlur}
+                                        value={formik.values['crossroads']}
+                                    />
                                 </div>
 
                                 <div className="sm:col-span-2">
-                                    <div className="flex justify-between">
+                                    <TextField
+                                        fieldName={schema.fields.comment.name}
+                                        fieldType={schema.fields.comment.type}
+                                        label={
+                                            schema.fields.comment.label.value
+                                        }
+                                        labelInfo={'Max. 500 characters'}
+                                        fieldClasses={schema.classes.input}
+                                        labelClasses={schema.classes.label}
+                                        handleChange={formik.handleChange}
+                                        handleBlur={formik.handleBlur}
+                                        value={formik.values['comment']}
+                                        rows={5}
+                                    />
+
+                                    {/* <div className="flex justify-between">
                                         <label
                                             htmlFor="message"
                                             className="block text-sm font-medium text-gray-900"
@@ -140,8 +160,9 @@ export default function NewPet() {
                                             aria-describedby="message-max"
                                             defaultValue={''}
                                         />
-                                    </div>
+                                    </div> */}
                                 </div>
+
                                 <div className="sm:col-span-2 sm:flex sm:justify-end">
                                     <button
                                         type="submit"

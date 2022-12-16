@@ -1,3 +1,5 @@
+import Label from './Label.jsx';
+
 export const SelectField = (props) => {
     const {
         fieldName,
@@ -8,19 +10,15 @@ export const SelectField = (props) => {
         handleBlur,
         value,
         options,
+        container,
+        ...others
     } = props || {};
 
+    // debugger;
     return (
-        <div>
+        <>
             {label ? (
-                <div className="flex justify-between">
-                    <label htmlFor={fieldName} className={labelClasses}>
-                        {label}
-                    </label>
-                    <span id="phone-optional" className="text-xs text-gray-500">
-                        {!props?.required && 'Optional'}
-                    </span>
-                </div>
+                <Label htmlFor={fieldName} className={labelClasses} />
             ) : null}
 
             <div className="mt-1">
@@ -45,6 +43,6 @@ export const SelectField = (props) => {
                 </select>
             </div>
             {props.children}
-        </div>
+        </>
     );
 };
