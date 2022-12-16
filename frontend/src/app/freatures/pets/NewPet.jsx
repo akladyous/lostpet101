@@ -39,17 +39,6 @@ export default function NewPet() {
                                 className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8"
                             >
                                 <div>
-                                    <InputField
-                                        type={schema.fields.report_type.type}
-                                        htmlAttributes={
-                                            schema.fields.report_type
-                                                .htmlAttributes
-                                        }
-                                        label={schema.fields.report_type.label}
-                                        container={
-                                            schema.fields.report_type.container
-                                        }
-                                    />
                                     <SelectField
                                         fieldName={
                                             schema.fields.report_type.name
