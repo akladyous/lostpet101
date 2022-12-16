@@ -6,6 +6,7 @@ import SideInfo from './form/newPet/SideInfo.jsx';
 import { Label } from '../../../components/form/Label.jsx';
 import { TextField } from '../../../components/form/TextField.jsx';
 import { TextAreaField } from '../../../components/form/TextArea.jsx';
+import { ErrorField } from '../../../components/form/ErrorField.jsx';
 
 export default function NewPetForm() {
     const handleSubmit = useCallback(async (values, actions) => {
@@ -51,6 +52,10 @@ export default function NewPetForm() {
                                         options={schema.fields.report_type.attributes.options}
                                         className={schema.classes.input}
                                     />
+                                    <ErrorField
+                                        error={formik.errors[schema.fields.report_type.attributes.name]}
+                                        touched={formik.touched[schema.fields.report_type.attributes.name]}
+                                    />
                                 </div>
 
                                 <div>
@@ -66,6 +71,12 @@ export default function NewPetForm() {
                                         handleChange={formik.handleChange}
                                         handleBlur={formik.handleBlur}
                                         value={formik.values[schema.fields.lost_found_date.attributes.name]}
+                                    />
+                                    <ErrorField
+                                        error={formik.errors[schema.fields.lost_found_date.attributes.name]}
+                                        touched={
+                                            formik.touched[schema.fields.lost_found_date.attributes.name]
+                                        }
                                     />
                                 </div>
 
@@ -83,6 +94,10 @@ export default function NewPetForm() {
                                         handleBlur={formik.handleBlur}
                                         value={formik.values[schema.fields.address.attributes.name]}
                                     />
+                                    <ErrorField
+                                        error={formik.errors[schema.fields.address.attributes.name]}
+                                        touched={formik.touched[schema.fields.address.attributes.name]}
+                                    />
                                 </div>
 
                                 <div className="sm:col-span-2">
@@ -99,6 +114,10 @@ export default function NewPetForm() {
                                         handleBlur={formik.handleBlur}
                                         value={formik.values[schema.fields.crossroads.attributes.name]}
                                     />
+                                    <ErrorField
+                                        error={formik.errors[schema.fields.crossroads.attributes.name]}
+                                        touched={formik.touched[schema.fields.crossroads.attributes.name]}
+                                    />
                                 </div>
 
                                 <div className="sm:col-span-2">
@@ -114,6 +133,10 @@ export default function NewPetForm() {
                                         handleBlur={formik.handleBlur}
                                         value={formik.values['comment']}
                                         rows={5}
+                                    />
+                                    <ErrorField
+                                        error={formik.errors[schema.fields.comment.attributes.name]}
+                                        touched={formik.touched[schema.fields.comment.attributes.name]}
                                     />
                                 </div>
 

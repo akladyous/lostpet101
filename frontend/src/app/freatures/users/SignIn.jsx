@@ -9,7 +9,7 @@ import { FormMessages } from './form/FormMessages.jsx';
 import { usersSignIn } from '../../../state/thunks/users/usersSignIn.js';
 import AuthenticateWithProvider from './form/AuthenticateWithProvider.jsx';
 import RememberMe from './form/RememberMe.jsx';
-import FieldErrors from './form/FieldErrors.jsx';
+import { ErrorField } from '../../../components/form/ErrorField.jsx';
 import avatarPlaceholder from '../../../assets/images/icons/avatarPlaceholder.png';
 import Image from '../../../components/ui/Image.jsx';
 import Button from '../../../components/ui/Button.jsx';
@@ -114,7 +114,7 @@ export default function SignIn() {
                                                 handleBlur={formik.handleBlur}
                                                 value={formik.values[field.input.name]}
                                             />
-                                            <FieldErrors
+                                            <ErrorField
                                                 error={formik.errors[field.input.name]}
                                                 touched={formik.touched[field.input.name]}
                                             />
