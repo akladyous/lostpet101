@@ -1,10 +1,11 @@
-export function TextField(props) {
+import React from 'react';
+
+export function TextAreaField(props) {
     const { type, name, className, handleChange, handleBlur, value, ...others } = props || {};
 
     return (
         <>
-            <input
-                type={type}
+            <textarea
                 name={name}
                 id={name}
                 className={className}
@@ -13,6 +14,7 @@ export function TextField(props) {
                 value={value}
                 {...others}
             />
+            {props.children}
         </>
     );
 }

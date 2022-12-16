@@ -2,11 +2,12 @@ import { useCallback } from 'react';
 import { useFormik, Field } from 'formik';
 import { reportFormSchema as schema } from '../reports/form/reportFormSchema.js';
 import { SelectField } from '../../../components/form/SelectField.jsx';
-import { TextField } from '../../../components/form/TextField.jsx';
 import SideInfo from './form/newPet/SideInfo.jsx';
-import InputField from '../../../components/form/InputField.jsx';
+import { Label } from '../../../components/form/Label.jsx';
+import { TextField } from '../../../components/form/TextField.jsx';
+import { TextAreaField } from '../../../components/form/TextArea.jsx';
 
-export default function NewPet() {
+export default function NewPetForm() {
     const handleSubmit = useCallback(async (values, actions) => {
         debugger;
     }, []);
@@ -29,9 +30,7 @@ export default function NewPet() {
                         <SideInfo />
 
                         <div className="py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12">
-                            <h3 className="text-lg font-medium text-gray-900">
-                                Send us a message
-                            </h3>
+                            <h3 className="text-lg font-medium text-gray-900">Send us a message</h3>
                             <form
                                 name="newPetForm"
                                 onSubmit={formik.handleSubmit}
@@ -39,128 +38,94 @@ export default function NewPet() {
                                 className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8"
                             >
                                 <div>
+                                    <Label
+                                        htmlFor={schema.fields.report_type.attributes.name}
+                                        className={schema.classes.label}
+                                        content={schema.fields.report_type.label.content}
+                                    />
                                     <SelectField
-                                        fieldName={
-                                            schema.fields.report_type.name
-                                        }
-                                        label={
-                                            schema.fields.report_type.label
-                                                .value
-                                        }
+                                        name={schema.fields.report_type.attributes.name}
                                         handleChange={formik.handleChange}
                                         handleBlur={formik.handleBlur}
                                         value={formik.values['report_type']}
-                                        options={
-                                            schema.fields.report_type.options
-                                        }
-                                        labelClasses={schema.classes.label}
-                                        fieldClasses={schema.classes.input}
+                                        options={schema.fields.report_type.attributes.options}
+                                        className={schema.classes.input}
                                     />
                                 </div>
+
                                 <div>
+                                    <Label
+                                        htmlFor={schema.fields.lost_found_date.attributes.name}
+                                        className={schema.classes.label}
+                                        content={schema.fields.lost_found_date.label.content}
+                                    />
                                     <TextField
-                                        fieldName={
-                                            schema.fields.lost_found_date.name
-                                        }
-                                        fieldType={
-                                            schema.fields.lost_found_date.type
-                                        }
-                                        label={
-                                            schema.fields.lost_found_date.label
-                                                .value
-                                        }
-                                        fieldClasses={schema.classes.input}
-                                        labelClasses={schema.classes.label}
+                                        name={schema.fields.lost_found_date.attributes.name}
+                                        type={schema.fields.lost_found_date.attributes.type}
+                                        className={schema.classes.input}
                                         handleChange={formik.handleChange}
                                         handleBlur={formik.handleBlur}
-                                        value={formik.values['lost_found_date']}
+                                        value={formik.values[schema.fields.lost_found_date.attributes.name]}
                                     />
                                 </div>
 
                                 <div className="sm:col-span-2">
-                                    <TextField
-                                        fieldName={schema.fields.address.name}
-                                        fieldType={schema.fields.address.type}
-                                        label={
-                                            schema.fields.address.label.value
-                                        }
-                                        fieldClasses={schema.classes.input}
-                                        labelClasses={schema.classes.label}
-                                        handleChange={formik.handleChange}
-                                        handleBlur={formik.handleBlur}
-                                        value={formik.values['address']}
+                                    <Label
+                                        htmlFor={schema.fields.address.attributes.name}
+                                        className={schema.classes.label}
+                                        content={schema.fields.address.label.content}
                                     />
-                                </div>
-                                <div className="sm:col-span-2">
                                     <TextField
-                                        fieldName={
-                                            schema.fields.crossroads.name
-                                        }
-                                        fieldType={
-                                            schema.fields.crossroads.type
-                                        }
-                                        label={
-                                            schema.fields.crossroads.label.value
-                                        }
-                                        fieldClasses={schema.classes.input}
-                                        labelClasses={schema.classes.label}
+                                        name={schema.fields.address.attributes.name}
+                                        type={schema.fields.address.attributes.type}
+                                        className={schema.classes.input}
                                         handleChange={formik.handleChange}
                                         handleBlur={formik.handleBlur}
-                                        value={formik.values['crossroads']}
+                                        value={formik.values[schema.fields.address.attributes.name]}
                                     />
                                 </div>
 
                                 <div className="sm:col-span-2">
+                                    <Label
+                                        htmlFor={schema.fields.crossroads.attributes.name}
+                                        className={schema.classes.label}
+                                        content={schema.fields.crossroads.label.content}
+                                    />
                                     <TextField
-                                        fieldName={schema.fields.comment.name}
-                                        fieldType={schema.fields.comment.type}
-                                        label={
-                                            schema.fields.comment.label.value
-                                        }
-                                        labelInfo={'Max. 500 characters'}
-                                        fieldClasses={schema.classes.input}
-                                        labelClasses={schema.classes.label}
+                                        name={schema.fields.crossroads.attributes.name}
+                                        type={schema.fields.crossroads.attributes.type}
+                                        className={schema.classes.input}
+                                        handleChange={formik.handleChange}
+                                        handleBlur={formik.handleBlur}
+                                        value={formik.values[schema.fields.crossroads.attributes.name]}
+                                    />
+                                </div>
+
+                                <div className="sm:col-span-2">
+                                    <Label
+                                        htmlFor={schema.fields.comment.attributes.name}
+                                        className={schema.classes.label}
+                                        content={schema.fields.comment.label.content}
+                                    />
+                                    <TextAreaField
+                                        name={schema.fields.comment.name}
+                                        className={schema.classes.textarea}
                                         handleChange={formik.handleChange}
                                         handleBlur={formik.handleBlur}
                                         value={formik.values['comment']}
                                         rows={5}
                                     />
-
-                                    {/* <div className="flex justify-between">
-                                        <label
-                                            htmlFor="message"
-                                            className="block text-sm font-medium text-gray-900"
-                                        >
-                                            comment
-                                        </label>
-                                        <span
-                                            id="message-max"
-                                            className="text-sm text-gray-500"
-                                        >
-                                            Max. 500 characters
-                                        </span>
-                                    </div>
-                                    <div className="mt-1">
-                                        <textarea
-                                            id="message"
-                                            name="message"
-                                            rows={4}
-                                            className="block w-full rounded-md border-gray-300 py-3 px-4 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                                            aria-describedby="message-max"
-                                            defaultValue={''}
-                                        />
-                                    </div> */}
                                 </div>
 
                                 <div className="sm:col-span-2 sm:flex sm:justify-end">
                                     <button
                                         type="submit"
-                                        className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
+                                        className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto"
+                                        // className="btn-primary mt-2 w-full justify-center rounded-md px-6 text-base shadow-sm sm:w-auto"
                                     >
                                         Submit
                                     </button>
                                 </div>
-                                {/* ----------------------------------------------- */}
                             </form>
                         </div>
                     </div>

@@ -2,33 +2,27 @@ import Label from './Label.jsx';
 
 export const SelectField = (props) => {
     const {
-        fieldName,
-        fieldClasses,
-        label,
-        labelClasses,
+        name,
+        className,
         handleChange,
         handleBlur,
         value,
         options,
-        container,
         ...others
     } = props || {};
 
     // debugger;
     return (
         <>
-            {label ? (
-                <Label htmlFor={fieldName} className={labelClasses} />
-            ) : null}
-
             <div className="mt-1">
                 <select
-                    name={fieldName}
-                    id={fieldName}
-                    className={fieldClasses}
+                    name={name}
+                    id={name}
+                    className={className}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={value}
+                    {...others}
                 >
                     <option value=""></option>
                     {options.map((option, idx) => (

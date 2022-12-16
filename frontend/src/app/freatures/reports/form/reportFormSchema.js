@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-const newReportSchema = {
+export const reportFormSchema = {
     fields: {
         report_type: {
             attributes: {
@@ -11,7 +11,6 @@ const newReportSchema = {
                     { value: 'found', label: 'found' },
                 ],
             },
-            node: {},
             label: { content: 'listing type', caption: 'Optional' },
             container: { type: 'div' },
         },
@@ -32,7 +31,7 @@ const newReportSchema = {
         crossroads: {
             attributes: { type: 'text', required: true, name: 'crossroads' },
             label: {
-                value: 'Nearest cross streets, landmark or location',
+                content: 'Nearest cross streets, landmark or location',
                 className: null,
             },
             container: { type: 'div', className: 'sm:col-span-2' },
@@ -46,6 +45,8 @@ const newReportSchema = {
     classes: {
         label: 'block text-sm font-medium text-gray-900 capitalize',
         input: 'peer mt-1 block w-full rounded-md border-gray-300 py-3 px-4 h-12 text-base focus:border-orange-500 focus:outline-none focus:ring-orange-500 sm:text-sm',
+        textarea:
+            'peer block mt-1 w-full rounded-md border-gray-300 py-3 px-4 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-indigo-500',
     },
     validations: Yup.object({
         report_type: Yup.string().required('Required').oneOf(['lost', 'found']),
@@ -54,17 +55,23 @@ const newReportSchema = {
         crossroads: Yup.string().required('Required'),
         comment: Yup.string().required('Required'),
     }),
+    get initialValues() {
+        return Object.keys(this.fields).reduce((acc, val) => {
+            acc[val] = '';
+            return acc;
+        }, {});
+    },
 };
 
 const handler = {
     get(target, prop, receiver) {
+        const objKeys = Object.keys(target.fields);
         switch (true) {
             case prop === 'initialValues':
-                const values = Object.keys(target.fields).reduce((acc, val) => {
+                return objKeys.reduce((acc, val) => {
                     acc[val] = '';
                     return acc;
                 }, {});
-                return values;
             case prop === 'columnsName':
                 return Object.keys(target.fields);
             default:
@@ -72,8 +79,4 @@ const handler = {
         }
     },
 };
-export const reportFormSchema = new Proxy(newReportSchema, handler);
-// console.log(proxy.initialValues);
-// console.log(proxy.comment.name);
-// console.log(proxy.columnsName);
-//['report_type', 'lost_found_date', 'address', 'crossroads', 'comment']
+export const schemaProxy = new Proxy(reportFormSchema, handler);

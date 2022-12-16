@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useCallback, useRef, useState, useEffect } from 'react';
 import { useFormik } from 'formik';
 import { TextField } from '../../../components/form/TextField.jsx';
+import { Label } from '../../../components/form/Label.jsx';
 import { signInSchema } from './form/signInSchema.js';
 import { FormMessages } from './form/FormMessages.jsx';
 import { usersSignIn } from '../../../state/thunks/users/usersSignIn.js';
@@ -13,8 +14,7 @@ import avatarPlaceholder from '../../../assets/images/icons/avatarPlaceholder.pn
 import Image from '../../../components/ui/Image.jsx';
 import Button from '../../../components/ui/Button.jsx';
 
-const [formFields, formInitialState, formClasses, formConstrains] =
-    signInSchema();
+const [formFields, formInitialState, formClasses, formConstrains] = signInSchema();
 
 export default function SignIn() {
     const [image, setImage] = useState(null);
@@ -31,8 +31,7 @@ export default function SignIn() {
             // controller.abort();
 
             if (usersSignIn.fulfilled.match(response)) {
-                formMessageRef.current.textContent =
-                    'account successfully created';
+                formMessageRef.current.textContent = 'account successfully created';
                 actions.resetForm(formInitialState);
                 setTimeout(() => {
                     navigate('/', { replace: true });
@@ -40,16 +39,14 @@ export default function SignIn() {
             } else {
                 switch (true) {
                     case response.payload.hasOwnProperty('message'):
-                        formMessageRef.current.textContent =
-                            response.payload.message;
+                        formMessageRef.current.textContent = response.payload.message;
                         break;
                     case response.payload.hasOwnProperty('validation'):
                         actions.setErrors(response.payload.validation);
                         formMessageRef.current.textContent = '';
                         break;
                     case response.payload.hasOwnProperty('error'):
-                        formMessageRef.current.textContent =
-                            response.payload.message;
+                        formMessageRef.current.textContent = response.payload.message;
                         break;
                     default:
                         formMessageRef.current.textContent = '';
@@ -103,33 +100,25 @@ export default function SignIn() {
                             {formFields.map((field, idx) => {
                                 return (
                                     <div key={idx}>
-                                        <TextField
-                                            fieldName={field.input.name}
-                                            fieldType={field.input.type}
-                                            fieldClasses={formClasses.input}
-                                            label={field.label.name}
-                                            labelClasses={formClasses.label}
-                                            handleChange={formik.handleChange}
-                                            handleBlur={formik.handleBlur}
-                                            value={
-                                                formik.values[field.input.name]
-                                            }
-                                        >
-                                            {
-                                                <FieldErrors
-                                                    error={
-                                                        formik.errors[
-                                                            field.input.name
-                                                        ]
-                                                    }
-                                                    touched={
-                                                        formik.touched[
-                                                            field.input.name
-                                                        ]
-                                                    }
-                                                />
-                                            }
-                                        </TextField>
+                                        <div key={idx}>
+                                            <Label
+                                                htmlFor={field.label.name}
+                                                className={formClasses.label}
+                                                content={field.label.name}
+                                            />
+                                            <TextField
+                                                name={field.input.name}
+                                                type={field.input.type}
+                                                className={formClasses.input}
+                                                handleChange={formik.handleChange}
+                                                handleBlur={formik.handleBlur}
+                                                value={formik.values[field.input.name]}
+                                            />
+                                            <FieldErrors
+                                                error={formik.errors[field.input.name]}
+                                                touched={formik.touched[field.input.name]}
+                                            />
+                                        </div>
                                     </div>
                                 );
                             })}
