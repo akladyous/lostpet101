@@ -11,7 +11,7 @@ import AuthenticateWithProvider from "./form/AuthenticateWithProvider.jsx";
 import RememberMe from "./form/RememberMe.jsx";
 import { ErrorField } from "../../../components/form/ErrorField.jsx";
 import avatarPlaceholder from "../../../assets/images/icons/avatarPlaceholder.png";
-import Image from "../../../components/ui/Image.jsx";
+import { Image } from "../../../components/ui/Image.jsx";
 import Button from "../../../components/ui/Button.jsx";
 
 const [formFields, formInitialState, formClasses, formConstrains] =
@@ -126,7 +126,7 @@ export default function SignUp() {
                                 title='upload Pet image'
                                 accept='image/*'
                                 multiple={false}
-                                style={{ display: "none" }}
+                                className='hidden'
                                 onChange={(e) => {
                                     loadImage(e);
                                     formik.handleChange(e);

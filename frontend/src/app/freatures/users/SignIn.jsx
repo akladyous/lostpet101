@@ -10,8 +10,8 @@ import { ErrorField } from "../../../components/form/ErrorField.jsx";
 import { usersSignIn } from "../../../state/thunks/users/usersSignIn.jsx";
 import AuthenticateWithProvider from "./form/AuthenticateWithProvider.jsx";
 import RememberMe from "./form/RememberMe.jsx";
-import Image from "../../../components/ui/Image.jsx";
 import Button from "../../../components/ui/Button.jsx";
+import { Image } from "../../../components/ui/Image.jsx";
 import avatarPlaceholder from "../../../assets/images/icons/avatarPlaceholder.png";
 
 const [formFields, formInitialState, formClasses, formConstrains] =
