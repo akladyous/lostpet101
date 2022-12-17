@@ -1,8 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useReducer, useCallback, useEffect } from "react";
-import { usersSignUp } from "../../app/api/ThunkAPI/users/usersSignUp.js";
+import { usersSignUp } from "../../app/api/ThunkAPI/users/usersSignUp.jsx";
 import { MemoizedComponent } from "../layout/form/InputField.jsx";
-import { SignUpSchema } from "./form/signUpSchema.js";
+import { SignUpSchema } from "./form/signUpSchema.jsx";
 
 const initializeState = (obj) => {
     return obj.reduce((acc, value) => {
@@ -26,8 +26,8 @@ const reducer = (state, action) => {
     }
 };
 export default function SignUpBootStrap() {
-    const dispatch = useDispatch()
-    const state = useSelector(state => state.users)
+    const dispatch = useDispatch();
+    const state = useSelector((state) => state.users);
     const [formState, formDispatch] = useReducer(
         reducer,
         SignUpSchema,
@@ -46,18 +46,18 @@ export default function SignUpBootStrap() {
         async (e) => {
             e.preventDefault();
             const controller = new AbortController();
-            dispatch(usersSignUp({ user: formState, controller }))
-            controller.abort()
+            dispatch(usersSignUp({ user: formState, controller }));
+            controller.abort();
         },
         [formState, dispatch]
     );
 
     useEffect(() => {
-        console.log("signUp update - data: ",);
+        console.log("signUp update - data: ");
     }, []);
     return (
-        <div className="container w-50">
-            <form action="/users/signup" onSubmit={handleForm}>
+        <div className='container w-50'>
+            <form action='/users/signup' onSubmit={handleForm}>
                 {SignUpSchema.map((obj, idx) => {
                     return (
                         <MemoizedComponent
@@ -70,17 +70,15 @@ export default function SignUpBootStrap() {
                         />
                     );
                 })}
-                <div className="mb-3">
-                    <p>{state?.loading === 'loading' && 'loading...'}</p>
+                <div className='mb-3'>
+                    <p>{state?.loading === "loading" && "loading..."}</p>
                 </div>
-                <div className="mb-3">
-                    {/* <p>{userState.error}</p> */}
-                </div>
-                <div className="mb-3">{/* <p>{data}</p> */}</div>
-                <div className="mb-3">
+                <div className='mb-3'>{/* <p>{userState.error}</p> */}</div>
+                <div className='mb-3'>{/* <p>{data}</p> */}</div>
+                <div className='mb-3'>
                     <button
-                        type="submit"
-                        className="btn-boxed cs-primary text-white"
+                        type='submit'
+                        className='btn-boxed cs-primary text-white'
                         onClick={null}
                     >
                         Submit

@@ -1,11 +1,11 @@
-import { useCallback } from 'react';
-import { useFormik, Field } from 'formik';
-import { reportFormSchema as schema } from '../reports/form/reportFormSchema.js';
-import { SelectField } from '../../../components/form/SelectField.jsx';
-import { TextField } from '../../../components/form/TextField.jsx';
-import SideInfo from './form/newPet/SideInfo.jsx';
-import InputField from '../../../components/form/InputField.jsx';
-import Label from '../../../components/form/Label.jsx';
+import { useCallback } from "react";
+import { useFormik, Field } from "formik";
+import { reportFormSchema as schema } from "../reports/form/reportFormSchema.jsx";
+import { SelectField } from "../../../components/form/SelectField.jsx";
+import { TextField } from "../../../components/form/TextField.jsx";
+import SideInfo from "./form/newPet/SideInfo.jsx";
+import InputField from "../../../components/form/InputField.jsx";
+import Label from "../../../components/form/Label.jsx";
 
 export default function NewPetForm() {
     const handleSubmit = useCallback(async (values, actions) => {
@@ -21,23 +21,23 @@ export default function NewPetForm() {
     });
 
     return (
-        <div className="rounded-md">
-            <div className="mx-auto max-w-7xl py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
-                <div className="relative  shadow-xl">
-                    <h2 className="sr-only">Pet Information</h2>
+        <div className='rounded-md'>
+            <div className='mx-auto max-w-7xl py-16 px-4 sm:py-24 sm:px-6 lg:px-8'>
+                <div className='relative  shadow-xl'>
+                    <h2 className='sr-only'>Pet Information</h2>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3">
+                    <div className='grid grid-cols-1 md:grid-cols-3'>
                         <SideInfo />
 
-                        <div className="py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12">
-                            <h3 className="text-lg font-medium text-gray-900">
+                        <div className='py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12'>
+                            <h3 className='text-lg font-medium text-gray-900'>
                                 Send us a message
                             </h3>
                             <form
-                                name="newPetForm"
+                                name='newPetForm'
                                 onSubmit={formik.handleSubmit}
                                 onReset={formik.handleReset}
-                                className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8"
+                                className='mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8'
                             >
                                 <div>
                                     <Label
@@ -62,7 +62,7 @@ export default function NewPetForm() {
                                         }
                                         handleChange={formik.handleChange}
                                         handleBlur={formik.handleBlur}
-                                        value={formik.values['report_type']}
+                                        value={formik.values["report_type"]}
                                         options={
                                             schema.fields.report_type.attributes
                                                 .options
@@ -107,7 +107,7 @@ export default function NewPetForm() {
                                     />
                                 </div>
 
-                                <div className="sm:col-span-2">
+                                <div className='sm:col-span-2'>
                                     <Label
                                         htmlFor={
                                             schema.fields.address.attributes
@@ -142,7 +142,7 @@ export default function NewPetForm() {
                                     />
                                 </div>
 
-                                <div className="sm:col-span-2">
+                                <div className='sm:col-span-2'>
                                     <Label
                                         htmlFor={
                                             schema.fields.crossroads.attributes
@@ -179,19 +179,19 @@ export default function NewPetForm() {
                                     />
                                 </div>
 
-                                <div className="sm:col-span-2">
+                                <div className='sm:col-span-2'>
                                     <TextField
                                         fieldName={schema.fields.comment.name}
                                         fieldType={schema.fields.comment.type}
                                         label={
                                             schema.fields.comment.label.value
                                         }
-                                        labelInfo={'Max. 500 characters'}
+                                        labelInfo={"Max. 500 characters"}
                                         fieldClasses={schema.classes.input}
                                         labelClasses={schema.classes.label}
                                         handleChange={formik.handleChange}
                                         handleBlur={formik.handleBlur}
-                                        value={formik.values['comment']}
+                                        value={formik.values["comment"]}
                                         rows={5}
                                     />
 
@@ -221,10 +221,10 @@ export default function NewPetForm() {
                                     </div> */}
                                 </div>
 
-                                <div className="sm:col-span-2 sm:flex sm:justify-end">
+                                <div className='sm:col-span-2 sm:flex sm:justify-end'>
                                     <button
-                                        type="submit"
-                                        className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
+                                        type='submit'
+                                        className='mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto'
                                     >
                                         Submit
                                     </button>

@@ -12,10 +12,10 @@ export function except(obj, properties) {
     return [props, rest];
 }
 
-export const camelCaseToString = (str) => str.split(/(?=[A-Z])/).join(' ');
+export const camelCaseToString = (str) => str.split(/(?=[A-Z])/).join(" ");
 
 export default (() => {
-    Object.defineProperty(String, 'capitalize', {
+    Object.defineProperty(String, "capitalize", {
         value: function () {
             return this.charAt(0).toUpperCase().concat(this.slice(1));
         },
@@ -25,3 +25,6 @@ export default (() => {
 Array.prototype.random = function () {
     return this[Math.floor(Math.random() * this.length)];
 };
+export function getImageUrl(name) {
+    return new URL(name, import.meta.url).href;
+}

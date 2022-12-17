@@ -1,8 +1,8 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { loadState } from './localStorage.js';
+import { configureStore } from "@reduxjs/toolkit";
+import { loadState } from "./localStorage.jsx";
 import usersSlice, {
     initialState as userInitialState,
-} from '../slices/usersSlice.js';
+} from "../slices/usersSlice.jsx";
 
 export const store = configureStore({
     reducer: {

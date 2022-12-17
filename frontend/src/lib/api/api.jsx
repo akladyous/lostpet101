@@ -6,11 +6,12 @@ export const api = axios.create({
     // Accept: "application/json",
     // withCredentials: true,
     // delayed: true
-})
+});
 api.interceptors.request.use((config) => {
     if (config.delayed) {
-        return new Promise(resolve => setTimeout(() => resolve(config), 1000));
+        return new Promise((resolve) =>
+            setTimeout(() => resolve(config), 1000)
+        );
     }
     return config;
 });
-

@@ -3,10 +3,10 @@ import {
     isPending,
     isRejected,
     isFulfilled,
-} from '@reduxjs/toolkit';
-import { usersSignUp } from '../thunks/users/usersSignUp.js';
-import { usersSignOut } from '../thunks/users/usersSignOut.js';
-import { usersSignIn } from '../thunks/users/usersSignIn.js';
+} from "@reduxjs/toolkit";
+import { usersSignUp } from "../thunks/users/usersSignUp.jsx";
+import { usersSignOut } from "../thunks/users/usersSignOut.jsx";
+import { usersSignIn } from "../thunks/users/usersSignIn.jsx";
 
 const isPendingAction = isPending(usersSignUp, usersSignIn, usersSignOut);
 const isRejectedAction = isRejected(usersSignUp, usersSignIn, usersSignOut);
@@ -15,10 +15,10 @@ const isFulfilledAction = isFulfilled(usersSignUp, usersSignIn, usersSignOut);
 export const initialState = {
     isAuthenticated: false,
     user: null,
-    status: 'idle', // idle | loading | succeeded | failed
+    status: "idle", // idle | loading | succeeded | failed
 };
 const usersSlice = createSlice({
-    name: 'users',
+    name: "users",
     initialState,
     reducers: {
         setUser: (state, action) => {
@@ -46,13 +46,13 @@ const usersSlice = createSlice({
                 state.user = null;
             })
             .addMatcher(isPendingAction, (state) => {
-                state.status = 'loading';
+                state.status = "loading";
             })
             .addMatcher(isFulfilledAction, (state) => {
-                state.status = 'succeeded';
+                state.status = "succeeded";
             })
             .addMatcher(isRejectedAction, (state, action) => {
-                state.status = 'faild';
+                state.status = "faild";
             });
     },
 });

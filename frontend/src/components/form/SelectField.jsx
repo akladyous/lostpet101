@@ -1,5 +1,3 @@
-import Label from './Label.jsx';
-
 export const SelectField = (props) => {
     const {
         name,
@@ -14,7 +12,7 @@ export const SelectField = (props) => {
     // debugger;
     return (
         <>
-            <div className="mt-1">
+            <div className='mt-1'>
                 <select
                     name={name}
                     id={name}
@@ -24,11 +22,11 @@ export const SelectField = (props) => {
                     value={value}
                     {...others}
                 >
-                    <option value=""></option>
+                    <option value=''></option>
                     {options.map((option, idx) => (
                         <option
                             key={idx}
-                            className="capitalize"
+                            className='capitalize'
                             value={option.value}
                         >
                             {option.label}
