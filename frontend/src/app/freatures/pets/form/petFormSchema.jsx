@@ -13,32 +13,16 @@ export const petFormSchema = {
             attributes: { type: "text", required: true, name: "color" },
             label: { content: "color" },
         },
-        coat: {
-            attributes: { type: "text", required: true, name: "coat" },
-            label: { content: "coat" },
-        },
-
         age: {
             attributes: {
                 type: "number",
                 required: true,
                 name: "age",
-                min: "",
-                max: "20",
+                min: "1",
+                max: "15",
             },
             label: { content: "age" },
         },
-        age: {
-            attributes: {
-                type: "number",
-                required: true,
-                name: "age",
-                min: "",
-                max: "20",
-            },
-            label: { content: "age" },
-        },
-
         species: {
             attributes: {
                 type: "select",
@@ -51,33 +35,51 @@ export const petFormSchema = {
             },
             label: { content: "species" },
         },
-
-        lost_found_date: {
+        collar: {
             attributes: {
-                type: "date",
+                type: "select",
+                name: "collar",
+                required: false,
+                options: [
+                    { value: true, label: "yes" },
+                    { value: false, label: "no" },
+                ],
+            },
+            label: { content: "collar" },
+        },
+        gender: {
+            attributes: {
+                type: "select",
+                name: "gender",
+                required: false,
+                options: [
+                    { value: "male", label: "male" },
+                    { value: "female", label: "female" },
+                ],
+            },
+            label: { content: "gender" },
+        },
+        size: {
+            attributes: {
+                type: "select",
+                name: "size",
+                required: false,
+                options: [
+                    { value: "small", label: "small" },
+                    { value: "medium", label: "medium" },
+                    { value: "large", label: "large" },
+                    { value: "giant", label: "giant" },
+                ],
+            },
+            label: { content: "size" },
+        },
+        description: {
+            attributes: {
+                type: "textaerea",
                 required: true,
-                name: "lost_found_date",
+                name: "description",
             },
-            label: { content: "Date last seen" },
-            container: { type: "div" },
-        },
-        address: {
-            attributes: { type: "text", required: true, name: "address" },
-            label: { content: "Last seed address" },
-            container: { type: "div", className: "sm:col-span-2" },
-        },
-        crossroads: {
-            attributes: { type: "text", required: true, name: "crossroads" },
-            label: {
-                content: "Nearest cross streets, landmark or location",
-                className: null,
-            },
-            container: { type: "div", className: "sm:col-span-2" },
-        },
-        comment: {
-            attributes: { type: "textaerea", required: true, name: "comment" },
-            label: { content: "comment", caption: "Max. 500 characters" },
-            container: { type: "div", className: "sm:col-span-2" },
+            label: { content: "description", caption: "Max. 500 characters" },
         },
     },
     classes: {

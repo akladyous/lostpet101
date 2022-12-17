@@ -27,11 +27,11 @@ def generate_pet
     size: %w[small medium large].sample,
     breed: -> { species == 'dog' ? Faker::Creature::Dog.breed : Faker::Creature::Cat.breed }.call,
     color: color_list.call.sample,
-    coat: coat_list.call.sample,
     age: rand(1..15),
+    # coat: coat_list.call.sample,
     # height: rand(0.65..3.28).round(2),
     # weight: rand(15..145),
-    microchip: -> { rand.to_s[2..9] }.call,
+    # microchip: -> { rand.to_s[2..9] }.call,
     collar: [true, false].sample,
     description: Faker::Lorem.paragraph(sentence_count: 10, supplemental: false, random_sentences_to_add: 4)
   }

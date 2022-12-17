@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_17_164208) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_17_164614) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -49,9 +49,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_17_164208) do
     t.integer "size", default: 0
     t.string "breed"
     t.string "color"
-    t.string "coat"
     t.decimal "age", precision: 4, scale: 2
-    t.integer "microchip"
     t.boolean "collar", default: false
     t.text "description"
     t.bigint "report_id", null: false
