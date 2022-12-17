@@ -89,11 +89,15 @@ export const petFormSchema = {
             "peer block mt-1 w-full rounded-md border-gray-300 py-3 px-4 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-indigo-500",
     },
     validations: Yup.object({
-        report_type: Yup.string().required("Required").oneOf(["lost", "found"]),
-        lost_found_date: Yup.date().required("Required"),
-        address: Yup.string().required("Required"),
-        crossroads: Yup.string().required("Required"),
-        comment: Yup.string().required("Required"),
+        name: Yup.string().required("Required"),
+        breed: Yup.string(),
+        color: Yup.string(),
+        age: Yup.number().min(1).max(15),
+        species: Yup.string().required("Required").oneOf(["dog", "cat"]),
+        collar: Yup.string().oneOf(["yes", "no"]),
+        gender: Yup.string().oneOf(["male", "female"]),
+        size: Yup.string().oneOf(["small", "medium", "large", "giant"]),
+        description: Yup.string().required("Required").min(5).max(255),
     }),
     get initialValues() {
         return Object.keys(this.fields).reduce((acc, val) => {
@@ -119,4 +123,4 @@ const handler = {
         }
     },
 };
-export const schemaProxy = new Proxy(reportFormSchema, handler);
+export const schemaProxy = new Proxy(petFormSchema, handler);
