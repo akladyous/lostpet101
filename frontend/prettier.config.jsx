@@ -3,7 +3,7 @@ module.exports = {
   tabWidth: 2,
   semi: true,
   singleQuote: true,
-  printWidth: 125,
+  printWidth: 130,
   overrides: [
     {
       files: ["*.js", "*.jsx", "*.html"],
