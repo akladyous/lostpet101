@@ -48,9 +48,7 @@ export default function NewPetForm() {
   }, [image]);
   return (
     <section className={"my-16 mx-5 rounded-2xl bg-white md:col-span-2"}>
-      {/* <h3 className='text-lg font-medium text-gray-900'>
-            Send us a message
-          </h3> */}
+      <h3 className='text-lg font-medium text-gray-900'>Pet Information</h3>
 
       <form
         name='newPetForm'
