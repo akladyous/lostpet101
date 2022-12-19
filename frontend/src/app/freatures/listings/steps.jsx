@@ -4,10 +4,10 @@ import NewPet from "../pets/NewPet.jsx";
 import NewReport from "../reports/NewReport.jsx";
 
 const steps = [
-  { name: "Step 1", href: "#", status: "complete" },
-  { name: "Step 2", href: "#", status: "current" },
-  { name: "Step 3", href: "#", status: "upcoming" },
-  { name: "Step 4", href: "#", status: "upcoming" },
+  { name: "Step 1", href: "/", status: "complete" },
+  { name: "Step 2", href: "/", status: "current" },
+  { name: "Step 3", href: "/", status: "upcoming" },
+  { name: "Step 4", href: "/", status: "upcoming" },
 ];
 
 export default function Steps() {
