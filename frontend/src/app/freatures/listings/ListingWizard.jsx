@@ -1,23 +1,47 @@
-import Header from "./Header.jsx";
 import Decorative from "./Decorative.jsx";
 import ListingSide from "./ListingSide.jsx";
 import Steps from "./steps.jsx";
 
 export default function ListingWizard() {
   return (
-    <div className={"overflow-hidden"}>
-      <Header />
-      <div className={"relative bg-white"}>
+    <div className={"md:w-4/6 max-w-7xl mx-auto md:my-20 my-10 py-10"}>
+      <div className='relative -z-10 sm:px-6 md:px-8 text-center md:text-start'>
+        <h1 className='text-warm-gray-900 text-4xl font-bold tracking-tight text-orange-600 sm:text-5xl lg:text-6xl'>
+          Listing Report
+        </h1>
+        <p className='text-warm-gray-500 my-5 max-w-3xl text-xl'>
+          Let us take care of the rest so you can have some peace of mind that
+          you are doing all that you can to bring your pet home safely
+        </p>
         <Decorative />
-        <main className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-20'>
-          <div className='relative  border-orange-500 bg-white shadow-xl md:rounded-2xl md:border'>
-            <div className='grid grid-cols-1 lg:grid-cols-3'>
-              {/* <ListingSide /> */}
-              <Steps />
-            </div>
+      </div>
+      <main className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+        <div className='relative  border-orange-100 bg-white shadow-xl md:rounded-2xl md:border'>
+          <Steps />
+        </div>
+      </main>
+    </div>
+  );
+}
+
+/*
+<div className={"grid grid-cols-12 overflow-hidden py-10 md:py-0"}>
+      <div className='relative col-span-11 col-start-2 col-end-12'>
+        <div className='relative z-10  sm:py-10 sm:px-6 md:py-32 lg:px-8'>
+          <h1 className='text-warm-gray-900 text-4xl font-bold tracking-tight text-orange-600 sm:text-5xl lg:text-6xl'>
+            Listing Report
+          </h1>
+          <p className='text-warm-gray-500 mt-6 max-w-3xl text-xl'>
+            Let us take care of the rest so you can have some peace of mind that
+            you are doing all that you can to bring your pet home safely
+          </p>
+        </div>
+        <Decorative />
+        <main className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+          <div className='relative  border-orange-100 bg-white shadow-xl md:rounded-2xl md:border'>
+            <Steps />
           </div>
         </main>
       </div>
     </div>
-  );
-}
+*/

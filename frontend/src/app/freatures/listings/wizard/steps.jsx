@@ -2,7 +2,6 @@ import { useFormWizard } from "../../../components/form/formWizard/useFormWizard
 import WizardContainerComponent from "../../../components/form/formWizard/WizardContainerComponent.jsx";
 import NewPet from "../pets/NewPet.jsx";
 import NewReport from "../reports/NewReport.jsx";
-import PetImage from "../pets/form/PetImage.jsx";
 
 const steps = [
   { name: "Step 1", href: "/", status: "complete" },
@@ -24,7 +23,6 @@ export default function Steps() {
         previous={previous}
       >
         <NewPet />
-        <PetImage />
         <NewReport />
       </WizardContainerComponent>
     </>

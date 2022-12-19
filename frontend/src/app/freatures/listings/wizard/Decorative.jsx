@@ -15,7 +15,7 @@ export default function Decorative() {
       >
         <svg
           className={
-            "absolute top-24 right-0 z-0 -translate-y-16 translate-x-1/2 transform text-orange-200 sm:translate-x-1/4 md:-translate-y-24 lg:-translate-y-72"
+            "absolute top-0 right-0 z-0 -translate-y-16 translate-x-1/2 transform text-orange-400 sm:translate-x-1/4 md:-translate-y-24 lg:-translate-y-72"
           }
           width={404}
           height={384}
