@@ -9,6 +9,7 @@ import { ErrorField } from "../../../components/form/ErrorField.jsx";
 import { Image } from "../../../components/ui/Image.jsx";
 import { Container } from "../../../components/ui/Container.jsx";
 import dogPlaceHolder from "../../../assets/images/banner/golden_retriever.jpeg";
+import PetImage from "./form/PetImage.jsx";
 
 export default function NewPetForm() {
   const petImageRef = useRef();
@@ -48,7 +49,8 @@ export default function NewPetForm() {
   }, [image]);
   return (
     <section className={"my-16 mx-5 rounded-2xl bg-white md:col-span-2"}>
-      <h3 className='text-lg font-medium text-gray-900'>Pet Information</h3>
+      {/* <h3 className='text-lg font-medium text-gray-900'>Pet Information</h3> */}
+      {/* <PetImage /> */}
 
       <form
         name='newPetForm'

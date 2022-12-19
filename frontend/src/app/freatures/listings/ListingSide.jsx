@@ -182,7 +182,7 @@ export default function ListingSide() {
           </span>
         </dd>
 
-        <dt>
+        {/* <dt>
           <span className='text-lg font-medium text-slate-50'>
             Listing Report
           </span>
@@ -208,7 +208,7 @@ export default function ListingSide() {
             Fill out our grant-report form to show how your grant has helped the
             pets in your care.
           </span>
-        </dd>
+        </dd> */}
       </dl>
     </div>
   );

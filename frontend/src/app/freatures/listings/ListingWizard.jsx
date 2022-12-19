@@ -9,10 +9,10 @@ export default function ListingWizard() {
       <Header />
       <div className={"relative bg-white"}>
         <Decorative />
-        <main className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+        <main className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-20'>
           <div className='relative  border-orange-500 bg-white shadow-xl md:rounded-2xl md:border'>
             <div className='grid grid-cols-1 lg:grid-cols-3'>
-              <ListingSide />
+              {/* <ListingSide /> */}
               <Steps />
             </div>
           </div>
