@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 
 export function Image(props) {
-  const { sourceImage, fallBackImage, alt, ...rest } = props || {};
+  const { sourceImage, fallBackImage, ...rest } = props || {};
   const [image, setImage] = useState(sourceImage || fallBackImage);
   const isMounted = useRef(false);
 
@@ -29,5 +29,5 @@ export function Image(props) {
   }, [sourceImage, onLoad, onError]);
 
   if (!image) return fallBackImage;
-  return <img src={image} alt={alt || "image"} {...rest} />;
+  return <img src={image} {...rest} />;
 }

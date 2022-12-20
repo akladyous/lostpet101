@@ -97,7 +97,7 @@ export default function SignUp() {
               sourceImage={image}
               fallBackImage={avatarPlaceholder}
               alt='user-avatar'
-              className='mx-auto h-20 w-auto rounded-full'
+              className='mx-auto h-20 w-20 object-center rounded-full'
             />
           </button>
           <h2 className='mt-6 text-center text-3xl font-bold tracking-tight text-gray-900'>
