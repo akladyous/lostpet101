@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback } from "react";
 
 const defaultProps = {
   disabled: false,
@@ -9,48 +9,58 @@ const defaultProps = {
   label: "Drag and drop files into this box or click to upload",
 };
 
-const filesValidation = ({ files, multiple, minSize, maxSize, maxFiles }) => {
+const fileValidation = ({ files, minSize, maxSize }) => {
   if (
-    (!multiple && files.length > 1) ||
-    (multiple && maxFiles > 1) ||
-    files.length > maxFiles
+    files.length === maxFiles ||
+    files[0].size >= minSize ||
+    files[0].size <= maxSize
   ) {
+    return files[0];
+  } else {
     return false;
   }
-  return files.every((file) => {
-    return file.size >= minSize && file.size <= maxSize;
-  });
 };
 
 export default function FileUploader(props = {}) {
-  const {
-    disabled,
-    multiple,
-    minSize,
-    maxSize,
-    maxFiles,
-    label,
-    filesUploaderCB,
-  } = {
+  const { disabled, multiple, minSize, maxSize, label, fileUploaderCB } = {
     ...defaultProps,
     ...props,
   };
   const inputRef = useRef();
   const [file, setFile] = useState(null);
 
-  const handleUploadBtn = () => {
+  const handleUploadBtn = useCallback(() => {
     inputRef.current.click();
-  };
+  });
+
+  const addFile = useCallback(
+    (file) => {
+      if (isMounted) {
+        setFile(file);
+      }
+    },
+    [file]
+  );
+  const removeFile = useCallback(
+    (file) => {
+      if (isMounted) {
+        setFile(undefined);
+      }
+    },
+    [file]
+  );
 
   const handleFileUploads = (event) => {
     event.preventDefault();
-    const file = inputRef.current?.files[0];
-    if (file) {
-      const objectUrl = URL.createObjectURL(file);
-      if (isMounted.current) {
-        setPetImage(objectUrl);
-        // event.target.src = objectUrl;
-      }
+    const uploadedFile = fileValidation(event.target.files, minSize, maxSize);
+    if (uploadedFile) {
+      const objectUrl = URL.createObjectURL(uploadedFile);
+      addFile(objectUrl);
+      fileUploaderCB(uploadedFile);
+      // if (isMounted.current) {
+      //   setFile(objectUrl);
+      //   fileUploaderCB(uploadedFile);
+      // }
     }
   };
 
@@ -77,6 +87,7 @@ export default function FileUploader(props = {}) {
               </button>
             </div>
             <input
+              disabled={disabled}
               ref={inputRef}
               id='inputFile'
               type='file'

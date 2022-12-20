@@ -21,8 +21,6 @@ export function Image(props) {
     img.addEventListener("load", onLoad);
     img.addEventListener("error", onError);
 
-    console.log("Image  sourceImage: ", sourceImage);
-
     return () => {
       img.removeEventListener("load", onLoad);
       img.removeEventListener("onerror", onError);
@@ -30,6 +28,6 @@ export function Image(props) {
     };
   }, [sourceImage, onLoad, onError]);
 
-  if (!image) return null;
+  if (!image) return fallBackImage;
   return <img src={image} alt={alt || "image"} {...rest} />;
 }

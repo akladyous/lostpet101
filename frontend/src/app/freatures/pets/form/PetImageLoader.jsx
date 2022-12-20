@@ -8,16 +8,50 @@ import { ImagePlaceHolder } from "../../../../assets/images/icons/ImagePlaceHold
 import dogIcon from "../../../../assets/images/icons/3.png";
 import { Image } from "../../../../components/ui/Image.jsx";
 
-export default function PetImageLoader({ open, setOpen }) {
+const filesValidation = (files, minSize, maxSize) => {
+  if (
+    files.length === 1 ||
+    files[0].size >= minSize ||
+    files[0].size <= maxSize
+  ) {
+    return files[0];
+  } else {
+    return false;
+  }
+};
+
+export default function PetImageLoader({ open, setOpen, uploadImageCB }) {
   const [petImage, setPetImage] = useState(null);
   const isMounted = useRef(false);
   const inputRef = useRef();
 
+  const handleUploadBtn = useCallback(() => {
+    petInputImageRef.current.click();
+  });
+
+  const addFile = useCallback(
+    (file) => {
+      if (isMounted) {
+        setFile(file);
+      }
+    },
+    [file]
+  );
+  const removeFile = useCallback(
+    (file) => {
+      if (isMounted) {
+        setFile(undefined);
+      }
+    },
+    [file]
+  );
+
   const handleFilesUpload = (event) => {
     event.preventDefault();
-    const { files } = event.target;
-    if (files[0]) {
-      const objectUrl = URL.createObjectURL(files[0]);
+
+    const file = filesValidation(event.target.files, 1, 5120000);
+    if (file) {
+      const objectUrl = URL.createObjectURL(file);
       if (isMounted.current) {
         setPetImage(objectUrl);
         // event.target.src = objectUrl;
@@ -81,19 +115,8 @@ export default function PetImageLoader({ open, setOpen }) {
                     </Dialog.Title>
 
                     {/* --------------------------------------------------------------------- */}
-                    {/* <Image
-                      sourceImage={petImage}
-                      fallBackImage={dogIcon}
-                      alt='dog-placeholder'
-                      className='rounded-3xl md:h-full md:w-full'
-                    /> */}
-                    {(() => {
-                      {
-                        /* debugger; */
-                      }
-                    })()}
                     {petImage ? (
-                      <img src={petImage} key={Date.now()} />
+                      <img src={petImage} />
                     ) : (
                       <div className={"p-5"}>
                         <p className='mb-5'>
