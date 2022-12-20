@@ -6,10 +6,6 @@ import { SelectField } from "../../../components/form/SelectField.jsx";
 import { TextField } from "../../../components/form/TextField.jsx";
 import { TextAreaField } from "../../../components/form/TextArea.jsx";
 import { ErrorField } from "../../../components/form/ErrorField.jsx";
-import { Container } from "../../../components/ui/Container.jsx";
-import dogPlaceHolder from "../../../assets/images/banner/golden_retriever.jpeg";
-import PetImageLoader from "./form/PetImageLoader.jsx";
-import { ImagePlaceHolder } from "../../../assets/images/icons/ImagePlaceHolder.jsx";
 import DogPlaceholder from "../../../assets/images/icons/DogPlaceholder.jsx";
 
 export default function NewPetForm() {
@@ -31,10 +27,6 @@ export default function NewPetForm() {
     validateOnChange: false,
   });
 
-  const handleUploadBtn = useCallback(() => {
-    petInputImageRef.current.click();
-  });
-
   const loadImage = useCallback((event) => {
     event.preventDefault();
     const file = event.target.files[0];
@@ -47,8 +39,6 @@ export default function NewPetForm() {
       }
     }
   }, []);
-
-  const uploadImageCB = () => {};
 
   useEffect(() => {
     isMounted.current = true;
@@ -63,10 +53,11 @@ export default function NewPetForm() {
         <div className='flex min-h-full flex-col justify-center'>
           <button
             type='button'
-            className='mx-auto p-1 border border-solid border-orange-400 rounded-full hover:bg-slate-50 hover:p-2.5 hover:border-spacing-4
+            id='pet-image'
+            className='mx-auto p-1 border border-solid border-orange-400 rounded-full hover:bg-slate-50 hover:p-2 hover:border-spacing-4
             shadow-md transition-all duration-300 ease-linear  focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2
             '
-            onClick={handleUploadBtn}
+            onClick={(e) => petInputImageRef.current.click()}
           >
             <div className='mx-auto h-24 w-24'>
               {image ? (
