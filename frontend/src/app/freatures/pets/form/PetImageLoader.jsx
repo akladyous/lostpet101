@@ -13,12 +13,11 @@ export default function PetImageLoader({ open, setOpen }) {
   const isMounted = useRef(false);
   const inputRef = useRef();
 
-  const loadImage = (event) => {
+  const handleFilesUpload = (event) => {
     event.preventDefault();
-    inputRef.current.click();
-    const file = inputRef.current?.files[0];
-    if (file) {
-      const objectUrl = URL.createObjectURL(file);
+    const { files } = event.target;
+    if (files[0]) {
+      const objectUrl = URL.createObjectURL(files[0]);
       if (isMounted.current) {
         setPetImage(objectUrl);
         // event.target.src = objectUrl;
@@ -28,7 +27,7 @@ export default function PetImageLoader({ open, setOpen }) {
 
   useEffect(() => {
     isMounted.current = true;
-    console.log(petImage);
+
     return function () {
       isMounted.current = false;
     };
@@ -82,14 +81,19 @@ export default function PetImageLoader({ open, setOpen }) {
                     </Dialog.Title>
 
                     {/* --------------------------------------------------------------------- */}
-                    <Image
+                    {/* <Image
                       sourceImage={petImage}
                       fallBackImage={dogIcon}
                       alt='dog-placeholder'
                       className='rounded-3xl md:h-full md:w-full'
-                    />
+                    /> */}
+                    {(() => {
+                      {
+                        /* debugger; */
+                      }
+                    })()}
                     {petImage ? (
-                      ""
+                      <img src={petImage} key={Date.now()} />
                     ) : (
                       <div className={"p-5"}>
                         <p className='mb-5'>
@@ -101,19 +105,20 @@ export default function PetImageLoader({ open, setOpen }) {
                           <div className='space-y-1 text-center'>
                             <ImagePlaceHolder />
                             <div className='text-sm text-gray-600'>
-                              <p>.JPG .JPEG .PNG</p>
                               <p>
-                                Drag and drop a single pet image into this box
-                                or
+                                Drag and drop files into this box or click to
+                                upload
                               </p>
                               <button
                                 type='button'
                                 className='inline-flex justify-center px-4 py-2 text-base font-medium text-orange-500 bg-transparent  focus:outline-none sm:text-sm'
-                                onClick={loadImage}
+                                onClick={(e) => {
+                                  inputRef.current.click();
+                                }}
                               >
                                 Upload
                               </button>
-                              <p className='pl-1'>from your computer.</p>
+                              {/* <p className='pl-1'>from your computer.</p> */}
                             </div>
                             <input
                               type='file'
@@ -121,7 +126,7 @@ export default function PetImageLoader({ open, setOpen }) {
                               accept='image/*'
                               multiple={false}
                               className='hidden'
-                              // onChange={(e) => {}}
+                              onChange={handleFilesUpload}
                             />
                           </div>
                         </div>
