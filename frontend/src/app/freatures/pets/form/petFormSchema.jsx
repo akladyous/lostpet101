@@ -1,5 +1,10 @@
 import * as Yup from "yup";
 export const petFormSchema = {
+  form: {
+    name: "pet detail",
+    href: "/",
+    status: "",
+  },
   fields: {
     name: {
       attributes: { type: "text", required: true, name: "name" },

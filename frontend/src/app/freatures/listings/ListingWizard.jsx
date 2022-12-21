@@ -1,5 +1,4 @@
 import Decorative from "./Decorative.jsx";
-import ListingSide from "./ListingSide.jsx";
 import Steps from "./steps.jsx";
 
 export default function ListingWizard() {
