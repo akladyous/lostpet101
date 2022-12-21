@@ -1,14 +1,12 @@
 import { useCallback } from "react";
 import { useFormik } from "formik";
-import { reportFormSchema as schema } from "./form/reportFormSchema.jsx";
-import SideInfo from "./form/ui/SideInfo.jsx";
 import { Label } from "../../../components/form/Label.jsx";
 import { SelectField } from "../../../components/form/SelectField.jsx";
 import { TextField } from "../../../components/form/TextField.jsx";
 import { TextAreaField } from "../../../components/form/TextArea.jsx";
 import { ErrorField } from "../../../components/form/ErrorField.jsx";
 
-export default function newReport() {
+export default function newReport({ schema }) {
   const handleSubmit = useCallback(async (values, actions) => {
     debugger;
   }, []);

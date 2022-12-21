@@ -1,18 +1,14 @@
 import { useFormWizard } from "../../../components/form/formWizard/useFormWizard.jsx";
 import WizardContainerComponent from "../../../components/form/formWizard/WizardContainerComponent.jsx";
-import NewPet from "../pets/NewPet.jsx";
-import NewReport from "../reports/NewReport.jsx";
-import PetImage from "../pets/form/PetImage.jsx";
 
-const steps = [
-  { name: "Step 1", href: "/", status: "complete", data: null },
-  { name: "Step 2", href: "/", status: "current", data: null },
-  { name: "Step 3", href: "/", status: "upcoming", data: null },
-];
+import { petSchema } from "../pets/form/petSchema.jsx";
+import NewPet from "../pets/NewPet.jsx";
+import { reportSchema } from "../reports/form/reportSchema.jsx";
+import NewReport from "../reports/NewReport.jsx";
 
 export default function Steps() {
   const { currentIndex, lastIndex, next, previous } = useFormWizard({
-    steps: steps,
+    steps: [petSchema.info, reportSchema.info],
   });
   return (
     <>
@@ -22,9 +18,8 @@ export default function Steps() {
         next={next}
         previous={previous}
       >
-        <NewPet />
-        <PetImage />
-        <NewReport />
+        <NewPet schema={petSchema} />
+        <NewReport schema={reportSchema} />
       </WizardContainerComponent>
     </>
   );

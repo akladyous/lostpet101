@@ -1,7 +1,8 @@
 import * as Yup from "yup";
-export const petFormSchema = {
-  form: {
-    name: "pet detail",
+export const petSchema = {
+  info: {
+    name: "petForm",
+    title: "pet detail",
     href: "/",
     status: "",
   },
@@ -129,4 +130,4 @@ const handler = {
     }
   },
 };
-export const schemaProxy = new Proxy(petFormSchema, handler);
+export const schemaProxy = new Proxy(petSchema, handler);

@@ -1,6 +1,5 @@
 import { useCallback, useRef, useState, useEffect } from "react";
 import { useFormik } from "formik";
-import { petFormSchema as schema } from "./form/petFormSchema.jsx";
 import { Label } from "../../../components/form/Label.jsx";
 import { SelectField } from "../../../components/form/SelectField.jsx";
 import { TextField } from "../../../components/form/TextField.jsx";
@@ -8,7 +7,7 @@ import { TextAreaField } from "../../../components/form/TextArea.jsx";
 import { ErrorField } from "../../../components/form/ErrorField.jsx";
 import DogPlaceholder from "../../../assets/images/icons/DogPlaceholder.jsx";
 
-export default function NewPetForm() {
+export default function NewPetForm({ schema }) {
   const petInputImageRef = useRef();
   const isMounted = useRef(false);
   // const [open, setOpen] = useState(false);

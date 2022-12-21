@@ -1,6 +1,17 @@
-import { useRef, useMemo, useState, useCallback } from "react";
+import { useRef, useMemo, useState, useCallback, useReducer } from "react";
+
+const reducer = (state, action) => {
+  switch (key) {
+    case value:
+      break;
+
+    default:
+      break;
+  }
+};
 
 export function useFormWizard({ steps }) {
+  const [state, dispatch] = useReducer(reducer, { index: 0 });
   const [currentIndex, setCurrentIndex] = useState(0);
   const lastIndex = useRef(steps.length - 1);
   // const currentIndex = useRef(0);
