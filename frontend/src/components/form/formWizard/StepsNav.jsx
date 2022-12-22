@@ -1,23 +1,8 @@
-import { useReducer } from "react";
 import { CheckIcon } from "@heroicons/react/20/solid";
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
-const initialState = { currentIndex: 0 };
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "next":
-      return {};
-    case "previous":
-      return {};
-    default:
-      return state;
-  }
-};
-
 export default function StepsNav({ steps }) {
-  const [state, dispatch] = useReducer(reducer, initialState);
-
   return (
     <nav aria-label='Progress' className='mt-3'>
       <ol role='list' className='flex items-center justify-center'>
