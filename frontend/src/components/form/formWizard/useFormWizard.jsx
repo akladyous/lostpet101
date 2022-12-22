@@ -1,26 +1,42 @@
 import { useCallback, useReducer } from "react";
 
-const reducer = (state, { type }) => {
-  switch (type) {
+const reducer = (state, action) => {
+  switch (action.type) {
     case "next":
       return {
         ...state,
         currentIndex: state.currentIndex + 1,
         steps: state.steps.map(function (step, index) {
+          //   debugger;
           switch (true) {
-            case index < this.currentIndex:
-              return { ...step, status: step.status };
-            case index === this.currentIndex:
+            case index <= this.currentIndex:
               return { ...step, status: "complete" };
-            case index > this.currentIndex:
+            case index === this.currentIndex + 1:
+              return { ...step, status: "current" };
+            // case index >= this.currentIndex + 2:
+            //   return { ...step, status: "upcoming" };
+            default:
+              return step;
+          }
+        }, state),
+        [state.currentIndex]: action.payload,
+      };
+    case "previous":
+      debugger;
+      return {
+        ...state,
+        currentIndex: state.currentIndex - 1,
+        steps: state.steps.map(function (step, index) {
+          switch (true) {
+            case index === this.currentIndex - 1:
+              return { ...step, status: "current" };
+            case index >= this.currentIndex:
               return { ...step, status: "upcoming" };
             default:
               return step;
           }
         }, state),
       };
-    case "previous":
-      return { ...state, currentIndex: state.currentIndex - 1 };
     case "setCurrentStatus":
       return {
         ...state,
@@ -31,7 +47,6 @@ const reducer = (state, { type }) => {
         }, state),
       };
     case "setPreviousStatus":
-      debugger;
       return {
         ...state,
         steps: state.steps.map(function (step, index) {
@@ -68,19 +83,19 @@ function initializeState(steps) {
         return { ...step, status: "upcoming", isValid: false };
       }),
     },
-    Array(steps.length - 1).fill({})
+    Array(steps.length - 1).fill(null)
   );
 }
 
 export function useFormWizard({ steps }) {
   const [state, dispatch] = useReducer(reducer, steps, initializeState);
 
-  console.log("state : ", state);
+  //   console.log("state : ", state);
 
   const next = useCallback(
     (data) => {
       if (state.currentIndex < state.steps.length - 1) {
-        dispatch({ type: "next" });
+        dispatch({ type: "next", payload: data });
       } else if (state.currentIndex === state.steps.length - 1) {
         onFinish();
       }
@@ -89,8 +104,7 @@ export function useFormWizard({ steps }) {
   );
 
   const previous = useCallback(
-    (e) => {
-      e.preventDefault();
+    (data) => {
       if (state.currentIndex > 0) {
         dispatch({ type: "previous" });
       }
@@ -113,6 +127,7 @@ export function useFormWizard({ steps }) {
     next,
     previous,
     setCurrentStatus,
+    formData: state[state.currentIndex],
     steps: state.steps,
   };
 }

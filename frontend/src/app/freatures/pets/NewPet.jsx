@@ -8,8 +8,8 @@ import { ErrorField } from "../../../components/form/ErrorField.jsx";
 import DogPlaceholder from "../../../assets/images/icons/DogPlaceholder.jsx";
 
 export default function NewPetForm(props) {
-  const { schema, next, previous, setCurrentStatus } = props || {};
-  console.log("pet props : ", props);
+  const { schema, next, previous, setCurrentStatus, formData } = props || {};
+
   const petInputImageRef = useRef();
   const isMounted = useRef(false);
   // const [open, setOpen] = useState(false);
@@ -21,7 +21,9 @@ export default function NewPetForm(props) {
   }, []);
 
   const formik = useFormik({
-    initialValues: Object.assign(schema.initialValues, { image: null }),
+    initialValues: Object.assign(formData ?? schema.initialValues, {
+      image: null,
+    }),
     onSubmit: handleSubmit,
     // onReset: (values, actions) => {},
     validationSchema: schema.validations,
@@ -293,7 +295,7 @@ export default function NewPetForm(props) {
             />
           </div>
 
-          <div className='sm:col-span-3 sm:flex sm:justify-end'>
+          <div className='sm:col-span-3 sm:flex sm:justify-between'>
             <button
               type='submit'
               // disabled={formik.isValid}
@@ -304,6 +306,19 @@ export default function NewPetForm(props) {
             </button>
           </div>
         </form>
+        <button
+          type='button'
+          onClick={(e) => {
+            debugger;
+            e.preventDefault();
+            previous();
+          }}
+          // disabled={formik.isValid}
+          className='mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto'
+          // className="btn-primary mt-2 w-full justify-center rounded-md px-6 text-base shadow-sm sm:w-auto"
+        >
+          back
+        </button>
       </section>
     </>
   );
