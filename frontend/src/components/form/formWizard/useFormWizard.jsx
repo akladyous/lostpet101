@@ -1,5 +1,4 @@
 import { useCallback, useReducer } from "react";
-import produce from "immer";
 
 const reducer = (state, { type }) => {
   switch (type) {
@@ -109,8 +108,6 @@ export function useFormWizard({ steps }) {
     dispatch({ type: "setCurrentStatus" });
   }, [state.currentIndex]);
 
-  //   debugger;
-  //   next();
   return {
     firstStep: 0,
     lastStep: state.steps.length - 1,
