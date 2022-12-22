@@ -1,11 +1,6 @@
 import * as Yup from "yup";
 export const reportSchema = {
-  info: {
-    name: "listingForm",
-    title: "listing detail",
-    href: "/",
-    status: "",
-  },
+  name: "report",
   fields: {
     report_type: {
       attributes: {

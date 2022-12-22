@@ -7,7 +7,9 @@ import { TextAreaField } from "../../../components/form/TextArea.jsx";
 import { ErrorField } from "../../../components/form/ErrorField.jsx";
 import DogPlaceholder from "../../../assets/images/icons/DogPlaceholder.jsx";
 
-export default function NewPetForm({ schema }) {
+export default function NewPetForm(props) {
+  const { schema, next, previous, setCurrentStatus } = props || {};
+  console.log("pet props : ", props);
   const petInputImageRef = useRef();
   const isMounted = useRef(false);
   // const [open, setOpen] = useState(false);
@@ -15,11 +17,11 @@ export default function NewPetForm({ schema }) {
 
   const handleSubmit = useCallback(async (values, actions) => {
     debugger;
+    next(values);
   }, []);
 
   const formik = useFormik({
     initialValues: Object.assign(schema.initialValues, { image: null }),
-    // initialValues: schema.initialValues,
     onSubmit: handleSubmit,
     // onReset: (values, actions) => {},
     validationSchema: schema.validations,
@@ -41,7 +43,7 @@ export default function NewPetForm({ schema }) {
 
   useEffect(() => {
     isMounted.current = true;
-
+    if (isMounted) setCurrentStatus();
     return function () {
       isMounted.current = false;
     };
@@ -75,7 +77,7 @@ export default function NewPetForm({ schema }) {
         </div>
 
         <form
-          name='newPetForm'
+          name={schema.name}
           onSubmit={formik.handleSubmit}
           onReset={formik.handleReset}
           className='mt-6 grid grid-cols-1 gap-y-6 sm:gap-x-8 md:grid-cols-3'

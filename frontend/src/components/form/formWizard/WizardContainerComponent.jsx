@@ -1,17 +1,23 @@
-import React from 'react';
+import React from "react";
 
 export default function WizardContainerComponent(props) {
-    const { currentIndex, lastIndex, next, previous } = props || {};
-    const currentChild = React.Children.toArray(props.children)[currentIndex];
+  //   const { currentStep, lastStep, next, previous, setCurrentStatus } =
+  //     props.stepsProp || {};
+  const { stepsProp } = props || {};
+  const currentChild = React.Children.toArray(props.children)[
+    stepsProp.currentStep
+  ];
 
-    if (React.isValidElement(currentChild)) {
-        return React.cloneElement(currentChild, {
-            currentIndex,
-            lastIndex,
-            next,
-            previous,
-        });
-    } else {
-        return null;
-    }
+  if (React.isValidElement(currentChild)) {
+    return React.cloneElement(currentChild, {
+      //   currentStep,
+      //   lastStep,
+      //   next,
+      //   previous,
+      //   setCurrentStatus,
+      ...stepsProp,
+    });
+  } else {
+    return null;
+  }
 }
