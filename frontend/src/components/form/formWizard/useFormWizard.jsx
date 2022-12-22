@@ -6,9 +6,6 @@ const reducer = (state, { type }) => {
       return {
         ...state,
         currentIndex: state.currentIndex + 1,
-        // steps: state.steps.map((step, index) => {
-        //   return index < 1 ? { ...step, status: "complete" } : step;
-        // }),
         steps: state.steps.map(function (step, index) {
           switch (true) {
             case index < this.currentIndex:

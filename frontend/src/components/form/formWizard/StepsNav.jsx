@@ -1,20 +1,14 @@
 import { useReducer, useCallback } from "react";
 import { CheckIcon } from "@heroicons/react/20/solid";
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
-// const initialState = {
-//   currentIndex: 0,
-//   steps: [
-//     { name: "Step 1", href: "#", status: "upcoming" },
-//     { name: "Step 2", href: "#", status: "upcoming" },
-//     { name: "Step 3", href: "#", status: "upcoming" },
-//     { name: "Step 4", href: "#", status: "upcoming" },
-//   ],
-// };
+
 const initializeState = (steps) => {
   return Object.assign({ currentIndex: 0 }, { steps: steps });
 };
+
 const reducer = (state, action) => {
   switch (action.type) {
     case "next":
@@ -36,6 +30,7 @@ const reducer = (state, action) => {
           }),
         };
       }
+
     case "previous":
       if (state.currentIndex >= 1) {
         return {
@@ -58,7 +53,7 @@ const reducer = (state, action) => {
   }
 };
 
-export default function StepsNav({ steps, children }) {
+export default function StepsNav({ steps }) {
   const [state, dispatch] = useReducer(reducer, steps, initializeState);
   const nextStep = useCallback(() => {
     dispatch({ type: "next" });
