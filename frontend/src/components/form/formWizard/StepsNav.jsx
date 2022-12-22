@@ -1,22 +1,71 @@
-import { useReducer } from "react";
+import { useReducer, useCallback } from "react";
 import { CheckIcon } from "@heroicons/react/20/solid";
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
-const initialState = { currentIndex: 0 };
+// const initialState = {
+//   currentIndex: 0,
+//   steps: [
+//     { name: "Step 1", href: "#", status: "upcoming" },
+//     { name: "Step 2", href: "#", status: "upcoming" },
+//     { name: "Step 3", href: "#", status: "upcoming" },
+//     { name: "Step 4", href: "#", status: "upcoming" },
+//   ],
+// };
+const initializeState = (steps) => {
+  return Object.assign({ currentIndex: 0 }, { steps: steps });
+};
 const reducer = (state, action) => {
   switch (action.type) {
     case "next":
-      return {};
+      if (state.currentIndex < state.steps.length - 1) {
+        return {
+          ...state,
+          currentIndex: state.currentIndex + 1,
+          steps: state.steps.map((step, index) => {
+            switch (true) {
+              case index === this.currentIndex - 1: //set the step before current index to 'complete'
+                return { ...step, status: "complete" };
+              case index === state.currentIndex: // set the current step to 'current'
+                return { ...step, status: "current" };
+              case index > state.currentIndex:
+                return { ...step, status: "upcoming" };
+              default:
+                return step;
+            }
+          }),
+        };
+      }
     case "previous":
-      return {};
+      if (state.currentIndex >= 1) {
+        return {
+          ...state,
+          currentIndex: state.currentIndex - 1,
+          steps: state.steps.map((step, index) => {
+            switch (true) {
+              case index === this.currentIndex - 1:
+                return { ...step, status: "current" };
+              case index >= state.currentIndex:
+                return { ...step, status: "upcoming" };
+              default:
+                return step;
+            }
+          }),
+        };
+      }
     default:
       return state;
   }
 };
 
-export default function StepsNav({ steps }) {
-  const [state, dispatch] = useReducer(reducer, initialState);
+export default function StepsNav({ steps, children }) {
+  const [state, dispatch] = useReducer(reducer, steps, initializeState);
+  const nextStep = useCallback(() => {
+    dispatch({ type: "next" });
+  }, [state.currentIndex]);
+  const previousStep = useCallback(() => {
+    dispatch({ type: "previous" });
+  }, [state.currentIndex]);
 
   return (
     <nav aria-label='Progress' className='mt-3'>
