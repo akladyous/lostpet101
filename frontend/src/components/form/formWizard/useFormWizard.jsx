@@ -1,101 +1,37 @@
-import { useCallback, useReducer } from "react";
+import { useCallback, useReducer, useMemo } from "react";
 
 const reducer = (state, action) => {
   switch (action.type) {
     case "next":
+      debugger;
       return {
         ...state,
         currentIndex: state.currentIndex + 1,
-        steps: state.steps.map(function (step, index) {
-          //   debugger;
-          switch (true) {
-            case index <= this.currentIndex:
-              return { ...step, status: "complete" };
-            case index === this.currentIndex + 1:
-              return { ...step, status: "current" };
-            // case index >= this.currentIndex + 2:
-            //   return { ...step, status: "upcoming" };
-            default:
-              return step;
-          }
-        }, state),
-        [state.currentIndex]: action.payload,
+        data: { ...state.data, [action.model]: action.payload },
       };
     case "previous":
       debugger;
       return {
         ...state,
         currentIndex: state.currentIndex - 1,
-        steps: state.steps.map(function (step, index) {
-          switch (true) {
-            case index === this.currentIndex - 1:
-              return { ...step, status: "current" };
-            case index >= this.currentIndex:
-              return { ...step, status: "upcoming" };
-            default:
-              return step;
-          }
-        }, state),
-      };
-    case "setCurrentStatus":
-      return {
-        ...state,
-        steps: state.steps.map(function (step, index) {
-          return index === this.currentIndex
-            ? { ...step, status: "current" }
-            : step;
-        }, state),
-      };
-    case "setPreviousStatus":
-      return {
-        ...state,
-        steps: state.steps.map(function (step, index) {
-          return index < this.currentIndex
-            ? {
-                ...step,
-                status: this.at(index).isValid ? "complete" : "upcoming",
-              }
-            : step;
-        }, state),
-      };
-    case "setNextStatus":
-      return {
-        ...state,
-        steps: state.steps.map(function () {
-          return index > this.currentIndex
-            ? {
-                ...step,
-                status: this.at(index).isValid ? "completed" : "upcoming",
-              }
-            : state;
-        }, state),
+        data: { ...state.data, [action.model]: action.payload },
       };
     default:
       return state;
   }
 };
 
-function initializeState(steps) {
-  return Object.assign(
-    { currentIndex: 0 },
-    {
-      steps: steps.map(function (step, idx) {
-        return { ...step, status: "upcoming", isValid: false };
-      }),
-    },
-    Array(steps.length - 1).fill(null)
-  );
+function initializeState(initialState) {
+  return Object.assign({ currentIndex: 0 }, initialState);
 }
 
-export function useFormWizard({ steps }) {
-  const [state, dispatch] = useReducer(reducer, steps, initializeState);
-
-  //   console.log("state : ", state);
+export function useFormWizard(initialState) {
+  const [state, dispatch] = useReducer(reducer, initialState, initializeState);
 
   const next = useCallback(
-    (data) => {
+    (data, model) => {
       if (state.currentIndex < state.steps.length - 1) {
-        dispatch({ type: "next", payload: data });
+        dispatch({ type: "next", payload: data, model: model });
       } else if (state.currentIndex === state.steps.length - 1) {
         onFinish();
       }
@@ -104,9 +40,9 @@ export function useFormWizard({ steps }) {
   );
 
   const previous = useCallback(
-    (data) => {
+    (data, model) => {
       if (state.currentIndex > 0) {
-        dispatch({ type: "previous" });
+        dispatch({ type: "previous", model: model, payload: data });
       }
     },
     [state.currentIndex]
@@ -114,20 +50,19 @@ export function useFormWizard({ steps }) {
 
   const onFinish = useCallback(() => {}, []);
 
-  const setCurrentStatus = useCallback(() => {
-    dispatch({ type: "setCurrentStatus" });
+  const isFirstStep = useMemo(() => {
+    return state.currentIndex === 0;
   }, [state.currentIndex]);
 
   return {
     firstStep: 0,
     lastStep: state.steps.length - 1,
     currentStep: state.currentIndex,
-    isFirstStep: state.currentIndex === 0,
+    // isFirstStep: state.currentIndex === 0,
+    isFirstStep,
     isLastStep: state.currentIndex === state.steps.length - 1,
     next,
     previous,
-    setCurrentStatus,
-    formData: state[state.currentIndex],
-    steps: state.steps,
+    data: state.data,
   };
 }

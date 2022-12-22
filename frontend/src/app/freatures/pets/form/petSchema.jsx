@@ -2,6 +2,9 @@ import * as Yup from "yup";
 export const petSchema = {
   name: "pet",
   fields: {
+    image: {
+      attributes: { type: "file", required: true, name: "image" },
+    },
     name: {
       attributes: { type: "text", required: true, name: "name" },
       label: { content: "pet name" },
@@ -90,7 +93,7 @@ export const petSchema = {
     textarea:
       "peer block mt-1 w-full rounded-md border-gray-300 py-3 px-4 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-indigo-500",
   },
-  validations: Yup.object({
+  validationSchema: Yup.object({
     name: Yup.string().required("Required"),
     breed: Yup.string(),
     color: Yup.string(),
@@ -102,10 +105,18 @@ export const petSchema = {
     description: Yup.string().required("Required").min(5).max(255),
   }),
   get initialValues() {
+    const defaultValues = {};
+    for (let field in this.fields) {
+      defaultValues[field] =
+        this.fields[field].attributes.type === "file" ? null : "";
+    }
+    return defaultValues;
+    /*
     return Object.keys(this.fields).reduce((acc, val) => {
-      acc[val] = "";
+      acc[val] = val.attributes.type === "file" ? null : "";
       return acc;
     }, {});
+     */
   },
 };
 

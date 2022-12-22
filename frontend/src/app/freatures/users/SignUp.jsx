@@ -27,6 +27,7 @@ export default function SignUp() {
 
   const handleSubmit = useCallback(
     async (values, actions) => {
+      debugger;
       const signupValues = new FormData(document.forms["signupForm"]);
       // const controller = new AbortController();
       const response = await dispatch(usersSignUp({ user: signupValues }));

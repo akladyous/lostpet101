@@ -7,7 +7,17 @@ import { TextAreaField } from "../../../components/form/TextArea.jsx";
 import { ErrorField } from "../../../components/form/ErrorField.jsx";
 
 export default function newReport(props) {
-  const { schema, next, previous, setCurrentStatus } = props || {};
+  const {
+    schema,
+    firstStep,
+    lastStep,
+    currentStep,
+    isFirstStep,
+    isLastStep,
+    next,
+    previous,
+    data,
+  } = props || {};
   const handleSubmit = useCallback(async (values, actions) => {
     debugger;
   }, []);
@@ -146,10 +156,10 @@ export default function newReport(props) {
         onClick={(e) => {
           // debugger;
           e.preventDefault();
-          previous();
+          previous(formik.values, "report");
         }}
-        // disabled={formik.isValid}
-        className='mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto'
+        disabled={isFirstStep}
+        className='mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none'
         // className="btn-primary mt-2 w-full justify-center rounded-md px-6 text-base shadow-sm sm:w-auto"
       >
         back

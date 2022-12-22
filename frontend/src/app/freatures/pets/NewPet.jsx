@@ -8,44 +8,57 @@ import { ErrorField } from "../../../components/form/ErrorField.jsx";
 import DogPlaceholder from "../../../assets/images/icons/DogPlaceholder.jsx";
 
 export default function NewPetForm(props) {
-  const { schema, next, previous, setCurrentStatus, formData } = props || {};
+  const {
+    schema,
+    firstStep,
+    lastStep,
+    currentStep,
+    isFirstStep,
+    isLastStep,
+    next,
+    previous,
+    data,
+  } = props || {};
 
   const petInputImageRef = useRef();
   const isMounted = useRef(false);
-  // const [open, setOpen] = useState(false);
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState(data.pet.image || undefined);
 
-  const handleSubmit = useCallback(async (values, actions) => {
-    debugger;
-    next(values);
-  }, []);
+  const handleSubmit = (values, actions) => {
+    // const signupValues = new FormData(document.forms["signupForm"]);
+    actions.setSubmitting(false);
+    actions.resetForm({ values: data["pet"] });
+    next(values, "pet");
+  };
 
   const formik = useFormik({
-    initialValues: Object.assign(formData ?? schema.initialValues, {
-      image: null,
-    }),
+    // initialValues: schema.initialValues,
+    initialValues: data.pet,
     onSubmit: handleSubmit,
-    // onReset: (values, actions) => {},
-    validationSchema: schema.validations,
+    validationSchema: schema.validationSchema,
     validateOnChange: false,
+    enableReinitialize: false,
   });
 
-  const loadImage = useCallback((event) => {
-    event.preventDefault();
-    const file = event.target.files[0];
+  const loadImage = useCallback(
+    (event) => {
+      event.preventDefault();
+      const file = event.target.files[0];
 
-    if (file) {
-      const objectUrl = URL.createObjectURL(file);
-      if (isMounted.current) {
-        setImage(objectUrl);
-        event.target.src = objectUrl;
+      if (file) {
+        const objectUrl = URL.createObjectURL(file);
+        if (isMounted.current) {
+          setImage(objectUrl);
+          // event.target.src = objectUrl;
+        }
       }
-    }
-  }, []);
+    },
+    [image]
+  );
 
   useEffect(() => {
     isMounted.current = true;
-    if (isMounted) setCurrentStatus();
+
     return function () {
       isMounted.current = false;
     };
@@ -96,48 +109,48 @@ export default function NewPetForm(props) {
             onChange={(e) => {
               loadImage(e);
               formik.handleChange(e);
-              formik.setFieldValue("avatar", e.currentTarget.files[0]);
+              formik.setFieldValue("image", e.currentTarget.files[0]);
             }}
             onBlur={formik.handleBlur}
           />
 
           <div className='md:col-span-2'>
             <Label
-              htmlFor={schema.fields.name.attributes.name}
+              htmlFor={"name"}
               className={schema.classes.label}
               content={schema.fields.name.label.content}
             />
             <TextField
-              name={schema.fields.name.attributes.name}
+              name={"name"}
               type={schema.fields.name.attributes.type}
               className={schema.classes.input}
               handleChange={formik.handleChange}
               handleBlur={formik.handleBlur}
-              value={formik.values[schema.fields.name.attributes.name]}
+              value={formik.values["name"]}
             />
             <ErrorField
-              error={formik.errors[schema.fields.name.attributes.name]}
-              touched={formik.touched[schema.fields.name.attributes.name]}
+              error={formik.errors["name"]}
+              touched={formik.touched["name"]}
             />
           </div>
 
           <div className=''>
             <Label
-              htmlFor={schema.fields.species.attributes.name}
+              htmlFor={"species"}
               className={schema.classes.label}
               content={schema.fields.species.label.content}
             />
             <SelectField
-              name={schema.fields.species.attributes.name}
+              name={"species"}
               handleChange={formik.handleChange}
               handleBlur={formik.handleBlur}
-              value={formik.values[schema.fields.species.attributes.name]}
+              value={formik.values["species"]}
               options={schema.fields.species.attributes.options}
               className={schema.classes.input}
             />
             <ErrorField
-              error={formik.errors[schema.fields.species.attributes.name]}
-              touched={formik.touched[schema.fields.species.attributes.name]}
+              error={formik.errors["species"]}
+              touched={formik.touched["species"]}
             />
           </div>
 
@@ -275,23 +288,21 @@ export default function NewPetForm(props) {
 
           <div className='sm:col-span-3'>
             <Label
-              htmlFor={schema.fields.description.attributes.name}
+              htmlFor={"description"}
               className={schema.classes.label}
               content={schema.fields.description.label.content}
             />
             <TextAreaField
-              name={schema.fields.description.attributes.name}
+              name={"description"}
               className={schema.classes.textarea}
               handleChange={formik.handleChange}
               handleBlur={formik.handleBlur}
-              value={formik.values[schema.fields.description.attributes.name]}
+              value={formik.values["description"]}
               rows={5}
             />
             <ErrorField
-              error={formik.errors[schema.fields.description.attributes.name]}
-              touched={
-                formik.touched[schema.fields.description.attributes.name]
-              }
+              error={formik.errors["description"]}
+              touched={formik.touched["description"]}
             />
           </div>
 
@@ -302,19 +313,19 @@ export default function NewPetForm(props) {
               className='mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto'
               // className="btn-primary mt-2 w-full justify-center rounded-md px-6 text-base shadow-sm sm:w-auto"
             >
-              Submit
+              {`Submit ${formik.isValid ? " valid" : " inValid"}`}
             </button>
           </div>
         </form>
         <button
           type='button'
           onClick={(e) => {
-            debugger;
+            // debugger;
             e.preventDefault();
             previous();
           }}
-          // disabled={formik.isValid}
-          className='mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto'
+          disabled={isFirstStep}
+          className='mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none'
           // className="btn-primary mt-2 w-full justify-center rounded-md px-6 text-base shadow-sm sm:w-auto"
         >
           back
