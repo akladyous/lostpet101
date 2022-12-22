@@ -26,6 +26,7 @@ export default function NewPetForm(props) {
 
   const handleSubmit = (values, actions) => {
     // const signupValues = new FormData(document.forms["signupForm"]);
+    console.log("handle form submit");
     actions.setSubmitting(false);
     actions.resetForm({ values: data["pet"] });
     next(values, "pet");
