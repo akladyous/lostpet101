@@ -93,6 +93,23 @@ function NewPetForm(props) {
           onSubmit={handleSubmit(onSubmit)}
           className='mt-6 grid grid-cols-1 gap-y-6 sm:gap-x-8 md:grid-cols-3'
         >
+          <input
+            id='image'
+            type='file'
+            {...inputFileField}
+            ref={(event) => {
+              inputFileField.ref(event);
+              inputFileRef.current = event;
+            }}
+            accept='image/*'
+            multiple={false}
+            className='hidden'
+            onChange={(event) => {
+              loadImage(event);
+              inputFileField.onChange(event);
+            }}
+          />
+
           <div className='md:col-span-2'>
             <TextField
               label={schema.fields.name.label}
@@ -100,6 +117,17 @@ function NewPetForm(props) {
               classes={schema.classes}
               error={errors.name}
               register={register}
+            />
+          </div>
+
+          <div>
+            <SelectField
+              label={schema.fields.species.label}
+              input={schema.fields.species.attributes}
+              classes={schema.classes}
+              options={schema.fields.species.options}
+              register={register}
+              error={errors.species}
             />
           </div>
 
@@ -131,5 +159,4 @@ function NewPetForm(props) {
   );
 }
 
-// NewPetForm.displayName = "pet";
 export default NewPetForm;

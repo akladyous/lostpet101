@@ -4,21 +4,26 @@ export const petSchema = {
   name: "pet",
   fields: {
     image: {
+      nameAttribute: "input",
       attributes: { type: "file", required: true, name: "image" },
     },
     name: {
+      nameAttribute: "input",
       attributes: { type: "text", name: "name" },
       label: { content: "pet name" },
     },
     breed: {
+      nameAttribute: "input",
       attributes: { type: "text", required: true, name: "breed" },
       label: { content: "breed" },
     },
     color: {
+      nameAttribute: "input",
       attributes: { type: "text", required: true, name: "color" },
       label: { content: "color" },
     },
     age: {
+      nameAttribute: "input",
       attributes: {
         type: "number",
         required: true,
@@ -29,58 +34,58 @@ export const petSchema = {
       label: { content: "age" },
     },
     species: {
+      nameAttribute: "select",
       attributes: {
-        type: "select",
         name: "species",
         required: true,
-        options: [
-          { value: "dog", label: "dog" },
-          { value: "cat", label: "cat" },
-        ],
       },
+      options: [
+        { value: "dog", label: "dog" },
+        { value: "cat", label: "cat" },
+      ],
       label: { content: "species" },
     },
     collar: {
+      nameAttribute: "select",
       attributes: {
-        type: "select",
         name: "collar",
         required: false,
-        options: [
-          { value: true, label: "Yes" },
-          { value: false, label: "No" },
-        ],
       },
+      options: [
+        { value: true, label: "Yes" },
+        { value: false, label: "No" },
+      ],
       label: { content: "collar" },
     },
     gender: {
+      nameAttribute: "select",
       attributes: {
-        type: "select",
         name: "gender",
         required: false,
-        options: [
-          { value: "male", label: "male" },
-          { value: "female", label: "female" },
-        ],
       },
+      options: [
+        { value: "male", label: "male" },
+        { value: "female", label: "female" },
+      ],
       label: { content: "gender" },
     },
     size: {
+      nameAttribute: "select",
       attributes: {
-        type: "select",
         name: "size",
         required: false,
-        options: [
-          { value: "small", label: "small" },
-          { value: "medium", label: "medium" },
-          { value: "large", label: "large" },
-          { value: "giant", label: "giant" },
-        ],
       },
+      options: [
+        { value: "small", label: "small" },
+        { value: "medium", label: "medium" },
+        { value: "large", label: "large" },
+        { value: "giant", label: "giant" },
+      ],
       label: { content: "size" },
     },
     description: {
+      nameAttribute: "textaerea",
       attributes: {
-        type: "textaerea",
         required: true,
         name: "description",
       },

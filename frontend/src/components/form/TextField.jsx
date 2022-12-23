@@ -9,7 +9,7 @@ export const TextField = (props) => {
   }, [input.name, error]);
 
   return (
-    <div>
+    <>
       {label ? (
         <label htmlFor={input.name} className={classes.label}>
           {label?.content}
@@ -29,7 +29,7 @@ export const TextField = (props) => {
           </p>
         </div>
       ) : null}
-    </div>
+    </>
   );
 };
 export const MemoizedComponent = React.memo(TextField);
