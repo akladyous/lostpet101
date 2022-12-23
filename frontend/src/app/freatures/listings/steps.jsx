@@ -1,7 +1,6 @@
 import { useFormWizard } from "../../../components/form/formWizard/useFormWizard.jsx";
 import WizardContainerComponent from "../../../components/form/formWizard/WizardContainerComponent.jsx";
 
-import { petSchema } from "../pets/form/petSchema.jsx";
 import NewPet from "../pets/NewPet.jsx";
 import { reportSchema } from "../reports/form/reportSchema.jsx";
 import NewReport from "../reports/NewReport.jsx";
@@ -94,7 +93,7 @@ export default function Steps({ initialValues = steps }) {
         currentStep={currentStep}
         lastStep={lastStep}
       >
-        <NewPet schema={petSchema} />
+        <NewPet />
         <NewReport schema={reportSchema} />
         <Final />
       </WizardContainerComponent>
