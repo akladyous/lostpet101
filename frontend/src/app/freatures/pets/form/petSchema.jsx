@@ -5,7 +5,7 @@ export const petSchema = {
   fields: {
     image: {
       nameAttribute: "input",
-      attributes: { type: "file", required: true, name: "image" },
+      attributes: { type: "file", name: "image" },
     },
     name: {
       nameAttribute: "input",
@@ -14,19 +14,18 @@ export const petSchema = {
     },
     breed: {
       nameAttribute: "input",
-      attributes: { type: "text", required: true, name: "breed" },
+      attributes: { type: "text", name: "breed" },
       label: { content: "breed" },
     },
     color: {
       nameAttribute: "input",
-      attributes: { type: "text", required: true, name: "color" },
+      attributes: { type: "text", name: "color" },
       label: { content: "color" },
     },
     age: {
       nameAttribute: "input",
       attributes: {
         type: "number",
-        required: true,
         name: "age",
         min: "1",
         max: "15",
@@ -37,7 +36,6 @@ export const petSchema = {
       nameAttribute: "select",
       attributes: {
         name: "species",
-        required: true,
       },
       options: [
         { value: "dog", label: "dog" },
@@ -86,8 +84,8 @@ export const petSchema = {
     description: {
       nameAttribute: "textaerea",
       attributes: {
-        required: true,
         name: "description",
+        rows: 5,
       },
       label: { content: "description", caption: "Max. 500 characters" },
     },
@@ -96,25 +94,25 @@ export const petSchema = {
     label: "block text-sm font-medium text-gray-900 capitalize",
     input:
       "peer mt-1 block w-full rounded-md border-gray-300 py-3 px-4 h-12 text-base focus:border-orange-500 focus:outline-none focus:ring-orange-500 sm:text-sm",
-    textarea:
+    textArea:
       "peer block mt-1 w-full rounded-md border-gray-300 py-3 px-4 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-indigo-500",
   },
   validationSchema: Yup.object().shape({
     name: Yup.string().required("pet name is equired").min(4),
-    // breed: Yup.string(),
-    // color: Yup.string(),
-    // age: Yup.number().min(1).max(15),
-    // species: Yup.string()
-    //   .required("pet species is Required")
-    //   .oneOf(["dog", "cat"]),
-    // collar: Yup.string().oneOf(["Yes", "No"]),
-    // gender: Yup.string().oneOf(["male", "female"]),
-    // size: Yup.string().oneOf(["small", "medium", "large", "giant"]),
-    // description: Yup.string()
-    //   .required("pet description is equired")
-    //   .min(5)
-    //   .max(255),
+    species: Yup.string()
+      .required("pet species is Required")
+      .oneOf(["dog", "cat"]),
+    description: Yup.string()
+      .required("pet description is equired")
+      .min(5)
+      .max(255),
   }),
+  // breed: Yup.string(),
+  // color: Yup.string(),
+  // age: Yup.number().min(1).max(15),
+  // collar: Yup.string().oneOf(["Yes", "No"]),
+  // gender: Yup.string().oneOf(["male", "female"]),
+  // size: Yup.string().oneOf(["small", "medium", "large", "giant"]),
   get initialValues() {
     const defaultValues = {};
     for (let field in this.fields) {

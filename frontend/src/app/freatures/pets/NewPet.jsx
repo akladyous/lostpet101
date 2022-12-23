@@ -115,11 +115,10 @@ function NewPetForm(props) {
               label={schema.fields.name.label}
               input={schema.fields.name.attributes}
               classes={schema.classes}
-              error={errors.name}
               register={register}
+              error={errors.name}
             />
           </div>
-
           <div>
             <SelectField
               label={schema.fields.species.label}
@@ -128,6 +127,72 @@ function NewPetForm(props) {
               options={schema.fields.species.options}
               register={register}
               error={errors.species}
+            />
+          </div>
+          <div>
+            <SelectField
+              label={schema.fields.gender.label}
+              input={schema.fields.gender.attributes}
+              classes={schema.classes}
+              options={schema.fields.gender.options}
+              register={register}
+              error={errors.gender}
+            />
+          </div>
+          <div>
+            <TextField
+              label={schema.fields.breed.label}
+              input={schema.fields.breed.attributes}
+              classes={schema.classes}
+              register={register}
+              error={errors.breed}
+            />
+          </div>
+          <div>
+            <TextField
+              label={schema.fields.color.label}
+              input={schema.fields.color.attributes}
+              classes={schema.classes}
+              register={register}
+              error={errors.color}
+            />
+          </div>
+          <div>
+            <TextField
+              label={schema.fields.age.label}
+              input={schema.fields.age.attributes}
+              classes={schema.classes}
+              register={register}
+              error={errors.age}
+            />
+          </div>
+          <div>
+            <SelectField
+              label={schema.fields.collar.label}
+              input={schema.fields.collar.attributes}
+              classes={schema.classes}
+              options={schema.fields.collar.options}
+              register={register}
+              error={errors.collar}
+            />
+          </div>
+          <div>
+            <SelectField
+              label={schema.fields.size.label}
+              input={schema.fields.size.attributes}
+              classes={schema.classes}
+              options={schema.fields.size.options}
+              register={register}
+              error={errors.size}
+            />
+          </div>
+          <div className='sm:col-span-3'>
+            <TextAreaField
+              label={schema.fields.description.label}
+              input={schema.fields.description.attributes}
+              classes={schema.classes}
+              register={register}
+              error={errors.description}
             />
           </div>
 
