@@ -5,7 +5,12 @@ export const petSchema = {
   fields: {
     image: {
       nameAttribute: "input",
-      attributes: { type: "file", name: "image" },
+      attributes: {
+        type: "file",
+        name: "image",
+        accept: "image/*",
+        multiple: false,
+      },
     },
     name: {
       nameAttribute: "input",
@@ -96,6 +101,7 @@ export const petSchema = {
       "peer mt-1 block w-full rounded-md border-gray-300 py-3 px-4 h-12 text-base focus:border-orange-500 focus:outline-none focus:ring-orange-500 sm:text-sm",
     textArea:
       "peer block mt-1 w-full rounded-md border-gray-300 py-3 px-4 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-indigo-500",
+    file: "hidden",
   },
   validationSchema: Yup.object().shape({
     name: Yup.string().required("pet name is equired").min(4),
@@ -107,12 +113,12 @@ export const petSchema = {
       .min(5)
       .max(255),
   }),
-  // breed: Yup.string(),
-  // color: Yup.string(),
-  // age: Yup.number().min(1).max(15),
-  // collar: Yup.string().oneOf(["Yes", "No"]),
-  // gender: Yup.string().oneOf(["male", "female"]),
-  // size: Yup.string().oneOf(["small", "medium", "large", "giant"]),
+  breed: Yup.string(),
+  color: Yup.string(),
+  age: Yup.number().min(1).max(15),
+  collar: Yup.string().oneOf(["Yes", "No"]),
+  gender: Yup.string().oneOf(["male", "female"]),
+  size: Yup.string().oneOf(["small", "medium", "large", "giant"]),
   get initialValues() {
     const defaultValues = {};
     for (let field in this.fields) {
