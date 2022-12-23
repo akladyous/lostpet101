@@ -10,7 +10,6 @@ import DogPlaceholder from "../../../assets/images/icons/DogPlaceholder.jsx";
 export default function NewPetForm(props) {
   const {
     schema,
-    firstStep,
     lastStep,
     currentStep,
     isFirstStep,
