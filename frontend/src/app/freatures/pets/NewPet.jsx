@@ -35,20 +35,17 @@ function NewPetForm(props) {
       errors,
     },
   } = useForm({
-    defaultValues: data.pet,
+    defaultValues: schema.initialValues,
     resolver: schema.validation,
   });
   // debugger;
   const inputFileRef = useRef();
   const isMounted = useRef(false);
-  const [image, setImage] = useState(data.pet.image || undefined);
+  const [image, setImage] = useState(getValues("image") || undefined);
 
-  const handleFormSubmit = (values, actions) => {
+  const onSubmit = (values) => {
     // const signupValues = new FormData(document.forms["signupForm"]);
     debugger;
-    console.log("handle form submit");
-    actions.setSubmitting(false);
-    actions.resetForm({ values: data["pet"] });
     next(values, "pet");
   };
 
@@ -64,20 +61,19 @@ function NewPetForm(props) {
           event.target.src = objectUrl;
         }
       }
-      console.log(getValues());
     },
     [image]
   );
 
-  useEffect(() => {
-    isMounted.current = true;
+  // useEffect(() => {
+  //   isMounted.current = true;
 
-    return function () {
-      isMounted.current = false;
-    };
-  }, [image]);
+  //   return function () {
+  //     isMounted.current = false;
+  //   };
+  // }, []);
 
-  const inputFileField = register("image");
+  const inputFileField = register("image", { required: true });
 
   return (
     <>
@@ -111,10 +107,10 @@ function NewPetForm(props) {
 
         <form
           name={schema.name}
-          onSubmit={handleSubmit(handleFormSubmit)}
+          onSubmit={handleSubmit(onSubmit)}
           className='mt-6 grid grid-cols-1 gap-y-6 sm:gap-x-8 md:grid-cols-3'
         >
-          <input
+          {/* <input
             id='image'
             type='file'
             {...inputFileField}
@@ -129,24 +125,35 @@ function NewPetForm(props) {
               loadImage(event);
               inputFileField.onChange(event);
             }}
-          />
+          /> */}
 
           <div className='md:col-span-2'>
-            <Label
+            <TextField
+              label={schema.fields.name.label}
+              input={schema.fields.name.attributes}
+              classes={schema.classes}
+              error={errors.name}
+              register={register}
+            />
+            {/* <Label
               htmlFor={"name"}
               className={schema.classes.label}
               content={schema.fields.name.label.content}
             />
-            <TextField
-              type={schema.fields.name.attributes.type}
+            <input
+              {...schema.fields.name.attributes}
+              {...register("name")}
+              // type={schema.fields.name.attributes.type}
               className={schema.classes.input}
-              register={register}
-              name={"name"}
-            />
-            <ErrorField error={errors.name} />
+            /> */}
+            {/* {errors.name && (
+              <p className='pt-2 text-sm text-red-600'>
+                {errors.name?.message}
+              </p>
+            )} */}
           </div>
 
-          <div className=''>
+          {/* <div className=''>
             <Label
               htmlFor={"species"}
               className={schema.classes.label}
@@ -265,7 +272,8 @@ function NewPetForm(props) {
             />
             <ErrorField error={errors.description} />
           </div>
-
+            */}
+          {/* ------------------------------------------------------------- */}
           <div className='sm:col-span-3 sm:flex sm:justify-between'>
             <button
               type='submit'
@@ -277,8 +285,9 @@ function NewPetForm(props) {
             <button
               type='button'
               onClick={async () => {
+                debugger;
                 const result = await trigger();
-                console.log(result);
+                console.log("trigger function : ", result);
               }}
             >
               trigger
@@ -303,5 +312,5 @@ function NewPetForm(props) {
   );
 }
 
-NewPetForm.displayName = "pet";
+// NewPetForm.displayName = "pet";
 export default NewPetForm;
