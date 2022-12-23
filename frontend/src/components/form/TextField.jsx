@@ -1,18 +1,9 @@
 export function TextField(props) {
-    const { type, name, className, handleChange, handleBlur, value, ...rest } = props || {};
+  const { register, type, name, className, ...rest } = props || {};
 
-    return (
-        <>
-            <input
-                type={type}
-                name={name}
-                id={name}
-                className={className}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={value}
-                {...rest}
-            />
-        </>
-    );
+  return (
+    <>
+      <input {...register(name)} type={type} className={className} {...rest} />
+    </>
+  );
 }

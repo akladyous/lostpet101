@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { Label } from "../../../components/form/Label.jsx";
 import { SelectField } from "../../../components/form/SelectField.jsx";
 import { TextField } from "../../../components/form/TextField.jsx";
-import { TextAreaField } from "../../../components/form/TextArea.jsx";
+import { TextAreaField } from "../../../components/form/TextAreaField.jsx";
 import { ErrorField } from "../../../components/form/ErrorField.jsx";
 
 export default function newReport(props) {

@@ -1,13 +1,14 @@
+import { v4 as uuid } from "uuid";
 import { useCallback, useRef, useState, useEffect } from "react";
-import { useFormik } from "formik";
 import { Label } from "../../../components/form/Label.jsx";
 import { SelectField } from "../../../components/form/SelectField.jsx";
 import { TextField } from "../../../components/form/TextField.jsx";
-import { TextAreaField } from "../../../components/form/TextArea.jsx";
+import { TextAreaField } from "../../../components/form/TextAreaField.jsx";
 import { ErrorField } from "../../../components/form/ErrorField.jsx";
 import DogPlaceholder from "../../../assets/images/icons/DogPlaceholder.jsx";
+import { useForm } from "react-hook-form";
 
-export default function NewPetForm(props) {
+function NewPetForm(props) {
   const {
     schema,
     firstStep,
@@ -20,26 +21,36 @@ export default function NewPetForm(props) {
     data,
   } = props || {};
 
-  const petInputImageRef = useRef();
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    trigger,
+    formState: {
+      isValid,
+      isDirty,
+      isSubmitting,
+      isLoading,
+      isSubmitted,
+      errors,
+    },
+  } = useForm({
+    defaultValues: data.pet,
+    resolver: schema.validation,
+  });
+  // debugger;
+  const inputFileRef = useRef();
   const isMounted = useRef(false);
   const [image, setImage] = useState(data.pet.image || undefined);
 
-  const handleSubmit = (values, actions) => {
+  const handleFormSubmit = (values, actions) => {
     // const signupValues = new FormData(document.forms["signupForm"]);
+    debugger;
     console.log("handle form submit");
     actions.setSubmitting(false);
     actions.resetForm({ values: data["pet"] });
     next(values, "pet");
   };
-
-  const formik = useFormik({
-    // initialValues: schema.initialValues,
-    initialValues: data.pet,
-    onSubmit: handleSubmit,
-    validationSchema: schema.validationSchema,
-    validateOnChange: false,
-    enableReinitialize: false,
-  });
 
   const loadImage = useCallback(
     (event) => {
@@ -50,9 +61,10 @@ export default function NewPetForm(props) {
         const objectUrl = URL.createObjectURL(file);
         if (isMounted.current) {
           setImage(objectUrl);
-          // event.target.src = objectUrl;
+          event.target.src = objectUrl;
         }
       }
+      console.log(getValues());
     },
     [image]
   );
@@ -64,6 +76,9 @@ export default function NewPetForm(props) {
       isMounted.current = false;
     };
   }, [image]);
+
+  const inputFileField = register("image");
+
   return (
     <>
       <section className={"my-10 mx-5 rounded-2xl bg-white md:col-span-2"}>
@@ -74,7 +89,9 @@ export default function NewPetForm(props) {
             className='mx-auto p-1 border border-solid border-orange-400 rounded-full hover:bg-slate-50 hover:p-2 hover:border-spacing-4
             shadow-md transition-all duration-300 ease-linear  focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2
             '
-            onClick={(e) => petInputImageRef.current.click()}
+            onClick={(e) => {
+              inputFileRef.current.click();
+            }}
           >
             <div className='mx-auto h-24 w-24'>
               {image ? (
@@ -94,25 +111,24 @@ export default function NewPetForm(props) {
 
         <form
           name={schema.name}
-          onSubmit={formik.handleSubmit}
-          onReset={formik.handleReset}
+          onSubmit={handleSubmit(handleFormSubmit)}
           className='mt-6 grid grid-cols-1 gap-y-6 sm:gap-x-8 md:grid-cols-3'
         >
           <input
-            ref={petInputImageRef}
             id='image'
             type='file'
-            name='image'
-            title='upload Pet image'
+            {...inputFileField}
+            ref={(event) => {
+              inputFileField.ref(event);
+              inputFileRef.current = event;
+            }}
             accept='image/*'
             multiple={false}
             className='hidden'
-            onChange={(e) => {
-              loadImage(e);
-              formik.handleChange(e);
-              formik.setFieldValue("image", e.currentTarget.files[0]);
+            onChange={(event) => {
+              loadImage(event);
+              inputFileField.onChange(event);
             }}
-            onBlur={formik.handleBlur}
           />
 
           <div className='md:col-span-2'>
@@ -122,17 +138,12 @@ export default function NewPetForm(props) {
               content={schema.fields.name.label.content}
             />
             <TextField
-              name={"name"}
               type={schema.fields.name.attributes.type}
               className={schema.classes.input}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              value={formik.values["name"]}
+              register={register}
+              name={"name"}
             />
-            <ErrorField
-              error={formik.errors["name"]}
-              touched={formik.touched["name"]}
-            />
+            <ErrorField error={errors.name} />
           </div>
 
           <div className=''>
@@ -142,17 +153,12 @@ export default function NewPetForm(props) {
               content={schema.fields.species.label.content}
             />
             <SelectField
+              register={register}
               name={"species"}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              value={formik.values["species"]}
               options={schema.fields.species.attributes.options}
               className={schema.classes.input}
             />
-            <ErrorField
-              error={formik.errors["species"]}
-              touched={formik.touched["species"]}
-            />
+            <ErrorField error={errors.species} />
           </div>
 
           <div className=''>
@@ -162,17 +168,12 @@ export default function NewPetForm(props) {
               content={schema.fields.gender.label.content}
             />
             <SelectField
-              name={schema.fields.gender.attributes.name}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              value={formik.values[schema.fields.gender.attributes.name]}
+              register={register}
+              name={"gender"}
               options={schema.fields.gender.attributes.options}
               className={schema.classes.input}
             />
-            <ErrorField
-              error={formik.errors[schema.fields.gender.attributes.name]}
-              touched={formik.touched[schema.fields.gender.attributes.name]}
-            />
+            <ErrorField error={errors.gender} />
           </div>
 
           <div className=''>
@@ -182,17 +183,12 @@ export default function NewPetForm(props) {
               content={schema.fields.breed.label.content}
             />
             <TextField
-              name={schema.fields.breed.attributes.name}
               type={schema.fields.breed.attributes.type}
               className={schema.classes.input}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              value={formik.values[schema.fields.breed.attributes.name]}
+              register={register}
+              name={"breed"}
             />
-            <ErrorField
-              error={formik.errors[schema.fields.breed.attributes.name]}
-              touched={formik.touched[schema.fields.breed.attributes.name]}
-            />
+            <ErrorField error={errors.breed} />
           </div>
 
           <div className=''>
@@ -202,17 +198,12 @@ export default function NewPetForm(props) {
               content={schema.fields.color.label.content}
             />
             <TextField
-              name={schema.fields.color.attributes.name}
               type={schema.fields.color.attributes.type}
               className={schema.classes.input}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              value={formik.values[schema.fields.color.attributes.name]}
+              register={register}
+              name={"color"}
             />
-            <ErrorField
-              error={formik.errors[schema.fields.color.attributes.name]}
-              touched={formik.touched[schema.fields.color.attributes.name]}
-            />
+            <ErrorField error={errors.color} />
           </div>
 
           <div className=''>
@@ -222,17 +213,12 @@ export default function NewPetForm(props) {
               content={schema.fields.age.label.content}
             />
             <TextField
-              name={schema.fields.age.attributes.name}
               type={schema.fields.age.attributes.type}
               className={schema.classes.input}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              value={formik.values[schema.fields.age.attributes.name]}
+              register={register}
+              name={"age"}
             />
-            <ErrorField
-              error={formik.errors[schema.fields.age.attributes.name]}
-              touched={formik.touched[schema.fields.age.attributes.name]}
-            />
+            <ErrorField error={errors.age} />
           </div>
 
           <div className=''>
@@ -242,17 +228,12 @@ export default function NewPetForm(props) {
               content={schema.fields.collar.label.content}
             />
             <SelectField
-              name={schema.fields.collar.attributes.name}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              value={formik.values[schema.fields.collar.attributes.name]}
+              register={register}
+              name={"collar"}
               options={schema.fields.collar.attributes.options}
               className={schema.classes.input}
             />
-            <ErrorField
-              error={formik.errors[schema.fields.collar.attributes.name]}
-              touched={formik.touched[schema.fields.collar.attributes.name]}
-            />
+            <ErrorField error={errors.collar} />
           </div>
 
           <div className=''>
@@ -262,30 +243,13 @@ export default function NewPetForm(props) {
               content={schema.fields.size.label.content}
             />
             <SelectField
-              name={schema.fields.size.attributes.name}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              value={formik.values[schema.fields.size.attributes.name]}
+              register={register}
+              name={"size"}
               options={schema.fields.size.attributes.options}
               className={schema.classes.input}
             />
-            <ErrorField
-              error={formik.errors[schema.fields.size.attributes.name]}
-              touched={formik.touched[schema.fields.size.attributes.name]}
-            />
+            <ErrorField error={errors.size} />
           </div>
-
-          {/* <div className='_md:col-span-3 '>
-            <Label
-              htmlFor={"image"}
-              className={schema.classes.label}
-              content={"Pet Image"}
-            />
-            <span className='block mt-1 w-full p-2 h-12 text-base text-gray-700 border  border-gray-300 rounded focus:text-gray-700 focus:bg-white'>
-              load
-            </span>
-            <div className='flex justify-between items-center'></div>
-          </div> */}
 
           <div className='sm:col-span-3'>
             <Label
@@ -295,26 +259,29 @@ export default function NewPetForm(props) {
             />
             <TextAreaField
               name={"description"}
+              register={register}
               className={schema.classes.textarea}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              value={formik.values["description"]}
               rows={5}
             />
-            <ErrorField
-              error={formik.errors["description"]}
-              touched={formik.touched["description"]}
-            />
+            <ErrorField error={errors.description} />
           </div>
 
           <div className='sm:col-span-3 sm:flex sm:justify-between'>
             <button
               type='submit'
-              // disabled={formik.isValid}
               className='mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto'
               // className="btn-primary mt-2 w-full justify-center rounded-md px-6 text-base shadow-sm sm:w-auto"
             >
-              {`Submit ${formik.isValid ? " valid" : " inValid"}`}
+              {`Submit ${isValid ? " valid" : " inValid"}`}
+            </button>
+            <button
+              type='button'
+              onClick={async () => {
+                const result = await trigger();
+                console.log(result);
+              }}
+            >
+              trigger
             </button>
           </div>
         </form>
@@ -335,3 +302,6 @@ export default function NewPetForm(props) {
     </>
   );
 }
+
+NewPetForm.displayName = "pet";
+export default NewPetForm;

@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 export default function WizardContainerComponent(props) {
+  const isMounted = useRef(false);
   const {
+    children,
     firstStep,
     lastStep,
     currentStep,
@@ -11,10 +13,16 @@ export default function WizardContainerComponent(props) {
     previous,
     data,
   } = props || {};
+  debugger;
+  const currentChild = React.Children.toArray(children)[currentStep];
 
-  const currentChild = React.Children.toArray(props.children)[currentStep];
+  useEffect(() => {
+    isMounted.current = true;
 
-  if (React.isValidElement(currentChild)) {
+    return () => (isMounted.current = false);
+  }, []);
+
+  if (isMounted.current && React.isValidElement(currentChild)) {
     return React.cloneElement(currentChild, {
       firstStep,
       lastStep,

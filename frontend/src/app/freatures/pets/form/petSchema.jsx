@@ -1,3 +1,4 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 export const petSchema = {
   name: "pet",
@@ -104,6 +105,7 @@ export const petSchema = {
     size: Yup.string().oneOf(["small", "medium", "large", "giant"]),
     description: Yup.string().required("Required").min(5).max(255),
   }),
+
   get initialValues() {
     const defaultValues = {};
     for (let field in this.fields) {
@@ -117,6 +119,9 @@ export const petSchema = {
       return acc;
     }, {});
      */
+  },
+  get validation() {
+    return yupResolver(this.validationSchema);
   },
 };
 
