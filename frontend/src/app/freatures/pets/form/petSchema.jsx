@@ -94,6 +94,7 @@ export const petSchema = {
       "peer block mt-1 w-full rounded-md border-gray-300 py-3 px-4 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-indigo-500",
   },
   validationSchema: Yup.object({
+    image: Yup.mixed().required("image is required"),
     name: Yup.string().required("Required"),
     breed: Yup.string(),
     color: Yup.string(),
