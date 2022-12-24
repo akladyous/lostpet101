@@ -14,4 +14,5 @@ class Pet < ApplicationRecord
   }, default: :dog
   enum :gender, { male: 0, female: 1, unknown: 2 }, default: :male
   enum :size, { small: 0, medium: 1, large: 2, giant: 3 }, default: :small
+  enum :collar, { No: 0, Yes: 1 }, default: :No
 end

@@ -1,22 +1,13 @@
-import { useCallback, useRef, useState, useEffect } from "react";
-import { petSchema as schema } from "./form/petSchema.jsx";
-import { SelectField } from "../../../components/form/SelectField.jsx";
-import { TextField } from "../../../components/form/TextField.jsx";
-import { TextAreaField } from "../../../components/form/TextAreaField.jsx";
-import DogPlaceholder from "../../../assets/images/icons/DogPlaceholder.jsx";
-import { useForm } from "react-hook-form";
+import { useCallback, useRef, useState, useEffect } from 'react';
+import { petSchema as schema } from './form/petSchema.jsx';
+import { SelectField } from '../../../components/form/SelectField.jsx';
+import { TextField } from '../../../components/form/TextField.jsx';
+import { TextAreaField } from '../../../components/form/TextAreaField.jsx';
+import DogPlaceholder from '../../../assets/images/icons/DogPlaceholder.jsx';
+import { useForm } from 'react-hook-form';
 
 function NewPetForm(props) {
-  const {
-    firstStep,
-    lastStep,
-    currentStep,
-    isFirstStep,
-    isLastStep,
-    next,
-    previous,
-    data,
-  } = props || {};
+  const { firstStep, lastStep, currentStep, isFirstStep, isLastStep, next, previous, data } = props || {};
 
   const {
     register,
@@ -26,64 +17,56 @@ function NewPetForm(props) {
   } = useForm({
     defaultValues: schema.initialValues,
     resolver: schema.validation,
-    mode: "onBlur",
+    mode: 'onBlur',
   });
 
   const inputFileRef = useRef();
   const isMounted = useRef(false);
-  const [image, setImage] = useState(getValues("image") || undefined);
+  const [image, setImage] = useState(getValues('image') || undefined);
 
   const onSubmit = (values) => {
     // const signupValues = new FormData(document.forms["pet"]);
     debugger;
-    const dati = getValues();
-    next(values, "pet");
+    // next(values, 'pet');
   };
 
   // PET IMAGE
-  const inputFileField = register("image", { required: true });
-  const loadImage = useCallback(
-    (event) => {
-      event.preventDefault();
-      const file = event.target.files[0];
+  const inputFileField = register('image', { required: true });
+  const loadImage = useCallback((event) => {
+    event.preventDefault();
+    const file = event.target.files[0];
 
-      if (file) {
-        const objectUrl = URL.createObjectURL(file);
-        setImage(objectUrl);
-        event.target.src = objectUrl;
-        // if (isMounted.current) {
-        // }
-      }
-    },
-    [image]
-  );
+    if (file) {
+      const objectUrl = URL.createObjectURL(file);
+      setImage(objectUrl);
+      event.target.src = objectUrl;
+      // if (isMounted.current) {
+      // }
+    }
+  }, []);
 
   useEffect(() => {
-    console.log("errors : ", errors);
+    console.log('from newPetForm -> errors : ', errors);
   }, [errors]);
 
   return (
     <>
-      <section className={"my-10 mx-5 rounded-2xl bg-white md:col-span-2"}>
-        <div className='flex min-h-full flex-col justify-center'>
+      <section className={'my-10 mx-5 rounded-2xl bg-white md:col-span-2'}>
+        <div className="flex min-h-full flex-col justify-center">
           <button
-            type='button'
-            id='pet-image'
-            className='mx-auto p-1 border border-solid border-orange-400 rounded-full hover:bg-slate-50 hover:p-2 hover:border-spacing-4
+            type="button"
+            id="pet-image"
+            className="mx-auto p-1 border border-solid border-orange-400 rounded-full hover:bg-slate-50 hover:p-2 hover:border-spacing-4
             shadow-md transition-all duration-300 ease-linear  focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2
-            '
+            "
             onClick={(e) => {
               inputFileRef.current.click();
             }}
           >
-            <div className='mx-auto h-24 w-24'>
+            <div className="mx-auto h-24 w-24">
               {image ? (
                 <>
-                  <img
-                    src={image}
-                    alt='image'
-                    className='h-full w-full object-cover rounded-full'
-                  />
+                  <img src={image} alt="image" className="h-full w-full object-cover rounded-full" />
                 </>
               ) : (
                 <DogPlaceholder />
@@ -95,7 +78,7 @@ function NewPetForm(props) {
         <form
           name={schema.name}
           onSubmit={handleSubmit(onSubmit)}
-          className='mt-6 grid grid-cols-1 gap-y-6 sm:gap-x-8 md:grid-cols-3'
+          className="mt-6 grid grid-cols-1 gap-y-6 sm:gap-x-8 md:grid-cols-3"
         >
           <input
             id={schema.fields.image.attributes.name}
@@ -112,7 +95,7 @@ function NewPetForm(props) {
             }}
           />
 
-          <div className='md:col-span-2'>
+          <div className="md:col-span-2">
             <TextField
               label={schema.fields.name.label}
               input={schema.fields.name.attributes}
@@ -188,7 +171,7 @@ function NewPetForm(props) {
               error={errors.size}
             />
           </div>
-          <div className='sm:col-span-3'>
+          <div className="sm:col-span-3">
             <TextAreaField
               label={schema.fields.description.label}
               input={schema.fields.description.attributes}
@@ -199,22 +182,22 @@ function NewPetForm(props) {
           </div>
 
           {/* ------------------------------------------------------------- */}
-          <div className='sm:col-span-3 sm:flex sm:justify-between'>
+          <div className="sm:col-span-3 sm:flex sm:justify-between">
             <button
-              type='button'
+              type="button"
               onClick={(e) => {
                 // debugger;
                 e.preventDefault();
                 previous();
               }}
               disabled={isFirstStep}
-              className='mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none'
+              className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
             >
               back
             </button>
             <button
-              type='submit'
-              className='mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto'
+              type="submit"
+              className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto"
               // className="btn-primary mt-2 w-full justify-center rounded-md px-6 text-base shadow-sm sm:w-auto"
             >
               submit
