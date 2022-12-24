@@ -14,7 +14,6 @@ const reducer = (state, action) => {
       return {
         ...state,
         currentIndex: state.currentIndex - 1,
-        data: { ...state.data, [action.model]: action.payload },
       };
     default:
       return state;
@@ -39,14 +38,11 @@ export function useFormWizard(initialState) {
     [state.currentIndex]
   );
 
-  const previous = useCallback(
-    (data, model) => {
-      if (state.currentIndex > 0) {
-        dispatch({ type: "previous", model: model, payload: data });
-      }
-    },
-    [state.currentIndex]
-  );
+  const previous = useCallback(() => {
+    if (state.currentIndex > 0) {
+      dispatch({ type: "previous" });
+    }
+  }, [state.currentIndex]);
 
   const onFinish = useCallback(() => {}, []);
 
@@ -58,7 +54,6 @@ export function useFormWizard(initialState) {
     firstStep: 0,
     lastStep: state.steps.length - 1,
     currentStep: state.currentIndex,
-    // isFirstStep: state.currentIndex === 0,
     isFirstStep,
     isLastStep: state.currentIndex === state.steps.length - 1,
     next,

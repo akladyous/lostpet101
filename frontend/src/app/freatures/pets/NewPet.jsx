@@ -1,14 +1,16 @@
-import { useCallback, useRef, useState, useEffect } from "react";
-import { useFormik } from "formik";
-import { Label } from "../../../components/form/Label.jsx";
-import { SelectField } from "../../../components/form/SelectField.jsx";
-import { TextField } from "../../../components/form/TextField.jsx";
-import { TextAreaField } from "../../../components/form/TextArea.jsx";
-import { ErrorField } from "../../../components/form/ErrorField.jsx";
-import DogPlaceholder from "../../../assets/images/icons/DogPlaceholder.jsx";
+import { useCallback, useRef, useState, useEffect } from 'react';
+import { petSchema as schema } from './form/petSchema.jsx';
+import { SelectField } from '../../../components/form/SelectField.jsx';
+import { TextField } from '../../../components/form/TextField.jsx';
+import { TextAreaField } from '../../../components/form/TextAreaField.jsx';
+import DogPlaceholder from '../../../assets/images/icons/DogPlaceholder.jsx';
+import { useForm } from 'react-hook-form';
 
-export default function NewPetForm(props) {
+function NewPetForm(props) {
+  const { firstStep, lastStep, currentStep, isFirstStep, isLastStep, next, previous, data } = props || {};
+
   const {
+<<<<<<< HEAD
     schema,
     lastStep,
     currentStep,
@@ -38,51 +40,76 @@ export default function NewPetForm(props) {
     validationSchema: schema.validationSchema,
     validateOnChange: false,
     enableReinitialize: false,
+=======
+    register,
+    handleSubmit,
+    getValues,
+    setFocus,
+    formState: { isValid, errors },
+  } = useForm({
+    defaultValues: schema.initialValues,
+    resolver: schema.validation,
+    mode: 'onBlur',
+>>>>>>> react-hook-form
   });
 
-  const loadImage = useCallback(
-    (event) => {
-      event.preventDefault();
-      const file = event.target.files[0];
+  const inputFileRef = useRef();
+  const isMounted = useRef(false);
+  const [image, setImage] = useState(getValues('image') || undefined);
 
-      if (file) {
-        const objectUrl = URL.createObjectURL(file);
-        if (isMounted.current) {
-          setImage(objectUrl);
-          // event.target.src = objectUrl;
-        }
-      }
-    },
-    [image]
-  );
+  const onSubmit = (values, e) => {
+    // const signupValues = new FormData(document.forms["pet"]);
+    // debugger;
+    console.log('Values : ', values, 'Values event : ', e);
+    // next(values, 'pet');
+  };
+  const onError = (errors, e) => {
+    const firstError = Object.keys(errors).reduce((field, a) => {
+      const fieldKey = field;
+      return !!errors[fieldKey] ? fieldKey : a;
+    }, null);
+    // debugger;
+    setFocus('gender');
+    console.log('onErrors : ', errors, 'onErrors event: ', e);
+  };
+
+  // PET IMAGE
+  const inputFileField = register('image', { required: true });
+  const loadImage = useCallback((event) => {
+    event.preventDefault();
+    const file = event.target.files[0];
+
+    if (file) {
+      const objectUrl = URL.createObjectURL(file);
+      setImage(objectUrl);
+      event.target.src = objectUrl;
+      // if (isMounted.current) {
+      // }
+    }
+  }, []);
 
   useEffect(() => {
-    isMounted.current = true;
+    console.log('from newPetForm -> errors : ', errors);
+  }, [errors]);
 
-    return function () {
-      isMounted.current = false;
-    };
-  }, [image]);
   return (
     <>
-      <section className={"my-10 mx-5 rounded-2xl bg-white md:col-span-2"}>
-        <div className='flex min-h-full flex-col justify-center'>
+      <section className={'my-10 mx-5 rounded-2xl bg-white md:col-span-2'}>
+        <div className="flex min-h-full flex-col justify-center">
           <button
-            type='button'
-            id='pet-image'
-            className='mx-auto p-1 border border-solid border-orange-400 rounded-full hover:bg-slate-50 hover:p-2 hover:border-spacing-4
+            type="button"
+            id="pet-image"
+            className="mx-auto p-1 border border-solid border-orange-400 rounded-full hover:bg-slate-50 hover:p-2 hover:border-spacing-4
             shadow-md transition-all duration-300 ease-linear  focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2
-            '
-            onClick={(e) => petInputImageRef.current.click()}
+            "
+            onClick={(e) => {
+              inputFileRef.current.click();
+            }}
           >
-            <div className='mx-auto h-24 w-24'>
+            <div className="mx-auto h-24 w-24">
               {image ? (
                 <>
-                  <img
-                    src={image}
-                    alt='image'
-                    className='h-full w-full object-cover rounded-full'
-                  />
+                  <img src={image} alt="image" className="h-full w-full object-cover rounded-full" />
                 </>
               ) : (
                 <DogPlaceholder />
@@ -93,244 +120,137 @@ export default function NewPetForm(props) {
 
         <form
           name={schema.name}
-          onSubmit={formik.handleSubmit}
-          onReset={formik.handleReset}
-          className='mt-6 grid grid-cols-1 gap-y-6 sm:gap-x-8 md:grid-cols-3'
+          onSubmit={handleSubmit(onSubmit, onError)}
+          className="mt-6 grid grid-cols-1 gap-y-6 sm:gap-x-8 md:grid-cols-3"
         >
           <input
-            ref={petInputImageRef}
-            id='image'
-            type='file'
-            name='image'
-            title='upload Pet image'
-            accept='image/*'
-            multiple={false}
-            className='hidden'
-            onChange={(e) => {
-              loadImage(e);
-              formik.handleChange(e);
-              formik.setFieldValue("image", e.currentTarget.files[0]);
+            id={schema.fields.image.attributes.name}
+            className={schema.classes.file}
+            {...schema.fields.image.attributes}
+            {...inputFileField}
+            ref={(event) => {
+              inputFileField.ref(event);
+              inputFileRef.current = event;
             }}
-            onBlur={formik.handleBlur}
+            onChange={(event) => {
+              loadImage(event);
+              inputFileField.onChange(event);
+            }}
           />
 
-          <div className='md:col-span-2'>
-            <Label
-              htmlFor={"name"}
-              className={schema.classes.label}
-              content={schema.fields.name.label.content}
-            />
+          <div className="md:col-span-2">
             <TextField
-              name={"name"}
-              type={schema.fields.name.attributes.type}
-              className={schema.classes.input}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              value={formik.values["name"]}
-            />
-            <ErrorField
-              error={formik.errors["name"]}
-              touched={formik.touched["name"]}
+              label={schema.fields.name.label}
+              input={schema.fields.name.attributes}
+              classes={schema.classes}
+              register={register}
+              error={errors.name}
             />
           </div>
-
-          <div className=''>
-            <Label
-              htmlFor={"species"}
-              className={schema.classes.label}
-              content={schema.fields.species.label.content}
-            />
+          <div>
             <SelectField
-              name={"species"}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              value={formik.values["species"]}
-              options={schema.fields.species.attributes.options}
-              className={schema.classes.input}
-            />
-            <ErrorField
-              error={formik.errors["species"]}
-              touched={formik.touched["species"]}
+              label={schema.fields.species.label}
+              input={schema.fields.species.attributes}
+              classes={schema.classes}
+              options={schema.fields.species.options}
+              register={register}
+              error={errors.species}
             />
           </div>
-
-          <div className=''>
-            <Label
-              htmlFor={schema.fields.gender.attributes.name}
-              className={schema.classes.label}
-              content={schema.fields.gender.label.content}
-            />
+          <div>
             <SelectField
-              name={schema.fields.gender.attributes.name}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              value={formik.values[schema.fields.gender.attributes.name]}
-              options={schema.fields.gender.attributes.options}
-              className={schema.classes.input}
-            />
-            <ErrorField
-              error={formik.errors[schema.fields.gender.attributes.name]}
-              touched={formik.touched[schema.fields.gender.attributes.name]}
+              label={schema.fields.gender.label}
+              input={schema.fields.gender.attributes}
+              classes={schema.classes}
+              options={schema.fields.gender.options}
+              register={register}
+              error={errors.gender}
             />
           </div>
-
-          <div className=''>
-            <Label
-              htmlFor={schema.fields.breed.attributes.name}
-              className={schema.classes.label}
-              content={schema.fields.breed.label.content}
-            />
+          <div>
             <TextField
-              name={schema.fields.breed.attributes.name}
-              type={schema.fields.breed.attributes.type}
-              className={schema.classes.input}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              value={formik.values[schema.fields.breed.attributes.name]}
-            />
-            <ErrorField
-              error={formik.errors[schema.fields.breed.attributes.name]}
-              touched={formik.touched[schema.fields.breed.attributes.name]}
+              label={schema.fields.breed.label}
+              input={schema.fields.breed.attributes}
+              classes={schema.classes}
+              register={register}
+              error={errors.breed}
             />
           </div>
-
-          <div className=''>
-            <Label
-              htmlFor={schema.fields.color.attributes.name}
-              className={schema.classes.label}
-              content={schema.fields.color.label.content}
-            />
+          <div>
             <TextField
-              name={schema.fields.color.attributes.name}
-              type={schema.fields.color.attributes.type}
-              className={schema.classes.input}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              value={formik.values[schema.fields.color.attributes.name]}
-            />
-            <ErrorField
-              error={formik.errors[schema.fields.color.attributes.name]}
-              touched={formik.touched[schema.fields.color.attributes.name]}
+              label={schema.fields.color.label}
+              input={schema.fields.color.attributes}
+              classes={schema.classes}
+              register={register}
+              error={errors.color}
             />
           </div>
-
-          <div className=''>
-            <Label
-              htmlFor={schema.fields.age.attributes.name}
-              className={schema.classes.label}
-              content={schema.fields.age.label.content}
-            />
+          <div>
             <TextField
-              name={schema.fields.age.attributes.name}
-              type={schema.fields.age.attributes.type}
-              className={schema.classes.input}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              value={formik.values[schema.fields.age.attributes.name]}
-            />
-            <ErrorField
-              error={formik.errors[schema.fields.age.attributes.name]}
-              touched={formik.touched[schema.fields.age.attributes.name]}
+              label={schema.fields.age.label}
+              input={schema.fields.age.attributes}
+              classes={schema.classes}
+              register={register}
+              error={errors.age}
             />
           </div>
-
-          <div className=''>
-            <Label
-              htmlFor={schema.fields.collar.attributes.name}
-              className={schema.classes.label}
-              content={schema.fields.collar.label.content}
-            />
+          <div>
             <SelectField
-              name={schema.fields.collar.attributes.name}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              value={formik.values[schema.fields.collar.attributes.name]}
-              options={schema.fields.collar.attributes.options}
-              className={schema.classes.input}
-            />
-            <ErrorField
-              error={formik.errors[schema.fields.collar.attributes.name]}
-              touched={formik.touched[schema.fields.collar.attributes.name]}
+              label={schema.fields.collar.label}
+              input={schema.fields.collar.attributes}
+              classes={schema.classes}
+              options={schema.fields.collar.options}
+              register={register}
+              error={errors.collar}
             />
           </div>
-
-          <div className=''>
-            <Label
-              htmlFor={schema.fields.size.attributes.name}
-              className={schema.classes.label}
-              content={schema.fields.size.label.content}
-            />
+          <div>
             <SelectField
-              name={schema.fields.size.attributes.name}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              value={formik.values[schema.fields.size.attributes.name]}
-              options={schema.fields.size.attributes.options}
-              className={schema.classes.input}
-            />
-            <ErrorField
-              error={formik.errors[schema.fields.size.attributes.name]}
-              touched={formik.touched[schema.fields.size.attributes.name]}
+              label={schema.fields.size.label}
+              input={schema.fields.size.attributes}
+              classes={schema.classes}
+              options={schema.fields.size.options}
+              register={register}
+              error={errors.size}
             />
           </div>
-
-          {/* <div className='_md:col-span-3 '>
-            <Label
-              htmlFor={"image"}
-              className={schema.classes.label}
-              content={"Pet Image"}
-            />
-            <span className='block mt-1 w-full p-2 h-12 text-base text-gray-700 border  border-gray-300 rounded focus:text-gray-700 focus:bg-white'>
-              load
-            </span>
-            <div className='flex justify-between items-center'></div>
-          </div> */}
-
-          <div className='sm:col-span-3'>
-            <Label
-              htmlFor={"description"}
-              className={schema.classes.label}
-              content={schema.fields.description.label.content}
-            />
+          <div className="sm:col-span-3">
             <TextAreaField
-              name={"description"}
-              className={schema.classes.textarea}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              value={formik.values["description"]}
-              rows={5}
-            />
-            <ErrorField
-              error={formik.errors["description"]}
-              touched={formik.touched["description"]}
+              label={schema.fields.description.label}
+              input={schema.fields.description.attributes}
+              classes={schema.classes}
+              register={register}
+              error={errors.description}
             />
           </div>
 
-          <div className='sm:col-span-3 sm:flex sm:justify-between'>
+          {/* ------------------------------------------------------------- */}
+          <div className="sm:col-span-3 sm:flex sm:justify-between">
             <button
-              type='submit'
-              // disabled={formik.isValid}
-              className='mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto'
+              type="button"
+              onClick={(e) => {
+                // debugger;
+                e.preventDefault();
+                previous();
+              }}
+              disabled={isFirstStep}
+              className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
+            >
+              back
+            </button>
+            <button
+              type="submit"
+              className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto"
               // className="btn-primary mt-2 w-full justify-center rounded-md px-6 text-base shadow-sm sm:w-auto"
             >
-              {`Submit ${formik.isValid ? " valid" : " inValid"}`}
+              submit
+              {/* {`Submit ${isValid ? " valid" : " inValid"}`} */}
             </button>
           </div>
         </form>
-        <button
-          type='button'
-          onClick={(e) => {
-            // debugger;
-            e.preventDefault();
-            previous();
-          }}
-          disabled={isFirstStep}
-          className='mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none'
-          // className="btn-primary mt-2 w-full justify-center rounded-md px-6 text-base shadow-sm sm:w-auto"
-        >
-          back
-        </button>
       </section>
     </>
   );
 }
+
+export default NewPetForm;
