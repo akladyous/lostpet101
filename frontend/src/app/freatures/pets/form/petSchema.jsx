@@ -11,6 +11,8 @@ export const petSchema = {
         accept: "image/*",
         multiple: false,
       },
+      label: null,
+      className: "hidden",
     },
     name: {
       nameAttribute: "input",

@@ -1,10 +1,8 @@
 import { useCallback, useRef, useState, useEffect } from "react";
 import { petSchema as schema } from "./form/petSchema.jsx";
-
 import { SelectField } from "../../../components/form/SelectField.jsx";
 import { TextField } from "../../../components/form/TextField.jsx";
 import { TextAreaField } from "../../../components/form/TextAreaField.jsx";
-import { ErrorField } from "../../../components/form/ErrorField.jsx";
 import DogPlaceholder from "../../../assets/images/icons/DogPlaceholder.jsx";
 import { useForm } from "react-hook-form";
 
@@ -28,15 +26,17 @@ function NewPetForm(props) {
   } = useForm({
     defaultValues: schema.initialValues,
     resolver: schema.validation,
+    mode: "onBlur",
   });
-  // debugger;
+
   const inputFileRef = useRef();
   const isMounted = useRef(false);
   const [image, setImage] = useState(getValues("image") || undefined);
 
   const onSubmit = (values) => {
-    // const signupValues = new FormData(document.forms["signupForm"]);
+    // const signupValues = new FormData(document.forms["pet"]);
     debugger;
+    const dati = getValues();
     next(values, "pet");
   };
 
@@ -49,14 +49,18 @@ function NewPetForm(props) {
 
       if (file) {
         const objectUrl = URL.createObjectURL(file);
-        if (isMounted.current) {
-          setImage(objectUrl);
-          event.target.src = objectUrl;
-        }
+        setImage(objectUrl);
+        event.target.src = objectUrl;
+        // if (isMounted.current) {
+        // }
       }
     },
     [image]
   );
+
+  useEffect(() => {
+    console.log("errors : ", errors);
+  }, [errors]);
 
   return (
     <>
@@ -94,16 +98,14 @@ function NewPetForm(props) {
           className='mt-6 grid grid-cols-1 gap-y-6 sm:gap-x-8 md:grid-cols-3'
         >
           <input
-            id='image'
-            type='file'
+            id={schema.fields.image.attributes.name}
+            className={schema.classes.file}
+            {...schema.fields.image.attributes}
             {...inputFileField}
             ref={(event) => {
               inputFileField.ref(event);
               inputFileRef.current = event;
             }}
-            accept='image/*'
-            multiple={false}
-            className='hidden'
             onChange={(event) => {
               loadImage(event);
               inputFileField.onChange(event);
@@ -199,13 +201,6 @@ function NewPetForm(props) {
           {/* ------------------------------------------------------------- */}
           <div className='sm:col-span-3 sm:flex sm:justify-between'>
             <button
-              type='submit'
-              className='mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto'
-              // className="btn-primary mt-2 w-full justify-center rounded-md px-6 text-base shadow-sm sm:w-auto"
-            >
-              {`Submit ${isValid ? " valid" : " inValid"}`}
-            </button>
-            <button
               type='button'
               onClick={(e) => {
                 // debugger;
@@ -216,6 +211,14 @@ function NewPetForm(props) {
               className='mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none'
             >
               back
+            </button>
+            <button
+              type='submit'
+              className='mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto'
+              // className="btn-primary mt-2 w-full justify-center rounded-md px-6 text-base shadow-sm sm:w-auto"
+            >
+              submit
+              {/* {`Submit ${isValid ? " valid" : " inValid"}`} */}
             </button>
           </div>
         </form>

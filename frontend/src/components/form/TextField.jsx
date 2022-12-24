@@ -1,13 +1,12 @@
-import React from "react";
+import { memo, useEffect } from "react";
 
 export const TextField = (props) => {
   const { input, label, error, classes, register, ...rest } = props || {};
+  // console.log("textField name: ", input.name);
 
-  // debugger;
-  React.useEffect(() => {
-    console.log("input error : ", error);
-  }, [input.name, error]);
-
+  useEffect(() => {
+    console.log("textField name: ", input.name);
+  }, [error]);
   return (
     <>
       {label ? (
@@ -32,4 +31,4 @@ export const TextField = (props) => {
     </>
   );
 };
-export const MemoizedComponent = React.memo(TextField);
+// export const TextField = memo(MemoTextField);

@@ -1,9 +1,12 @@
 // import { v4 as uuid } from "uuid";
+import { useEffect } from "react";
 export const SelectField = (props) => {
-  const { name, className } = props || {};
   const { input, label, error, classes, options, register, ...rest } =
     props || {};
 
+  useEffect(() => {
+    console.log("selectField name: ", input.name);
+  }, [error, input.name]);
   return (
     <>
       {label ? (
