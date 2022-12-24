@@ -2,7 +2,6 @@ import { memo, useEffect } from "react";
 
 export const TextField = (props) => {
   const { input, label, error, classes, register, ...rest } = props || {};
-  // console.log("textField name: ", input.name);
 
   useEffect(() => {
     console.log("textField name: ", input.name);
