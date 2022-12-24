@@ -1,13 +1,16 @@
-import { v4 as uuid } from 'uuid';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 export function TextField(props) {
-  const { input, label, error, classes, register, ...rest } = props || {};
-
+  const { input, label, value, handleChange, handleBlur, error, touched, classes, ...rest } = props || {};
+  const isMounted = useRef(false);
+  // debugger;
   useEffect(() => {
+    isMounted.current = true;
     console.log('textField name: ', input.name, 'textField error: ', error);
-    // debugger;
-  }, [input.name, error]);
+    return () => {
+      isMounted.current = false;
+    };
+  }, [handleBlur]);
   return (
     <>
       {label ? (
@@ -15,10 +18,18 @@ export function TextField(props) {
           {label?.content}
         </label>
       ) : null}
-      <input id={input.name} className={classes.input} {...input} {...rest} {...register(input.name)} key={uuid()} />
-      {error ? (
+      <input
+        id={input.name}
+        className={classes.input}
+        {...input}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        value={value}
+        {...rest}
+      />
+      {error && touched ? (
         <div className="_pt-2">
-          <p className={classes.error ?? 'text-sm text-red-600'}>{error?.message}</p>
+          <p className={classes.error ?? 'text-sm text-red-600'}>{error}</p>
         </div>
       ) : null}
     </>

@@ -1,21 +1,21 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { useCallback, useRef, useState, useEffect } from "react";
-import { useFormik } from "formik";
-import { Label } from "../../../components/form/Label.jsx";
-import { TextField } from "../../../components/form/TextField.jsx";
-import { signUpSchema } from "./form/signUpSchema.jsx";
-import { FormMessages } from "./form/FormMessages.jsx";
-import { usersSignUp } from "../../../state/thunks/users/usersSignUp.jsx";
-import AuthenticateWithProvider from "./form/AuthenticateWithProvider.jsx";
-import RememberMe from "./form/RememberMe.jsx";
-import { ErrorField } from "../../../components/form/ErrorField.jsx";
-import avatarPlaceholder from "../../../assets/images/icons/avatarPlaceholder.png";
-import { Image } from "../../../components/ui/Image.jsx";
-import Button from "../../../components/ui/Button.jsx";
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useCallback, useRef, useState, useEffect } from 'react';
+import { useFormik } from 'formik';
 
-const [formFields, formInitialState, formClasses, formConstrains] =
-  signUpSchema();
+// import { Label } from '../../../components/form/Label.jsx';
+// import { ErrorField } from '../../../components/form/ErrorField.jsx';
+import { TextField } from '../../../components/form/TextField.jsx';
+import { signUpSchema as schema } from './form/signUpSchema.js';
+import { FormMessages } from './form/FormMessages.jsx';
+import { usersSignUp } from '../../../state/thunks/users/usersSignUp.jsx';
+import AuthenticateWithProvider from './form/AuthenticateWithProvider.jsx';
+import RememberMe from './form/RememberMe.jsx';
+import avatarPlaceholder from '../../../assets/images/icons/avatarPlaceholder.png';
+import { Image } from '../../../components/ui/Image.jsx';
+import Button from '../../../components/ui/Button.jsx';
+
+// const [formFields, formInitialState, formClasses, formConstrains] = schema;
 
 export default function SignUp() {
   const [image, setImage] = useState(null);
@@ -27,32 +27,32 @@ export default function SignUp() {
 
   const handleSubmit = useCallback(
     async (values, actions) => {
-      debugger;
-      const signupValues = new FormData(document.forms["signupForm"]);
+      console.log('handle submit -> values : ', values);
+      const signupValues = new FormData(document.forms['signupForm']);
       // const controller = new AbortController();
       const response = await dispatch(usersSignUp({ user: signupValues }));
       // controller.abort();
 
       if (usersSignUp.fulfilled.match(response)) {
-        formMessageRef.current.textContent = "account successfully created";
-        actions.resetForm(formInitialState);
+        formMessageRef.current.textContent = 'account successfully created';
+        actions.resetForm(schema.initialValues);
         setTimeout(() => {
-          navigate("/", { replace: true });
+          navigate('/', { replace: true });
         }, 5000);
       } else {
         switch (true) {
-          case response.payload.hasOwnProperty("message"):
+          case response.payload.hasOwnProperty('message'):
             formMessageRef.current.textContent = response.payload.message;
             break;
-          case response.payload.hasOwnProperty("validation"):
+          case response.payload.hasOwnProperty('validation'):
             actions.setErrors(response.payload.validation);
-            formMessageRef.current.textContent = "";
+            formMessageRef.current.textContent = '';
             break;
-          case response.payload.hasOwnProperty("error"):
+          case response.payload.hasOwnProperty('error'):
             formMessageRef.current.textContent = response.payload.message;
             break;
           default:
-            formMessageRef.current.textContent = "";
+            formMessageRef.current.textContent = 'Server Error';
             break;
         }
       }
@@ -62,10 +62,10 @@ export default function SignUp() {
   );
 
   const formik = useFormik({
-    initialValues: Object.assign(formInitialState, { avatar: null }),
+    initialValues: schema.initialValues,
     onSubmit: handleSubmit,
     onReset: (values, actions) => {},
-    validationSchema: formConstrains,
+    validationSchema: schema.validationSchema,
     validateOnChange: false,
   });
 
@@ -89,80 +89,99 @@ export default function SignUp() {
       isMounted.current = false;
     };
   }, [image]);
+
   return (
     <>
-      <div className='flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8'>
-        <div className='sm:mx-auto sm:w-full sm:max-w-md'>
-          <button className='mx-auto block' onClick={loadImage}>
+      <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
+        <div className="sm:mx-auto sm:w-full sm:max-w-md">
+          <button className="mx-auto block" onClick={loadImage}>
             <Image
               sourceImage={image}
               fallBackImage={avatarPlaceholder}
-              alt='user-avatar'
-              className='mx-auto h-20 w-20 object-center rounded-full'
+              alt="user-avatar"
+              className="mx-auto h-20 w-20 object-center rounded-full"
             />
           </button>
-          <h2 className='mt-6 text-center text-3xl font-bold tracking-tight text-gray-900'>
-            Sign up a new account
-          </h2>
+          <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Sign up a new account</h2>
         </div>
 
-        <div className='mx-3 mt-8 sm:mx-auto sm:w-full sm:max-w-md'>
-          <div className='bg-slate py-8 px-4 shadow-xl brightness-100 sm:rounded-lg sm:px-10'>
-            <form
-              name='signupForm'
-              onSubmit={formik.handleSubmit}
-              onReset={formik.handleReset}
-              className='space-y-6'
-            >
+        <div className="mx-3 mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+          <div className="bg-slate py-8 px-4 shadow-xl brightness-100 sm:rounded-lg sm:px-10">
+            <form name={schema.name} onSubmit={formik.handleSubmit} onReset={formik.handleReset} className="space-y-6">
               <input
                 ref={avatarRef}
-                id='avatar'
-                type='file'
-                name='avatar'
-                title='upload Pet image'
-                accept='image/*'
-                multiple={false}
-                className='hidden'
+                id={schema.fields.avatar.attributes.name}
+                {...schema.fields.avatar.attributes}
+                className="hidden"
                 onChange={(e) => {
                   loadImage(e);
                   formik.handleChange(e);
-                  formik.setFieldValue("avatar", e.currentTarget.files[0]);
+                  formik.setFieldValue('avatar', e.currentTarget.files[0]);
                 }}
                 onBlur={formik.handleBlur}
               />
 
-              {formFields.map((field, idx) => {
-                return (
-                  <div key={idx}>
-                    <Label
-                      htmlFor={field.label.name}
-                      className={formClasses.label}
-                      content={field.label.name}
-                    />
-                    <TextField
-                      name={field.input.name}
-                      type={field.input.type}
-                      className={formClasses.input}
-                      handleChange={formik.handleChange}
-                      handleBlur={formik.handleBlur}
-                      value={formik.values[field.input.name]}
-                    />
-                    <ErrorField
-                      error={formik.errors[field.input.name]}
-                      touched={formik.touched[field.input.name]}
-                    />
-                  </div>
-                );
-              })}
+              {Object.keys(schema.fields)
+                .filter((field) => field !== 'avatar')
+                .map((field, idx) => {
+                  return (
+                    <div key={idx}>
+                      <TextField
+                        label={schema.fields[field].label}
+                        input={schema.fields[field].attributes}
+                        classes={schema.classes}
+                        handleChange={formik.handleChange}
+                        handleBlur={formik.handleBlur}
+                        value={formik.values[schema.fields[field].attributes.name]}
+                        error={formik.errors[schema.fields[field].attributes.name]}
+                        touched={formik.touched[schema.fields[field].attributes.name]}
+                      />
+                    </div>
+                  );
+                })}
+
+              {/* <div>
+                <TextField
+                  label={schema.fields.email.label}
+                  input={schema.fields.email.attributes}
+                  classes={schema.classes}
+                  handleChange={formik.handleChange}
+                  handleBlur={formik.handleBlur}
+                  value={formik.values[schema.fields.email.attributes.name]}
+                  error={formik.errors[schema.fields.email.attributes.name]}
+                  touched={formik.touched[schema.fields.email.attributes.name]}
+                />
+              </div>
+              <div>
+                <TextField
+                  label={schema.fields.password.label}
+                  input={schema.fields.password.attributes}
+                  classes={schema.classes}
+                  handleChange={formik.handleChange}
+                  handleBlur={formik.handleBlur}
+                  value={formik.values[schema.fields.password.attributes.name]}
+                  error={formik.errors[schema.fields.password.attributes.name]}
+                  touched={formik.touched[schema.fields.password.attributes.name]}
+                />
+              </div>
+              <div>
+                <TextField
+                  label={schema.fields.passwordConfirmation.label}
+                  input={schema.fields.passwordConfirmation.attributes}
+                  classes={schema.classes}
+                  handleChange={formik.handleChange}
+                  handleBlur={formik.handleBlur}
+                  value={formik.values[schema.fields.passwordConfirmation.attributes.name]}
+                  error={formik.errors[schema.fields.passwordConfirmation.attributes.name]}
+                  touched={formik.touched[schema.fields.passwordConfirmation.attributes.name]}
+                />
+              </div>
+              */}
               <FormMessages ref={formMessageRef} />
-              <div className='flex items-center justify-between'>
+              <div className="flex items-center justify-between">
                 <RememberMe />
-                <div className='text-sm'>
-                  <Link
-                    to='/users/signin'
-                    state={"User SignUp"}
-                    className='font-medium text-orange-600 hover:text-orange-500'
-                  >
+                <div className="text-sm">
+                  <Link to="/users/signin" state={'User SignUp'} className="font-medium text-orange-600 hover:text-orange-500">
                     have account already?
                   </Link>
                 </div>
@@ -170,12 +189,12 @@ export default function SignUp() {
 
               <div>
                 <Button
-                  type='submit'
+                  type="submit"
                   isSubmitting={formik.isSubmitting}
                   status={formik.isSubmitting}
-                  value='submit'
-                  className='flex w-full justify-center rounded-md border border-transparent bg-orange-600 py-2 px-4 text-sm
-                                    font-medium text-white shadow-md transition-all duration-300 ease-linear hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2'
+                  value="submit"
+                  className="flex w-full justify-center rounded-md border border-transparent bg-orange-600 py-2 px-4 text-sm
+                                    font-medium text-white shadow-md transition-all duration-300 ease-linear hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
                 ></Button>
               </div>
             </form>
