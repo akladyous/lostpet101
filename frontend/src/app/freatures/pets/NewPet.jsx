@@ -13,6 +13,7 @@ function NewPetForm(props) {
     register,
     handleSubmit,
     getValues,
+    setFocus,
     formState: { isValid, errors },
   } = useForm({
     defaultValues: schema.initialValues,
@@ -24,10 +25,20 @@ function NewPetForm(props) {
   const isMounted = useRef(false);
   const [image, setImage] = useState(getValues('image') || undefined);
 
-  const onSubmit = (values) => {
+  const onSubmit = (values, e) => {
     // const signupValues = new FormData(document.forms["pet"]);
-    debugger;
+    // debugger;
+    console.log('Values : ', values, 'Values event : ', e);
     // next(values, 'pet');
+  };
+  const onError = (errors, e) => {
+    const firstError = Object.keys(errors).reduce((field, a) => {
+      const fieldKey = field;
+      return !!errors[fieldKey] ? fieldKey : a;
+    }, null);
+    // debugger;
+    setFocus('gender');
+    console.log('onErrors : ', errors, 'onErrors event: ', e);
   };
 
   // PET IMAGE
@@ -77,7 +88,7 @@ function NewPetForm(props) {
 
         <form
           name={schema.name}
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(onSubmit, onError)}
           className="mt-6 grid grid-cols-1 gap-y-6 sm:gap-x-8 md:grid-cols-3"
         >
           <input

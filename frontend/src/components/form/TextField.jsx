@@ -1,13 +1,13 @@
 import { v4 as uuid } from 'uuid';
-import { memo, useEffect } from 'react';
+import { useEffect } from 'react';
 
-export const TextField = (props) => {
+export function TextField(props) {
   const { input, label, error, classes, register, ...rest } = props || {};
 
-  // useEffect(() => {
-  //   console.log('selectField name: ', input.name);
-  //   console.log('error: ', error);
-  // }, [input.name, error]);
+  useEffect(() => {
+    console.log('textField name: ', input.name, 'textField error: ', error);
+    // debugger;
+  }, [input.name, error]);
   return (
     <>
       {label ? (
@@ -23,5 +23,5 @@ export const TextField = (props) => {
       ) : null}
     </>
   );
-};
+}
 // export const TextField = memo(MemoTextField);
