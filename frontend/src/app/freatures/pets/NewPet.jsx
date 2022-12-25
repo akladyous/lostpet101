@@ -1,10 +1,12 @@
-import { useCallback, useRef, useState, useEffect } from 'react';
+import { useCallback, useRef, useState, useEffect, useReducer } from 'react';
 import { petSchema as schema } from './form/petSchema.jsx';
-import { SelectField } from '../../../components/form/SelectField.jsx';
+
+import { Input } from '../../../components/form/Input.jsx';
 import { TextField } from '../../../components/form/TextField.jsx';
 import { TextAreaField } from '../../../components/form/TextAreaField.jsx';
+import { SelectField } from '../../../components/form/SelectField.jsx';
 import DogPlaceholder from '../../../assets/images/icons/DogPlaceholder.jsx';
-import { useForm } from 'react-hook-form';
+import { control, useForm } from 'react-hook-form';
 
 function NewPetForm(props) {
   // const { firstStep, lastStep, currentStep, isFirstStep, isLastStep, next, previous, data } = props || {};
@@ -14,6 +16,7 @@ function NewPetForm(props) {
     handleSubmit,
     getValues,
     setFocus,
+    control,
     formState: { isValid, errors },
   } = useForm({
     defaultValues: schema.initialValues,
@@ -76,7 +79,11 @@ function NewPetForm(props) {
             <div className="mx-auto h-24 w-24">
               {petImage ? (
                 <>
-                  <img src={petImage} alt="dog-iamge" className="h-full w-full object-cover rounded-full" />
+                  <img
+                    src={petImage}
+                    alt="dog-iamge"
+                    className="h-full w-full object-cover rounded-full"
+                  />
                 </>
               ) : (
                 <DogPlaceholder />
@@ -108,12 +115,18 @@ function NewPetForm(props) {
           </>
 
           <div className="md:col-span-2">
-            <TextField
+            {/* <TextField
               label={schema.fields.name.label}
               input={schema.fields.name.attributes}
               classes={schema.classes}
               register={register}
               error={errors.name}
+            /> */}
+            <Input
+              control={control}
+              input={schema.fields.name.attributes}
+              label={schema.fields.name.label}
+              classes={schema.classes}
             />
           </div>
           <div>

@@ -1,12 +1,13 @@
 module.exports = {
-  trailingComma: "es5",
+  trailingCommma: 'all',
+  arrowParens: 'always',
   tabWidth: 2,
   semi: true,
   singleQuote: true,
-  printWidth: 130,
+  printWidth: 80,
   overrides: [
     {
-      files: ["*.js", "*.jsx", "*.html"],
+      files: ['*.js', '*.jsx', '*.html'],
       options: {
         semi: true,
         tabWidth: 2,

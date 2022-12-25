@@ -103,6 +103,7 @@ export const petSchema = {
     textArea:
       'peer mt-1 block w-full rounded-md border-gray-300 py-3 px-4 text-base text-gray-900 shadow-sm focus:border-orange-500 focus:ring-orange-500 placeholder:italic placeholder:text-xs placeholder:text-gray-400',
     file: 'hidden',
+    error: 'text-sm text-red-600',
   },
   validationSchema: Yup.object().shape({
     name: Yup.string().required('pet name is equired').min(5),
