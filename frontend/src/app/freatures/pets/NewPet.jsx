@@ -7,7 +7,7 @@ import DogPlaceholder from '../../../assets/images/icons/DogPlaceholder.jsx';
 import { useForm } from 'react-hook-form';
 
 function NewPetForm(props) {
-  const { firstStep, lastStep, currentStep, isFirstStep, isLastStep, next, previous, data } = props || {};
+  // const { firstStep, lastStep, currentStep, isFirstStep, isLastStep, next, previous, data } = props || {};
 
   const {
     register,
@@ -18,12 +18,12 @@ function NewPetForm(props) {
   } = useForm({
     defaultValues: schema.initialValues,
     resolver: schema.validation,
-    mode: 'onBlur',
+    criteriaMode: 'all',
   });
 
   const inputFileRef = useRef();
-  const isMounted = useRef(false);
-  const [image, setImage] = useState(getValues('image') || undefined);
+  // const isMounted = useRef(false);
+  const [petImage, setPetImage] = useState(getValues('image') || undefined);
 
   const onSubmit = (values, e) => {
     // const signupValues = new FormData(document.forms["pet"]);
@@ -37,7 +37,8 @@ function NewPetForm(props) {
       return !!errors[fieldKey] ? fieldKey : a;
     }, null);
     // debugger;
-    setFocus('gender');
+    setFocus(firstError);
+    // errors['gender'].ref.focus();
     console.log('onErrors : ', errors, 'onErrors event: ', e);
   };
 
@@ -49,7 +50,7 @@ function NewPetForm(props) {
 
     if (file) {
       const objectUrl = URL.createObjectURL(file);
-      setImage(objectUrl);
+      setPetImage(objectUrl);
       event.target.src = objectUrl;
       // if (isMounted.current) {
       // }
@@ -67,17 +68,15 @@ function NewPetForm(props) {
           <button
             type="button"
             id="pet-image"
-            className="mx-auto p-1 border border-solid border-orange-400 rounded-full hover:bg-slate-50 hover:p-2 hover:border-spacing-4
-            shadow-md transition-all duration-300 ease-linear  focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2
-            "
+            className="mx-auto p-1 border border-solid border-orange-400 rounded-full hover:bg-slate-50 hover:p-2 hover:border-spacing-4 shadow-md transition-all duration-300 ease-linear  focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
             onClick={(e) => {
               inputFileRef.current.click();
             }}
           >
             <div className="mx-auto h-24 w-24">
-              {image ? (
+              {petImage ? (
                 <>
-                  <img src={image} alt="image" className="h-full w-full object-cover rounded-full" />
+                  <img src={petImage} alt="dog-iamge" className="h-full w-full object-cover rounded-full" />
                 </>
               ) : (
                 <DogPlaceholder />
@@ -91,20 +90,22 @@ function NewPetForm(props) {
           onSubmit={handleSubmit(onSubmit, onError)}
           className="mt-6 grid grid-cols-1 gap-y-6 sm:gap-x-8 md:grid-cols-3"
         >
-          <input
-            id={schema.fields.image.attributes.name}
-            className={schema.classes.file}
-            {...schema.fields.image.attributes}
-            {...inputFileField}
-            ref={(event) => {
-              inputFileField.ref(event);
-              inputFileRef.current = event;
-            }}
-            onChange={(event) => {
-              loadImage(event);
-              inputFileField.onChange(event);
-            }}
-          />
+          <>
+            <input
+              id={schema.fields.image.attributes.name}
+              className={schema.classes.file}
+              {...schema.fields.image.attributes}
+              {...inputFileField}
+              ref={(event) => {
+                inputFileField.ref(event);
+                inputFileRef.current = event;
+              }}
+              onChange={(event) => {
+                loadImage(event);
+                inputFileField.onChange(event);
+              }}
+            />
+          </>
 
           <div className="md:col-span-2">
             <TextField
@@ -194,7 +195,7 @@ function NewPetForm(props) {
 
           {/* ------------------------------------------------------------- */}
           <div className="sm:col-span-3 sm:flex sm:justify-between">
-            <button
+            {/* <button
               type="button"
               onClick={(e) => {
                 // debugger;
@@ -205,7 +206,7 @@ function NewPetForm(props) {
               className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
             >
               back
-            </button>
+            </button> */}
             <button
               type="submit"
               className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto"

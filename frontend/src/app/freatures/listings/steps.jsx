@@ -1,16 +1,15 @@
-import { useFormWizard } from "../../../components/form/formWizard/useFormWizard.jsx";
-import WizardContainerComponent from "../../../components/form/formWizard/WizardContainerComponent.jsx";
+import { useFormWizard } from '../../../components/form/formWizard/useFormWizard.jsx';
+import WizardContainerComponent from '../../../components/form/formWizard/WizardContainerComponent.jsx';
 
-import NewPet from "../pets/NewPet.jsx";
-import { reportSchema } from "../reports/form/reportSchema.jsx";
-import NewReport from "../reports/NewReport.jsx";
-import { useReducer, useCallback, useMemo } from "react";
+import NewPet from '../pets/NewPet.jsx';
+import NewReport from '../reports/NewReport.jsx';
+import { useReducer, useCallback, useMemo } from 'react';
 function Final() {}
 
 // ----------------------------------------------------------------------------------
 function reducer(state, action) {
   switch (action.type) {
-    case "next":
+    case 'next':
       return {
         ...state,
         currentIndex: state.currentIndex + 1,
@@ -19,7 +18,7 @@ function reducer(state, action) {
           ...action.payload,
         },
       };
-    case "previous":
+    case 'previous':
       return {
         ...state,
         currentIndex: state.currentIndex - 1,
@@ -29,34 +28,22 @@ function reducer(state, action) {
   }
 }
 const steps = [
-  { name: "report", href: "#", status: "upcoming" },
-  { name: "pet", href: "#", status: "upcoming" },
-  { name: "preview", href: "#", status: "upcoming" },
+  { name: 'report', href: '#', status: 'upcoming' },
+  { name: 'pet', href: '#', status: 'upcoming' },
+  { name: 'preview', href: '#', status: 'upcoming' },
 ];
 function initializeState(initialValues) {
-  return Object.assign(
-    { currentIndex: 0 },
-    { onboardingData: {} },
-    { steps: initialValues }
-  );
+  const currentData = Array(initialValues.length).fill({});
+  return Object.assign({ currentIndex: 0 }, { onboardingData: {} }, { steps: initialValues });
 }
 // const initialValues = steps;
 // ----------------------------------------------------------------------------------
 export default function Steps({ initialValues = steps }) {
   const [state, dispatch] = useReducer(reducer, initialValues, initializeState);
-  // debugger;
-  // const stepsProp = useFormWizard({
-  //   steps: steps,
-  //   data: {
-  //     pet: petSchema.initialValues,
-  //     report: reportSchema.initialValues,
-  //   },
-  // });
-
   const onNext = useCallback(
     (stepData) => {
       if (state.currentIndex < state.steps.length - 1) {
-        dispatch({ type: "next", payload: stepData });
+        dispatch({ type: 'next', payload: stepData });
       } else if (state.currentIndex === state.steps.length - 1) {
         onFinish();
       }
@@ -65,7 +52,7 @@ export default function Steps({ initialValues = steps }) {
   );
   const onPrevious = useCallback(() => {
     if (state.currentIndex > 0) {
-      dispatch({ type: "previous" });
+      dispatch({ type: 'previous' });
     }
   }, [state.currentIndex]);
   const onFinish = useCallback(() => {}, []);
@@ -87,14 +74,9 @@ export default function Steps({ initialValues = steps }) {
   // debugger;
   return (
     <>
-      <WizardContainerComponent
-        onNext={onNext}
-        onPrevious={onPrevious}
-        currentStep={currentStep}
-        lastStep={lastStep}
-      >
+      <WizardContainerComponent onNext={onNext} onPrevious={onPrevious} currentStep={currentStep} lastStep={lastStep}>
         <NewPet />
-        <NewReport schema={reportSchema} />
+        <NewReport />
         <Final />
       </WizardContainerComponent>
     </>

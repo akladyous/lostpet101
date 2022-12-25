@@ -1,12 +1,10 @@
-import { v4 as uuid } from 'uuid';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 export const SelectField = (props) => {
   const { input, label, error, classes, options, register, ...rest } = props || {};
   // debugger;
   // useEffect(() => {
-  //   console.log('selectField name: ', input.name);
-  //   console.log('error: ', error);
-  // }, [input.name, error]);
+  //   console.log('textField name: ', input.name, 'textField error: ', error);
+  // }, [error]);
   return (
     <>
       {label ? (
@@ -15,7 +13,7 @@ export const SelectField = (props) => {
         </label>
       ) : null}
       <div className="mt-1">
-        <select id={input.name} className={classes.input} {...register(input.name)} {...rest} key={uuid()}>
+        <select id={input.name} className={classes.input} {...register(input.name)} {...rest} key={input.name}>
           <option value=""></option>
           {options.map((option, idx) => (
             <option key={idx} className="capitalize" value={option.value}>
@@ -29,7 +27,6 @@ export const SelectField = (props) => {
           <p className={classes.error ?? 'text-sm text-red-600'}>{error?.message}</p>
         </div>
       ) : null}
-      {props.children}
     </>
   );
 };
