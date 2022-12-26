@@ -1,12 +1,5 @@
-// import { useEffect } from 'react';
-
 export function TextField(props) {
   const { input, label, error, classes, register, ...rest } = props || {};
-
-  // useEffect(() => {
-  //   console.log('textField name: ', input.name, 'textField error: ', error);
-  //   // debugger;
-  // }, [error]);
 
   return (
     <>
@@ -15,10 +8,19 @@ export function TextField(props) {
           {label?.content}
         </label>
       ) : null}
-      <input id={input.name} className={classes.input} {...input} {...rest} {...register(input.name)} key={input.name} />
+      <input
+        id={input.name}
+        className={classes.input}
+        {...input}
+        {...rest}
+        {...register(input.name)}
+        key={input.name}
+      />
       {error ? (
         <div className="_pt-2">
-          <p className={classes.error ?? 'text-sm text-red-600'}>{error?.message}</p>
+          <p className={classes.error ?? 'text-sm text-red-600'}>
+            {error?.message}
+          </p>
         </div>
       ) : null}
     </>

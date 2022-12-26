@@ -11,9 +11,11 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
+    'no-prototype-builtins': 0,
     'no-unused-vars': 'warn',
     'react/prop-types': 'warn',
     'no-extra-boolean-cast': 'warn',
+    'no-debugger': 'off',
 
     'react/react-in-jsx-scope': 'off',
     'react/jsx-indent-props': [2, 'first'],

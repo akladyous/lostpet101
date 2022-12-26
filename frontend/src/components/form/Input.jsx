@@ -1,17 +1,18 @@
 import { useController } from 'react-hook-form';
+
 import { Label } from './Label.jsx';
 
-export default function Input({ control, input, label, classes, ...rest }) {
+export function Input({ control, input, label, classes, ...rest }) {
   const {
     field,
-    formState: { isValid, isTouched, error },
+    formState: { isValid, isTouched, errors },
   } = useController({
     name: input.name,
     control,
     defaultValue: input.value || '',
     rules: {},
   });
-
+  // debugger;
   return (
     <>
       {label ? (
@@ -33,10 +34,10 @@ export default function Input({ control, input, label, classes, ...rest }) {
         ref={field.ref}
         {...rest}
       />
-      {error ? (
-        <div className="_pt-2">
-          <p className={classes.error ?? 'text-sm text-red-600'}>{error}</p>
-        </div>
+      {errors[input.name] ? (
+        <p className={classes.error ?? 'text-sm text-red-600'}>
+          {errors[input.name]}
+        </p>
       ) : null}
     </>
   );

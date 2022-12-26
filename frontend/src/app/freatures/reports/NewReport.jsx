@@ -1,10 +1,10 @@
-import { useCallback } from "react";
-import { useFormik } from "formik";
-import { Label } from "../../../components/form/Label.jsx";
-import { SelectField } from "../../../components/form/SelectField.jsx";
-import { TextField } from "../../../components/form/TextField.jsx";
-import { TextAreaField } from "../../../components/form/TextAreaField.jsx";
-import { ErrorField } from "../../../components/form/ErrorField.jsx";
+import { useCallback } from 'react';
+import { useFormik } from 'formik';
+import { Label } from '../../../components/form/Label.jsx';
+import { SelectField } from '../../../components/form/SelectField.jsx';
+import { TextField } from '../../../components/form/TextField.jsx';
+import { TextAreaField } from '../../../components/form/TextAreaField.jsx';
+import { ErrorField } from '../../../components/form/ErrorField.jsx';
 
 export default function NewReport(props) {
   const {
@@ -32,13 +32,13 @@ export default function NewReport(props) {
   });
 
   return (
-    <section className={"py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12"}>
-      <h3 className='text-lg font-medium text-gray-900'>Send us a message</h3>
+    <section className={'py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12'}>
+      <h3 className="text-lg font-medium text-gray-900">Send us a message</h3>
       <form
         name={schema.name}
         onSubmit={formik.handleSubmit}
         onReset={formik.handleReset}
-        className='mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8'
+        className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8"
       >
         <div>
           <Label
@@ -50,7 +50,7 @@ export default function NewReport(props) {
             name={schema.fields.report_type.attributes.name}
             handleChange={formik.handleChange}
             handleBlur={formik.handleBlur}
-            value={formik.values["report_type"]}
+            value={formik.values['report_type']}
             options={schema.fields.report_type.attributes.options}
             className={schema.classes.input}
           />
@@ -82,7 +82,7 @@ export default function NewReport(props) {
           />
         </div>
 
-        <div className='sm:col-span-2'>
+        <div className="sm:col-span-2">
           <Label
             htmlFor={schema.fields.address.attributes.name}
             className={schema.classes.label}
@@ -102,7 +102,7 @@ export default function NewReport(props) {
           />
         </div>
 
-        <div className='sm:col-span-2'>
+        <div className="sm:col-span-2">
           <Label
             htmlFor={schema.fields.crossroads.attributes.name}
             className={schema.classes.label}
@@ -122,7 +122,7 @@ export default function NewReport(props) {
           />
         </div>
 
-        <div className='sm:col-span-2'>
+        <div className="sm:col-span-2">
           <Label
             htmlFor={schema.fields.comment.attributes.name}
             className={schema.classes.label}
@@ -142,10 +142,10 @@ export default function NewReport(props) {
           />
         </div>
 
-        <div className='sm:col-span-2 sm:flex sm:justify-between'>
+        <div className="sm:col-span-2 sm:flex sm:justify-between">
           <button
-            type='submit'
-            className='mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto'
+            type="submit"
+            className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto"
             // className="btn-primary mt-2 w-full justify-center rounded-md px-6 text-base shadow-sm sm:w-auto"
           >
             Submit
@@ -153,14 +153,14 @@ export default function NewReport(props) {
         </div>
       </form>
       <button
-        type='button'
+        type="button"
         onClick={(e) => {
           // debugger;
           e.preventDefault();
-          previous(formik.values, "report");
+          previous(formik.values, 'report');
         }}
         disabled={isFirstStep}
-        className='mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none'
+        className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
         // className="btn-primary mt-2 w-full justify-center rounded-md px-6 text-base shadow-sm sm:w-auto"
       >
         back

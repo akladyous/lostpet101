@@ -21,7 +21,7 @@ function NewPetForm(props) {
   } = useForm({
     defaultValues: schema.initialValues,
     resolver: schema.validation,
-    criteriaMode: 'all',
+    // criteriaMode: 'firstError',
   });
 
   const inputFileRef = useRef();
@@ -30,7 +30,7 @@ function NewPetForm(props) {
 
   const onSubmit = (values, e) => {
     // const signupValues = new FormData(document.forms["pet"]);
-    // debugger;
+
     console.log('Values : ', values, 'Values event : ', e);
     // next(values, 'pet');
   };
@@ -39,7 +39,6 @@ function NewPetForm(props) {
       const fieldKey = field;
       return !!errors[fieldKey] ? fieldKey : a;
     }, null);
-    // debugger;
     setFocus(firstError);
     // errors['gender'].ref.focus();
     console.log('onErrors : ', errors, 'onErrors event: ', e);
@@ -115,19 +114,19 @@ function NewPetForm(props) {
           </>
 
           <div className="md:col-span-2">
-            {/* <TextField
+            <TextField
               label={schema.fields.name.label}
               input={schema.fields.name.attributes}
               classes={schema.classes}
               register={register}
               error={errors.name}
-            /> */}
-            <Input
+            />
+            {/* <Input
               control={control}
               input={schema.fields.name.attributes}
               label={schema.fields.name.label}
               classes={schema.classes}
-            />
+            /> */}
           </div>
           <div>
             <SelectField
@@ -211,7 +210,6 @@ function NewPetForm(props) {
             {/* <button
               type="button"
               onClick={(e) => {
-                // debugger;
                 e.preventDefault();
                 previous();
               }}
