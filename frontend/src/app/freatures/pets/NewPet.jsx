@@ -1,12 +1,11 @@
 import { useCallback, useRef, useState, useEffect, useReducer } from 'react';
 import { petSchema as schema } from './form/petSchema.jsx';
-
+import { FileField } from '../../../components/form/FileField.jsx';
 import { TextField } from '../../../components/form/TextField.jsx';
 import { TextAreaField } from '../../../components/form/TextAreaField.jsx';
 import { SelectField } from '../../../components/form/SelectField.jsx';
 import DogPlaceholder from '../../../assets/images/icons/DogPlaceholder.jsx';
 import { useForm } from 'react-hook-form';
-
 function NewPetForm(props) {
   // const { firstStep, lastStep, currentStep, isFirstStep, isLastStep, next, previous, data } = props || {};
 
@@ -15,22 +14,24 @@ function NewPetForm(props) {
     handleSubmit,
     getValues,
     setFocus,
+    watch,
+    setValue,
     control,
-    formState: { isValid, errors },
+    formState: { isLoading, isValid, errors },
   } = useForm({
     defaultValues: schema.initialValues,
     resolver: schema.validation,
-    // criteriaMode: 'firstError',
   });
-
+  const watchPetImage = watch('image');
   const inputFileRef = useRef();
   // const isMounted = useRef(false);
-  const [petImage, setPetImage] = useState(getValues('image') || undefined);
+  const [petImage, setPetImage] = useState(watchPetImage || undefined);
 
   const onSubmit = (values, e) => {
     // const signupValues = new FormData(document.forms["pet"]);
-    debugger;
+
     console.log('Values : ', values, 'Values event : ', e);
+    debugger;
     // next(values, 'pet');
   };
   const onError = (errors, e) => {
@@ -39,7 +40,7 @@ function NewPetForm(props) {
       return !!errors[fieldKey] ? fieldKey : a;
     }, null);
     setFocus(firstError);
-    // errors['gender'].ref.focus();
+
     console.log('onErrors : ', errors, 'onErrors event: ', e);
   };
 
@@ -48,19 +49,20 @@ function NewPetForm(props) {
   const loadImage = useCallback((event) => {
     event.preventDefault();
     const file = event.target.files[0];
-
-    if (file) {
+    if (event.target.value && file instanceof File) {
       const objectUrl = URL.createObjectURL(file);
       setPetImage(objectUrl);
-      event.target.src = objectUrl;
+      // debugger;
+      // event.target.src = objectUrl;
       // if (isMounted.current) {
       // }
     }
   }, []);
 
   useEffect(() => {
-    console.log('from newPetForm -> errors : ', errors);
-  }, [errors]);
+    console.log('form values : ', getValues());
+    console.log('watchPetImage : ', watchPetImage);
+  }, [getValues('image')]);
 
   return (
     <>
@@ -75,10 +77,10 @@ function NewPetForm(props) {
             }}
           >
             <div className="mx-auto h-24 w-24">
-              {petImage ? (
+              {watchPetImage ? (
                 <>
                   <img
-                    src={petImage}
+                    src={watchPetImage}
                     alt="dog-iamge"
                     className="h-full w-full object-cover rounded-full"
                   />
@@ -95,7 +97,7 @@ function NewPetForm(props) {
           onSubmit={handleSubmit(onSubmit, onError)}
           className="mt-6 grid grid-cols-1 gap-y-6 sm:gap-x-8 md:grid-cols-3"
         >
-          <>
+          {/* <>
             <input
               id={schema.fields.image.attributes.name}
               className={schema.classes.file}
@@ -108,9 +110,17 @@ function NewPetForm(props) {
               onChange={(event) => {
                 loadImage(event);
                 inputFileField.onChange(event);
+                setValue('image', event.target.files[0]);
               }}
             />
-          </>
+          </> */}
+
+          <FileField
+            control={control}
+            input={schema.fields.image.attributes}
+            ref={inputFileRef}
+            classes={schema.classes}
+          />
 
           <div className="md:col-span-2">
             <TextField
@@ -182,11 +192,10 @@ function NewPetForm(props) {
           </div>
           <div className="sm:col-span-3">
             <TextAreaField
-              label={schema.fields.description.label}
+              control={control}
               input={schema.fields.description.attributes}
+              label={schema.fields.description.label}
               classes={schema.classes}
-              register={register}
-              error={errors.description}
             />
           </div>
 

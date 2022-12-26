@@ -12,7 +12,7 @@ export const petSchema = {
         multiple: false,
       },
       label: null,
-      className: 'hidden',
+      classes: 'hidden',
     },
     name: {
       attributeName: 'input',
@@ -154,15 +154,18 @@ export const petSchema = {
 
 const handler = {
   get(target, prop, receiver) {
-    const objKeys = Object.keys(target.fields);
+    const fields = Object.keys(target.fields);
     switch (true) {
-      case prop === 'initialValues':
-        return objKeys.reduce((acc, val) => {
-          acc[val] = '';
-          return acc;
-        }, {});
-      case prop === 'columnsName':
-        return Object.keys(target.fields);
+      case prop === 'initialValues': {
+        var defaultValues = {};
+        for (let field in target.fields) {
+          defaultValues[field] =
+            target.fields[field].attributes.type === 'file' ? null : '';
+        }
+        return defaultValues;
+      }
+      case fields.indexOf(prop) >= 0:
+        return target.fields[prop];
       default:
         return Reflect.get(...arguments);
     }

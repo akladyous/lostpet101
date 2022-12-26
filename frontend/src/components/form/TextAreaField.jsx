@@ -1,21 +1,50 @@
-import { v4 as uuid } from 'uuid';
+import { useController } from 'react-hook-form';
+import { ErrorMessage } from '@hookform/error-message';
+import { Label } from './Label.jsx';
+
 export function TextAreaField(props) {
-  const { input, label, error, classes, register, ...rest } = props || {};
+  const { control, input, label, classes, ...rest } = props || {};
+
+  const {
+    field,
+    formState: { errors },
+  } = useController({
+    name: input.name,
+    control,
+    defaultValue: input.value || '',
+    rules: {},
+  });
 
   return (
     <>
       {label ? (
-        <label htmlFor={input.name} className={classes.label}>
-          {label?.content}
-        </label>
+        <Label
+          htmlFor={input.name}
+          classes={classes.label}
+          content={label?.content || input.name}
+        />
       ) : null}
-      <textarea id={input.name} className={classes.textArea} {...input} {...rest} {...register(input.name)} key={uuid()} />
-      {error ? (
-        <div className="_pt-2">
-          <p className={classes.error ?? 'text-sm text-red-600'}>{error?.message}</p>
-        </div>
-      ) : null}
-      {props.children}
+      <textarea
+        key={input.name}
+        id={input.name}
+        className={classes.textArea}
+        {...input}
+        name={field.name}
+        value={field.value}
+        onChange={field.onChange}
+        onBlur={field.onBlur}
+        ref={field.ref}
+        {...rest}
+      />
+      <ErrorMessage
+        errors={errors}
+        name={input.name}
+        render={({ message }) => (
+          <p className={classes.inputError ?? 'text-sm text-red-600'}>
+            {message}
+          </p>
+        )}
+      />
     </>
   );
 }

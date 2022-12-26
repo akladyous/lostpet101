@@ -1,45 +1,65 @@
-import React from "react";
+import { useCallback, useState, forwardRef } from 'react';
+import { useController } from 'react-hook-form';
 
-export const FileField = (props) => {
-  const { input, label, error, classes, register, ...rest } = props || {};
+const FileFieldRef = (props, ref) => {
+  const { control, input, classes, ...rest } = props || {};
+  const [petImage, setPetImage] = useState();
 
-  // debugger;
-  React.useEffect(() => {
-    console.log("input error : ", error);
-  }, [input.name, error]);
+  const {
+    field,
+    formState: { errors },
+  } = useController({
+    name: input.name,
+    control,
+    defaultValue: input.value || '',
+    rules: {},
+  });
+
+  const loadImage = useCallback((event) => {
+    event.preventDefault();
+    const file = event.target.files[0];
+
+    if (file) {
+      const objectUrl = URL.createObjectURL(file);
+      setPetImage(objectUrl);
+      field.onChange({
+        target: {
+          name: input.name,
+          value: objectUrl,
+          // value: event.target.files[0],
+        },
+      });
+      // event.target.src = objectUrl;
+      // if (isMounted.current) {
+      // }
+    }
+  }, []);
 
   return (
     <>
-      {label ? (
-        <label htmlFor={input.name} className={classes.label}>
-          {label?.content}
-        </label>
-      ) : null}
       <input
+        key={input.name}
         id={input.name}
         className={classes.file}
-        type='file'
         {...input}
-        {...rest}
         ref={(event) => {
-          inputFileField.ref(event);
-          inputFileRef.current = event;
+          field.ref(event);
+          ref.current = event;
         }}
-        accept='image/*'
-        multiple={false}
         onChange={(event) => {
+          // debugger;
           loadImage(event);
-          inputFileField.onChange(event);
+          // field.onChange({
+          //   target: {
+          //     name: input.name,
+          //     value: event.target.files[0],
+          //   },
+          // });
         }}
+        onBlur={field.onBlur}
       />
-      {error ? (
-        <div className='_pt-2'>
-          <p className={classes.error ?? "text-sm text-red-600"}>
-            {error?.message}
-          </p>
-        </div>
-      ) : null}
     </>
   );
 };
-export const MemoizedComponent = React.memo(TextField);
+export const FileField = forwardRef(FileFieldRef);
+// export const MemoizedComponent = React.memo(TextField);
