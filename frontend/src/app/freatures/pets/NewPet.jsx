@@ -122,22 +122,20 @@ function NewPetForm(props) {
           </div>
           <div>
             <SelectField
-              label={schema.fields.species.label}
+              control={control}
               input={schema.fields.species.attributes}
+              label={schema.fields.species.label}
               classes={schema.classes}
               options={schema.fields.species.options}
-              register={register}
-              error={errors.species}
             />
           </div>
           <div>
             <SelectField
-              label={schema.fields.gender.label}
+              control={control}
               input={schema.fields.gender.attributes}
+              label={schema.fields.gender.label}
               classes={schema.classes}
               options={schema.fields.gender.options}
-              register={register}
-              error={errors.gender}
             />
           </div>
           <div>
@@ -166,22 +164,20 @@ function NewPetForm(props) {
           </div>
           <div>
             <SelectField
-              label={schema.fields.collar.label}
+              control={control}
               input={schema.fields.collar.attributes}
+              label={schema.fields.collar.label}
               classes={schema.classes}
               options={schema.fields.collar.options}
-              register={register}
-              error={errors.collar}
             />
           </div>
           <div>
             <SelectField
-              label={schema.fields.size.label}
+              control={control}
               input={schema.fields.size.attributes}
+              label={schema.fields.size.label}
               classes={schema.classes}
               options={schema.fields.size.options}
-              register={register}
-              error={errors.size}
             />
           </div>
           <div className="sm:col-span-3">
