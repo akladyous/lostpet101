@@ -114,19 +114,19 @@ function NewPetForm(props) {
           </>
 
           <div className="md:col-span-2">
-            <TextField
+            {/* <TextField
               label={schema.fields.name.label}
               input={schema.fields.name.attributes}
               classes={schema.classes}
               register={register}
               error={errors.name}
-            />
-            {/* <Input
+            /> */}
+            <Input
               control={control}
               input={schema.fields.name.attributes}
               label={schema.fields.name.label}
               classes={schema.classes}
-            /> */}
+            />
           </div>
           <div>
             <SelectField

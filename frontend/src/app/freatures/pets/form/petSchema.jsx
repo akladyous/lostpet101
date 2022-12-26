@@ -90,7 +90,8 @@ export const petSchema = {
       nameAttribute: 'textaerea',
       attributes: {
         name: 'description',
-        placeholder: 'BE SPECIFIC - IMPORTANT / DISTINCT MARKINGS / FEATURES Coloring of fur, describe collars, etc.',
+        placeholder:
+          'BE SPECIFIC - IMPORTANT / DISTINCT MARKINGS / FEATURES Coloring of fur, describe collars, etc.',
         rows: 5,
       },
       label: { content: 'description', caption: 'Max. 500 characters' },
@@ -103,29 +104,40 @@ export const petSchema = {
     textArea:
       'peer mt-1 block w-full rounded-md border-gray-300 py-3 px-4 text-base text-gray-900 shadow-sm focus:border-orange-500 focus:ring-orange-500 placeholder:italic placeholder:text-xs placeholder:text-gray-400',
     file: 'hidden',
-    error: 'text-sm text-red-600',
+    inputError: 'text-sm text-red-600',
+    formError: 'text-sm text-red-600',
   },
   validationSchema: Yup.object().shape({
     name: Yup.string().required('pet name is equired').min(5),
-    species: Yup.string().required('pet species is Required').oneOf(['dog', 'cat']),
-    description: Yup.string().required('pet description is equired').min(5).max(255),
+    species: Yup.string()
+      .required('pet species is Required')
+      .oneOf(['dog', 'cat']),
+    description: Yup.string()
+      .required('pet description is equired')
+      .min(5)
+      .max(255),
     breed: Yup.string(),
     color: Yup.string(),
     age: Yup.number()
       .required()
-      .transform((value) => (isNaN(value) || value === null || value === undefined ? 0 : value))
+      .transform((value) =>
+        isNaN(value) || value === null || value === undefined ? 0 : value
+      )
       .typeError('Amount must be a number')
       .positive()
       .min(1, 'age must be greater than zero')
       .max(15, 'age must be less than or equal 15'),
     collar: Yup.string().required().oneOf(['Yes', 'No'], ''),
     gender: Yup.string().oneOf(['male', 'female'], 'Select pet gender'),
-    size: Yup.string().required().oneOf(['small', 'medium', 'large', 'giant'], 'Select pet size'),
+    size: Yup.string()
+      .required()
+      .oneOf(['small', 'medium', 'large', 'giant'], 'Select pet size'),
   }),
   get initialValues() {
     const defaultValues = {};
     for (let field in this.fields) {
-      defaultValues[field] = this.fields[field].attributes.type === 'file' ? null : '';
+      defaultValues[field] =
+        this.fields[field].attributes.type === 'file' ? null : '';
     }
     return defaultValues;
     /*

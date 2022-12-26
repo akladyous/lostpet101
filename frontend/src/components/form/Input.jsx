@@ -1,5 +1,5 @@
 import { useController } from 'react-hook-form';
-
+import { ErrorMessage } from '@hookform/error-message';
 import { Label } from './Label.jsx';
 
 export function Input({ control, input, label, classes, ...rest }) {
@@ -34,11 +34,15 @@ export function Input({ control, input, label, classes, ...rest }) {
         ref={field.ref}
         {...rest}
       />
-      {errors[input.name] ? (
-        <p className={classes.error ?? 'text-sm text-red-600'}>
-          {errors[input.name]}
-        </p>
-      ) : null}
+      <ErrorMessage
+        errors={errors}
+        name={input.name}
+        render={({ message }) => (
+          <p className={classes.inputError ?? 'text-sm text-red-600'}>
+            {message}
+          </p>
+        )}
+      />
     </>
   );
 }
