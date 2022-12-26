@@ -1,81 +1,90 @@
-import * as Yup from "yup";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
+
 export const reportSchema = {
-  name: "report",
+  name: 'report',
   fields: {
     report_type: {
+      attributeName: 'select',
       attributes: {
-        type: "select",
-        name: "report_type",
-        required: true,
-        options: [
-          { value: "lost", label: "lost" },
-          { value: "found", label: "found" },
-        ],
+        name: 'report_type',
       },
-      label: { content: "listing type", caption: "Optional" },
-      container: { type: "div" },
+      options: [
+        { value: 'lost', label: 'lost' },
+        { value: 'found', label: 'found' },
+      ],
+      label: { content: 'listing type', caption: 'Optional' },
     },
     lost_found_date: {
+      attributeName: 'input',
       attributes: {
-        type: "date",
-        required: true,
-        name: "lost_found_date",
+        type: 'date',
+        name: 'lost_found_date',
       },
-      label: { content: "Date last seen" },
-      container: { type: "div" },
+      label: { content: 'Date last seen' },
     },
     address: {
-      attributes: { type: "text", required: true, name: "address" },
-      label: { content: "Last seed address" },
-      container: { type: "div", className: "sm:col-span-2" },
+      attributeName: 'input',
+      attributes: { type: 'text', required: true, name: 'address' },
+      label: { content: 'Last seed address' },
     },
     crossroads: {
-      attributes: { type: "text", required: true, name: "crossroads" },
+      attributeName: 'input',
+      attributes: { type: 'text', required: true, name: 'crossroads' },
       label: {
-        content: "Nearest cross streets, landmark or location",
-        className: null,
+        content: 'Nearest cross streets, or location',
       },
-      container: { type: "div", className: "sm:col-span-2" },
     },
     comment: {
-      attributes: { type: "textaerea", required: true, name: "comment" },
-      label: { content: "comment", caption: "Max. 500 characters" },
-      container: { type: "div", className: "sm:col-span-2" },
+      attributeName: 'textaerea',
+      attributes: { name: 'comment', placeholder: 'comment', rows: 5 },
+      label: { content: 'comment', caption: 'Max. 500 characters' },
     },
   },
   classes: {
-    label: "block text-sm font-medium text-gray-900 capitalize",
+    label: 'block text-sm font-medium text-gray-900 capitalize',
     input:
-      "peer mt-1 block w-full rounded-md border-gray-300 py-3 px-4 h-12 text-base focus:border-orange-500 focus:outline-none focus:ring-orange-500 sm:text-sm",
-    textarea:
-      "peer block mt-1 w-full rounded-md border-gray-300 py-3 px-4 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-indigo-500",
+      'peer mt-1 block w-full rounded-md border-gray-300 py-3 px-4 h-12 text-base text-gray-900 focus:border-orange-500 focus:outline-none focus:ring-orange-500 sm:text-sm placeholder:italic placeholder:text-xs placeholder:text-gray-400',
+    textArea:
+      'peer mt-1 block w-full rounded-md border-gray-300 py-3 px-4 text-base text-gray-900 shadow-sm focus:border-orange-500 focus:ring-orange-500 placeholder:italic placeholder:text-xs placeholder:text-gray-400',
+    file: 'hidden',
+    inputError: 'text-sm text-red-600',
+    formError: 'text-sm text-red-600',
   },
-  validations: Yup.object({
-    report_type: Yup.string().required("Required").oneOf(["lost", "found"]),
-    lost_found_date: Yup.date().required("Required"),
-    address: Yup.string().required("Required"),
-    crossroads: Yup.string().required("Required"),
-    comment: Yup.string().required("Required"),
+  validations: Yup.object().shape({
+    report_type: Yup.string().required('Required').oneOf(['lost', 'found']),
+    lost_found_date: Yup.date().required('Required'),
+    address: Yup.string().required('Required'),
+    crossroads: Yup.string().required('Required'),
+    comment: Yup.string().required('Required'),
   }),
   get initialValues() {
-    return Object.keys(this.fields).reduce((acc, val) => {
-      acc[val] = "";
-      return acc;
-    }, {});
+    const defaultValues = {};
+    for (let field in this.fields) {
+      defaultValues[field] =
+        this.fields[field].attributes.type === 'file' ? null : '';
+    }
+    return defaultValues;
+  },
+  get validation() {
+    return yupResolver(this.validationSchema);
   },
 };
 
 const handler = {
   get(target, prop, receiver) {
-    const objKeys = Object.keys(target.fields);
+    const fields = Object.keys(target.fields);
     switch (true) {
-      case prop === "initialValues":
-        return objKeys.reduce((acc, val) => {
-          acc[val] = "";
-          return acc;
-        }, {});
-      case prop === "columnsName":
-        return Object.keys(target.fields);
+      case prop === 'initialValues': {
+        var defaultValues = {};
+        for (let field in target.fields) {
+          defaultValues[field] =
+            target.fields[field].attributes.type === 'file' ? null : '';
+        }
+        return defaultValues;
+      }
+      case fields.indexOf(prop) >= 0:
+        return target.fields[prop];
       default:
         return Reflect.get(...arguments);
     }

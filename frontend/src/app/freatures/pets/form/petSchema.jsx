@@ -140,12 +140,6 @@ export const petSchema = {
         this.fields[field].attributes.type === 'file' ? null : '';
     }
     return defaultValues;
-    /*
-    return Object.keys(this.fields).reduce((acc, val) => {
-      acc[val] = val.attributes.type === "file" ? null : "";
-      return acc;
-    }, {});
-     */
   },
   get validation() {
     return yupResolver(this.validationSchema);

@@ -6,16 +6,14 @@ import { TextAreaField } from '../../../components/form/TextAreaField.jsx';
 import { SelectField } from '../../../components/form/SelectField.jsx';
 import DogPlaceholder from '../../../assets/images/icons/DogPlaceholder.jsx';
 import { useForm } from 'react-hook-form';
+
 function NewPetForm(props) {
   // const { firstStep, lastStep, currentStep, isFirstStep, isLastStep, next, previous, data } = props || {};
 
   const {
-    register,
     handleSubmit,
-    getValues,
     setFocus,
     watch,
-    setValue,
     control,
     formState: { isLoading, isValid, errors },
   } = useForm({
@@ -28,8 +26,6 @@ function NewPetForm(props) {
   const [petImage, setPetImage] = useState(watchPetImage || undefined);
 
   const onSubmit = (values, e) => {
-    // const signupValues = new FormData(document.forms["pet"]);
-
     console.log('Values : ', values, 'Values event : ', e);
     debugger;
     // next(values, 'pet');
@@ -44,25 +40,9 @@ function NewPetForm(props) {
     console.log('onErrors : ', errors, 'onErrors event: ', e);
   };
 
-  // PET IMAGE
-  const inputFileField = register('image', { required: true });
-  const loadImage = useCallback((event) => {
-    event.preventDefault();
-    const file = event.target.files[0];
-    if (event.target.value && file instanceof File) {
-      const objectUrl = URL.createObjectURL(file);
-      setPetImage(objectUrl);
-      // debugger;
-      // event.target.src = objectUrl;
-      // if (isMounted.current) {
-      // }
-    }
-  }, []);
-
-  useEffect(() => {
-    console.log('form values : ', getValues());
-    console.log('watchPetImage : ', watchPetImage);
-  }, [getValues('image')]);
+  // useEffect(() => {
+  //   console.log('watchPetImage : ', watchPetImage);
+  // }, [watchPetImage]);
 
   return (
     <>
@@ -97,24 +77,6 @@ function NewPetForm(props) {
           onSubmit={handleSubmit(onSubmit, onError)}
           className="mt-6 grid grid-cols-1 gap-y-6 sm:gap-x-8 md:grid-cols-3"
         >
-          {/* <>
-            <input
-              id={schema.fields.image.attributes.name}
-              className={schema.classes.file}
-              {...schema.fields.image.attributes}
-              {...inputFileField}
-              ref={(event) => {
-                inputFileField.ref(event);
-                inputFileRef.current = event;
-              }}
-              onChange={(event) => {
-                loadImage(event);
-                inputFileField.onChange(event);
-                setValue('image', event.target.files[0]);
-              }}
-            />
-          </> */}
-
           <FileField
             control={control}
             input={schema.fields.image.attributes}

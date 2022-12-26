@@ -1,17 +1,9 @@
-import clsx from 'clsx';
-
-export default function DogPlaceholder(props) {
-  const { classes } = props || {};
-  return (
-    <svg
-      className={clsx('fill-orange-600 mx-auto', classes || 'h-20 w-20')}
-      // className='fill-orange-600 mx-auto h-20 w-20 text-orange-500'
-      version="1.0"
-      xmlns="http://www.w3.org/2000/svg"
-      // width='1280.000000pt'
-      // height='1027.000000pt'
-      viewBox="0 0 1280.000000 1027.000000"
-      preserveAspectRatio="xMidYMid meet"
+<svg
+    className='fill-orange-600 mx-auto h-20 w-20 text-orange-500'
+    version="1.0"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 1280.000000 1027.000000"
+    preserveAspectRatio="xMidYMid meet"
     >
       <g
         transform="translate(0.000000,1027.000000) scale(0.100000,-0.100000)"
@@ -162,6 +154,4 @@ export default function DogPlaceholder(props) {
 53 -13 19 -43 26 -62 13z"
         />
       </g>
-    </svg>
-  );
-}
+</svg>

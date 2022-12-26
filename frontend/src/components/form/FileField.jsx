@@ -19,7 +19,7 @@ const FileFieldRef = (props, ref) => {
     event.preventDefault();
     const file = event.target.files[0];
 
-    if (file) {
+    if (event.target.value && file instanceof File) {
       const objectUrl = URL.createObjectURL(file);
       setPetImage(objectUrl);
       field.onChange({
@@ -29,9 +29,6 @@ const FileFieldRef = (props, ref) => {
           // value: event.target.files[0],
         },
       });
-      // event.target.src = objectUrl;
-      // if (isMounted.current) {
-      // }
     }
   }, []);
 
@@ -47,14 +44,7 @@ const FileFieldRef = (props, ref) => {
           ref.current = event;
         }}
         onChange={(event) => {
-          // debugger;
           loadImage(event);
-          // field.onChange({
-          //   target: {
-          //     name: input.name,
-          //     value: event.target.files[0],
-          //   },
-          // });
         }}
         onBlur={field.onBlur}
       />

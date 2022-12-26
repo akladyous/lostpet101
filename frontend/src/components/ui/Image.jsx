@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useState, useCallback, useEffect, useRef } from 'react';
 
 export function Image(props) {
   const { sourceImage, fallBackImage, ...rest } = props || {};
@@ -18,12 +18,12 @@ export function Image(props) {
 
     const img = new window.Image();
     img.src = sourceImage;
-    img.addEventListener("load", onLoad);
-    img.addEventListener("error", onError);
+    img.addEventListener('load', onLoad);
+    img.addEventListener('error', onError);
 
     return () => {
-      img.removeEventListener("load", onLoad);
-      img.removeEventListener("onerror", onError);
+      img.removeEventListener('load', onLoad);
+      img.removeEventListener('onerror', onError);
       isMounted.current = false;
     };
   }, [sourceImage, onLoad, onError]);
