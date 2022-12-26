@@ -20,6 +20,7 @@ function NewPetForm(props) {
     defaultValues: schema.initialValues,
     resolver: schema.validation,
   });
+
   const watchPetImage = watch('image');
   const inputFileRef = useRef();
   // const isMounted = useRef(false);

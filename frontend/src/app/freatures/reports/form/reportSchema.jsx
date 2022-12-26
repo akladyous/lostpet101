@@ -6,31 +6,26 @@ export const reportSchema = {
   fields: {
     report_type: {
       attributeName: 'select',
-      attributes: {
-        name: 'report_type',
-      },
+      attributes: { name: 'report_type' },
       options: [
         { value: 'lost', label: 'lost' },
         { value: 'found', label: 'found' },
       ],
-      label: { content: 'listing type', caption: 'Optional' },
+      label: { content: 'listing type' },
     },
     lost_found_date: {
       attributeName: 'input',
-      attributes: {
-        type: 'date',
-        name: 'lost_found_date',
-      },
+      attributes: { type: 'date', name: 'lost_found_date' },
       label: { content: 'Date last seen' },
     },
     address: {
       attributeName: 'input',
-      attributes: { type: 'text', required: true, name: 'address' },
+      attributes: { type: 'text', name: 'address' },
       label: { content: 'Last seed address' },
     },
     crossroads: {
       attributeName: 'input',
-      attributes: { type: 'text', required: true, name: 'crossroads' },
+      attributes: { type: 'text', name: 'crossroads' },
       label: {
         content: 'Nearest cross streets, or location',
       },
@@ -51,9 +46,16 @@ export const reportSchema = {
     inputError: 'text-sm text-red-600',
     formError: 'text-sm text-red-600',
   },
-  validations: Yup.object().shape({
-    report_type: Yup.string().required('Required').oneOf(['lost', 'found']),
-    lost_found_date: Yup.date().required('Required'),
+  validationSchema: Yup.object().shape({
+    report_type: Yup.string()
+      .required('Field Required')
+      .oneOf(['lost', 'found']),
+    lost_found_date: Yup.date()
+      .required('Required')
+      .nullable()
+      .max(Date(), (date) => {
+        return `date need to be before ${date.originalValue}`;
+      }),
     address: Yup.string().required('Required'),
     crossroads: Yup.string().required('Required'),
     comment: Yup.string().required('Required'),

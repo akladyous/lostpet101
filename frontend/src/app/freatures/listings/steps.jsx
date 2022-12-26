@@ -34,7 +34,11 @@ const steps = [
 ];
 function initializeState(initialValues) {
   const currentData = Array(initialValues.length).fill({});
-  return Object.assign({ currentIndex: 0 }, { onboardingData: {} }, { steps: initialValues });
+  return Object.assign(
+    { currentIndex: 0 },
+    { onboardingData: {} },
+    { steps: initialValues }
+  );
 }
 // const initialValues = steps;
 // ----------------------------------------------------------------------------------
@@ -74,9 +78,14 @@ export default function Steps({ initialValues = steps }) {
   // debugger;
   return (
     <>
-      <WizardContainerComponent onNext={onNext} onPrevious={onPrevious} currentStep={currentStep} lastStep={lastStep}>
-        <NewPet />
+      <WizardContainerComponent
+        onNext={onNext}
+        onPrevious={onPrevious}
+        currentStep={currentStep}
+        lastStep={lastStep}
+      >
         <NewReport />
+        <NewPet />
         <Final />
       </WizardContainerComponent>
     </>
