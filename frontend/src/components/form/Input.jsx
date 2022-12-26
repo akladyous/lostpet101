@@ -5,7 +5,7 @@ import { Label } from './Label.jsx';
 export function Input({ control, input, label, classes, ...rest }) {
   const {
     field,
-    formState: { isValid, isTouched, errors },
+    formState: { errors },
   } = useController({
     name: input.name,
     control,
@@ -23,10 +23,10 @@ export function Input({ control, input, label, classes, ...rest }) {
         />
       ) : null}
       <input
+        key={input.name}
         id={input.name}
         className={classes.input}
         {...input}
-        key={input.name}
         name={field.name}
         value={field.value}
         onChange={field.onChange}
