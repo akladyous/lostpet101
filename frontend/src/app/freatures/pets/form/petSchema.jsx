@@ -4,7 +4,7 @@ export const petSchema = {
   name: 'pet',
   fields: {
     image: {
-      nameAttribute: 'input',
+      attributeName: 'input',
       attributes: {
         type: 'file',
         name: 'image',
@@ -15,22 +15,22 @@ export const petSchema = {
       className: 'hidden',
     },
     name: {
-      nameAttribute: 'input',
+      attributeName: 'input',
       attributes: { type: 'text', name: 'name' },
       label: { content: 'pet name' },
     },
     breed: {
-      nameAttribute: 'input',
+      attributeName: 'input',
       attributes: { type: 'text', name: 'breed', placeholder: 'if known' },
       label: { content: 'breed' },
     },
     color: {
-      nameAttribute: 'input',
+      attributeName: 'input',
       attributes: { type: 'text', name: 'color' },
       label: { content: 'color' },
     },
     age: {
-      nameAttribute: 'input',
+      attributeName: 'input',
       attributes: {
         type: 'number',
         name: 'age',
@@ -41,7 +41,7 @@ export const petSchema = {
       label: { content: 'age' },
     },
     species: {
-      nameAttribute: 'select',
+      attributeName: 'select',
       attributes: {
         name: 'species',
       },
@@ -52,7 +52,7 @@ export const petSchema = {
       label: { content: 'species' },
     },
     collar: {
-      nameAttribute: 'select',
+      attributeName: 'select',
       attributes: {
         name: 'collar',
       },
@@ -63,7 +63,7 @@ export const petSchema = {
       label: { content: 'collar' },
     },
     gender: {
-      nameAttribute: 'select',
+      attributeName: 'select',
       attributes: {
         name: 'gender',
       },
@@ -74,7 +74,7 @@ export const petSchema = {
       label: { content: 'gender' },
     },
     size: {
-      nameAttribute: 'select',
+      attributeName: 'select',
       attributes: {
         name: 'size',
       },
@@ -87,7 +87,7 @@ export const petSchema = {
       label: { content: 'size' },
     },
     description: {
-      nameAttribute: 'textaerea',
+      attributeName: 'textaerea',
       attributes: {
         name: 'description',
         placeholder:

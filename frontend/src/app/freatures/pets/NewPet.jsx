@@ -1,12 +1,11 @@
 import { useCallback, useRef, useState, useEffect, useReducer } from 'react';
 import { petSchema as schema } from './form/petSchema.jsx';
 
-import { Input } from '../../../components/form/Input.jsx';
 import { TextField } from '../../../components/form/TextField.jsx';
 import { TextAreaField } from '../../../components/form/TextAreaField.jsx';
 import { SelectField } from '../../../components/form/SelectField.jsx';
 import DogPlaceholder from '../../../assets/images/icons/DogPlaceholder.jsx';
-import { control, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 function NewPetForm(props) {
   // const { firstStep, lastStep, currentStep, isFirstStep, isLastStep, next, previous, data } = props || {};
@@ -30,7 +29,7 @@ function NewPetForm(props) {
 
   const onSubmit = (values, e) => {
     // const signupValues = new FormData(document.forms["pet"]);
-
+    debugger;
     console.log('Values : ', values, 'Values event : ', e);
     // next(values, 'pet');
   };
@@ -114,14 +113,7 @@ function NewPetForm(props) {
           </>
 
           <div className="md:col-span-2">
-            {/* <TextField
-              label={schema.fields.name.label}
-              input={schema.fields.name.attributes}
-              classes={schema.classes}
-              register={register}
-              error={errors.name}
-            /> */}
-            <Input
+            <TextField
               control={control}
               input={schema.fields.name.attributes}
               label={schema.fields.name.label}
@@ -150,29 +142,26 @@ function NewPetForm(props) {
           </div>
           <div>
             <TextField
-              label={schema.fields.breed.label}
+              control={control}
               input={schema.fields.breed.attributes}
+              label={schema.fields.breed.label}
               classes={schema.classes}
-              register={register}
-              error={errors.breed}
             />
           </div>
           <div>
             <TextField
+              control={control}
               label={schema.fields.color.label}
               input={schema.fields.color.attributes}
               classes={schema.classes}
-              register={register}
-              error={errors.color}
             />
           </div>
           <div>
             <TextField
+              control={control}
               label={schema.fields.age.label}
               input={schema.fields.age.attributes}
               classes={schema.classes}
-              register={register}
-              error={errors.age}
             />
           </div>
           <div>
