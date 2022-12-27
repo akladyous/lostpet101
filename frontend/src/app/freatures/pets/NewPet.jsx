@@ -9,6 +9,7 @@ import { useForm } from 'react-hook-form';
 
 function NewPetForm(props) {
   // const { firstStep, lastStep, currentStep, isFirstStep, isLastStep, next, previous, data } = props || {};
+  const [petImage, setPetImage] = useState();
 
   const {
     handleSubmit,
@@ -16,14 +17,20 @@ function NewPetForm(props) {
     watch,
     control,
     getValues,
-    formState: { isLoading, isValid, errors },
+    formState: { isSubmitting, isValid, isSubmitSuccessful, errors },
   } = useForm({
     defaultValues: schema.initialValues,
     resolver: schema.validation,
   });
 
-  const watchPetImage = watch('image');
   const inputFileRef = useRef();
+  const setPetImageState = useCallback(
+    (image) => {
+      const objectURL = URL.createObjectURL(image);
+      setPetImage(objectURL);
+    },
+    [setPetImage]
+  );
   // const isMounted = useRef(false);
 
   const onSubmit = (values, e) => {
@@ -32,19 +39,9 @@ function NewPetForm(props) {
     // next(values, 'pet');
   };
   const onError = (errors, e) => {
-    // const firstError = Object.keys(errors).reduce((field, a) => {
-    //   const fieldKey = field;
-    //   return !!errors[fieldKey] ? fieldKey : a;
-    // }, null);
-    // setFocus(firstError);
-    // trigger('name');
     console.log('onErrors  :', errors, 'onErrors event: ', e);
     console.log('getValues :', getValues());
   };
-
-  // useEffect(() => {
-  //   console.log('watchPetImage : ', watchPetImage);
-  // }, [watchPetImage]);
 
   return (
     <>
@@ -59,10 +56,10 @@ function NewPetForm(props) {
             }}
           >
             <div className="mx-auto h-24 w-24">
-              {watchPetImage ? (
+              {petImage ? (
                 <>
                   <img
-                    src={watchPetImage}
+                    src={petImage}
                     alt="dog-iamge"
                     className="h-full w-full object-cover rounded-full"
                   />
@@ -82,8 +79,9 @@ function NewPetForm(props) {
           <FileField
             control={control}
             input={schema.fields.image.attributes}
-            ref={inputFileRef}
             classes={schema.classes}
+            ref={inputFileRef}
+            imageUploader={setPetImageState}
           />
 
           <div className="md:col-span-2">
@@ -178,11 +176,11 @@ function NewPetForm(props) {
             </button> */}
             <button
               type="submit"
+              disabled={isSubmitting || (isValid && isSubmitSuccessful)}
               className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto"
               // className="btn-primary mt-2 w-full justify-center rounded-md px-6 text-base shadow-sm sm:w-auto"
             >
               submit
-              {/* {`Submit ${isValid ? " valid" : " inValid"}`} */}
             </button>
           </div>
         </form>
