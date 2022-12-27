@@ -52,29 +52,33 @@ export default function SignUp() {
       }
       const response = await dispatch(usersSignUp({ formData }));
 
-      if (usersSignUp.fulfilled.match(response)) {
-        setError('account successfully created');
-        reset();
-        setTimeout(() => {
-          navigate('/', { replace: true });
-        }, 5000);
-      } else {
-        switch (true) {
-          case response.payload.hasOwnProperty('message'):
-            setError(response.payload.message);
-            break;
-          case response.payload.hasOwnProperty('validation'):
-            setError(response.payload.validation);
-            setError('');
-            break;
-          case response.payload.hasOwnProperty('error'):
-            setError(response.payload.message);
-            break;
-          case response.payload.default:
-            setError('network error');
-            break;
+      return new Promise((resolve, reject) => {
+        if (usersSignUp.fulfilled.match(response)) {
+          setError('account successfully created');
+          reset();
+          setTimeout(() => {
+            navigate('/', { replace: true });
+          }, 5000);
+          return resolve(true);
+        } else {
+          switch (true) {
+            case response.payload.hasOwnProperty('message'):
+              setError(response.payload.message);
+              break;
+            case response.payload.hasOwnProperty('validation'):
+              setError(response.payload.validation);
+              setError('');
+              break;
+            case response.payload.hasOwnProperty('error'):
+              setError(response.payload.message);
+              break;
+            case response.payload.default:
+              setError('network error');
+              break;
+          }
+          return reject(false);
         }
-      }
+      });
     },
     [dispatch, navigate, handleSubmit]
   );
