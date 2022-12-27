@@ -21,7 +21,6 @@ export default function SignUp() {
   const dispatch = useDispatch();
   const isMounted = useRef(false);
   const inputFileRef = useRef();
-  // const formMessageRef = useRef(null);
   const navigate = useNavigate();
   const [error, setError] = useState('');
   const [avatar, setAvatar] = useState();
@@ -29,7 +28,6 @@ export default function SignUp() {
   const {
     handleSubmit,
     reset,
-    watch,
     getValues,
     control,
     formState: { isSubmitting, isValid, errors },
@@ -38,7 +36,6 @@ export default function SignUp() {
     resolver: schema.validation,
   });
 
-  const watchUserAvatar = watch('avatar');
   const setUserAvatar = useCallback(
     (image) => {
       const objectUrl = URL.createObjectURL(image);
@@ -53,18 +50,7 @@ export default function SignUp() {
       for (let key in values) {
         formData.append(key, values[key]);
       }
-      // debugger;
-      // const signupValues = new FormData(document.forms['signupForm']);
-      // const controller = new AbortController();
-      // console.log('isValid : ', isValid);
-      // debugger;
-      // if (!isValid) {
-      //   console.log('not valid => errors : ', errors);
-      //   return;
-      // }
-
       const response = await dispatch(usersSignUp({ formData }));
-      // controller.abort();
 
       if (usersSignUp.fulfilled.match(response)) {
         setError('account successfully created');
