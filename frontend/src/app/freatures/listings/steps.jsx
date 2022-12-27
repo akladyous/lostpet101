@@ -84,8 +84,8 @@ export default function Steps({ initialValues = steps }) {
         currentStep={currentStep}
         lastStep={lastStep}
       >
-        <NewReport />
         <NewPet />
+        <NewReport />
         <Final />
       </WizardContainerComponent>
     </>

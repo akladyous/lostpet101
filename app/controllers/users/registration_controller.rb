@@ -27,7 +27,9 @@ class Users::RegistrationController < UsersController
   end
 
   private
+
   def user_params
     params.permit(:email, :password, :password_confirmation, :avatar)
   end
+
 end

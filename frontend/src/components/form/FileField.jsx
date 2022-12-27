@@ -2,8 +2,8 @@ import { useCallback, useState, forwardRef } from 'react';
 import { useController } from 'react-hook-form';
 
 const FileFieldRef = (props, ref) => {
-  const { control, input, classes, ...rest } = props || {};
-  const [petImage, setPetImage] = useState();
+  const { control, input, classes, imageUploader, ...rest } = props || {};
+  // const [petImage, setPetImage] = useState();
 
   const {
     field,
@@ -11,26 +11,28 @@ const FileFieldRef = (props, ref) => {
   } = useController({
     name: input.name,
     control,
-    defaultValue: input.value || '',
+    defaultValue: input.value,
     rules: {},
   });
 
-  const loadImage = useCallback((event) => {
-    event.preventDefault();
-    const file = event.target.files[0];
+  const loadImage = useCallback(
+    (event) => {
+      event.preventDefault();
+      const file = event.target.files[0];
 
-    if (event.target.value && file instanceof File) {
-      const objectUrl = URL.createObjectURL(file);
-      setPetImage(objectUrl);
-      field.onChange({
-        target: {
-          name: input.name,
-          value: objectUrl,
-          // value: event.target.files[0],
-        },
-      });
-    }
-  }, []);
+      if (event.target.value && file instanceof File) {
+        imageUploader(file);
+        field.onChange({
+          target: {
+            name: input.name,
+            value: event.target.files[0],
+            // value: objectUrl,
+          },
+        });
+      }
+    },
+    [control]
+  );
 
   return (
     <>
@@ -47,6 +49,7 @@ const FileFieldRef = (props, ref) => {
           loadImage(event);
         }}
         onBlur={field.onBlur}
+        {...rest}
       />
     </>
   );

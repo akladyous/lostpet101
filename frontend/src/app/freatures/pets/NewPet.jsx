@@ -15,6 +15,7 @@ function NewPetForm(props) {
     setFocus,
     watch,
     control,
+    getValues,
     formState: { isLoading, isValid, errors },
   } = useForm({
     defaultValues: schema.initialValues,
@@ -24,7 +25,6 @@ function NewPetForm(props) {
   const watchPetImage = watch('image');
   const inputFileRef = useRef();
   // const isMounted = useRef(false);
-  const [petImage, setPetImage] = useState(watchPetImage || undefined);
 
   const onSubmit = (values, e) => {
     console.log('Values : ', values, 'Values event : ', e);
@@ -32,13 +32,14 @@ function NewPetForm(props) {
     // next(values, 'pet');
   };
   const onError = (errors, e) => {
-    const firstError = Object.keys(errors).reduce((field, a) => {
-      const fieldKey = field;
-      return !!errors[fieldKey] ? fieldKey : a;
-    }, null);
-    setFocus(firstError);
-
-    console.log('onErrors : ', errors, 'onErrors event: ', e);
+    // const firstError = Object.keys(errors).reduce((field, a) => {
+    //   const fieldKey = field;
+    //   return !!errors[fieldKey] ? fieldKey : a;
+    // }, null);
+    // setFocus(firstError);
+    // trigger('name');
+    console.log('onErrors  :', errors, 'onErrors event: ', e);
+    console.log('getValues :', getValues());
   };
 
   // useEffect(() => {

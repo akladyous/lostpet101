@@ -1,10 +1,10 @@
-import axios from "axios";
+import axios from 'axios';
 
 export const Axios = axios.create({
-  headers: { "Content-Type": "application/json" },
-  baseURL: process.env.REACT_APP_BASE_URL,
+  headers: { 'Content-Type': 'application/json' },
+  baseURL: 'http://localhost:3000',
   withCredentials: true,
-  // Accept: "application/json",
+  // Accept: 'application/json',
   // delayed: true
 });
 // Axios.interceptors.request.use((config) => {
