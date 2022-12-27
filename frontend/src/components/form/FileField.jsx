@@ -3,7 +3,6 @@ import { useController } from 'react-hook-form';
 
 const FileFieldRef = (props, ref) => {
   const { control, input, classes, imageUploader, ...rest } = props || {};
-  // const [petImage, setPetImage] = useState();
 
   const {
     field,

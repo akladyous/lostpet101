@@ -30,7 +30,7 @@ export default function SignUp() {
     reset,
     getValues,
     control,
-    formState: { isSubmitting, isValid, errors },
+    formState: { isSubmitting, isValid, isSubmitSuccessful, errors },
   } = useForm({
     defaultValues: schema.initialValues,
     resolver: schema.validation,
@@ -169,7 +169,8 @@ export default function SignUp() {
                 <Button
                   type="submit"
                   isLoading={isSubmitting}
-                  disabled={isSubmitting}
+                  isValid={isValid}
+                  isSubmitSuccessful={isSubmitSuccessful}
                   value="submit"
                   className="flex w-full justify-center rounded-md border border-transparent bg-orange-600 py-2 px-4 text-sm font-medium text-white shadow-md transition-all duration-300 ease-linear hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
                 ></Button>

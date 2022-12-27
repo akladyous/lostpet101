@@ -7,12 +7,12 @@ export function TextField({ control, input, label, classes, ...rest }) {
   const {
     field: { onChange, onBlur, value, name, ref },
     fieldState: { isTouched, error },
-    formState: { errors },
+    formState: { errors, isSubmitSuccessful, isValid },
   } = useController({
     name: input.name,
     control,
-    // defaultValue: input.value || '',
-    // rules: {},
+    defaultValue: input.value || '',
+    rules: {},
   });
 
   useEffect(() => {
@@ -39,15 +39,9 @@ export function TextField({ control, input, label, classes, ...rest }) {
         onChange={onChange}
         onBlur={onBlur}
         ref={ref}
+        disabled={isSubmitSuccessful && isValid}
         {...rest}
       />
-
-      {/* {isTouched && error
-        ? (() => {
-            return <p className="text-sm text-red-600">{error.message}</p>;
-          })()
-        : null} */}
-
       <ErrorMessage
         errors={errors}
         name={name}

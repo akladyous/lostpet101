@@ -25,7 +25,8 @@ export default function Button(props) {
     type,
     value = 'Submit',
     isLoading,
-    disabled,
+    isValid,
+    isSubmitSuccessful,
     className,
     ...reset
   } = props || {};
@@ -36,7 +37,7 @@ export default function Button(props) {
     <button
       type={type}
       className={className}
-      disabled={disabled || isLoading}
+      disabled={isLoading || (isValid && isSubmitSuccessful)}
       {...reset}
     >
       {isLoading ? spinner : null}
