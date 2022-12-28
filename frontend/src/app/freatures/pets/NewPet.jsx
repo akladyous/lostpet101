@@ -8,18 +8,27 @@ import DogPlaceholder from '../../../assets/images/icons/DogPlaceholder.jsx';
 import { useForm } from 'react-hook-form';
 
 function NewPetForm(props) {
-  // const { firstStep, lastStep, currentStep, isFirstStep, isLastStep, next, previous, data } = props || {};
+  const {
+    currentStep,
+    lastStep,
+    isFirstStep,
+    isLastStep,
+    setStepStatus,
+    next,
+    prev,
+    getStepData,
+    setStepData,
+    getState,
+    initialValues,
+  } = props || {};
   const [petImage, setPetImage] = useState();
 
   const {
     handleSubmit,
-    setFocus,
-    watch,
     control,
-    getValues,
     formState: { isSubmitting, isValid, isSubmitSuccessful, errors },
   } = useForm({
-    defaultValues: schema.initialValues,
+    defaultValues: getStepData,
     resolver: schema.validation,
   });
 
@@ -31,16 +40,12 @@ function NewPetForm(props) {
     },
     [setPetImage]
   );
-  // const isMounted = useRef(false);
 
   const onSubmit = (values, e) => {
-    console.log('Values : ', values, 'Values event : ', e);
-    debugger;
-    // next(values, 'pet');
+    next(values);
   };
   const onError = (errors, e) => {
     console.log('onErrors  :', errors, 'onErrors event: ', e);
-    console.log('getValues :', getValues());
   };
 
   return (
@@ -163,20 +168,20 @@ function NewPetForm(props) {
 
           {/* ------------------------------------------------------------- */}
           <div className="sm:col-span-3 sm:flex sm:justify-between">
-            {/* <button
+            <button
               type="button"
               onClick={(e) => {
                 e.preventDefault();
-                previous();
+                prev();
               }}
               disabled={isFirstStep}
               className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
             >
               back
-            </button> */}
+            </button>
             <button
               type="submit"
-              disabled={isSubmitting || (isValid && isSubmitSuccessful)}
+              // disabled={isSubmitting || (isValid && isSubmitSuccessful)}
               className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto"
               // className="btn-primary mt-2 w-full justify-center rounded-md px-6 text-base shadow-sm sm:w-auto"
             >

@@ -7,19 +7,36 @@ import { useForm } from 'react-hook-form';
 
 export default function NewReport(props) {
   const {
+    currentStep,
+    lastStep,
+    isFirstStep,
+    isLastStep,
+    setStepStatus,
+    next,
+    prev,
+    getStepData,
+    setStepData,
+    getState,
+    initialValues,
+  } = props || {};
+  const {
     handleSubmit,
     setFocus,
     control,
-    formState: { isLoading, isValid, errors },
+    getValues,
+    formState: { isValid, isSubmitting, isSubmitSuccessful, errors },
   } = useForm({
-    defaultValues: schema.initialValues,
+    defaultValues: getStepData,
     resolver: schema.validation,
   });
 
   const onSubmit = (values, e) => {
-    console.log('Values : ', values, 'Values event : ', e);
-    debugger;
-    // next(values, 'pet');
+    next({
+      ...values,
+      lost_found_date: new Date(values.lost_found_date)
+        .toISOString()
+        .split('T')[0],
+    });
   };
   const onError = (errors, e) => {
     const firstError = Object.keys(errors).reduce((field, a) => {
@@ -30,8 +47,7 @@ export default function NewReport(props) {
 
     console.log('onErrors : ', errors, 'onErrors event: ', e);
   };
-  console.log('NewReport initialValues : ', schema.initialValues);
-  console.log('NewReport validation    : ', schema.validation);
+
   return (
     <section className={'py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12'}>
       <h3 className="text-lg font-medium text-gray-900">Send us a message</h3>
@@ -56,6 +72,11 @@ export default function NewReport(props) {
             input={schema.fields.lost_found_date.attributes}
             label={schema.fields.lost_found_date.label}
             classes={schema.classes}
+            pattern={'d{4}-d{2}-d{2}'}
+            onInput={(e) => {
+              console.log(e.target.value);
+            }}
+            // defaultValue={getValues('lost_found_date')}
           />
         </div>
 
@@ -88,7 +109,19 @@ export default function NewReport(props) {
 
         <div className="sm:col-span-2 sm:flex sm:justify-between">
           <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              prev();
+            }}
+            disabled={isFirstStep}
+            className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto"
+          >
+            back
+          </button>
+          <button
             type="submit"
+            // disabled={isSubmitting || (isValid && isSubmitSuccessful)}
             className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto"
             // className="btn-primary mt-2 w-full justify-center rounded-md px-6 text-base shadow-sm sm:w-auto"
           >

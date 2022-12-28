@@ -7,7 +7,7 @@ export function TextAreaField(props) {
 
   const {
     field,
-    formState: { errors },
+    formState: { errors, isValid, isSubmitSuccessful },
   } = useController({
     name: input.name,
     control,
@@ -34,6 +34,7 @@ export function TextAreaField(props) {
         onChange={field.onChange}
         onBlur={field.onBlur}
         ref={field.ref}
+        disabled={isSubmitSuccessful && isValid}
         {...rest}
       />
       <ErrorMessage

@@ -5,7 +5,7 @@ import { Label } from './Label.jsx';
 
 export function TextField({ control, input, label, classes, ...rest }) {
   const {
-    field: { onChange, onBlur, value, name, ref },
+    field,
     fieldState: { isTouched, error },
     formState: { errors, isSubmitSuccessful, isValid },
   } = useController({
@@ -16,8 +16,8 @@ export function TextField({ control, input, label, classes, ...rest }) {
   });
 
   useEffect(() => {
-    console.log('TextField Component => isTouched : ', isTouched);
-    console.log('TextField Component => error     : ', error);
+    // console.log('TextField Component => isTouched : ', isTouched);
+    // console.log('TextField Component => error     : ', error);
   }, [isTouched, error]);
 
   return (
@@ -34,17 +34,17 @@ export function TextField({ control, input, label, classes, ...rest }) {
         id={input.name}
         className={classes.input}
         {...input}
-        name={name}
-        value={value}
-        onChange={onChange}
-        onBlur={onBlur}
-        ref={ref}
+        name={field.name}
+        value={field.value}
+        onChange={field.onChange}
+        onBlur={field.onBlur}
+        ref={field.ref}
         disabled={isSubmitSuccessful && isValid}
         {...rest}
       />
       <ErrorMessage
         errors={errors}
-        name={name}
+        name={field.name}
         render={({ message }) => (
           <p className={classes.inputError ?? 'text-sm text-red-600'}>
             {message}

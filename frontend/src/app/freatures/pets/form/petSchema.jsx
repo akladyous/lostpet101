@@ -165,4 +165,5 @@ const handler = {
     }
   },
 };
-export const schemaProxy = new Proxy(petSchema, handler);
+export const petSchemaProxy = new Proxy(petSchema, handler);
+export const petIntialValues = petSchema.initialValues;

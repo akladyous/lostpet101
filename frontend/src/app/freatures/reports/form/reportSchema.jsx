@@ -51,10 +51,16 @@ export const reportSchema = {
       .required('Field Required')
       .oneOf(['lost', 'found']),
     lost_found_date: Yup.date()
+      // .transform((value, originalValue) => {
+      //   debugger;
+      //   const data = new Date(originalValue).toISOString().split('T')[0];
+      //   return data;
+      // })
       .required('Required')
-      .nullable()
+      .typeError('Please select a valid date')
+      .default(undefined)
       .max(Date(), (date) => {
-        return `date need to be before ${date.originalValue}`;
+        return `date need to be before or equal ${new Date().toDateString()}`;
       }),
     address: Yup.string().required('Required'),
     crossroads: Yup.string().required('Required'),
@@ -92,4 +98,5 @@ const handler = {
     }
   },
 };
-export const schemaProxy = new Proxy(reportSchema, handler);
+export const reportSchemaProxy = new Proxy(reportSchema, handler);
+export const reportInitialValues = reportSchema.initialValues;

@@ -8,7 +8,7 @@ export const SelectField = (props) => {
   const {
     field,
 
-    formState: { errors },
+    formState: { isValid, isSubmitSuccessful, errors },
   } = useController({
     name: input.name,
     control,
@@ -35,6 +35,7 @@ export const SelectField = (props) => {
           onChange={field.onChange}
           onBlur={field.onBlur}
           ref={field.ref}
+          disabled={isSubmitSuccessful && isValid}
           {...rest}
         >
           <option value=""></option>

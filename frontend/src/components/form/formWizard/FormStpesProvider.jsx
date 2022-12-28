@@ -1,36 +1,42 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from 'react';
 
-export default function WizardContainerComponent(props) {
+export default function FormStpesProvider(props) {
   const {
     children,
     currentStep,
     lastStep,
-    // isFirstStep,
-    // isLastStep,
-    onNext,
-    onPrevious,
+    isFirstStep,
+    isLastStep,
+    setStepStatus,
+    next,
+    prev,
+    getStepData,
+    setStepData,
+    getState,
   } = props || {};
   const isMounted = useRef(false);
-  const next = (stepData) => {
-    onNext(stepData);
-  };
-  // debugger;
+
   const currentChild = React.Children.toArray(children)[currentStep];
 
   useEffect(() => {
     isMounted.current = true;
 
     return () => (isMounted.current = false);
-  }, []);
+  }, [currentStep]);
 
   if (React.isValidElement(currentChild)) {
     return React.cloneElement(currentChild, {
+      children,
       currentStep,
       lastStep,
-      // isFirstStep,
-      // isLastStep,
+      isFirstStep,
+      isLastStep,
+      setStepStatus,
       next,
-      previous: onPrevious,
+      prev,
+      getStepData,
+      setStepData,
+      getState,
     });
   } else {
     return null;
