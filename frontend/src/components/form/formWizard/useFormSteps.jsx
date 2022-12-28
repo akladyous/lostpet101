@@ -6,13 +6,6 @@ function reducer(state, action) {
       return {
         ...state,
         currentIndex: state.currentIndex + 1,
-        onboardingData: {
-          ...state.onboardingData,
-          [state.currentIndex]: {
-            ...state.onboardingData[state.currentIndex],
-            ...action.payload,
-          },
-        },
       };
     case 'previous':
       return {
@@ -59,43 +52,36 @@ function initializeState(stepsData) {
 export function useFormSteps(initialState) {
   const [state, dispatch] = useReducer(reducer, initialState, initializeState);
 
-  const next = useCallback(
-    (stepData) => {
-      console.log('next -> stepData : ', stepData);
-      if (state.currentIndex < lastStep) {
-        dispatch({ type: 'next', payload: stepData });
-      } else if (state.currentIndex === lastStep - 1) {
-        onFinish();
-      }
-      console.log('next -> state    : ', state);
-    },
-    [state.currentIndex]
-  );
-  const prev = useCallback(() => {
-    if (state.currentIndex > 0) {
-      dispatch({ type: 'previous' });
-    }
-  }, [state.currentIndex]);
-
   const getStepData = useMemo(() => {
     return state.onboardingData[state.currentIndex];
   });
-  const setStepData = useCallback((stepData) => {
+  const setStepData = (stepData) => {
     dispatch({ type: 'setData', payload: stepData });
-  }, []);
+  };
+  const next = (stepData) => {
+    debugger;
+    if (state.currentIndex < lastStep) {
+      if (stepData) dispatch({ type: 'setStepData', payload: stepData });
+      dispatch({ type: 'next' });
+    } else if (state.currentIndex === lastStep) {
+      onFinish();
+    }
+  };
+  const prev = () => {
+    if (state.currentIndex > 0) dispatch({ type: 'previous' });
+  };
 
-  const setStepStatus = useCallback((status) => {
+  const setStepStatus = (status) => {
     dispatch({ type: 'setStepStatus', payload: status });
-  }, []);
+  };
 
-  const lastStep = Object.keys(state.steps).length;
+  const lastStep = Object.keys(state.steps).length - 1;
 
-  const onFinish = useCallback(() => {
+  const onFinish = () => {
     console.log('onFinish state : ', Object.values(state.onboardingData));
     // return Object.values(state.onboardingData).pop;
     debugger;
-  }, []);
-
+  };
   const getState = state;
 
   return {

@@ -23,7 +23,6 @@ export default function NewReport(props) {
     handleSubmit,
     setFocus,
     control,
-    getValues,
     formState: { isValid, isSubmitting, isSubmitSuccessful, errors },
   } = useForm({
     defaultValues: getStepData,

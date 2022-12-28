@@ -21,7 +21,12 @@ function NewPetForm(props) {
     getState,
     initialValues,
   } = props || {};
-  const [petImage, setPetImage] = useState();
+  const [petImage, setPetImage] = useState(() => {
+    if (getStepData.image && getStepData.image instanceof File) {
+      return URL.createObjectURL(getStepData.image);
+    }
+    return undefined;
+  });
 
   const {
     handleSubmit,
@@ -38,7 +43,7 @@ function NewPetForm(props) {
       const objectURL = URL.createObjectURL(image);
       setPetImage(objectURL);
     },
-    [setPetImage]
+    [setPetImage, currentStep]
   );
 
   const onSubmit = (values, e) => {

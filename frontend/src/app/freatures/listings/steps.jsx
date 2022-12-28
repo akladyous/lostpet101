@@ -5,18 +5,7 @@ import { reportInitialValues } from '../reports/form/reportSchema.jsx';
 import { petIntialValues } from '../pets/form/petSchema.jsx';
 import NewPet from '../pets/NewPet.jsx';
 import NewReport from '../reports/NewReport.jsx';
-function Final(props) {
-  debugger;
-  return (
-    <div>
-      <h4>state data</h4>
-      <pre className="text-xs">
-        {JSON.stringify(props.getState, undefined, 2)}
-      </pre>
-    </div>
-  );
-}
-
+import Preview from './Preview.jsx';
 // ----------------------------------------------------------------------------------
 const steps = [
   { name: 'report', href: '#', status: 'upcoming' },
@@ -35,7 +24,7 @@ export default function Steps() {
       <FormStpesProvider currentStep={currentStep} {...rest}>
         <NewReport initialValues={reportInitialValues} />
         <NewPet initialValues={petIntialValues} />
-        <Final />
+        <Preview />
       </FormStpesProvider>
     </>
   );
