@@ -19,6 +19,7 @@ export default function NewReport(props) {
     getState,
     initialValues,
   } = props || {};
+
   const {
     handleSubmit,
     setFocus,
@@ -72,10 +73,6 @@ export default function NewReport(props) {
             label={schema.fields.lost_found_date.label}
             classes={schema.classes}
             pattern={'d{4}-d{2}-d{2}'}
-            onInput={(e) => {
-              console.log(e.target.value);
-            }}
-            // defaultValue={getValues('lost_found_date')}
           />
         </div>
 
