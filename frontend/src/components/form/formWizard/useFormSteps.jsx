@@ -55,9 +55,11 @@ export function useFormSteps(initialState) {
   const getStepData = useMemo(() => {
     return state.onboardingData[state.currentIndex];
   });
+
   const setStepData = (stepData) => {
     dispatch({ type: 'setData', payload: stepData });
   };
+
   const next = (stepData) => {
     debugger;
     if (state.currentIndex < lastStep) {
@@ -67,6 +69,7 @@ export function useFormSteps(initialState) {
       onFinish();
     }
   };
+
   const prev = () => {
     if (state.currentIndex > 0) dispatch({ type: 'previous' });
   };
@@ -79,7 +82,6 @@ export function useFormSteps(initialState) {
 
   const onFinish = () => {
     console.log('onFinish state : ', Object.values(state.onboardingData));
-    // return Object.values(state.onboardingData).pop;
     debugger;
   };
   const getState = state;
