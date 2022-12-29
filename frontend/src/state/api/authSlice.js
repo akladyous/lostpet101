@@ -50,6 +50,7 @@ export const authSlice = apiSlice.injectEndpoints({
       keepUnusedDataFor: 5,
     }),
   }),
+  overrideExisting: true,
 });
 
 export const {
