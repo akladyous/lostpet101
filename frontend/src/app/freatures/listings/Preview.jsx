@@ -12,6 +12,9 @@ export default function Preview(props) {
     getState,
     initialValues,
   } = props || {};
+
+  const submit = () => {};
+
   console.log('preview component - state : ', getState);
   return (
     <div>
