@@ -8,9 +8,9 @@ import NewReport from '../reports/NewReport.jsx';
 import Preview from './Preview.jsx';
 // ----------------------------------------------------------------------------------
 const steps = [
-  { name: 'report', href: '#', status: 'upcoming' },
-  { name: 'pet', href: '#', status: 'upcoming' },
-  { name: 'preview', href: '#', status: 'upcoming' },
+  { name: 'report', title: '', href: '#', status: 'upcoming' },
+  { name: 'pet', title: '', href: '#', status: 'upcoming' },
+  { name: 'preview', title: '', href: '#', status: 'upcoming' },
 ];
 // ----------------------------------------------------------------------------------
 export default function Steps() {

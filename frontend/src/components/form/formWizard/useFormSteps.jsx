@@ -61,7 +61,6 @@ export function useFormSteps(initialState) {
   };
 
   const next = (stepData) => {
-    debugger;
     if (state.currentIndex < lastStep) {
       if (stepData) dispatch({ type: 'setStepData', payload: stepData });
       dispatch({ type: 'next' });
@@ -82,7 +81,6 @@ export function useFormSteps(initialState) {
 
   const onFinish = () => {
     console.log('onFinish state : ', Object.values(state.onboardingData));
-    debugger;
   };
   const getState = state;
 

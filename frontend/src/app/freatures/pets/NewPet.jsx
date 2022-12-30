@@ -47,6 +47,8 @@ function NewPetForm(props) {
   );
 
   const onSubmit = (values, e) => {
+    console.log('petImage : ', petImage);
+    console.log('inputFileRef : ', inputFileRef.current);
     next(values);
   };
   const onError = (errors, e) => {
