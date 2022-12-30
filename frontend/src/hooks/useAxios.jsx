@@ -90,5 +90,9 @@ export function useAxios(_config, _options) {
     };
   }, [options.manual, options.autoCancel]);
 
-  return [state, request, cancelOutstandingRequest];
+  return [
+    { loading: state.loading, error: state.error, data: state.data },
+    request,
+    cancelOutstandingRequest,
+  ];
 }

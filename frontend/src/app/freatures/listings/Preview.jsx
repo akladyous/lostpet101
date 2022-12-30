@@ -33,27 +33,45 @@ export default function Preview(props) {
     getState,
     initialValues,
   } = props || {};
-  const formData = {
+  const formData1 = {
     report: {
       ...getState.onboardingData[0],
       pet_attributes: getState.onboardingData[1],
     },
   };
 
-  const [state, request, cancelOutstandingRequest] = useAxios(
-    {
+  const [{ loading, error, data }, request, cancelOutstandingRequest] =
+    useAxios(null, {
+      manual: true,
+    });
+  const handleSubmit = async () => {
+    const formData = new FormData();
+
+    for (let key in getState.onboardingData[0]) {
+      formData.append(key, getState.onboardingData[0][key]);
+    }
+
+    for (let key in getState.onboardingData[1]) {
+      formData.append(
+        `pet_attributes[${key}]`,
+        getState.onboardingData[1][key]
+      );
+    }
+
+    for (let val of formData.entries()) {
+      console.log(val[0] + ', ' + val[1]);
+    }
+
+    const response = await request({
       method: 'post',
       url: 'reports',
-      // headers: { 'Content-Type': 'application/json' },
+      headers: { 'content-type': 'multipart/form-data' },
       data: formData,
-    },
-    { manual: true }
-  );
-  const handleSubmit = async () => {
-    console.log('formData : ', formData);
+    });
+
+    console.log('state.data  : ', data);
+    console.log('state.error : ', error);
     debugger;
-    const response = await request();
-    console.log('response : ', response);
   };
 
   console.log('preview component - state : ', getState);
@@ -61,8 +79,9 @@ export default function Preview(props) {
     <div>
       <h4>state data</h4>
       <pre className="text-xs">{JSON.stringify(getState, undefined, 2)}</pre>
-      {state.loading ? <p className="py-2">{spinner}</p> : null}
-      {state.error ? <p className="py-2">{state.error}</p> : null}
+      {loading ? <p className="py-2">{spinner}</p> : null}
+      {data ? <p>{JSON.stringify(data, undefined, 2)}</p> : null}
+      {error ? <p className="py-2">{error}</p> : null}
       <div className="sm:col-span-2 sm:flex sm:justify-between">
         <button
           type="button"

@@ -15,4 +15,14 @@ class Pet < ApplicationRecord
   enum :gender, { male: 0, female: 1, unknown: 2 }, default: :male
   enum :size, { small: 0, medium: 1, large: 2, giant: 3 }, default: :small
   enum :collar, { No: 0, Yes: 1 }, default: :No
+
+  validates :name, :species, :gender, :size, :collar, :description, presence: true
+  validates :age, numericality: { only_integer: true, in: 1..15 }
+  validate :image_validation
+
+  def image_validation
+    if !image.attached? || !image.content_type.in?(['image/jpeg', 'image/png', 'image/jpg'])
+      errors.add(:image, 'invalida image format')
+    end
+  end
 end

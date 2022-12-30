@@ -1,9 +1,9 @@
 class Users::RegistrationController < UsersController
+  skip_before_action :authenticate_user, only: :create
 
   before_action do
       ActiveStorage::Current.url_options = { protocol: request.protocol, host: request.host, port: request.port }
   end
-  skip_before_action :authenticate_user, only: :create
 
   def create
     @user = User.new(user_params)
