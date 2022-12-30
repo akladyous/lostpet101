@@ -1,6 +1,6 @@
 class Pet < ApplicationRecord
   has_one_attached :image
-  belongs_to :report
+  belongs_to :report, optional: true
 
   enum :species, {
     dog: 0,

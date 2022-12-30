@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: ba5cea0504a8fba0ea5ddaf78e5b0d174a3a1c07
+  revision: a037265ce0627612537b79f9b25e3da2141412b0
   branch: main
   specs:
     faker (3.1.0)
@@ -192,7 +192,7 @@ GEM
       rubocop-ast (>= 1.23.0, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 3.0)
-    rubocop-ast (1.24.0)
+    rubocop-ast (1.24.1)
       parser (>= 3.1.1.0)
     ruby-progressbar (1.11.0)
     solargraph (0.45.0)
