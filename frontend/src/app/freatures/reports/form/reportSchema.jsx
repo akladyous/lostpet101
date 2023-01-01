@@ -20,19 +20,34 @@ export const reportSchema = {
     },
     address: {
       attributeName: 'input',
-      attributes: { type: 'text', name: 'address' },
+      attributes: {
+        type: 'text',
+        name: 'address',
+        placeholder:
+          'An address where your pet was last seen. Example: 1757 Tremont Dr, Denver, CO 80202',
+      },
       label: { content: 'Last seed address' },
     },
     crossroads: {
       attributeName: 'input',
-      attributes: { type: 'text', name: 'crossroads' },
+      attributes: {
+        type: 'text',
+        name: 'crossroads',
+        placeholder:
+          'Help others recognize the area! This could be a nearby park, apartment area, or major crossroads.',
+      },
       label: {
         content: 'Nearest cross streets, or location',
       },
     },
     comment: {
       attributeName: 'textaerea',
-      attributes: { name: 'comment', placeholder: 'comment', rows: 5 },
+      attributes: {
+        name: 'comment',
+        placeholder:
+          'Be descriptive about appearance! Neutered? Declawed? Markings? How are they around strangers? Is there a reward?',
+        rows: 5,
+      },
       label: { content: 'comment', caption: 'Max. 500 characters' },
     },
   },

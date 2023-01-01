@@ -62,7 +62,9 @@ export function useFormSteps(initialState) {
 
   const next = (stepData) => {
     if (state.currentIndex < lastStep) {
-      if (stepData) dispatch({ type: 'setStepData', payload: stepData });
+      if (stepData) {
+        dispatch({ type: 'setStepData', payload: stepData });
+      }
       dispatch({ type: 'next' });
     } else if (state.currentIndex === lastStep) {
       onFinish();

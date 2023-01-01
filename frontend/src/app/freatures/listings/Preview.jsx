@@ -25,13 +25,9 @@ export default function Preview(props) {
     lastStep,
     isFirstStep,
     isLastStep,
-    setStepStatus,
     next,
     prev,
-    getStepData,
-    setStepData,
     getState,
-    initialValues,
   } = props || {};
   const formData1 = {
     report: {
@@ -41,9 +37,7 @@ export default function Preview(props) {
   };
 
   const [{ loading, error, data }, request, cancelOutstandingRequest] =
-    useAxios(null, {
-      manual: true,
-    });
+    useAxios(null, { manual: true });
   const handleSubmit = async () => {
     const formData = new FormData();
 
@@ -62,52 +56,124 @@ export default function Preview(props) {
       console.log(val[0] + ', ' + val[1]);
     }
 
-    const response = await request({
+    await request({
       method: 'post',
       url: 'reports',
       headers: { 'content-type': 'multipart/form-data' },
       data: formData,
     });
-
-    console.log('state.data  : ', data);
-    console.log('state.error : ', error);
-    debugger;
   };
 
   console.log('preview component - state : ', getState);
+
   return (
-    <div>
-      <h4>state data</h4>
-      <pre className="text-xs">{JSON.stringify(getState, undefined, 2)}</pre>
-      {loading ? <p className="py-2">{spinner}</p> : null}
-      {data ? <p>{JSON.stringify(data, undefined, 2)}</p> : null}
-      {error ? <p className="py-2">{error}</p> : null}
-      <div className="sm:col-span-2 sm:flex sm:justify-between">
-        <button
-          type="button"
-          onClick={(e) => {
-            e.preventDefault();
-            prev();
-          }}
-          disabled={isFirstStep}
-          className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto"
-        >
-          back
-        </button>
-        <button
-          type="button"
-          onClick={(e) => {
-            e.preventDefault();
-            next();
-            handleSubmit();
-          }}
-          // disabled={isSubmitting || (isValid && isSubmitSuccessful)}
-          className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto"
-          // className="btn-primary mt-2 w-full justify-center rounded-md px-6 text-base shadow-sm sm:w-auto"
-        >
-          Submit
-        </button>
+    <section className="relative border-orange-100 bg-white shadow-xl rounded-2xl border">
+      <div className="grid grid-cols-12 gap-2 space-y-2">
+        <div className="col-span-12 sm:col-span-5 h-[36rem] p-2">
+          <img
+            className="object-cover shadow-xl rounded-2xl h-full w-full"
+            src={URL.createObjectURL(getState.onboardingData[1].image)}
+            alt=""
+          />
+        </div>
+        <div className="col-span-12 sm:col-span-7">
+          <h3 className="text-3xl font-bold tracking-tight text-orange-600 uppercase">
+            {getState.onboardingData[1].name}
+          </h3>
+          <div className="grid grid-cols-12">
+            <div className="col-span-3">
+              <p className="py-2 text-gray-500 font-medium capitalize">
+                species
+              </p>
+              <p className="py-2 text-gray-500 font-medium capitalize">age</p>
+              <p className="py-2 text-gray-500 font-medium capitalize">
+                gender
+              </p>
+              <p className="py-2 text-gray-500 font-medium capitalize">breed</p>
+              <p className="py-2 text-gray-500 font-medium capitalize">size</p>
+              <p className="py-2 text-gray-500 font-medium capitalize">
+                collar
+              </p>
+              <p className="py-2 text-gray-500 font-medium capitalize">color</p>
+              <p className="py-2 text-gray-500 font-medium capitalize">
+                Date last seen
+              </p>
+              <p className="py-2 text-gray-500 font-medium capitalize">
+                address
+              </p>
+              <p className="py-2 text-gray-500 font-medium capitalize">
+                Owner Message
+              </p>
+            </div>
+            <div className="col-span-9">
+              <p className="py-2 text-gray-500  capitalize">
+                {getState.onboardingData[1].species}
+              </p>
+              <p className="py-2 text-gray-500  capitalize">
+                {/* {getState.onboardingData[0].report_type} */}
+                {getState.onboardingData[1].age} {' years'}
+              </p>
+              <p className="py-2 text-gray-500  capitalize">
+                {getState.onboardingData[1].gender}
+              </p>
+
+              <p className="py-2 text-gray-500  capitalize">
+                {getState.onboardingData[1].breed}
+              </p>
+              <p className="py-2 text-gray-500  capitalize">
+                {getState.onboardingData[1].size}
+              </p>
+              <p className="py-2 text-gray-500  capitalize">
+                {getState.onboardingData[1].collar}
+              </p>
+              <p className="py-2 text-gray-500  capitalize">
+                {getState.onboardingData[1].color}
+              </p>
+              <p className="py-2 text-gray-500  capitalize">
+                {getState.onboardingData[0].lost_found_date}
+              </p>
+              <p className="py-2 text-gray-500  capitalize">
+                {getState.onboardingData[0].address}
+              </p>
+              <p className="mt-3 mb-4 font-light text-gray-500 ">
+                {getState.onboardingData[0].comment}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* <pre className="text-xs">{JSON.stringify(getState, undefined, 2)}</pre> */}
+        {/* {loading ? <p className="py-2">{spinner}</p> : null} */}
+        {/* {data ? <p>{JSON.stringify(data, undefined, 2)}</p> : null} */}
+        {/* {error ? <p className="py-2">{error}</p> : null} */}
+
+        <div className="sm:col-span-12 sm:flex sm:justify-between">
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              prev();
+            }}
+            disabled={isFirstStep}
+            className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto"
+          >
+            back
+          </button>
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              next();
+              handleSubmit();
+            }}
+            // disabled={isSubmitting || (isValid && isSubmitSuccessful)}
+            className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto"
+            // className="btn-primary mt-2 w-full justify-center rounded-md px-6 text-base shadow-sm sm:w-auto"
+          >
+            Submit
+          </button>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
