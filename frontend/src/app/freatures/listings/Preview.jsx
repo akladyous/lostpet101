@@ -69,7 +69,7 @@ export default function Preview(props) {
   return (
     <section className="relative border-orange-100 bg-white shadow-xl rounded-2xl border">
       <div className="grid grid-cols-12 gap-2 space-y-2">
-        <div className="col-span-12 sm:col-span-5 h-[36rem] p-2">
+        <div className="col-span-12 sm:col-span-5 h-[34rem] p-2">
           <img
             className="object-cover shadow-xl rounded-2xl h-full w-full"
             src={URL.createObjectURL(getState.onboardingData[1].image)}
@@ -82,98 +82,96 @@ export default function Preview(props) {
           </h3>
           <div className="grid grid-cols-12">
             <div className="col-span-3">
-              <p className="py-2 text-gray-500 font-medium capitalize">
+              <p className="py-1 text-gray-500 font-medium capitalize">
                 species
               </p>
-              <p className="py-2 text-gray-500 font-medium capitalize">age</p>
-              <p className="py-2 text-gray-500 font-medium capitalize">
+              <p className="py-1 text-gray-500 font-medium capitalize">age</p>
+              <p className="py-1 text-gray-500 font-medium capitalize">
                 gender
               </p>
-              <p className="py-2 text-gray-500 font-medium capitalize">breed</p>
-              <p className="py-2 text-gray-500 font-medium capitalize">size</p>
-              <p className="py-2 text-gray-500 font-medium capitalize">
+              <p className="py-1 text-gray-500 font-medium capitalize">breed</p>
+              <p className="py-1 text-gray-500 font-medium capitalize">size</p>
+              <p className="py-1 text-gray-500 font-medium capitalize">
                 collar
               </p>
-              <p className="py-2 text-gray-500 font-medium capitalize">color</p>
-              <p className="py-2 text-gray-500 font-medium capitalize">
+              <p className="py-1 text-gray-500 font-medium capitalize">color</p>
+              <p className="py-1 text-gray-500 font-medium capitalize">
                 Date last seen
-              </p>
-              <p className="py-2 text-gray-500 font-medium capitalize">
-                address
-              </p>
-              <p className="py-2 text-gray-500 font-medium capitalize">
-                Owner Message
               </p>
             </div>
             <div className="col-span-9">
-              <p className="py-2 text-gray-500  capitalize">
+              <p className="py-1 text-gray-500  capitalize">
                 {getState.onboardingData[1].species}
               </p>
-              <p className="py-2 text-gray-500  capitalize">
+              <p className="py-1 text-gray-500  capitalize">
                 {/* {getState.onboardingData[0].report_type} */}
                 {getState.onboardingData[1].age} {' years'}
               </p>
-              <p className="py-2 text-gray-500  capitalize">
+              <p className="py-1 text-gray-500  capitalize">
                 {getState.onboardingData[1].gender}
               </p>
 
-              <p className="py-2 text-gray-500  capitalize">
+              <p className="py-1 text-gray-500  capitalize">
                 {getState.onboardingData[1].breed}
               </p>
-              <p className="py-2 text-gray-500  capitalize">
+              <p className="py-1 text-gray-500  capitalize">
                 {getState.onboardingData[1].size}
               </p>
-              <p className="py-2 text-gray-500  capitalize">
+              <p className="py-1 text-gray-500  capitalize">
                 {getState.onboardingData[1].collar}
               </p>
-              <p className="py-2 text-gray-500  capitalize">
+              <p className="py-1 text-gray-500  capitalize">
                 {getState.onboardingData[1].color}
               </p>
-              <p className="py-2 text-gray-500  capitalize">
+              <p className="py-1 text-gray-500  capitalize">
                 {getState.onboardingData[0].lost_found_date}
-              </p>
-              <p className="py-2 text-gray-500  capitalize">
-                {getState.onboardingData[0].address}
-              </p>
-              <p className="mt-3 mb-4 font-light text-gray-500 ">
-                {getState.onboardingData[0].comment}
               </p>
             </div>
           </div>
+          <p className="py-1 text-gray-500 font-medium capitalize">address</p>
+          <p className="py-1 text-gray-500  capitalize">
+            {getState.onboardingData[0].address}
+          </p>
+          <p className="py-1 text-gray-500 font-medium capitalize">
+            Owner Message
+          </p>
+          <p className="mt-3 mb-4 font-light text-gray-500 px-1">
+            {getState.onboardingData[0].comment}
+          </p>
         </div>
 
         {/* <pre className="text-xs">{JSON.stringify(getState, undefined, 2)}</pre> */}
-        {/* {loading ? <p className="py-2">{spinner}</p> : null} */}
+        {/* {loading ? <p className="py-1">{spinner}</p> : null} */}
         {/* {data ? <p>{JSON.stringify(data, undefined, 2)}</p> : null} */}
-        {/* {error ? <p className="py-2">{error}</p> : null} */}
-
-        <div className="sm:col-span-12 sm:flex sm:justify-between">
-          <button
-            type="button"
-            onClick={(e) => {
-              e.preventDefault();
-              prev();
-            }}
-            disabled={isFirstStep}
-            className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto"
-          >
-            back
-          </button>
-          <button
-            type="button"
-            onClick={(e) => {
-              e.preventDefault();
-              next();
-              handleSubmit();
-            }}
-            // disabled={isSubmitting || (isValid && isSubmitSuccessful)}
-            className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto"
-            // className="btn-primary mt-2 w-full justify-center rounded-md px-6 text-base shadow-sm sm:w-auto"
-          >
-            Submit
-          </button>
-        </div>
+        {/* {error ? <p className="py-1">{error}</p> : null} */}
       </div>
+
+      {/* <div className="sm:col-span-12 sm:flex sm:justify-between">
+        <button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            prev();
+          }}
+          disabled={isFirstStep}
+          className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto"
+        >
+          back
+        </button>
+        <button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            next();
+            handleSubmit();
+          }}
+          // disabled={isSubmitting || (isValid && isSubmitSuccessful)}
+          className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto"
+          // className="btn-primary mt-2 w-full justify-center rounded-md px-6 text-base shadow-sm sm:w-auto"
+        >
+          Submit
+        </button>
+      </div> */}
     </section>
   );
 }
