@@ -1,5 +1,7 @@
+import { useNavigate } from 'react-router-dom';
 import { useAxios } from '../../../hooks/useAxios.jsx';
 import { SpinnerCircle } from '../../../assets/images/icons/SpinnerCircle.jsx';
+import { MessageField } from '../../../components/form/ErrorMessage.jsx';
 
 export default function Preview(props) {
   const {
@@ -9,20 +11,15 @@ export default function Preview(props) {
     isLastStep,
     next,
     prev,
+    getStepData,
     getState,
   } = props || {};
-  const formData1 = {
-    report: {
-      ...getState.onboardingData[0],
-      pet_attributes: getState.onboardingData[1],
-    },
-  };
 
-  const [
-    { isLoading, isError, error, isSuccess, data },
-    request,
-    cancelOutstandingRequest,
-  ] = useAxios(null, { manual: true });
+  const navigate = useNavigate();
+  const [{ isLoading, isError, error, isSuccess, data }, request] = useAxios(
+    null,
+    { manual: true }
+  );
 
   const handleSubmit = async () => {
     const formData = new FormData();
@@ -30,17 +27,15 @@ export default function Preview(props) {
     for (let key in getState.onboardingData[0]) {
       formData.append(key, getState.onboardingData[0][key]);
     }
-
     for (let key in getState.onboardingData[1]) {
       formData.append(
         `pet_attributes[${key}]`,
         getState.onboardingData[1][key]
       );
     }
-
-    for (let val of formData.entries()) {
-      console.log(val[0] + ', ' + val[1]);
-    }
+    // for (let val of formData.entries()) {
+    //   console.log(val[0] + ', ' + val[1]);
+    // }
 
     await request({
       method: 'post',
@@ -48,9 +43,13 @@ export default function Preview(props) {
       headers: { 'content-type': 'multipart/form-data' },
       data: formData,
     });
+
+    setTimeout(() => {
+      navigate('/', { replace: true });
+    }, 2000);
   };
 
-  console.log('preview component - state : ', getState);
+  // console.log('preview component - state : ', getState);
 
   return (
     <section className="relative border-orange-100 bg-white shadow-xl rounded-2xl border">
@@ -128,9 +127,14 @@ export default function Preview(props) {
           </p>
 
           <div className="sm:col-span-12 sm:flex sm:justify-between items-center">
-            <div>
-              <p>account successfully created</p>
-            </div>
+            <MessageField
+              {...(isError && { isError: isError, message: error })}
+              {...(isSuccess && {
+                isSuccess: isSuccess,
+                message: 'listing successfully created',
+              })}
+              classes="capitalize text-lg"
+            />
             <div>
               <button
                 type="button"
@@ -142,7 +146,7 @@ export default function Preview(props) {
                 // disabled={isSubmitting || (isValid && isSubmitSuccessful)}
                 className="btn btn-secondary px-8"
               >
-                {isLoading ? <SpinnerCircle /> : null}
+                {isLoading ? <SpinnerCircle classes="text-orange-500" /> : null}
                 Submit
               </button>
             </div>

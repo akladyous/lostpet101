@@ -47,12 +47,12 @@ function NewPetForm(props) {
   );
 
   const onSubmit = (values, e) => {
-    console.log('petImage : ', petImage);
-    console.log('inputFileRef : ', inputFileRef.current);
+    // console.log('petImage : ', petImage);
+    // console.log('inputFileRef : ', inputFileRef.current);
     next(values);
   };
   const onError = (errors, e) => {
-    console.log('onErrors  :', errors, 'onErrors event: ', e);
+    // console.log('onErrors  :', errors, 'onErrors event: ', e);
   };
 
   return (
@@ -183,16 +183,16 @@ function NewPetForm(props) {
                   prev();
                 }}
                 disabled={isFirstStep}
-                className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
+                className="btn btn-secondary px-8"
               >
                 back
               </button>
               <button
                 type="submit"
                 // disabled={isSubmitting || (isValid && isSubmitSuccessful)}
-                className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto"
+                className="btn btn-secondary px-8"
               >
-                submit
+                Next
               </button>
             </div>
           </form>

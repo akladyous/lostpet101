@@ -1,5 +1,18 @@
-import React from 'react';
+import clsx from 'clsx';
 
-export default function ErrorMessage({ errors, name, render }) {
-  return <div>ErrorMessage</div>;
+export function MessageField({ isError, isSuccess, message, classes }) {
+  return (
+    <div>
+      <p
+        className={clsx(
+          'text-sm',
+          { ['text-red-600']: isError },
+          { ['text-orange-500']: isSuccess },
+          classes
+        )}
+      >
+        {message}
+      </p>
+    </div>
+  );
 }

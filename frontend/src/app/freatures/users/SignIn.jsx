@@ -67,14 +67,14 @@ export default function SignIn() {
   );
 
   const onError = (errors, e) => {
-    console.log('onErrors  :', errors, 'onErrors event: ', e);
-    console.log('getValues :', getValues());
+    // console.log('onErrors  :', errors, 'onErrors event: ', e);
+    // console.log('getValues :', getValues());
   };
 
   useEffect(() => {
     isMounted.current = true;
 
-    console.log('signup update');
+    // console.log('signup update');
     return function () {
       isMounted.current = false;
     };

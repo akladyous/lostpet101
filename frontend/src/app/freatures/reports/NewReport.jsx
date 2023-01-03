@@ -45,7 +45,7 @@ export default function NewReport(props) {
     }, null);
     setFocus(firstError);
 
-    console.log('onErrors : ', errors, 'onErrors event: ', e);
+    // console.log('onErrors : ', errors, 'onErrors event: ', e);
   };
 
   return (
@@ -112,17 +112,17 @@ export default function NewReport(props) {
                 prev();
               }}
               disabled={isFirstStep}
-              className="btn btn-primary"
+              className="btn btn-secondary px-8"
             >
               back
             </button>
             <button
               type="submit"
               // disabled={isSubmitting || (isValid && isSubmitSuccessful)}
-              className="btn btn-primary"
+              className="btn btn-secondary px-8"
               // className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto"
             >
-              Submit
+              Next
             </button>
           </div>
         </form>

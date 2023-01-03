@@ -46,6 +46,7 @@ function initializeState(stepsData) {
     { currentIndex: 0 },
     { steps: { ...stepsData.steps } },
     { onboardingData: { ...stepsData.initialValues } }
+    //onBoardingData = initialValues for each form step + empty object to handle the final step
   );
 }
 
@@ -67,7 +68,7 @@ export function useFormSteps(initialState) {
       }
       dispatch({ type: 'next' });
     } else if (state.currentIndex === lastStep) {
-      onFinish();
+      if (typeof stepData === 'function') onFinish(stepData);
     }
   };
 
@@ -81,8 +82,11 @@ export function useFormSteps(initialState) {
 
   const lastStep = Object.keys(state.steps).length - 1;
 
-  const onFinish = () => {
-    console.log('onFinish state : ', Object.values(state.onboardingData));
+  const onFinish = (callback) => {
+    if (typeof callback === 'function') {
+      const lastStepData = Object.values(state.onboardingData).slice(0, -1);
+      callback({ ...lastStepData });
+    }
   };
   const getState = state;
 
