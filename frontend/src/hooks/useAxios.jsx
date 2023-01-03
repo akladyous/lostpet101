@@ -19,20 +19,22 @@ const actions = {
   ERROR: 'ERROR',
 };
 const initializeState = {
-  loading: false,
+  isLoading: false,
+  isError: false,
   error: null,
+  isSuccess: false,
   data: null,
 };
 function reducer(state, action) {
   switch (action.type) {
     case actions.START:
-      return { ...state, loading: true, error: null };
+      return { ...state, isLoading: true, error: null };
     case actions.END:
-      return { ...state, loading: false };
+      return { ...state, isLoading: false };
     case actions.SUCCESS:
-      return { ...state, data: action.payload };
+      return { ...state, data: action.payload, isSuccess: true };
     case actions.ERROR:
-      return { ...state, error: action.payload };
+      return { ...state, error: action.payload, isError: true };
     default:
       break;
   }
@@ -57,7 +59,7 @@ export function useAxios(_config, _options) {
       controller.current.abort();
     }
   }, []);
-  //   debugger;
+
   const request = React.useCallback(async function (_config) {
     _config ??= config;
     try {
@@ -91,7 +93,7 @@ export function useAxios(_config, _options) {
   }, [options.manual, options.autoCancel]);
 
   return [
-    { loading: state.loading, error: state.error, data: state.data },
+    { isLoading: state.isLoading, error: state.error, data: state.data },
     request,
     cancelOutstandingRequest,
   ];
