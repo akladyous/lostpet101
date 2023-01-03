@@ -1,10 +1,10 @@
-import { useFormSteps } from '../../../components/form/formWizard/useFormSteps.jsx';
-import FormStpesProvider from '../../../components/form/formWizard/FormStpesProvider.jsx';
+import { useFormSteps } from '../../../../components/form/formWizard/useFormSteps.jsx';
+import FormStpesProvider from '../../../../components/form/formWizard/FormStpesProvider.jsx';
 import Decorative from './Decorative.jsx';
-import { reportInitialValues } from '../reports/form/reportSchema.jsx';
-import { petIntialValues } from '../pets/form/petSchema.jsx';
-import NewPet from '../pets/NewPet.jsx';
-import NewReport from '../reports/NewReport.jsx';
+import { reportInitialValues } from '../../reports/form/reportSchema.jsx';
+import { petIntialValues } from '../../pets/form/petSchema.jsx';
+import NewPet from '../../pets/NewPet.jsx';
+import NewReport from '../../reports/NewReport.jsx';
 import Preview from './Preview.jsx';
 
 const steps = [

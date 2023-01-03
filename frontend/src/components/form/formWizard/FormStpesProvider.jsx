@@ -18,12 +18,6 @@ export default function FormStpesProvider(props) {
 
   const currentChild = React.Children.toArray(children)[currentStep];
 
-  // useEffect(() => {
-  //   isMounted.current = true;
-
-  //   return () => (isMounted.current = false);
-  // }, [currentStep]);
-
   if (React.isValidElement(currentChild)) {
     return React.cloneElement(currentChild, {
       children,

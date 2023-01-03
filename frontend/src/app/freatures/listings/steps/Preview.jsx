@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import { useAxios } from '../../../hooks/useAxios.jsx';
-import { SpinnerCircle } from '../../../assets/images/icons/SpinnerCircle.jsx';
-import { MessageField } from '../../../components/form/ErrorMessage.jsx';
+import { useAxios } from '../../../../hooks/useAxios.jsx';
+import { SpinnerCircle } from '../../../../assets/images/icons/SpinnerCircle.jsx';
+import { MessageField } from '../../../../components/form/ErrorMessage.jsx';
 
 export default function Preview(props) {
   const {
