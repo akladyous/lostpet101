@@ -1,0 +1,55 @@
+.service-area {
+    margin-block-start: 10rem;
+}
+.section_title h1 {
+    font-size: 50px;
+    font-weight: 600;
+    /* line-height: 60px; */
+    color: #191d34;
+    font-family: "Poppins", sans-serif;
+}
+@media (max-width: 767px) {
+    .section_title h1 {
+        font-size: 20px;
+    }
+    .section_title p {
+        color: gray;
+        padding-inline: 1rem;
+    }
+    .service-area {
+        margin-block-start: 1rem;
+    }
+}
+.single-service {
+    padding: 70px 25px 65px 25px;
+    border: 1px solid #ffc5c2;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -o-transition: 0.5s;
+    transition: 0.5s;
+}
+.icon-area {
+    height: 140px;
+    width: 160px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    margin: auto;
+    background-image: url("../images/service/service_icon_bg_1.png");
+}
+.service-bg {
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.service-area .single-service .service-content h3 {
+    font-size: 25px;
+    font-weight: 500;
+    margin-block: 1.5rem;
+}
+.service-area .single-service .service-content {
+    height: 10rem;
+}
