@@ -104,7 +104,7 @@ export default function NewReport(props) {
             />
           </div>
 
-          <div className="sm:col-span-2 sm:flex sm:justify-between">
+          <div className="sm:col-span-2 sm:flex sm:justify-between space-y-1">
             <button
               type="button"
               onClick={(e) => {
@@ -112,14 +112,14 @@ export default function NewReport(props) {
                 prev();
               }}
               disabled={isFirstStep}
-              className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto"
+              className="btn btn-primary"
             >
               back
             </button>
             <button
               type="submit"
               // disabled={isSubmitting || (isValid && isSubmitSuccessful)}
-              className="btn"
+              className="btn btn-primary"
               // className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto"
             >
               Submit
