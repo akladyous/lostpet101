@@ -1,21 +1,43 @@
-import { v4 as uuid } from 'uuid';
-import { useEffect } from 'react';
+import { useController } from 'react-hook-form';
+import { ErrorMessage } from '@hookform/error-message';
+import { Label } from './Label.jsx';
+
 export const SelectField = (props) => {
-  const { input, label, error, classes, options, register, ...rest } = props || {};
-  // debugger;
-  // useEffect(() => {
-  //   console.log('selectField name: ', input.name);
-  //   console.log('error: ', error);
-  // }, [input.name, error]);
+  const { control, input, label, classes, options, ...rest } = props || {};
+
+  const {
+    field,
+
+    formState: { isValid, isSubmitSuccessful, errors },
+  } = useController({
+    name: input.name,
+    control,
+    defaultValue: input.value || '',
+    rules: {},
+  });
+
   return (
     <>
       {label ? (
-        <label htmlFor={input.name} className={classes.label}>
-          {label?.content}
-        </label>
+        <Label
+          htmlFor={input.name}
+          classes={classes.label}
+          content={label?.content || input.name}
+        />
       ) : null}
-      <div className="mt-1">
-        <select id={input.name} className={classes.input} {...register(input.name)} {...rest} key={uuid()}>
+      <div className="_mt-1">
+        <select
+          key={input.name}
+          id={input.name}
+          className={classes.input}
+          name={field.name}
+          value={field.value}
+          onChange={field.onChange}
+          onBlur={field.onBlur}
+          ref={field.ref}
+          disabled={isSubmitSuccessful && isValid}
+          {...rest}
+        >
           <option value=""></option>
           {options.map((option, idx) => (
             <option key={idx} className="capitalize" value={option.value}>
@@ -24,12 +46,15 @@ export const SelectField = (props) => {
           ))}
         </select>
       </div>
-      {error ? (
-        <div className="_pt-2">
-          <p className={classes.error ?? 'text-sm text-red-600'}>{error?.message}</p>
-        </div>
-      ) : null}
-      {props.children}
+      <ErrorMessage
+        errors={errors}
+        name={input.name}
+        render={({ message }) => (
+          <p className={classes.inputError ?? 'text-sm text-red-600'}>
+            {message}
+          </p>
+        )}
+      />
     </>
   );
 };

@@ -1,38 +1,56 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
+import { useController } from 'react-hook-form';
+import { ErrorMessage } from '@hookform/error-message';
+import { Label } from './Label.jsx';
 
-export function TextField(props) {
-  const { input, label, value, handleChange, handleBlur, error, touched, classes, ...rest } = props || {};
-  const isMounted = useRef(false);
-  // debugger;
+export function TextField({ control, input, label, classes, ...rest }) {
+  const {
+    field,
+    fieldState: { isTouched, error },
+    formState: { errors, isSubmitSuccessful, isValid },
+  } = useController({
+    name: input.name,
+    control,
+    defaultValue: input.value || '',
+    rules: {},
+  });
+
   useEffect(() => {
-    isMounted.current = true;
-    console.log('textField name: ', input.name, 'textField error: ', error);
-    return () => {
-      isMounted.current = false;
-    };
-  }, [handleBlur]);
+    // console.log('TextField Component => isTouched : ', isTouched);
+    // console.log('TextField Component => error     : ', error);
+  }, [isTouched, error]);
+
   return (
     <>
       {label ? (
-        <label htmlFor={input.name} className={classes.label}>
-          {label?.content}
-        </label>
+        <Label
+          htmlFor={input.name}
+          classes={classes.label}
+          content={label?.content || input.name}
+        />
       ) : null}
       <input
+        key={input.name}
         id={input.name}
         className={classes.input}
         {...input}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        value={value}
+        name={field.name}
+        value={field.value}
+        onChange={field.onChange}
+        onBlur={field.onBlur}
+        ref={field.ref}
+        disabled={isSubmitSuccessful && isValid}
         {...rest}
       />
-      {error && touched ? (
-        <div className="_pt-2">
-          <p className={classes.error ?? 'text-sm text-red-600'}>{error}</p>
-        </div>
-      ) : null}
+      <ErrorMessage
+        errors={errors}
+        name={field.name}
+        render={({ message }) => (
+          <p className={classes.inputError ?? 'text-sm text-red-600'}>
+            {message}
+          </p>
+        )}
+      />
     </>
   );
 }
-// export const TextField = memo(MemoTextField);

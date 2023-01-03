@@ -1,159 +1,203 @@
-import { useCallback } from 'react';
-import { useFormik } from 'formik';
+import { useCallback, useRef, useState, useEffect, useReducer } from 'react';
 import { petSchema as schema } from './form/petSchema.jsx';
-import { Label } from '../../../components/form/Label.jsx';
-import { SelectField } from '../../../components/form/SelectField.jsx';
-import { TextField } from '../../../components/form/TextAreaField.jsx';
+import { FileField } from '../../../components/form/FileField.jsx';
+import { TextField } from '../../../components/form/TextField.jsx';
 import { TextAreaField } from '../../../components/form/TextAreaField.jsx';
-import { ErrorField } from '../../../components/form/ErrorField.jsx';
+import { SelectField } from '../../../components/form/SelectField.jsx';
+import DogPlaceholder from '../../../assets/images/icons/DogPlaceholder.jsx';
+import { useForm } from 'react-hook-form';
 
-export default function NewPet(props) {
-  const { schema, firstStep, lastStep, currentStep, isFirstStep, isLastStep, next, previous, data } = props || {};
-
-  const handleSubmit = useCallback((values, actions) => {
-    debugger;
-  }, []);
-
-  const formik = useFormik({
-    initialValues: schema.initialValues,
-    onSubmit: handleSubmit,
-    // onReset: (values, actions) => {},
-    validationSchema: schema.validations,
-    validateOnChange: false,
+function NewPetForm(props) {
+  const {
+    currentStep,
+    lastStep,
+    isFirstStep,
+    isLastStep,
+    setStepStatus,
+    next,
+    prev,
+    getStepData,
+    setStepData,
+    getState,
+    initialValues,
+  } = props || {};
+  const [petImage, setPetImage] = useState(() => {
+    if (getStepData.image && getStepData.image instanceof File) {
+      return URL.createObjectURL(getStepData.image);
+    }
+    return undefined;
   });
 
+  const {
+    handleSubmit,
+    control,
+    formState: { isSubmitting, isValid, isSubmitSuccessful, errors },
+  } = useForm({
+    defaultValues: getStepData,
+    resolver: schema.validation,
+  });
+
+  const inputFileRef = useRef();
+  const setPetImageState = useCallback(
+    (image) => {
+      const objectURL = URL.createObjectURL(image);
+      setPetImage(objectURL);
+    },
+    [setPetImage, currentStep]
+  );
+
+  const onSubmit = (values, e) => {
+    console.log('petImage : ', petImage);
+    console.log('inputFileRef : ', inputFileRef.current);
+    next(values);
+  };
+  const onError = (errors, e) => {
+    console.log('onErrors  :', errors, 'onErrors event: ', e);
+  };
+
   return (
-    <section className={'py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12'}>
-      <h3 className="text-lg font-medium text-gray-900">Send us a message</h3>
-      <form
-        name={schema.name}
-        onSubmit={formik.handleSubmit}
-        onReset={formik.handleReset}
-        className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8"
-      >
-        {/* <div>
-          <Label
-            htmlFor={schema.fields.report_type.attributes.name}
-            className={schema.classes.label}
-            content={schema.fields.report_type.label.content}
-          />
-          <SelectField
-            name={schema.fields.report_type.attributes.name}
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-            value={formik.values['report_type']}
-            options={schema.fields.report_type.attributes.options}
-            className={schema.classes.input}
-          />
-          <ErrorField
-            error={formik.errors[schema.fields.report_type.attributes.name]}
-            touched={formik.touched[schema.fields.report_type.attributes.name]}
-          />
-        </div>
+    <>
+      <section className="relative border-orange-100 bg-white shadow-xl rounded-2xl border">
+        <div className={'my-8 mx-5'}>
+          <div className="flex flex-col justify-center">
+            <button
+              type="button"
+              id="pet-image"
+              className="mx-auto p-1 border border-solid border-orange-400 rounded-full hover:bg-slate-50 hover:p-2 hover:border-spacing-4 shadow-md transition-all duration-300 ease-linear  focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+              onClick={(e) => {
+                inputFileRef.current.click();
+              }}
+            >
+              <div className="mx-auto h-24 w-24">
+                {petImage ? (
+                  <>
+                    <img
+                      src={petImage}
+                      alt="dog-iamge"
+                      className="h-full w-full object-cover rounded-full"
+                    />
+                  </>
+                ) : (
+                  <DogPlaceholder />
+                )}
+              </div>
+            </button>
+          </div>
 
-        <div>
-          <Label
-            htmlFor={schema.fields.lost_found_date.attributes.name}
-            className={schema.classes.label}
-            content={schema.fields.lost_found_date.label.content}
-          />
-          <TextField
-            name={schema.fields.lost_found_date.attributes.name}
-            type={schema.fields.lost_found_date.attributes.type}
-            className={schema.classes.input}
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-            value={formik.values[schema.fields.lost_found_date.attributes.name]}
-          />
-          <ErrorField
-            error={formik.errors[schema.fields.lost_found_date.attributes.name]}
-            touched={formik.touched[schema.fields.lost_found_date.attributes.name]}
-          />
-        </div>
-
-        <div className="sm:col-span-2">
-          <Label
-            htmlFor={schema.fields.address.attributes.name}
-            className={schema.classes.label}
-            content={schema.fields.address.label.content}
-          />
-          <TextField
-            name={schema.fields.address.attributes.name}
-            type={schema.fields.address.attributes.type}
-            className={schema.classes.input}
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-            value={formik.values[schema.fields.address.attributes.name]}
-          />
-          <ErrorField
-            error={formik.errors[schema.fields.address.attributes.name]}
-            touched={formik.touched[schema.fields.address.attributes.name]}
-          />
-        </div>
-
-        <div className="sm:col-span-2">
-          <Label
-            htmlFor={schema.fields.crossroads.attributes.name}
-            className={schema.classes.label}
-            content={schema.fields.crossroads.label.content}
-          />
-          <TextField
-            name={schema.fields.crossroads.attributes.name}
-            type={schema.fields.crossroads.attributes.type}
-            className={schema.classes.input}
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-            value={formik.values[schema.fields.crossroads.attributes.name]}
-          />
-          <ErrorField
-            error={formik.errors[schema.fields.crossroads.attributes.name]}
-            touched={formik.touched[schema.fields.crossroads.attributes.name]}
-          />
-        </div>
-
-        <div className="sm:col-span-2">
-          <Label
-            htmlFor={schema.fields.comment.attributes.name}
-            className={schema.classes.label}
-            content={schema.fields.comment.label.content}
-          />
-          <TextAreaField
-            name={schema.fields.comment.attributes.name}
-            className={schema.classes.textarea}
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-            value={formik.values[schema.fields.comment.attributes.name]}
-            rows={5}
-          />
-          <ErrorField
-            error={formik.errors[schema.fields.comment.attributes.name]}
-            touched={formik.touched[schema.fields.comment.attributes.name]}
-          />
-        </div> */}
-
-        <div className="sm:col-span-2 sm:flex sm:justify-between">
-          <button
-            type="submit"
-            className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto"
-            // className="btn-primary mt-2 w-full justify-center rounded-md px-6 text-base shadow-sm sm:w-auto"
+          <form
+            name={schema.name}
+            onSubmit={handleSubmit(onSubmit, onError)}
+            className="mt-6 grid grid-cols-1 gap-y-6 sm:gap-x-8 md:grid-cols-3"
           >
-            Submit
-          </button>
+            <FileField
+              control={control}
+              input={schema.fields.image.attributes}
+              classes={schema.classes}
+              ref={inputFileRef}
+              imageUploader={setPetImageState}
+            />
+
+            <div className="md:col-span-2">
+              <TextField
+                control={control}
+                input={schema.fields.name.attributes}
+                label={schema.fields.name.label}
+                classes={schema.classes}
+              />
+            </div>
+            <div>
+              <SelectField
+                control={control}
+                input={schema.fields.species.attributes}
+                label={schema.fields.species.label}
+                classes={schema.classes}
+                options={schema.fields.species.options}
+              />
+            </div>
+            <div>
+              <SelectField
+                control={control}
+                input={schema.fields.gender.attributes}
+                label={schema.fields.gender.label}
+                classes={schema.classes}
+                options={schema.fields.gender.options}
+              />
+            </div>
+            <div>
+              <TextField
+                control={control}
+                input={schema.fields.breed.attributes}
+                label={schema.fields.breed.label}
+                classes={schema.classes}
+              />
+            </div>
+            <div>
+              <TextField
+                control={control}
+                label={schema.fields.color.label}
+                input={schema.fields.color.attributes}
+                classes={schema.classes}
+              />
+            </div>
+            <div>
+              <TextField
+                control={control}
+                label={schema.fields.age.label}
+                input={schema.fields.age.attributes}
+                classes={schema.classes}
+              />
+            </div>
+            <div>
+              <SelectField
+                control={control}
+                input={schema.fields.collar.attributes}
+                label={schema.fields.collar.label}
+                classes={schema.classes}
+                options={schema.fields.collar.options}
+              />
+            </div>
+            <div>
+              <SelectField
+                control={control}
+                input={schema.fields.size.attributes}
+                label={schema.fields.size.label}
+                classes={schema.classes}
+                options={schema.fields.size.options}
+              />
+            </div>
+            <div className="sm:col-span-3">
+              <TextAreaField
+                control={control}
+                input={schema.fields.description.attributes}
+                label={schema.fields.description.label}
+                classes={schema.classes}
+              />
+            </div>
+
+            {/* ------------------------------------------------------------- */}
+            <div className="sm:col-span-3 sm:flex sm:justify-between">
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  prev();
+                }}
+                disabled={isFirstStep}
+                className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
+              >
+                back
+              </button>
+              <button
+                type="submit"
+                // disabled={isSubmitting || (isValid && isSubmitSuccessful)}
+                className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto"
+              >
+                submit
+              </button>
+            </div>
+          </form>
         </div>
-      </form>
-      <button
-        type="button"
-        onClick={(e) => {
-          // debugger;
-          e.preventDefault();
-          previous(formik.values, 'report');
-        }}
-        disabled={isFirstStep}
-        className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
-        // className="btn-primary mt-2 w-full justify-center rounded-md px-6 text-base shadow-sm sm:w-auto"
-      >
-        back
-      </button>
-    </section>
+      </section>
+    </>
   );
 }

@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .btn {
+    @apply w-full px-4 py-3 capitalize font-medium text-lg text-center bg-green-400;
+  }
+  .btn-primary {
+    @apply text-white border rounded-3xl border-transparent bg-orange-600  shadow-md transition-all duration-300 ease-linear hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2;
+  }
+  .btn-secondary {
+    @apply text-orange-600 border rounded-3xl border-orange-300 bg-white shadow-md transition-all duration-300 ease-linear hover:bg-orange-50
+    focus:outline-none focus:ring-2 focus:ring-slate-100 focus:ring-offset-2;
+  }
+}
+@layer utilities {
+  .animation-delay-200 {
+    animation-delay: 0.2s;
+  }
+  .animation-delay-400 {
+    animation-delay: 0.4s;
+  }
+}
+
+.dot {
+  @apply my-12 mx-1 h-4 w-4 rounded-full bg-orange-400;
+}

@@ -1,160 +1,132 @@
-import { useCallback } from 'react';
-import { useFormik } from 'formik';
-import { Label } from '../../../components/form/Label.jsx';
-import { SelectField } from '../../../components/form/SelectField.jsx';
+import { useCallback, useRef, useState, useEffect, useReducer } from 'react';
+import { reportSchema as schema } from './form/reportSchema.jsx';
 import { TextField } from '../../../components/form/TextField.jsx';
 import { TextAreaField } from '../../../components/form/TextAreaField.jsx';
-import { ErrorField } from '../../../components/form/ErrorField.jsx';
+import { SelectField } from '../../../components/form/SelectField.jsx';
+import { useForm } from 'react-hook-form';
 
 export default function NewReport(props) {
-  const { schema, firstStep, lastStep, currentStep, isFirstStep, isLastStep, next, previous, data } = props || {};
+  const {
+    currentStep,
+    lastStep,
+    isFirstStep,
+    isLastStep,
+    setStepStatus,
+    next,
+    prev,
+    getStepData,
+    setStepData,
+    getState,
+    initialValues,
+  } = props || {};
 
-  const handleSubmit = useCallback((values, actions) => {
-    debugger;
-  }, []);
-
-  const formik = useFormik({
-    initialValues: schema.initialValues,
-    onSubmit: handleSubmit,
-    // onReset: (values, actions) => {},
-    validationSchema: schema.validations,
-    validateOnChange: false,
+  const {
+    handleSubmit,
+    setFocus,
+    control,
+    formState: { isValid, isSubmitting, isSubmitSuccessful, errors },
+  } = useForm({
+    defaultValues: getStepData,
+    resolver: schema.validation,
   });
 
+  const onSubmit = (values, e) => {
+    next({
+      ...values,
+      lost_found_date: new Date(values.lost_found_date)
+        .toISOString()
+        .split('T')[0],
+    });
+  };
+  const onError = (errors, e) => {
+    const firstError = Object.keys(errors).reduce((field, a) => {
+      const fieldKey = field;
+      return errors[fieldKey] ? fieldKey : a;
+    }, null);
+    setFocus(firstError);
+
+    console.log('onErrors : ', errors, 'onErrors event: ', e);
+  };
+
   return (
-    <section className={'py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12'}>
-      <h3 className="text-lg font-medium text-gray-900">Send us a message</h3>
-      <form
-        name={schema.name}
-        onSubmit={formik.handleSubmit}
-        onReset={formik.handleReset}
-        className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8"
-      >
-        {/* <div>
-          <Label
-            htmlFor={schema.fields.report_type.attributes.name}
-            className={schema.classes.label}
-            content={schema.fields.report_type.label.content}
-          />
-          <SelectField
-            name={schema.fields.report_type.attributes.name}
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-            value={formik.values["report_type"]}
-            options={schema.fields.report_type.attributes.options}
-            className={schema.classes.input}
-          />
-          <ErrorField
-            error={formik.errors[schema.fields.report_type.attributes.name]}
-            touched={formik.touched[schema.fields.report_type.attributes.name]}
-          />
-        </div>
+    <section className="relative border-orange-100 bg-white shadow-xl rounded-2xl border">
+      <div className={'my-8 mx-5'}>
+        <h3 className="text-lg font-medium text-gray-900">Send us a message</h3>
+        <form
+          name={schema.name}
+          onSubmit={handleSubmit(onSubmit, onError)}
+          className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8"
+        >
+          <div>
+            <SelectField
+              control={control}
+              input={schema.fields.report_type.attributes}
+              label={schema.fields.report_type.label}
+              classes={schema.classes}
+              options={schema.fields.report_type.options}
+            />
+          </div>
 
-        <div>
-          <Label
-            htmlFor={schema.fields.lost_found_date.attributes.name}
-            className={schema.classes.label}
-            content={schema.fields.lost_found_date.label.content}
-          />
-          <TextField
-            name={schema.fields.lost_found_date.attributes.name}
-            type={schema.fields.lost_found_date.attributes.type}
-            className={schema.classes.input}
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-            value={formik.values[schema.fields.lost_found_date.attributes.name]}
-          />
-          <ErrorField
-            error={formik.errors[schema.fields.lost_found_date.attributes.name]}
-            touched={
-              formik.touched[schema.fields.lost_found_date.attributes.name]
-            }
-          />
-        </div>
+          <div>
+            <TextField
+              control={control}
+              input={schema.fields.lost_found_date.attributes}
+              label={schema.fields.lost_found_date.label}
+              classes={schema.classes}
+              pattern={'d{4}-d{2}-d{2}'}
+            />
+          </div>
 
-        <div className='sm:col-span-2'>
-          <Label
-            htmlFor={schema.fields.address.attributes.name}
-            className={schema.classes.label}
-            content={schema.fields.address.label.content}
-          />
-          <TextField
-            name={schema.fields.address.attributes.name}
-            type={schema.fields.address.attributes.type}
-            className={schema.classes.input}
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-            value={formik.values[schema.fields.address.attributes.name]}
-          />
-          <ErrorField
-            error={formik.errors[schema.fields.address.attributes.name]}
-            touched={formik.touched[schema.fields.address.attributes.name]}
-          />
-        </div>
+          <div className="sm:col-span-2">
+            <TextField
+              control={control}
+              input={schema.fields.address.attributes}
+              label={schema.fields.address.label}
+              classes={schema.classes}
+            />
+          </div>
 
-        <div className='sm:col-span-2'>
-          <Label
-            htmlFor={schema.fields.crossroads.attributes.name}
-            className={schema.classes.label}
-            content={schema.fields.crossroads.label.content}
-          />
-          <TextField
-            name={schema.fields.crossroads.attributes.name}
-            type={schema.fields.crossroads.attributes.type}
-            className={schema.classes.input}
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-            value={formik.values[schema.fields.crossroads.attributes.name]}
-          />
-          <ErrorField
-            error={formik.errors[schema.fields.crossroads.attributes.name]}
-            touched={formik.touched[schema.fields.crossroads.attributes.name]}
-          />
-        </div>
+          <div className="sm:col-span-2">
+            <TextField
+              control={control}
+              input={schema.fields.crossroads.attributes}
+              label={schema.fields.crossroads.label}
+              classes={schema.classes}
+            />
+          </div>
 
-        <div className='sm:col-span-2'>
-          <Label
-            htmlFor={schema.fields.comment.attributes.name}
-            className={schema.classes.label}
-            content={schema.fields.comment.label.content}
-          />
-          <TextAreaField
-            name={schema.fields.comment.attributes.name}
-            className={schema.classes.textarea}
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-            value={formik.values[schema.fields.comment.attributes.name]}
-            rows={5}
-          />
-          <ErrorField
-            error={formik.errors[schema.fields.comment.attributes.name]}
-            touched={formik.touched[schema.fields.comment.attributes.name]}
-          />
-        </div> */}
+          <div className="sm:col-span-2">
+            <TextAreaField
+              control={control}
+              input={schema.fields.comment.attributes}
+              label={schema.fields.comment.label}
+              classes={schema.classes}
+            />
+          </div>
 
-        <div className="sm:col-span-2 sm:flex sm:justify-between">
-          <button
-            type="submit"
-            className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto"
-            // className="btn-primary mt-2 w-full justify-center rounded-md px-6 text-base shadow-sm sm:w-auto"
-          >
-            Submit
-          </button>
-        </div>
-      </form>
-      <button
-        type="button"
-        onClick={(e) => {
-          // debugger;
-          e.preventDefault();
-          previous(formik.values, 'report');
-        }}
-        disabled={isFirstStep}
-        className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
-        // className="btn-primary mt-2 w-full justify-center rounded-md px-6 text-base shadow-sm sm:w-auto"
-      >
-        back
-      </button>
+          <div className="sm:col-span-2 sm:flex sm:justify-between">
+            <button
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                prev();
+              }}
+              disabled={isFirstStep}
+              className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto"
+            >
+              back
+            </button>
+            <button
+              type="submit"
+              // disabled={isSubmitting || (isValid && isSubmitSuccessful)}
+              className="btn"
+              // className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
     </section>
   );
 }

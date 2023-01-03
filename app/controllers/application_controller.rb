@@ -1,12 +1,14 @@
 class ApplicationController < ActionController::API
-    include ActionController::Cookies
-    include ActionController::RequestForgeryProtection
-    include ActiveStorage::SetCurrent
-    protect_from_forgery with: :exception, unless: -> { request.format.json? }
+  include ActionController::Cookies
+  include ActiveStorage::SetCurrent
+  include ActionController::RequestForgeryProtection
+  protect_from_forgery with: :exception, unless: -> { request.format.json? }
+  before_action :authenticate_user
+  before_action do
+    ActiveStorage::Current.url_options = { protocol: request.protocol, host: request.host, port: request.port }
+  end
 
-
-
-  protected
+  private
     def login(user)
       session[:user_id] = user.id
       user.touch(:last_signin_at)

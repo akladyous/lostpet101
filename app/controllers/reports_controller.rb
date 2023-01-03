@@ -1,10 +1,13 @@
 class ReportsController < ApplicationController
+  skip_before_action :authenticate_user, only: :index
+
+  skip_before_action :verify_authenticity_token
   before_action :set_report, only: %i[ show update destroy ]
+
 
   # GET /reports
   def index
     @reports = Report.all
-
     render json: @reports
   end
 
@@ -16,7 +19,7 @@ class ReportsController < ApplicationController
   # POST /reports
   def create
     @report = Report.new(report_params)
-
+    @report.user_id = current_user.id
     if @report.save
       render json: @report, status: :created, location: @report
     else
@@ -46,6 +49,10 @@ class ReportsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def report_params
-      params.require(:report).permit(:type, :lost_found_date, :address, :crossroads, :comment, :user_id)
+      params
+        .require(:report)
+        .permit( :type,  :lost_found_date,  :address,  :crossroads,  :comment,  :user_id,
+          pet_attributes: [:image, :name, :species, :gender, :size, :breed, :color, :coat, :age, :height, :weight, :microchip, :collar, :description]
+        )
     end
 end
