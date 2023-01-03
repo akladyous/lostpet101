@@ -4,7 +4,7 @@
 
 @layer components {
   .btn {
-    @apply w-full px-4 py-3 capitalize font-medium text-lg text-center;
+    @apply w-full px-4 py-3 capitalize font-medium text-lg text-center bg-green-400;
   }
   .btn-primary {
     @apply inline-flex items-center rounded-full border border-transparent bg-orange-600 px-5 py-3 text-sm font-medium capitalize text-white shadow-md transition-all duration-300 ease-linear hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2;

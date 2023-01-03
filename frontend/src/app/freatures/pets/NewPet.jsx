@@ -201,3 +201,5 @@ function NewPetForm(props) {
     </>
   );
 }
+
+export default NewPetForm;
