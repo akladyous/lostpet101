@@ -191,7 +191,6 @@ function NewPetForm(props) {
                 type="submit"
                 // disabled={isSubmitting || (isValid && isSubmitSuccessful)}
                 className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto"
-                // className="btn-primary mt-2 w-full justify-center rounded-md px-6 text-base shadow-sm sm:w-auto"
               >
                 submit
               </button>

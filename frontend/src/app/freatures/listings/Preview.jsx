@@ -68,76 +68,102 @@ export default function Preview(props) {
 
   return (
     <section className="relative border-orange-100 bg-white shadow-xl rounded-2xl border">
-      <div className="grid grid-cols-12 gap-2 space-y-2">
-        <div className="col-span-12 sm:col-span-5 h-[34rem] p-2">
+      <div className="grid grid-cols-12 gap-2 p-4">
+        <div className="col-span-12 sm:col-span-5 h-[34rem]">
           <img
             className="object-cover shadow-xl rounded-2xl h-full w-full"
             src={URL.createObjectURL(getState.onboardingData[1].image)}
             alt=""
           />
         </div>
-        <div className="col-span-12 sm:col-span-7">
-          <h3 className="text-3xl font-bold tracking-tight text-orange-600 uppercase">
+        <div className="col-span-12 sm:col-span-7 px-2 flex flex-col justify-between">
+          <h3 className="text-2xl font-bold tracking-tight text-orange-600 uppercase">
             {getState.onboardingData[1].name}
           </h3>
           <div className="grid grid-cols-12">
-            <div className="col-span-3">
-              <p className="py-1 text-gray-500 font-medium capitalize">
-                species
-              </p>
-              <p className="py-1 text-gray-500 font-medium capitalize">age</p>
-              <p className="py-1 text-gray-500 font-medium capitalize">
-                gender
-              </p>
-              <p className="py-1 text-gray-500 font-medium capitalize">breed</p>
-              <p className="py-1 text-gray-500 font-medium capitalize">size</p>
-              <p className="py-1 text-gray-500 font-medium capitalize">
-                collar
-              </p>
-              <p className="py-1 text-gray-500 font-medium capitalize">color</p>
-              <p className="py-1 text-gray-500 font-medium capitalize">
-                Date last seen
-              </p>
+            <div className="col-span-3 [&>p]:py-1">
+              {[
+                'species',
+                'age',
+                'gender',
+                'breed',
+                'size',
+                'collar',
+                'color',
+                'last seen',
+                'address',
+              ].map((attr, idx) => (
+                <p
+                  className="text-gray-500 font-medium capitalize"
+                  key={`${attr}-${idx}`}
+                >
+                  {attr}
+                </p>
+              ))}
             </div>
-            <div className="col-span-9">
-              <p className="py-1 text-gray-500  capitalize">
+            <div className="col-span-9 [&>p]:py-1">
+              <p className="text-gray-500  capitalize">
                 {getState.onboardingData[1].species}
               </p>
-              <p className="py-1 text-gray-500  capitalize">
+              <p className="text-gray-500  capitalize">
                 {/* {getState.onboardingData[0].report_type} */}
                 {getState.onboardingData[1].age} {' years'}
               </p>
-              <p className="py-1 text-gray-500  capitalize">
+              <p className="text-gray-500  capitalize">
                 {getState.onboardingData[1].gender}
               </p>
 
-              <p className="py-1 text-gray-500  capitalize">
+              <p className="text-gray-500  capitalize">
                 {getState.onboardingData[1].breed}
               </p>
-              <p className="py-1 text-gray-500  capitalize">
+              <p className="text-gray-500  capitalize">
                 {getState.onboardingData[1].size}
               </p>
-              <p className="py-1 text-gray-500  capitalize">
+              <p className="text-gray-500  capitalize">
                 {getState.onboardingData[1].collar}
               </p>
-              <p className="py-1 text-gray-500  capitalize">
+              <p className="text-gray-500  capitalize">
                 {getState.onboardingData[1].color}
               </p>
-              <p className="py-1 text-gray-500  capitalize">
-                {getState.onboardingData[0].lost_found_date}
+              <p className="text-gray-500  capitalize">
+                {new Date(
+                  getState.onboardingData[0].lost_found_date
+                ).toLocaleDateString()}
+              </p>
+              <p className=" text-gray-500  capitalize">
+                {getState.onboardingData[0].address}
               </p>
             </div>
           </div>
-          <p className="py-1 text-gray-500 font-medium capitalize">address</p>
-          <p className="py-1 text-gray-500  capitalize">
-            {getState.onboardingData[0].address}
-          </p>
-          <p className="py-1 text-gray-500 font-medium capitalize">
-            Owner Message
-          </p>
-          <p className="mt-3 mb-4 font-light text-gray-500 px-1">
+          {/* <p className="py-1 text-gray-500 font-medium capitalize">address</p> */}
+          <p className="text-gray-500 font-medium capitalize">Owner Message</p>
+          <p className="font-light text-gray-500 px-1 pt-1 pb-4">
             {getState.onboardingData[0].comment}
           </p>
+
+          <div className="sm:col-span-12 sm:flex sm:justify-between">
+            <div>
+              <p>account successfully created</p>
+            </div>
+            <div>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  next();
+                  handleSubmit();
+                }}
+                // disabled={isSubmitting || (isValid && isSubmitSuccessful)}
+                className="btn"
+                // className=" rounded-3xl px-5 py-3 text-orange-600 border border-orange-200 w-full "
+                // className="rounded-full w-full border px-4  py-3 capitalize text-orange-600 text-center "
+                // "mt-2 w-full rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto"
+                // className="btn-primary mt-2 w-full justify-center rounded-md px-6 text-base shadow-sm sm:w-auto"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* <pre className="text-xs">{JSON.stringify(getState, undefined, 2)}</pre> */}
@@ -145,33 +171,6 @@ export default function Preview(props) {
         {/* {data ? <p>{JSON.stringify(data, undefined, 2)}</p> : null} */}
         {/* {error ? <p className="py-1">{error}</p> : null} */}
       </div>
-
-      {/* <div className="sm:col-span-12 sm:flex sm:justify-between">
-        <button
-          type="button"
-          onClick={(e) => {
-            e.preventDefault();
-            prev();
-          }}
-          disabled={isFirstStep}
-          className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto"
-        >
-          back
-        </button>
-        <button
-          type="button"
-          onClick={(e) => {
-            e.preventDefault();
-            next();
-            handleSubmit();
-          }}
-          // disabled={isSubmitting || (isValid && isSubmitSuccessful)}
-          className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto"
-          // className="btn-primary mt-2 w-full justify-center rounded-md px-6 text-base shadow-sm sm:w-auto"
-        >
-          Submit
-        </button>
-      </div> */}
     </section>
   );
 }

@@ -3,7 +3,7 @@ import Steps from './steps.jsx';
 
 export default function ListingWizard() {
   return (
-    <div className={'md:w-4/6 max-w-7xl mx-auto md:my-20 my-10 py-10'}>
+    <div className={'md:w-4/5 max-w-7xl mx-auto md:my-20 my-10 py-10'}>
       <div className="relative sm:px-6 md:px-8 text-center md:text-start">
         <h1 className="text-warm-gray-900 text-4xl font-bold tracking-tight text-orange-600 sm:text-5xl lg:text-6xl">
           Listing Report
