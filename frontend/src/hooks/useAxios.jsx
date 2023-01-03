@@ -93,7 +93,13 @@ export function useAxios(_config, _options) {
   }, [options.manual, options.autoCancel]);
 
   return [
-    { isLoading: state.isLoading, error: state.error, data: state.data },
+    {
+      isLoading: state.isLoading,
+      isError: state.isError,
+      error: state.error,
+      isSuccess: state.isSuccess,
+      data: state.data,
+    },
     request,
     cancelOutstandingRequest,
   ];

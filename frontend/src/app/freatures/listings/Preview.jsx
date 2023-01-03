@@ -1,4 +1,5 @@
 import { useAxios } from '../../../hooks/useAxios.jsx';
+import { SpinnerCircle } from '../../../assets/images/icons/SpinnerCircle.jsx';
 
 export default function Preview(props) {
   const {
@@ -17,8 +18,11 @@ export default function Preview(props) {
     },
   };
 
-  const [{ loading, error, data }, request, cancelOutstandingRequest] =
-    useAxios(null, { manual: true });
+  const [
+    { isLoading, isError, error, isSuccess, data },
+    request,
+    cancelOutstandingRequest,
+  ] = useAxios(null, { manual: true });
 
   const handleSubmit = async () => {
     const formData = new FormData();
@@ -118,7 +122,6 @@ export default function Preview(props) {
               </p>
             </div>
           </div>
-          {/* <p className="py-1 text-gray-500 font-medium capitalize">address</p> */}
           <p className="text-gray-500 font-medium capitalize">Owner Message</p>
           <p className="font-light text-gray-500 px-1 pt-1 pb-4">
             {getState.onboardingData[0].comment}
@@ -139,6 +142,7 @@ export default function Preview(props) {
                 // disabled={isSubmitting || (isValid && isSubmitSuccessful)}
                 className="btn btn-secondary px-8"
               >
+                {isLoading ? <SpinnerCircle /> : null}
                 Submit
               </button>
             </div>
