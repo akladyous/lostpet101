@@ -8,7 +8,7 @@ export default function Root() {
   return (
     <div className="app">
       <Navbar />
-      {/* {window.location.pathname !== '/' ? <Header /> : ''} */}
+      <Header />
       <div className="content min-h-screen">
         <Outlet />
       </div>

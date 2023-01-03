@@ -6,7 +6,6 @@ import { petIntialValues } from '../pets/form/petSchema.jsx';
 import NewPet from '../pets/NewPet.jsx';
 import NewReport from '../reports/NewReport.jsx';
 import Preview from './Preview.jsx';
-import ListingSteps from './ListingSteps.jsx';
 
 const steps = [
   { name: 'report', title: '', href: '#', status: 'upcoming' },

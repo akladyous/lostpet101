@@ -16,7 +16,7 @@ class ReportsController < ApplicationController
     render json: @report
   end
 
-  # POST /reports
+# POST /reports
   def create
     @report = Report.new(report_params)
     @report.user_id = current_user.id
@@ -51,7 +51,7 @@ class ReportsController < ApplicationController
     def report_params
       params
         .require(:report)
-        .permit( :type,  :lost_found_date,  :address,  :crossroads,  :comment,  :user_id,
+        .permit( :report_type,  :lost_found_date,  :address,  :crossroads,  :comment,  :user_id,
           pet_attributes: [:image, :name, :species, :gender, :size, :breed, :color, :coat, :age, :height, :weight, :microchip, :collar, :description]
         )
     end
