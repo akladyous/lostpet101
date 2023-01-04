@@ -7,7 +7,7 @@ class ReportsController < ApplicationController
 
   # GET /reports
   def index
-    @reports = Report.all
+    @reports = Report.all.includes(:pet).order(created_at: :desc)
     render json: @reports
   end
 
