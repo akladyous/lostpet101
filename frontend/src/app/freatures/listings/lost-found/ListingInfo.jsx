@@ -30,41 +30,45 @@ export default function ListingInfo({ report }) {
         />
       </div>
       <div className="py-4 px-3">
-        <p className="mb-2 capitalize text-slate-500 leading-5 font-bold text-lg">
-          {report.report_type}
-        </p>
-        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-600 uppercase">
-          {report.pet.name}
-        </h5>
+        <div
+          id="petCard-body"
+          className="before:rouned-tl-[50%] before:rouned-tr[50%]"
+        >
+          <div id="petCard-detail">
+            <h4 className="mb-2 text-2xl font-bold tracking-tight text-[#dd2834] uppercase">
+              {report.pet.name}
+            </h4>
 
-        <p className="mb-2">
-          <span className="capitalize text-slate-500 leading-5 font-bold text-lg">
-            {report.pet.gender}
-          </span>
+            <p className="mb-2">
+              <span className="capitalize text-slate-800 leading-5 font-semibold text-sm">
+                {report.pet.gender}
+              </span>
 
-          {report.pet.breed ? (
-            <span className="capitalize text-slate-500 leading-5 font-bold text-lg">
-              {' '}
-              {report.pet.breed}
-            </span>
-          ) : null}
-        </p>
-        <p className="mb-2">
-          <span className="capitalize text-lg text-slate-500 leading-5 font-bold">
-            Last Seen{' '}
-          </span>
-          <span className="capitalize text-lg text-slate-500 leading-5 font-bold">
-            {new Date(report.lost_found_date).toLocaleDateString('en-US', {
-              day: 'numeric',
-              month: 'short',
-              year: 'numeric',
-            })}
-          </span>
-        </p>
-        <p className="mb-2 capitalize text-sm text-slate-600 italic leading-5 font-semibold">
-          reported
-          <span>{` ${moment(report.lost_found_date).fromNow()}`}</span>
-        </p>
+              {report.pet.breed ? (
+                <span className="capitalize text-slate-500 leading-5 font-semibold text-xs italic">
+                  {' '}
+                </span>
+              ) : null}
+              <span>{report.pet.breed}</span>
+            </p>
+            <p className="mb-2">
+              <span className="capitalize text-sm text-slate-500 leading-5 font-semibold">
+                Last Seen{' '}
+              </span>
+              <span className="capitalize text-sm text-slate-500 leading-5 font-semibold">
+                {new Date(report.lost_found_date).toLocaleDateString('en-US', {
+                  day: 'numeric',
+                  month: 'short',
+                  year: 'numeric',
+                })}
+              </span>
+            </p>
+            <p className="mb-2 capitalize text-xs text-slate-500 italic leading-5 font-semibold">
+              reported
+              <span>{` ${moment(report.lost_found_date).fromNow()}`}</span>
+            </p>
+          </div>
+        </div>
         <div className="pt-3">
           <button className="btn btn-secondary w-full">contact</button>
         </div>

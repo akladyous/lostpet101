@@ -4,14 +4,16 @@ class ReportsController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :set_report, only: %i[ show update destroy ]
 
-
-  # GET /reports
   def index
     @reports = Report.all.includes(:pet).order(created_at: :desc)
     render json: @reports
   end
 
-  # GET /reports/1
+  def search
+    @reports = Report.search(search_params)
+    render json: @reports, status: :ok
+  end
+
   def show
     render json: @report
   end
@@ -48,6 +50,9 @@ class ReportsController < ApplicationController
     end
 
     # Only allow a list of trusted parameters through.
+    def search_params
+      params.permit(:name, :species, :breed).reject! { |_, v| v.blank? }
+    end
     def report_params
       params
         .require(:report)

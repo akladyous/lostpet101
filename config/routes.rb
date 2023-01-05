@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   resources :pets
-  resources :reports
+  resources :reports do
+      post :search, on: :collection
+  end
+
   namespace :users, defaults: {format: :json} do
     post 'signin', to: 'session#create'
     delete 'signout', to: 'session#destroy'
@@ -13,3 +16,4 @@ Rails.application.routes.draw do
     patch 'reset_password',  to: 'reset_password#update'
   end
 end
+# listings_posts GET  /listings/posts(.:format) listings/posts#index

@@ -16,6 +16,21 @@ export const reportsSlice = apiSlice.injectEndpoints({
       },
       keepUnusedDataFor: 5,
     }),
+    searchReports: build.mutation({
+      query: (body) => ({
+        url: 'reports/search',
+        method: 'POST',
+        body: { body },
+      }),
+      transformErrorResponse: (response, meta, args) => {
+        if (response.error?.reponse) {
+          return response.error.response.data;
+        } else {
+          return response.error;
+        }
+      },
+      keepUnusedDataFor: 5,
+    }),
     createReport: build.mutation({
       query: (body) => ({
         url: 'reports',
