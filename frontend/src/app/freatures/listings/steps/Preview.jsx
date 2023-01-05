@@ -16,7 +16,7 @@ export default function Preview(props) {
   } = props || {};
 
   const navigate = useNavigate();
-  const [{ isLoading, isError, error, isSuccess, data }, request] = useAxios(
+  const [request, { isLoading, isError, error, isSuccess, data }] = useAxios(
     null,
     { manual: true }
   );
@@ -48,9 +48,7 @@ export default function Preview(props) {
       navigate('/', { replace: true });
     }, 2000);
   };
-
-  // console.log('preview component - state : ', getState);
-
+  console.log('onboardingData : ', getState.onboardingData);
   return (
     <section className="relative border-orange-100 bg-white shadow-xl rounded-2xl border">
       <div className="grid grid-cols-12 gap-2 p-4">

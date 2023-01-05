@@ -32,9 +32,15 @@ function reducer(state, action) {
     case actions.END:
       return { ...state, isLoading: false };
     case actions.SUCCESS:
-      return { ...state, data: action.payload, isSuccess: true };
+      return {
+        ...state,
+        data: action.payload,
+        isSuccess: true,
+        isError: false,
+        error: null,
+      };
     case actions.ERROR:
-      return { ...state, error: action.payload, isError: true };
+      return { ...state, error: { ...action.payload }, isError: true };
     default:
       break;
   }
@@ -70,10 +76,16 @@ export function useAxios(_config, _options) {
       if (error.response) {
         dispatch({
           type: actions.ERROR,
-          payload: error.response.data.error,
+          payload: {
+            data: error.response.data,
+            status: error.response.status,
+          },
         });
       } else {
-        dispatch({ type: actions.ERROR, payload: error.message });
+        dispatch({
+          type: actions.ERROR,
+          payload: { data: { message: error.message }, status: error.code },
+        });
       }
     } finally {
       dispatch({ type: actions.END });
@@ -93,6 +105,7 @@ export function useAxios(_config, _options) {
   }, [options.manual, options.autoCancel]);
 
   return [
+    request,
     {
       isLoading: state.isLoading,
       isError: state.isError,
@@ -100,7 +113,5 @@ export function useAxios(_config, _options) {
       isSuccess: state.isSuccess,
       data: state.data,
     },
-    request,
-    cancelOutstandingRequest,
   ];
 }

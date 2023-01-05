@@ -18,7 +18,6 @@ class ReportsController < ApplicationController
     render json: @report
   end
 
-# POST /reports
   def create
     @report = Report.new(report_params)
     @report.user_id = current_user.id
