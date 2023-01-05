@@ -25,8 +25,8 @@ class Report < ApplicationRecord
     params.except(:name).each do |k, v|
       sub_query = { k => v }
       sub_query.transform_keys!(&:to_sym)
-      # query = query.joins(:pet).where(pets: sub_query)
-      query = query.where(sanitize_sql_hash_for_assignment(sub_query, self))
+      query = query.joins(:pet).where(pets: sub_query)
+      # query = query.where(sanitize_sql_hash_for_assignment(sub_query, self))
     end
     query
   end

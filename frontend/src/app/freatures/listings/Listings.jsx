@@ -1,18 +1,35 @@
 import { useCallback, useEffect } from 'react';
-import { useShowReportsQuery } from '../../../state/api/reportsSlice.js';
+import { useSearchReportsMutation } from '../../../state/api/reportsSlice.js';
 import ListingsSearch from './lost-found/ListingsSearch.jsx';
 import ListMapper from '../../../hooks/ListMapper.jsx';
 import ListingInfo from './lost-found/ListingInfo.jsx';
 import { BouncingLoader } from '../../../components/ui/BouncingLoader.jsx';
 
 export default function Listings() {
-  const { data, error, isLoading, isSuccess, isError } = useShowReportsQuery();
+  const [searchReports, { data, error, isLoading, isSuccess, isError }] =
+    useSearchReportsMutation();
 
-  const onSubmit = useCallback((values, event) => {
-    console.log('values : ', values);
-  }, []);
-  const onError = useCallback(() => {
-    console.log('error : ', error);
+  const onSubmit = useCallback(
+    async (values, event) => {
+      await searchReports(values);
+    },
+    [useSearchReportsMutation]
+  );
+  const onError = useCallback(
+    (error) => {
+      console.log('error : ', error);
+    },
+    [useSearchReportsMutation]
+  );
+
+  useEffect(() => {
+    searchReports()
+      .unwrap()
+      .then((res) => {
+        // debugger;
+        console.log(res);
+      });
+    // console.log('componentDidMound');
   }, []);
 
   return (

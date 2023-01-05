@@ -49,7 +49,7 @@ export default function ListingInfo({ report }) {
                   {' '}
                 </span>
               ) : null}
-              <span>{report.pet.breed}</span>
+              <span className="capitalize">{report.pet.breed}</span>
             </p>
             <p className="mb-2">
               <span className="capitalize text-sm text-slate-500 leading-5 font-semibold">

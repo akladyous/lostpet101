@@ -20,7 +20,7 @@ export const reportsSlice = apiSlice.injectEndpoints({
       query: (body) => ({
         url: 'reports/search',
         method: 'POST',
-        body: { body },
+        body,
       }),
       transformErrorResponse: (response, meta, args) => {
         if (response.error?.reponse) {
@@ -59,6 +59,7 @@ export const reportsSlice = apiSlice.injectEndpoints({
 });
 export const {
   useShowReportsQuery,
+  useSearchReportsMutation,
   useCreateReportMutation,
   useUpdateReportMutation,
   useDeleteReportMutation,

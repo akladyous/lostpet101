@@ -22,10 +22,10 @@ def generate_pet
   }
   {
     name: Faker::Creature::Animal.name,
-    species:,
+    species: species,
     gender: %w[male female].sample,
     size: %w[small medium large].sample,
-    breed: -> { species == 'dog' ? Faker::Creature::Dog.breed : Faker::Creature::Cat.breed }.call,
+    breed: -> { species == 'dog' ? Faker::Creature::Dog.breed : Faker::Creature::Cat.breed }.call.downcase,
     color: color_list.call.sample,
     age: rand(1..15),
     # coat: coat_list.call.sample,

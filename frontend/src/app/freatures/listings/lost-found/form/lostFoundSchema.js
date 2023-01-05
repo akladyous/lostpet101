@@ -33,7 +33,7 @@ export const lostFoundSchema = {
     formError: 'text-sm text-red-600',
   },
   validationSchema: Yup.object().shape({
-    name: Yup.string().required('pet name is equired').min(5),
+    name: Yup.string(),
     species: Yup.string(),
     description: Yup.string(),
     breed: Yup.string(),
