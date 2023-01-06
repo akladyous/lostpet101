@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :user_addresses
   resources :pets
   resources :reports do
       post :search, on: :collection

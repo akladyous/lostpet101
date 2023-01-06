@@ -24,14 +24,14 @@ function App() {
           <Route path="about" element={<Home />} />
           <Route path="feedback" element={<Home />} />
           <Route path="users" element={<Users />}>
-            <Route index path="signin" element={<SignIn />} />
-            <Route index path="signout" element={<SignOut />} />
-            <Route index path="signup" element={<SignUp />} />
-            <Route index path="profile" element={<Profile />} />
+            <Route path="signin" element={<SignIn />} />
+            <Route path="signout" element={<SignOut />} />
+            <Route path="signup" element={<SignUp />} />
+            <Route path="profile" element={<Profile />} />
           </Route>
           <Route path="listings" element={<ListingsRoot />}>
             <Route index element={<Listings />} />
-            <Route index path="new" element={<ListingWizard />} />
+            <Route path="new" element={<ListingWizard />} />
             <Route
               caseSensitive
               path=":petName"
