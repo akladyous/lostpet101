@@ -21,7 +21,7 @@ export default function ListingWizard() {
 
   return (
     <>
-      <div className="md:w-3/4 max-w-7xl mx-auto md:my-20 my-10 py-10">
+      <div className="max-w-7xl mx-auto md:my-20 my-10 py-10">
         <div className="relative px-8 text-center md:text-start">
           <h1 className="text-warm-gray-900 text-4xl font-bold tracking-tight text-orange-600 sm:text-5xl lg:text-6xl">
             Listing Report

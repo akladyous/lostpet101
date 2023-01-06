@@ -10,13 +10,17 @@ import ListingsRoot from './freatures/listings/ListingsRoot.jsx';
 
 import ListingWizard from './freatures/listings/steps/ListingWizard.jsx';
 import Listings from './freatures/listings/Listings.jsx';
+import ReportRoot from './freatures/reports/ReportsRoot.jsx';
+import ReportCard from './freatures/reports/ReportCard.jsx';
+import { withLocationProps } from '../hooks/withLocationProps.jsx';
+const ReportInfo = withLocationProps(ReportCard);
 
 function App() {
   return (
     <div className="main">
       <Routes>
         <Route path="/" element={<Root />}>
-          <Route path="/" element={<Home />} />
+          <Route index element={<Home />} />
           <Route path="about" element={<Home />} />
           <Route path="feedback" element={<Home />} />
           <Route path="users" element={<Users />}>
@@ -26,11 +30,17 @@ function App() {
             <Route index path="profile" element={<Profile />} />
           </Route>
           <Route path="listings" element={<ListingsRoot />}>
-            <Route index path="" element={<Listings />} />
+            <Route index element={<Listings />} />
             <Route index path="new" element={<ListingWizard />} />
+            <Route
+              caseSensitive
+              path=":petName"
+              element={<ReportInfo resourceName="report" />}
+            />
             {/* <Route index path="report" element={<NewReport />} /> */}
             {/* <Route index path="pet" element={<NewPet />} /> */}
           </Route>
+          <Route path="reports" element={<ReportRoot />} />
         </Route>
       </Routes>
     </div>

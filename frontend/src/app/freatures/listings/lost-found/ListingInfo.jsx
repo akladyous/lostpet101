@@ -1,4 +1,6 @@
-import { useState, useCallback } from 'react';
+/* eslint-disable react/prop-types */
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import moment from 'moment';
 import { BouncingLoader } from '../../../../components/ui/BouncingLoader.jsx';
 
@@ -70,7 +72,14 @@ export default function ListingInfo({ report }) {
           </div>
         </div>
         <div className="pt-3">
-          <button className="btn btn-secondary w-full">contact</button>
+          <Link
+            to={`/listings/${report.pet.name}`}
+            state={report}
+            key={report.pet.name}
+            className="btn btn-secondary w-full"
+          >
+            Pet Info
+          </Link>
         </div>
       </div>
     </div>

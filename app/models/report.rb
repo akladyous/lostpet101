@@ -18,7 +18,7 @@ class Report < ApplicationRecord
   end
 
   def self.search(params)
-    return all.joins(:pet) unless params.present?
+    return all.joins(:pet).order(created_at: :desc) unless params.present?
     query = Report.joins(:pet)
     query = query.where(pets: { name: params[:name]}) if params.include?(:name)
 
@@ -28,7 +28,7 @@ class Report < ApplicationRecord
       query = query.joins(:pet).where(pets: sub_query)
       # query = query.where(sanitize_sql_hash_for_assignment(sub_query, self))
     end
-    query
+    query.order(created_at: :desc)
   end
 
   scope :random_sample, -> (num = nil) { order('RANDOM()').take(num || 10) }

@@ -112,10 +112,6 @@ export const petSchema = {
     species: Yup.string()
       .required('pet species is Required')
       .oneOf(['dog', 'cat']),
-    description: Yup.string()
-      .required('pet description is equired')
-      .min(5)
-      .max(255),
     breed: Yup.string(),
     color: Yup.string(),
     age: Yup.number()
@@ -132,6 +128,10 @@ export const petSchema = {
     size: Yup.string()
       .required()
       .oneOf(['small', 'medium', 'large', 'giant'], 'Select pet size'),
+    description: Yup.string()
+      .required('pet description is equired')
+      .min(5)
+      .max(255),
   }),
   get initialValues() {
     const defaultValues = {};

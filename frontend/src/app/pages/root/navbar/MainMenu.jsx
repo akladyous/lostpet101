@@ -9,12 +9,13 @@ export default function MainMenu() {
       >
         Testimonials
       </a>
-      <a
-        href="/"
+      <Link
+        to="listings"
+        state={'Lost & found Pet'}
         className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
       >
         Lost & Found
-      </a>
+      </Link>
       <Link
         to="listings/new"
         state={'Lost & found Pet'}
