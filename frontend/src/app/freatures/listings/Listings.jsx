@@ -35,7 +35,6 @@ export default function Listings() {
         data: null,
       });
     }
-    // console.log('componentDidMound');
     return () => {
       isMounted.current = false;
     };
@@ -44,7 +43,6 @@ export default function Listings() {
     debugger;
     console.error('error: ', error);
   }
-  // console.log('data : ', data);
   return isMounted.current ? (
     <>
       <section className="relative border-orange-100 bg-white shadow-xl rounded-2xl border mb-5 p-5">
