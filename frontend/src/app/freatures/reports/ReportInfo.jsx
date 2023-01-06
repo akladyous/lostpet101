@@ -2,9 +2,9 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import moment from 'moment';
-import { BouncingLoader } from '../../../../components/ui/BouncingLoader.jsx';
+import { BouncingLoader } from '../../../components/ui/BouncingLoader.jsx';
 
-export default function ListingInfo({ report }) {
+export default function ReportInfo({ report }) {
   const [isLoading, setIsLoading] = useState(true);
 
   return report ? (

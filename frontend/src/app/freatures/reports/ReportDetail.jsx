@@ -1,4 +1,4 @@
-export default function ReportCard(props) {
+export default function ReportDetail(props) {
   const { report, children } = props || {};
 
   return report ? (

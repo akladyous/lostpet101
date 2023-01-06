@@ -11,9 +11,9 @@ import ListingsRoot from './freatures/listings/ListingsRoot.jsx';
 import ListingWizard from './freatures/listings/steps/ListingWizard.jsx';
 import Listings from './freatures/listings/Listings.jsx';
 import ReportRoot from './freatures/reports/ReportsRoot.jsx';
-import ReportCard from './freatures/reports/ReportCard.jsx';
+import ReportDetail from './freatures/reports/ReportDetail.jsx';
 import { withLocationProps } from '../hooks/withLocationProps.jsx';
-const ReportInfo = withLocationProps(ReportCard);
+const ReportInfo = withLocationProps(ReportDetail);
 
 function App() {
   return (

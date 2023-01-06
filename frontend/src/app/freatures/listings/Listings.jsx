@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef } from 'react';
 import { useAxios } from '../../../hooks/useAxios.jsx';
 import ListingsSearch from './lost-found/ListingsSearch.jsx';
 import ListMapper from '../../../hooks/ListMapper.jsx';
-import ListingInfo from './lost-found/ListingInfo.jsx';
+import ReportInfo from '../reports/ReportInfo.jsx';
 import { BouncingLoader } from '../../../components/ui/BouncingLoader.jsx';
 
 export default function Listings() {
@@ -59,7 +59,7 @@ export default function Listings() {
             <ListMapper
               items={data}
               resourceName="report"
-              itemComponent={ListingInfo}
+              itemComponent={ReportInfo}
             />
           ) : null}
         </div>

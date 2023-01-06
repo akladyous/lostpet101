@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAxios } from '../../../../hooks/useAxios.jsx';
 import { SpinnerCircle } from '../../../../assets/images/icons/SpinnerCircle.jsx';
 import { MessageField } from '../../../../components/form/ErrorMessage.jsx';
-import ReportCard from '../../reports/ReportCard.jsx';
+import ReportDetail from '../../reports/ReportDetail.jsx';
 
 export default function Preview(props) {
   const {
@@ -59,7 +59,7 @@ export default function Preview(props) {
   console.log(report);
   return (
     <>
-      <ReportCard report={report}>
+      <ReportDetail report={report}>
         <div className="sm:col-span-12 sm:flex sm:justify-between items-center ">
           <MessageField
             {...(isError && { isError: isError, message: error })}
@@ -85,7 +85,7 @@ export default function Preview(props) {
             </button>
           </div>
         </div>
-      </ReportCard>
+      </ReportDetail>
     </>
   );
 }
