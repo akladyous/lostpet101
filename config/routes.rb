@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :report_requests
+  resources :user_profiles
   resources :user_addresses
   resources :pets
   resources :reports do

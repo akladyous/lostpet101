@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_17_164614) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_06_203457) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -58,6 +58,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_17_164614) do
     t.index ["report_id"], name: "index_pets_on_report_id"
   end
 
+  create_table "report_requests", force: :cascade do |t|
+    t.text "message"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_report_requests_on_user_id"
+  end
+
   create_table "reports", force: :cascade do |t|
     t.integer "report_type", limit: 2, default: 0
     t.datetime "lost_found_date", default: -> { "CURRENT_DATE" }
@@ -68,6 +76,33 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_17_164614) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_reports_on_user_id"
+  end
+
+  create_table "user_addresses", force: :cascade do |t|
+    t.string "address"
+    t.string "city"
+    t.string "zip_code"
+    t.string "state"
+    t.string "country"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_addresses_on_user_id"
+  end
+
+  create_table "user_profiles", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "home_phone"
+    t.string "cell_phone"
+    t.string "job_title"
+    t.string "company"
+    t.string "website"
+    t.string "blog"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_profiles_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -84,5 +119,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_17_164614) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "pets", "reports"
+  add_foreign_key "report_requests", "users"
   add_foreign_key "reports", "users"
+  add_foreign_key "user_addresses", "users"
+  add_foreign_key "user_profiles", "users"
 end
