@@ -22,9 +22,6 @@ function NewPetForm(props) {
     initialValues,
   } = props || {};
 
-  // console.log('NewPetForm -> getState    : ', getState);
-  console.log('NewPetForm -> getStepData : ', getStepData);
-
   const [petImage, setPetImage] = useState(() => {
     if (getStepData.image && getStepData.image instanceof File) {
       return URL.createObjectURL(getStepData.image);

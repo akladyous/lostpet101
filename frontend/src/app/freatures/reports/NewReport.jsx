@@ -20,8 +20,6 @@ export default function NewReport(props) {
     initialValues,
   } = props || {};
 
-  // console.log('NewReport -> getState    : ', getState);
-  console.log('NewReport -> getStepData : ', getStepData);
   const {
     handleSubmit,
     setFocus,
