@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_one_attached :avatar #, service: :amazon
   has_many :reports, dependent: :destroy
   has_many :pets, through: :reports
+  has_many :report_requests, dependent: :destroy
 
   validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: /\A[^@\s]+@[^@\s]+\z/, message: 'invalid email format' }
   validates :password, presence: true, length: { in: 5..32 }, confirmation: { case_sensitive: true }

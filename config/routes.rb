@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   resources :pets
   resources :reports do
       post :search, on: :collection
+      # resources :report_requests, as: 'request'
   end
+
 
   namespace :users, defaults: {format: :json} do
     post 'signin', to: 'session#create'
