@@ -15,7 +15,7 @@ export default function ReportDetail(props) {
             alt=""
           />
         </div>
-        <div className="col-span-12 sm:col-span-7 px-2 flex flex-col justify-between">
+        <div className="col-span-12 sm:col-span-7 px-2 flex flex-col justify-between mt-4 sm:mt-1">
           <h3 className="text-2xl font-bold tracking-tight text-orange-600 uppercase">
             {report.pet.name}
           </h3>
