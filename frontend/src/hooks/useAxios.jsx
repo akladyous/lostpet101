@@ -34,13 +34,13 @@ function reducer(state, action) {
     case actions.SUCCESS:
       return {
         ...state,
-        data: action.payload,
         isSuccess: true,
+        data: action.payload,
         isError: false,
         error: null,
       };
     case actions.ERROR:
-      return { ...state, error: { ...action.payload }, isError: true };
+      return { ...state, isError: true, error: { ...action.payload } };
     default:
       break;
   }

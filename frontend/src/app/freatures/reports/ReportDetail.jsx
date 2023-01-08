@@ -1,6 +1,10 @@
+import { useLocation, useResolvedPath } from 'react-router-dom';
 export default function ReportDetail(props) {
   const { report, children } = props || {};
-
+  // const resolved = useResolvedPath('/listings');
+  const loc = useLocation();
+  // console.log('useLocation : ', loc);
+  // console.log('useResolvedPath : ', resolved);
   return report ? (
     <section className="relative border-orange-100 bg-white shadow-xl rounded-2xl border">
       <div className="grid grid-cols-12 gap-2 p-4">

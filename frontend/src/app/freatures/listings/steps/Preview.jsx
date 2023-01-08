@@ -1,84 +1,109 @@
+/* eslint-disable no-unused-vars */
 import { useNavigate } from 'react-router-dom';
 import { useAxios } from '../../../../hooks/useAxios.jsx';
 import { SpinnerCircle } from '../../../../assets/images/icons/SpinnerCircle.jsx';
 import { MessageField } from '../../../../components/form/ErrorMessage.jsx';
 import ReportDetail from '../../reports/ReportDetail.jsx';
+import { useEffect, useState, useRef, useCallback } from 'react';
+import { setFormData } from '../lost-found/form/lostFoundFormData.js';
 
 export default function Preview(props) {
-  const {
-    currentStep,
-    lastStep,
-    isFirstStep,
-    isLastStep,
-    next,
-    prev,
-    getStepData,
-    getState,
-  } = props || {};
-
+  const [message, setMessage] = useState('');
   const navigate = useNavigate();
+  const isMounted = useRef(false);
   const [request, { isLoading, isError, error, isSuccess, data }] = useAxios(
     null,
     { manual: true }
   );
 
-  const handleSubmit = async () => {
-    const formData = new FormData();
+  const {
+    currentStep,
+    lastStep,
+    isFirstStep,
+    isLastStep,
+    getState,
+    getStepData,
+    next,
+    prev,
+    setStepData,
+    setStepStatus,
+  } = props || {};
 
-    for (let key in getState.onboardingData[0]) {
-      formData.append(key, getState.onboardingData[0][key]);
+  const handleForm = useCallback(() => {
+    const { formData } = setFormData(getStepData);
+    if (isSuccess) return;
+    if (formData && formData instanceof FormData) {
+      request({
+        method: 'post',
+        url: 'reports',
+        headers: { 'content-type': 'multipart/form-data' },
+        data: formData,
+      });
     }
-    for (let key in getState.onboardingData[1]) {
-      formData.append(
-        `pet_attributes[${key}]`,
-        getState.onboardingData[1][key]
-      );
-    }
-    // for (let val of formData.entries()) {
-    //   console.log(val[0] + ', ' + val[1]);
-    // }
+  }, [getStepData, request, isSuccess]);
 
-    await request({
-      method: 'post',
-      url: 'reports',
-      headers: { 'content-type': 'multipart/form-data' },
-      data: formData,
-    });
-
-    setTimeout(() => {
-      navigate('/', { replace: true });
-    }, 2000);
-  };
   const report = {
-    ...getState.onboardingData[0],
+    ...getStepData[0],
     pet: {
-      ...getState.onboardingData[1],
-      photo_url: URL.createObjectURL(getState.onboardingData[1].image),
+      ...getStepData[1],
+      photo_url: getStepData[1].image
+        ? URL.createObjectURL(getStepData[1].image)
+        : null,
     },
   };
-  console.log(report);
+
+  useEffect(() => {
+    if (isError && error) {
+      setMessage(error.data.message);
+    }
+  }, [isError, error]);
+
+  useEffect(() => {
+    if (isSuccess && data) {
+      setMessage('Listing successfully created');
+      setTimeout(() => {
+        debugger;
+        navigate(`/listings/${getStepData[1].name}`, {
+          state: data,
+        });
+      }, 3000);
+    }
+  }, [isSuccess, data]);
+
   return (
     <>
       <ReportDetail report={report}>
-        <div className="sm:col-span-12 sm:flex sm:justify-between items-center ">
+        <div className="sm:col-span-12 sm:flex sm:justify-between sm:items-center">
           <MessageField
-            {...(isError && { isError: isError, message: error })}
-            {...(isSuccess && {
-              isSuccess: isSuccess,
-              message: 'listing successfully created',
-            })}
+            isError={isError}
+            isSuccess={isSuccess}
+            message={message}
             classes="capitalize text-lg"
           />
           <div>
+            {!isSuccess && (
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  prev();
+                }}
+                disabled={isSuccess}
+                className="btn btn-secondary py-2 px-6 mx-1"
+              >
+                {isLoading ? <SpinnerCircle classes="text-orange-500" /> : null}
+                back
+              </button>
+            )}
+
             <button
               type="button"
               onClick={(e) => {
                 e.preventDefault();
-                next();
-                handleSubmit();
+                handleForm();
               }}
-              // disabled={isSubmitting || (isValid && isSubmitSuccessful)}
-              className="btn btn-secondary px-8"
+              // disabled={isSuccess}
+              className="btn btn-secondary py-2 px-4 mx-1"
             >
               {isLoading ? <SpinnerCircle classes="text-orange-500" /> : null}
               Submit

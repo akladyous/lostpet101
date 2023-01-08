@@ -6,6 +6,7 @@ import { petIntialValues } from '../../pets/form/petSchema.jsx';
 import NewPet from '../../pets/NewPet.jsx';
 import NewReport from '../../reports/NewReport.jsx';
 import Preview from './Preview.jsx';
+import { setFormData } from '../lost-found/form/lostFoundFormData.js';
 
 const steps = [
   { name: 'report', title: '', href: '#', status: 'upcoming' },
@@ -17,6 +18,7 @@ export default function ListingWizard() {
   const { currentStep, ...rest } = useFormSteps({
     steps: steps,
     initialValues: [reportInitialValues, petIntialValues],
+    formHandler: setFormData,
   });
 
   return (

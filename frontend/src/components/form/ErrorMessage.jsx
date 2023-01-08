@@ -7,7 +7,7 @@ export function MessageField({ isError, isSuccess, message, classes }) {
         className={clsx(
           'text-sm',
           { ['text-red-600']: isError },
-          { ['text-orange-500']: isSuccess },
+          { ['text-slate-600']: isSuccess },
           classes
         )}
       >

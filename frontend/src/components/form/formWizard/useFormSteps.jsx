@@ -42,10 +42,12 @@ function reducer(state, action) {
 }
 
 function initializeState(stepsData) {
+  const { steps, formHandler } = stepsData;
   return Object.assign(
     { currentIndex: 0 },
-    { steps: { ...stepsData.steps } },
-    { onboardingData: { ...stepsData.initialValues } }
+    { steps: { ...steps } },
+    { formHandler },
+    { onboardingData: { ...[...stepsData.initialValues, {}] } }
     //onBoardingData = initialValues for each form step + empty object to handle the final step
   );
 }
@@ -53,23 +55,43 @@ function initializeState(stepsData) {
 export function useFormSteps(initialState) {
   const [state, dispatch] = useReducer(reducer, initialState, initializeState);
 
+  const currentStep = state.currentIndex;
+  const lastStep = Object.keys(state.steps).length - 1;
+  const isFirstStep = state.currentIndex === 0;
+  const isLastStep = state.currentIndex === lastStep;
+
   const getStepData = useMemo(() => {
+    if (isLastStep) {
+      return Object.values(state.onboardingData).slice(0, -1);
+    }
     return state.onboardingData[state.currentIndex];
   });
 
   const setStepData = (stepData) => {
-    dispatch({ type: 'setData', payload: stepData });
+    dispatch({ type: 'setStepData', payload: stepData });
   };
 
-  const next = (stepData) => {
+  const next = (stepData, callback = null) => {
     if (state.currentIndex < lastStep) {
       if (stepData) {
         dispatch({ type: 'setStepData', payload: stepData });
       }
       dispatch({ type: 'next' });
     } else if (state.currentIndex === lastStep) {
-      if (typeof stepData === 'function') onFinish(stepData);
+      if (typeof callback === 'function') {
+        onFinish(callback);
+        return;
+      }
     }
+    /*
+    const isPenultimateStep = lastStep - state.currentIndex === 1;
+
+    if (isPenultimateStep) {
+      onFinish(state.formHandler);
+      const lastStepData = Object.values(state.onboardingData).slice(0, -1);
+      dispatch({ type: 'setStepData', payload: lastStepData });
+    }
+    */
   };
 
   const prev = () => {
@@ -80,26 +102,23 @@ export function useFormSteps(initialState) {
     dispatch({ type: 'setStepStatus', payload: status });
   };
 
-  const lastStep = Object.keys(state.steps).length - 1;
-
   const onFinish = (callback) => {
     if (typeof callback === 'function') {
       const lastStepData = Object.values(state.onboardingData).slice(0, -1);
       callback({ ...lastStepData });
     }
   };
-  const getState = state;
 
   return {
-    currentStep: state.currentIndex,
+    currentStep: currentStep,
     lastStep: lastStep,
-    isFirstStep: state.currentIndex === 0,
-    isLastStep: state.currentIndex === lastStep - 1,
-    setStepStatus,
+    isFirstStep: isFirstStep,
+    isLastStep: isLastStep,
+    getState: state,
+    getStepData,
     next,
     prev,
     setStepData,
-    getStepData,
-    getState,
+    setStepStatus,
   };
 }

@@ -11,15 +11,17 @@ export default function NewReport(props) {
     lastStep,
     isFirstStep,
     isLastStep,
-    setStepStatus,
+    getState,
+    getStepData,
     next,
     prev,
-    getStepData,
     setStepData,
-    getState,
+    setStepStatus,
     initialValues,
   } = props || {};
 
+  // console.log('NewReport -> getState    : ', getState);
+  console.log('NewReport -> getStepData : ', getStepData);
   const {
     handleSubmit,
     setFocus,
@@ -30,8 +32,8 @@ export default function NewReport(props) {
     resolver: schema.validation,
   });
 
-  const onSubmit = (values, e) => {
-    next({
+  const onSubmit = async (values) => {
+    await next({
       ...values,
       lost_found_date: new Date(values.lost_found_date)
         .toISOString()
@@ -44,8 +46,6 @@ export default function NewReport(props) {
       return errors[fieldKey] ? fieldKey : a;
     }, null);
     setFocus(firstError);
-
-    // console.log('onErrors : ', errors, 'onErrors event: ', e);
   };
 
   return (

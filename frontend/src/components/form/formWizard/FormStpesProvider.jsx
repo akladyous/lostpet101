@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 
 export default function FormStpesProvider(props) {
   const {
@@ -14,9 +14,9 @@ export default function FormStpesProvider(props) {
     setStepData,
     getState,
   } = props || {};
-  const isMounted = useRef(false);
 
   const currentChild = React.Children.toArray(children)[currentStep];
+  useEffect(() => {}, [currentStep]);
 
   if (React.isValidElement(currentChild)) {
     return React.cloneElement(currentChild, {
