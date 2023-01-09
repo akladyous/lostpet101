@@ -15,19 +15,19 @@ export function TextField({ control, input, label, classes, ...rest }) {
     rules: {},
   });
 
-  useEffect(() => {
-    // console.log('TextField Component => isTouched : ', isTouched);
-    // console.log('TextField Component => error     : ', error);
-  }, [isTouched, error]);
-
   return (
     <>
       {label ? (
-        <Label
-          htmlFor={input.name}
-          classes={classes.label}
-          content={label?.content || input.name}
-        />
+        <div className="flex justify-between">
+          <Label
+            htmlFor={input.name}
+            classes={classes.label}
+            content={label?.content || input.name}
+          />
+          <span className="text-xs text-warm-gray-500 capitalize">
+            {label?.caption ? label.caption : null}
+          </span>
+        </div>
       ) : null}
       <input
         key={input.name}

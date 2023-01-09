@@ -18,11 +18,16 @@ export function TextAreaField(props) {
   return (
     <>
       {label ? (
-        <Label
-          htmlFor={input.name}
-          classes={classes.label}
-          content={label?.content || input.name}
-        />
+        <div className="flex justify-between">
+          <Label
+            htmlFor={input.name}
+            classes={classes.label}
+            content={label?.content || input.name}
+          />
+          <span className="text-xs text-warm-gray-500 capitalize">
+            {label?.caption ? label.caption : null}
+          </span>
+        </div>
       ) : null}
       <textarea
         key={input.name}

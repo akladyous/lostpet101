@@ -3,6 +3,8 @@ import Root from './pages/root/Root.jsx';
 import ReportRoot from './freatures/reports/ReportsRoot.jsx';
 import RequestsRoot from './freatures/requests/RequestsRoot.jsx';
 import Home from './pages/home/Home.jsx';
+import Feedback from './pages/feedback/Feedback.jsx';
+import About from './pages/about/About.jsx';
 import Users from './freatures/users/Users.jsx';
 import SignIn from './freatures/users/SignIn.jsx';
 import SignOut from './freatures/users/SignOut.jsx';
@@ -25,7 +27,8 @@ function App() {
         <Route path="/" element={<Root />}>
           <Route index element={<Home />} />
           <Route path="about" element={<Home />} />
-          <Route path="feedback" element={<Home />} />
+          <Route path="feedback" element={<Feedback />} />
+          <Route path="about" element={<About />} />
           <Route path="users" element={<Users />}>
             <Route path="signin" element={<SignIn />} />
             <Route path="signout" element={<SignOut />} />
