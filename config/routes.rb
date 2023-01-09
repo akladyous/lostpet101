@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resource :feedback, only: :create
   resources :report_requests
   resources :user_profiles
   resources :user_addresses
