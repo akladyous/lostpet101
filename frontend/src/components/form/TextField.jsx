@@ -3,11 +3,17 @@ import { useController } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import { Label } from './Label.jsx';
 
-export function TextField({ control, input, label, classes, ...rest }) {
+export function TextField({
+  control,
+  input,
+  label,
+  classes,
+  isSuccess,
+  ...rest
+}) {
   const {
     field,
-    fieldState: { isTouched, error },
-    formState: { errors, isSubmitSuccessful, isValid },
+    formState: { errors },
   } = useController({
     name: input.name,
     control,
@@ -39,7 +45,7 @@ export function TextField({ control, input, label, classes, ...rest }) {
         onChange={field.onChange}
         onBlur={field.onBlur}
         ref={field.ref}
-        disabled={isSubmitSuccessful && isValid}
+        disabled={isSuccess}
         {...rest}
       />
       <ErrorMessage

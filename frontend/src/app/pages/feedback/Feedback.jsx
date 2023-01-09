@@ -35,42 +35,36 @@ export default function Feedback() {
   };
 
   return (
-    <main className="overflow-hidden bg-white my-10">
-      <div className="bg-warm-gray-50">
-        <div className="py-10 md:py-20">
-          <div className="relative z-10 mx-auto max-w-7xl pl-4 pr-8 sm:px-6 lg:px-8">
-            <h1 className="text-xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-red-600 to-orange-400">
-              Get in touch
-            </h1>
-            <p className="mt-6 max-w-3xl text-xl text-gray-500">
-              Your feedback provides us with key information about what you
-              think as a user of our services and helps us make informed
-              decisions about improvements; it also helps us identify area where
-              we are doing a good job
-            </p>
-          </div>
+    <main className="overflow-hidden bg-white my-10" id="feedback">
+      <div className="py-7 md:py-10">
+        <div className="relative z-10 mx-auto px-10">
+          <h1 className="text-xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-red-600 to-orange-400">
+            Get in touch
+          </h1>
+          <p className="mt-6 max-w-3xl text-xl text-gray-500">
+            It also helps us identify area where we are doing a good job
+          </p>
         </div>
       </div>
 
       <section className="relative bg-white" aria-labelledby="contact-heading">
-        <div
-          className="absolute h-1/2 w-full bg-warm-gray-50"
-          aria-hidden="true"
-        />
+        <div className="absolute h-1/2 w-full" aria-hidden="true" />
 
         <div className="hidden sm:block sm:relative sm:mx-auto sm:max-w-7xl sm:px-6 lg:px-8">
           <DecorativeSVG />
           <DecorativeBackgroundSVG />
         </div>
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="relative bg-white shadow-xl">
+          <div className="relative">
             <div className="grid grid-cols-1 lg:grid-cols-3">
               <FeedbackSide />
 
-              <div className="py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12">
-                <h3 className="text-lg font-medium text-warm-gray-900">
-                  Give us your feedback
-                </h3>
+              <div className="py-10 px-6 sm:px-10 lg:col-span-2 md:p-12 rounded-2xl sm:rounded-tr-2xl sm:rounded-tl-none sm:rounded-br-2xl sm:rounded-bl-none border border-orange-200 bg-white">
+                <div className="hidden sm:block">
+                  <h3 className="text-lg font-medium text-warm-gray-900">
+                    Give us your feedback
+                  </h3>
+                </div>
                 <form
                   name={schema.name}
                   onSubmit={handleSubmit(onSubmit, onError)}

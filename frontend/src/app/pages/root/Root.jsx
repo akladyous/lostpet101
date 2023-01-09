@@ -9,7 +9,7 @@ export default function Root() {
     <div className="app">
       <Navbar />
       <Header />
-      <div className="content min-h-screen">
+      <div className="content min-h-screen" id="main">
         <Outlet />
       </div>
       <Footer />

@@ -1,9 +1,8 @@
 import { EnvelopeIcon, PhoneIcon } from '@heroicons/react/24/outline';
-
+import dog from '../../../assets/images/banner/chih-tzu.png';
 export default function FeedbackSide() {
   return (
-    <div className="relative overflow-hidden bg-gradient-to-b from-orange-400 to-red-600 py-10 px-6 sm:px-10 xl:p-12">
-      {/* Decorative angle backgrounds */}
+    <div className="relative overflow-hidden bg-gradient-to-b from-red-600 to-orange-400 py-5 sm:py-10 px-6 sm:px-10 xl:p-12 rounded-2xl sm:rounded-tl-2xl sm:rounded-bl-2xl sm:rounded-tr-none sm:rounded-br-none my-2 sm:my-0">
       <div
         className="pointer-events-none absolute inset-0 sm:hidden"
         aria-hidden="true"
@@ -105,10 +104,11 @@ export default function FeedbackSide() {
       </div>
       <h3 className="text-lg font-medium text-white">Contact information</h3>
       <p className="mt-6 max-w-3xl text-base text-teal-50">
-        Nullam risus blandit ac aliquam justo ipsum. Quam mauris volutpat massa
-        dictumst amet. Sapien tortor lacus arcu.
+        Your feedback provides us with key information about what you think as a
+        user of our services and helps us make informed decisions about
+        improvements
       </p>
-      <dl className="mt-8 space-y-6">
+      {/* <dl className="mt-8 space-y-6">
         <dt>
           <span className="sr-only">Phone number</span>
         </dt>
@@ -129,8 +129,8 @@ export default function FeedbackSide() {
           />
           <span className="ml-3">support@workcation.com</span>
         </dd>
-      </dl>
-      <ul role="list" className="mt-8 flex space-x-12">
+      </dl> */}
+      {/* <ul role="list" className="mt-8 flex space-x-12">
         <li>
           <a className="text-teal-200 hover:text-teal-100" href="#">
             <span className="sr-only">Facebook</span>
@@ -178,7 +178,10 @@ export default function FeedbackSide() {
             </svg>
           </a>
         </li>
-      </ul>
+      </ul> */}
+      <div>
+        <img src={dog} alt="" />
+      </div>
     </div>
   );
 }

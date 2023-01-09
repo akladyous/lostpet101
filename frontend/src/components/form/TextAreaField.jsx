@@ -3,11 +3,11 @@ import { ErrorMessage } from '@hookform/error-message';
 import { Label } from './Label.jsx';
 
 export function TextAreaField(props) {
-  const { control, input, label, classes, ...rest } = props || {};
+  const { control, input, label, classes, isSuccess, ...rest } = props || {};
 
   const {
     field,
-    formState: { errors, isValid, isSubmitSuccessful },
+    formState: { errors },
   } = useController({
     name: input.name,
     control,
@@ -39,7 +39,7 @@ export function TextAreaField(props) {
         onChange={field.onChange}
         onBlur={field.onBlur}
         ref={field.ref}
-        disabled={isSubmitSuccessful && isValid}
+        disabled={isSuccess}
         {...rest}
       />
       <ErrorMessage

@@ -3,12 +3,13 @@ import { ErrorMessage } from '@hookform/error-message';
 import { Label } from './Label.jsx';
 
 export const SelectField = (props) => {
-  const { control, input, label, classes, options, ...rest } = props || {};
+  const { control, input, label, classes, isSuccess, options, ...rest } =
+    props || {};
 
   const {
     field,
 
-    formState: { isValid, isSubmitSuccessful, errors },
+    formState: { errors },
   } = useController({
     name: input.name,
     control,
@@ -35,7 +36,7 @@ export const SelectField = (props) => {
           onChange={field.onChange}
           onBlur={field.onBlur}
           ref={field.ref}
-          disabled={isSubmitSuccessful && isValid}
+          disabled={isSuccess}
           {...rest}
         >
           <option value=""></option>
