@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useNavigate } from 'react-router-dom';
 import { useAxios } from '../../../../hooks/useAxios.jsx';
-import { SpinnerCircle } from '../../../../assets/images/icons/SpinnerCircle.jsx';
+import { SpinnerCircleSVG } from '../../../../assets/images/icons/SpinnerCircleSVG.jsx';
 import { MessageField } from '../../../../components/form/ErrorMessage.jsx';
 import ReportDetail from '../../reports/ReportDetail.jsx';
 import { useEffect, useState, useRef, useCallback } from 'react';
@@ -91,7 +91,9 @@ export default function Preview(props) {
                 disabled={isSuccess}
                 className="btn btn-secondary py-2 px-6 mx-1"
               >
-                {isLoading ? <SpinnerCircle classes="text-orange-500" /> : null}
+                {isLoading ? (
+                  <SpinnerCircleSVG classes="text-orange-500" />
+                ) : null}
                 back
               </button>
             )}
@@ -105,7 +107,9 @@ export default function Preview(props) {
               // disabled={isSuccess}
               className="btn btn-secondary py-2 px-4 mx-1"
             >
-              {isLoading ? <SpinnerCircle classes="text-orange-500" /> : null}
+              {isLoading ? (
+                <SpinnerCircleSVG classes="text-orange-500" />
+              ) : null}
               Submit
             </button>
           </div>

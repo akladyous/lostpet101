@@ -4,7 +4,7 @@ import { useState } from 'react';
 import moment from 'moment';
 import { BouncingLoader } from '../../../components/ui/BouncingLoader.jsx';
 
-export default function ReportInfo({ report }) {
+export default function ReportPreview({ report }) {
   const [isLoading, setIsLoading] = useState(true);
 
   return report ? (
@@ -20,7 +20,7 @@ export default function ReportInfo({ report }) {
           {report.report_type}
         </p>
       </div> */}
-      <div className="h-[25rem]">
+      <div className="h-[20rem]">
         {isLoading && <BouncingLoader />}
         <img
           className="rounded-t-lg h-full w-full object-cover"
@@ -58,22 +58,14 @@ export default function ReportInfo({ report }) {
                 Last Seen{' '}
               </span>
               <span className="capitalize text-sm text-slate-500 leading-5 font-semibold">
-                {new Date(report.lost_found_date).toLocaleDateString('en-US', {
-                  day: 'numeric',
-                  month: 'short',
-                  year: 'numeric',
-                })}
+                {moment(report.lost_found_date).format('MMM Do YY')}
               </span>
-            </p>
-            <p className="mb-2 capitalize text-xs text-slate-500 italic leading-5 font-semibold">
-              reported
-              <span>{` ${moment(report.lost_found_date).fromNow()}`}</span>
             </p>
           </div>
         </div>
         <div className="pt-3">
           <Link
-            to={`/listings/${report.pet.name}`}
+            to={`/reports/${report.pet.name}`}
             state={report}
             key={report.pet.name}
             className="btn btn-secondary w-full"

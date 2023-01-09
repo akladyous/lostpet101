@@ -1,5 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Root from './pages/root/Root.jsx';
+import ReportRoot from './freatures/reports/ReportsRoot.jsx';
+import RequestsRoot from './freatures/requests/RequestsRoot.jsx';
 import Home from './pages/home/Home.jsx';
 import Users from './freatures/users/Users.jsx';
 import SignIn from './freatures/users/SignIn.jsx';
@@ -10,10 +12,11 @@ import ListingsRoot from './freatures/listings/ListingsRoot.jsx';
 
 import ListingWizard from './freatures/listings/steps/ListingWizard.jsx';
 import Listings from './freatures/listings/Listings.jsx';
-import ReportRoot from './freatures/reports/ReportsRoot.jsx';
+
 import ReportDetail from './freatures/reports/ReportDetail.jsx';
 import { withLocationProps } from '../hooks/withLocationProps.jsx';
 const ReportInfo = withLocationProps(ReportDetail);
+import ReportRequest from './freatures/requests/ReportRequest.jsx';
 
 function App() {
   return (
@@ -32,15 +35,24 @@ function App() {
           <Route path="listings" element={<ListingsRoot />}>
             <Route index element={<Listings />} />
             <Route path="new" element={<ListingWizard />} />
-            <Route
-              caseSensitive
-              path=":petName"
-              element={<ReportInfo resourceName="report" />}
-            />
             {/* <Route index path="report" element={<NewReport />} /> */}
             {/* <Route index path="pet" element={<NewPet />} /> */}
           </Route>
-          <Route path="reports" element={<ReportRoot />} />
+          <Route path="reports" element={<ReportRoot />}>
+            <Route
+              caseSensitive
+              path=":name"
+              element={
+                <>
+                  <ReportInfo resourceName="report" />
+                  <ReportRequest />
+                </>
+              }
+            />
+          </Route>
+          <Route path="requests" element={<RequestsRoot />}>
+            {/* <Route index element={<></>} /> */}
+          </Route>
         </Route>
       </Routes>
     </div>

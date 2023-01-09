@@ -1,7 +1,6 @@
-import React from 'react';
 import clsx from 'clsx';
 
-export function SpinnerCircle(props) {
+export function SpinnerCircleSVG(props) {
   const { classes } = props || {};
   return (
     <svg

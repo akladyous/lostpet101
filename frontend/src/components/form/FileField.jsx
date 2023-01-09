@@ -1,4 +1,4 @@
-import { useCallback, useState, forwardRef } from 'react';
+import { useCallback, forwardRef } from 'react';
 import { useController } from 'react-hook-form';
 
 const FileFieldRef = (props, ref) => {

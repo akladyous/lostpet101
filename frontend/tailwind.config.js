@@ -29,6 +29,7 @@ module.exports = {
   },
   plugins: [
     require('@tailwindcss/forms'),
+    require('@tailwindcss/line-clamp'),
 
     plugin(function ({ addVariant }) {
       addVariant('optional', '&:optional');

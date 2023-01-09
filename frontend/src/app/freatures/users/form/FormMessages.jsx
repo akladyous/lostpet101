@@ -20,4 +20,4 @@ export const FormMessages = forwardRef((props, ref) => {
     </div>
   );
 });
-FormMessages.displayName = 'FormErrors';
+FormMessages.displayName = 'FormMessages';

@@ -7,13 +7,17 @@ export function withLocationProps(WrappedComponent) {
     const { resourceName, paramsName, children, ...rest } = props || {};
 
     const { state } = useLocation();
-    const { petName } = useParams();
+    const { name } = useParams();
+    console.log('useLocation : ', useLocation());
+    console.log('useParams : ', useParams());
     return (
       <WrappedComponent
         {...{ [resourceName]: state }}
-        {...{ urlParams: petName }}
+        {...{ urlParams: name }}
         {...rest}
-      ></WrappedComponent>
+      >
+        {children}
+      </WrappedComponent>
     );
   };
 }

@@ -37,3 +37,9 @@
 .dot {
   @apply my-12 mx-1 h-4 w-4 rounded-full bg-orange-400;
 }
+.prova {
+  /* top: 50%; */
+  right: 50%;
+  transform: translate(50%, -50%);
+  border-radius: 50%;
+}
