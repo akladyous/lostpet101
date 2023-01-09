@@ -1,38 +1,58 @@
+import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { useAxios } from '../../../hooks/useAxios.jsx';
 import { feedbackSChema as schema } from './form/feedbackSchema.js';
 import { TextField } from '../../../components/form/TextField.jsx';
 import { TextAreaField } from '../../../components/form/TextAreaField.jsx';
-import { useForm } from 'react-hook-form';
-import FeedbackSide from './FeedbackSide.jsx';
 import { DecorativeSVG } from '../../../assets/images/svgs/DecorativeSVG.jsx';
 import { DecorativeBackgroundSVG } from '../../../assets/images/svgs/DecorativeBackgroundSVG.jsx';
+import FeedbackSide from './FeedbackSide.jsx';
+import { MessageField } from '../../../components/form/MessageField.jsx';
 
 export default function Feedback() {
+  const [message, setMessage] = useState('');
+  const navigate = useNavigate();
+  const [request, { isLoading, isError, error, isSuccess, data }] = useAxios(
+    null,
+    { manual: true }
+  );
   const {
     handleSubmit,
-    setFocus,
     control,
-    formState: { isValid, isSubmitting, isSubmitSuccessful, errors },
+    formState: { isValid, errors },
   } = useForm({
     defaultValues: schema.initialValues,
     resolver: schema.validation,
   });
 
-  const onSubmit = async (values) => {
-    console.log('values : ', values);
-    // await next({
-    //   ...values,
-    //   lost_found_date: new Date(values.lost_found_date)
-    //     .toISOString()
-    //     .split('T')[0],
-    // });
+  const onSubmit = (values) => {
+    if (!isValid) {
+      setMessage('Missing information');
+      return;
+    }
+    request({
+      method: 'post',
+      url: 'feedback',
+      data: values,
+    });
+    debugger;
+    if (error) console.log('request error: ', error);
   };
-  const onError = (errors, e) => {
-    const firstError = Object.keys(errors).reduce((field, a) => {
-      const fieldKey = field;
-      return errors[fieldKey] ? fieldKey : a;
-    }, null);
-    setFocus(firstError);
-  };
+  useEffect(() => {
+    if (isError && error) {
+      setMessage(error.data.message);
+    }
+  }, [isError, error]);
+
+  useEffect(() => {
+    if (isSuccess && data) {
+      setMessage('Listing successfully created');
+      setTimeout(() => {
+        // navigate('/', { replace: true });
+      }, 3000);
+    }
+  }, [isSuccess, data]);
 
   return (
     <main className="overflow-hidden bg-white my-10" id="feedback">
@@ -67,7 +87,7 @@ export default function Feedback() {
                 </div>
                 <form
                   name={schema.name}
-                  onSubmit={handleSubmit(onSubmit, onError)}
+                  onSubmit={handleSubmit(onSubmit)}
                   className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8"
                 >
                   <div>
@@ -77,6 +97,7 @@ export default function Feedback() {
                         input={schema.fields.first_name.attributes}
                         label={schema.fields.first_name.label}
                         classes={schema.classes}
+                        disabled={isSuccess}
                       />
                     </div>
                   </div>
@@ -86,6 +107,7 @@ export default function Feedback() {
                       input={schema.fields.last_name.attributes}
                       label={schema.fields.last_name.label}
                       classes={schema.classes}
+                      disabled={isSuccess}
                     />
                   </div>
                   <div>
@@ -94,6 +116,7 @@ export default function Feedback() {
                       input={schema.fields.email.attributes}
                       label={schema.fields.email.label}
                       classes={schema.classes}
+                      disabled={isSuccess}
                     />
                   </div>
                   <div>
@@ -102,6 +125,7 @@ export default function Feedback() {
                       input={schema.fields.phone.attributes}
                       label={schema.fields.phone.label}
                       classes={schema.classes}
+                      disabled={isSuccess}
                     />
                   </div>
                   <div className="sm:col-span-2">
@@ -110,6 +134,7 @@ export default function Feedback() {
                       input={schema.fields.subject.attributes}
                       label={schema.fields.subject.label}
                       classes={schema.classes}
+                      disabled={isSuccess}
                     />
                   </div>
                   <div className="sm:col-span-2">
@@ -118,10 +143,23 @@ export default function Feedback() {
                       input={schema.fields.message.attributes}
                       label={schema.fields.message.label}
                       classes={schema.classes}
+                      disabled={isSuccess}
                     />
                   </div>
-                  <div className="sm:col-span-2 sm:flex sm:justify-end">
-                    <button type="submit" className="btn btn-primary">
+                  <div className="sm:col-span-2 sm:flex items-center sm:justify-between">
+                    <div className="mb-2 sm:mb-0">
+                      <MessageField
+                        isError={isError}
+                        isSuccess={isSuccess}
+                        message={message}
+                        classes="capitalize text-lg"
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      className="btn btn-primary"
+                      disabled={isSuccess}
+                    >
                       Submit
                     </button>
                   </div>

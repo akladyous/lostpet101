@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  resource :feedback, only: :create
+
+  post :feedback, to: "feedback#create"
   resources :report_requests
   resources :user_profiles
   resources :user_addresses

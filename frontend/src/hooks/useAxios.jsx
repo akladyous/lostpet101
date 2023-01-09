@@ -77,7 +77,7 @@ export function useAxios(_config, _options) {
         dispatch({
           type: actions.ERROR,
           payload: {
-            data: error.response.data,
+            data: { message: error.response.data },
             status: error.response.status,
           },
         });

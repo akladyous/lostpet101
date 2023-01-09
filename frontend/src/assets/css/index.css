@@ -12,7 +12,7 @@
   .btn-primary {
     @apply text-white bg-orange-600
   hover:bg-orange-500
-  disabled:bg-slate-50 disabled:shadow-none
+  disabled:bg-slate-50 disabled:text-orange-600 disabled:border-none disabled:shadow-none
     focus:outline-none focus:ring-1 focus:ring-orange-500 focus:ring-offset-1
     transition-all duration-300 ease-linear;
   }
@@ -36,10 +36,4 @@
 
 .dot {
   @apply my-12 mx-1 h-4 w-4 rounded-full bg-orange-400;
-}
-.prova {
-  /* top: 50%; */
-  right: 50%;
-  transform: translate(50%, -50%);
-  border-radius: 50%;
 }

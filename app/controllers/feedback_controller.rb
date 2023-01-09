@@ -1,14 +1,14 @@
 class FeedbackController < ApplicationController
   skip_before_action :authenticate_user
-
+  skip_before_action :verify_authenticity_token
 
   def create
-    @feedback = Feedback.new(feedback_params)
-    if @feedback.valid?
-      FeedbackMailer.send_feedback(@feedback).deliver_now
+    @contact = Feedback.new(feedback_params)
+    if @contact.valid?
+      FeedbackMailer.send_feedback(@contact).deliver_now
       render status: :ok
     else
-      render status: :unprocessable_entity
+      render json: @contact.errors.full_messages.to_sentence, status: :unprocessable_entity
     end
   end
 

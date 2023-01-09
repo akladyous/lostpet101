@@ -2,7 +2,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useAxios } from '../../../../hooks/useAxios.jsx';
 import { SpinnerCircleSVG } from '../../../../assets/images/icons/SpinnerCircleSVG.jsx';
-import { MessageField } from '../../../../components/form/ErrorMessage.jsx';
+import { MessageField } from '../../../../components/form/MessageField.jsx';
 import ReportDetail from '../../reports/ReportDetail.jsx';
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { setFormData } from '../lost-found/form/lostFoundFormData.js';

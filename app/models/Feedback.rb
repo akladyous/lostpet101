@@ -3,7 +3,7 @@ class Feedback
   extend  ActiveModel::Naming
   include ActiveModel::Validations
 
-  attr_accessor :first_name, :last_name, :email, :subject, :message
+  attr_accessor :first_name, :last_name, :email, :phone, :subject, :message
 
   def initialize(attributes = {})
     attributes.each do |name, value|
