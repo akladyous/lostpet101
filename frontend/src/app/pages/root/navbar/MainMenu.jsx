@@ -10,31 +10,33 @@ export default function MainMenu() {
         Testimonials
       </a>
       <Link
-        to="listings"
-        state={'Lost & found Pet'}
+        to="/listings"
+        state={{ title: 'Lost & found Pet' }}
         className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
       >
         Lost & Found
       </Link>
       <Link
-        to="listings/new"
-        state={'Lost & found Pet'}
+        to="/listings/new"
+        state={{ title: 'Report Lost & Found' }}
         className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
       >
         Report Lost Pet
       </Link>
-      <a
-        href="/"
+      <Link
+        to="/about"
+        state={{ title: 'About Us' }}
         className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
       >
         About Us
-      </a>
-      <a
-        href="/"
+      </Link>
+      <Link
+        to="/feedback"
+        state={{ title: 'Contact Us' }}
         className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
       >
-        Contact Us
-      </a>
+        Feedback
+      </Link>
     </div>
   );
 }

@@ -40,7 +40,6 @@ export default function Listings() {
     };
   }, [request]);
   if (isError) {
-    debugger;
     console.error('error: ', error);
   }
   return isMounted.current ? (
