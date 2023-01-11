@@ -48,7 +48,9 @@ export default function SignUp() {
     async (values, event) => {
       const formData = new FormData();
       for (let key in values) {
-        formData.append(key, values[key]);
+        if (values[key]) {
+          formData.append(key, values[key]);
+        }
       }
       const response = await dispatch(usersSignUp({ formData }));
 
@@ -70,7 +72,7 @@ export default function SignUp() {
               setError('');
               break;
             case response.payload.hasOwnProperty('error'):
-              setError(response.payload.message);
+              setError(response.payload.error);
               break;
             case response.payload.default:
               setError('network error');
@@ -84,7 +86,7 @@ export default function SignUp() {
   );
 
   const onError = (errors, e) => {
-    console.log('onErrors  :', errors, 'onErrors event: ', e);
+    console.log('onErrors  :', errors);
     console.log('getValues :', getValues());
   };
 
