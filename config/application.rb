@@ -28,5 +28,8 @@ module PetFinder
     # config.middleware.use ActionDispatch::Session::CookieStore
     config.middleware.use ActionDispatch::Session::CookieStore, key: '_app', expire_after: 1.day
     # config.middleware.insert_after(ActionDispatch::Cookies, ActionDispatch::Session::CookieStore)
+
+    Rails.application.config.active_storage.variant_processor = :vips
+
   end
 end

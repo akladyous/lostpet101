@@ -1,0 +1,48 @@
+version: "3.8"
+
+volumes:
+  pgdata:
+    driver: local
+  application:
+    driver: local
+
+services:
+  pg_host:
+    image: postgres:alpine
+    container_name: "postgres"
+    # command: postgres://pguser@postgres:5432/pg
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: deploy
+      POSTGRES_PASSWORD: deploy
+      POSTGRES_DB: petfinder
+    restart: always
+    # restart: on-failure
+    ports:
+      - "5432:5432"
+  #----------------------
+  rails:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: "petfinder"
+    volumes:
+      - .:/petfinder_volume
+    ports:
+      - 3000:3000
+    stdin_open: true
+    tty: true
+    # env_file: .env.production
+    environment:
+      # DATABASE_URL: postgres://petfinder_user:paolo@pg_host:5432/petfinder
+      RAILS_ENV: production
+      DATABASE_HOST: localhost
+    # entrypoint: [prod-entrypoint.sh]
+    # entrypoint: [ "bundle", "exec" ]
+    command:
+      bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b
+      '0.0.0.0'"
+    # command: ["rails", "server", "-p", "3000", "-b", "0.0.0.0"]
+    depends_on:
+      - pg_host

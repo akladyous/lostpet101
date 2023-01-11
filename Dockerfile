@@ -11,10 +11,11 @@ ENV BUNDLE_PATH /usr/local/bundle/gems
 ENV TMP_PATH /tmp/
 ENV RAILS_LOG_TO_STDOUT true
 ENV APP_PATH /petfinder
-ENV RAILS_PORT 3000
-ENV RAILS_ENV production
-ENV RAILS_SERVE_STATIC_FILES true
-ENV RAILS_LOG_TO_STDOUT true
+ENV RAILS_PORT 3000 \
+  RAILS_ENV production \
+  RAILS_SERVE_STATIC_FILES true \
+  RAILS_LOG_TO_STDOUT true \
+  BUNDLE_WITHOUT="development"
 
 RUN mkdir -p $APP_PATH
 WORKDIR $APP_PATH
@@ -29,7 +30,6 @@ RUN gem install rubygems-update --no-document
 RUN gem install bundler
 RUN gem install rails
 RUN bundle instal --jobs=2 --retry=2 \
-  # && rm -rf /usr/local/bundle/cache/*.gem \
   && find /usr/local/bundle/gems/ -name "*.c" -delete \
   && find /usr/local/bundle/gems/ -name "*.o" -delete \
   && rm -rf /usr/local/bundle/cache && rm -rf /usr/local/bundle/cache
