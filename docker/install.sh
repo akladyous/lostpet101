@@ -1,3 +1,17 @@
+# UBUNTU INSTANCE CONFIGURATION
+
+apt-get -y install sudo
+sudo apt update && sudo apt upgrade -y
+
+sudo adduser paolo // Adding a New User to the System
+sudo usermod -aG sudo paolo //add the user to the sudo group:
+su - paolo //switch to the new user account:
+sudo passwd // set new password
+
+sudo passwd paolo // set new password for user
+docker volume create postgres_data
+
+
 
 rm -rf Gemfile.lock
 bundle lock --add-platform ruby
