@@ -1,14 +1,13 @@
-require 'ruby-progressbar'
+# require 'ruby-progressbar'
 require 'faker'
 Faker::Config.locale = :en
 
 system('clear')
-puts 'How many records ?'
-REPORTS_TO_CREATE = gets.strip.to_i
+REPORTS_TO_CREATE = ENV['records'] || 20
 system('clear')
 puts "🌱 Start Seeding ..."
 
-user_progress = ProgressBar.create(title: "  #{REPORTS_TO_CREATE} reports ⏱️", total: REPORTS_TO_CREATE)
+# user_progress = ProgressBar.create(title: "  #{REPORTS_TO_CREATE} reports ⏱️", total: REPORTS_TO_CREATE)
 
 def generate_pet
   species = -> { %w[dog cat].sample }.call
@@ -73,7 +72,7 @@ uuid = -> { SecureRandom.uuid }
 
       report.save
     end
-    user_progress.increment
+    # user_progress.increment
   end
 end
 puts "🌱 End   Seeding ..."

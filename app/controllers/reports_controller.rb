@@ -1,5 +1,5 @@
 class ReportsController < ApplicationController
-  skip_before_action :authenticate_user, only: :index
+  skip_before_action :authenticate_user, only: %i[index search]
 
   skip_before_action :verify_authenticity_token
   before_action :set_report, only: %i[ show update destroy ]
