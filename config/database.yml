@@ -19,5 +19,5 @@ production:
   <<: *default
   database: <%= ENV["POSTGRES_DB_PRODUCTION"] %>
   host: <%= ENV["POSTGRES_HOST"] %>
+  port: <%= ENV["POSTGRES_PORT"] %>
   timeout: 5000
-  port: 5432

@@ -95,6 +95,10 @@ GEM
       irb (>= 1.5.0)
       reline (>= 0.3.1)
     diff-lcs (1.5.0)
+    dotenv (2.8.1)
+    dotenv-rails (2.8.1)
+      dotenv (= 2.8.1)
+      railties (>= 3.2)
     e2mmap (0.1.0)
     erubi (1.12.0)
     ffi (1.15.5)
@@ -246,6 +250,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootsnap
   debug
+  dotenv-rails (~> 2.8, >= 2.8.1)
   faker!
   image_processing (~> 1.2)
   pg (~> 1.1)

@@ -4,15 +4,6 @@ bundle lock --add-platform ruby
 bundle lock --add-platform x86_64-linux
 bundle install
 
-docker pull postgres:alpine
-docker volume create postgres_data
-
-docker run -d \
-	--name postgres \
-	-e POSTGRES_USER=user \
-	-e POSTGRES_PASSWORD=password \
-	-v postgres_data:/var/lib/postgresql/data \
-	postgres
 
 docker-compose build
 docker-compose up
