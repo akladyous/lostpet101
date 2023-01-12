@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import Root from './pages/root/Root.jsx';
+import TestimonialsRoot from './freatures/testmonials/TestimonialsRoot.jsx';
 import ReportRoot from './freatures/reports/ReportsRoot.jsx';
 import RequestsRoot from './freatures/requests/RequestsRoot.jsx';
 import Home from './pages/home/Home.jsx';
@@ -52,8 +53,9 @@ function App() {
               }
             />
           </Route>
-          <Route path="requests" element={<RequestsRoot />}>
-            {/* <Route index element={<></>} /> */}
+          <Route path="requests" element={<RequestsRoot />}></Route>
+          <Route path="testimonials" element={<TestimonialsRoot />}>
+            <Route index element={<Listings />} />
           </Route>
         </Route>
       </Routes>
