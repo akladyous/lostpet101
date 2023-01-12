@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   postgres:
-    image: postgres:alpine
+    image: postgres
     container_name: postgres
     volumes:
       - postgres_data:/var/lib/postgresql/data
@@ -22,7 +22,6 @@ services:
     tty: true
     env_file: .env.production
     environment:
-      # DATABASE_URL: postgres://petfinder_user:paolo@pg_host:5432/petfinder
       RAILS_ENV: production
     command:
       bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b

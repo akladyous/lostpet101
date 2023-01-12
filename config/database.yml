@@ -4,17 +4,20 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: <%= ENV["POSTGRES_USER"] %>
   password: <%= ENV["POSTGRES_PASSWORD"] %>
-  timeout: 5000
-  host: <%= ENV["POSTGRES_HOST"] %>
 
 development:
   <<: *default
   database: <%= ENV["POSTGRES_DB_DEVELOPMENT"] %>
+  host: localhost
 
 test:
   <<: *default
   database: <%= ENV["POSTGRES_DB_TEST"] %>
+  host: localhost
 
 production:
   <<: *default
   database: <%= ENV["POSTGRES_DB_PRODUCTION"] %>
+  host: <%= ENV["POSTGRES_HOST"] %>
+  timeout: 5000
+  port: 5432
