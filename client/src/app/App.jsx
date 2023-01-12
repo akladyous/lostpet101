@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import Root from './pages/root/Root.jsx';
-import TestimonialsRoot from './freatures/testmonials/TestimonialsRoot.jsx';
+import StoriesRoot from './freatures/stories/StoriesRoot.jsx';
 import ReportRoot from './freatures/reports/ReportsRoot.jsx';
 import RequestsRoot from './freatures/requests/RequestsRoot.jsx';
 import Home from './pages/home/Home.jsx';
@@ -15,6 +15,7 @@ import ListingsRoot from './freatures/listings/ListingsRoot.jsx';
 
 import ListingWizard from './freatures/listings/steps/ListingWizard.jsx';
 import Listings from './freatures/listings/Listings.jsx';
+import Stories from './freatures/stories/Stories.jsx';
 
 import ReportDetail from './freatures/reports/ReportDetail.jsx';
 import { withLocationProps } from '../hooks/withLocationProps.jsx';
@@ -54,8 +55,8 @@ function App() {
             />
           </Route>
           <Route path="requests" element={<RequestsRoot />}></Route>
-          <Route path="testimonials" element={<TestimonialsRoot />}>
-            <Route index element={<Listings />} />
+          <Route path="stories" element={<StoriesRoot />}>
+            <Route index element={<Stories />} />
           </Route>
         </Route>
       </Routes>

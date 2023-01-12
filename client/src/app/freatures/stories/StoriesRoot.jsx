@@ -1,6 +1,6 @@
 import { Outlet, useParams, useLocation } from 'react-router-dom';
 
-export default function TestimonialsRoot() {
+export default function StoriesRoot() {
   const location = useLocation();
   const params = useParams();
   return (

@@ -1,13 +1,17 @@
 Rails.application.routes.draw do
+  resources :likes
 
   post :feedback, to: "feedback#create"
+
   resources :report_requests
   resources :user_profiles
   resources :user_addresses
-  resources :pets
   resources :reports do
-      post :search, on: :collection
-      # resources :report_requests, as: 'request'
+    post :search, on: :collection
+    # resources :report_requests, as: 'request'
+  end
+  resources :pets do
+    resource :likes, controller: 'pets/likes' ,only: %i[show create destroy]
   end
 
 

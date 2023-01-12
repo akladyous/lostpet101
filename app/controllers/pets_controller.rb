@@ -4,7 +4,7 @@ class PetsController < ApplicationController
 
   # GET /pets
   def index
-    @pets = Pet.all
+    @pets = Pet.includes(:likes).all
     render json: @pets, status: :ok
   end
 

@@ -1,6 +1,7 @@
 class Pet < ApplicationRecord
   has_one_attached :image
   belongs_to :report, optional: true
+  has_many :likes, dependent: :destroy
 
   enum :species, {
     dog: 0,
@@ -18,7 +19,7 @@ class Pet < ApplicationRecord
 
   validates :name, :species, :gender, :size, :collar, :description, presence: true
   validates :age, numericality: { only_integer: true, in: 1..15 }
-  validate :image_validation
+  # validate :image_validation
 
   def image_validation
     if !image.attached? || !image.content_type.in?(['image/jpeg', 'image/png', 'image/jpg'])
