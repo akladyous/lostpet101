@@ -56,7 +56,8 @@ function App() {
           <Route path="stories" element={<StoriesRoot />}>
             <Route index element={<Stories />} />
           </Route>
-          <Route path="stories" element={<StoriesRoot />}>
+          <Route path="pets" element={<StoriesRoot />}>
+            <Route path=":name" element={<ReportInfo />} />
             <Route index element={<Stories />} />
           </Route>
         </Route>
