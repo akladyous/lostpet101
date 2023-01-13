@@ -21,5 +21,9 @@ class User < ApplicationRecord
     likes.where(pet: pet).first_or_create
   end
 
+  def dislike!(pet)
+    likes.where(pet: pet).destroy
+  end
+
   before_save { email&.downcase }
 end

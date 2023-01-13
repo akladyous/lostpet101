@@ -1,22 +1,8 @@
-import { useAxios } from '../../../hooks/useAxios.jsx';
-import { useCallback } from 'react';
 import { ChatBubbleLeftIcon, HeartIcon } from '@heroicons/react/24/outline';
 import LikesList from '../likes/LikesList.jsx';
+import LikePet from '../likes/LikePet.jsx';
 export default function Story({ pet }) {
-  const [request, { isLoading, isError, error, isSuccess, data }] = useAxios(
-    null,
-    { manual: true }
-  );
-
   console.log('pet : ', pet);
-
-  const handleLike = useCallback(() => {
-    request({
-      method: 'post',
-      url: 'pet_likes',
-      data: '',
-    });
-  }, [request]);
 
   return pet ? (
     <div
@@ -48,13 +34,7 @@ export default function Story({ pet }) {
         <div className="flex items-center justify-between">
           <LikesList likes={pet.likes} />
           <div className="flex space-x-4 mr-3">
-            {/*  */}
-            <div className="relative rounded-full bg-slate-50">
-              <HeartIcon className="h-7 w-7 mt-1 text-gray-400 transition duration-500 ease-in-out transform hover:text-gray-500 hover:fill-red-300" />
-              <div className="absolute -top-3 left-3 px-1 py-1 text-[9px] font-bold ring-1 ring-white leading-none text-red-100 transform bg-red-600 rounded-full">
-                <p>{pet.likes.length}</p>
-              </div>
-            </div>
+            <LikePet pet_id={pet.id} likes={pet.likes} />
             <div className="relative">
               <ChatBubbleLeftIcon className="h-7 w-7 mt-1 text-gray-400 hover:text-gray-500 hover:fill-slate-50" />
             </div>

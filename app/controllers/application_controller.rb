@@ -1,9 +1,11 @@
 class ApplicationController < ActionController::API
   include ActionController::Cookies
   include ActiveStorage::SetCurrent
+  before_action :authenticate_user
+
   include ActionController::RequestForgeryProtection
   protect_from_forgery with: :exception, unless: -> { request.format.json? }
-  before_action :authenticate_user
+
   before_action do
     ActiveStorage::Current.url_options = { protocol: request.protocol, host: request.host, port: request.port }
   end

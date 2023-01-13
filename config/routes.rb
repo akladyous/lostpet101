@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     # resources :report_requests, as: 'request'
   end
   resources :pets do
-    resource :likes, controller: 'pets/likes' ,only: %i[show create destroy]
+    resource :likes, only: %i[show create destroy]
   end
 
 
