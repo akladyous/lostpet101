@@ -4,7 +4,7 @@
 
 @layer components {
   .btn {
-    @apply w-full sm:w-auto shadow-md
+    @apply w-full sm:w-auto
       px-5 py-3
       text-lg font-medium capitalize text-center
       border rounded-xl border-transparent shadow-xl;

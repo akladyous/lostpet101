@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 
-export function SpinnerCircleSVG(props) {
-  const { classes } = props || {};
+export function SpinnerCircleSVG({ classes }) {
   return (
     <svg
       role="status"
