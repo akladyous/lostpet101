@@ -1,4 +1,4 @@
-# require 'ruby-progressbar'
+require 'ruby-progressbar' if ENV['RAILS_ENV'] == development
 require 'faker'
 Faker::Config.locale = :en
 
@@ -55,6 +55,19 @@ def generate_user
   }
 end
 
+def users_sample
+  User.ids.sample(rand(1..User.ids.count))
+end
+
+def generate_likes
+  Pet.ids.inject([]) do |acc, id|
+    users_sample.each do |user_id_sample|
+      acc.push({pet_id: id, user_id: user_id_sample})
+    end
+    acc
+  end
+end
+
 uuid = -> { SecureRandom.uuid }
 
 1.upto(REPORTS_TO_CREATE) do |idx|
@@ -75,4 +88,9 @@ uuid = -> { SecureRandom.uuid }
     # user_progress.increment
   end
 end
+
+Like.create(generate_likes)
+
 puts "🌱 End   Seeding ..."
+
+

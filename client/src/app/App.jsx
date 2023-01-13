@@ -39,8 +39,6 @@ function App() {
           <Route path="listings" element={<ListingsRoot />}>
             <Route index element={<Listings />} />
             <Route path="new" element={<ListingWizard />} />
-            {/* <Route index path="report" element={<NewReport />} /> */}
-            {/* <Route index path="pet" element={<NewPet />} /> */}
           </Route>
           <Route path="reports" element={<ReportRoot />}>
             <Route
@@ -55,6 +53,9 @@ function App() {
             />
           </Route>
           <Route path="requests" element={<RequestsRoot />}></Route>
+          <Route path="stories" element={<StoriesRoot />}>
+            <Route index element={<Stories />} />
+          </Route>
           <Route path="stories" element={<StoriesRoot />}>
             <Route index element={<Stories />} />
           </Route>

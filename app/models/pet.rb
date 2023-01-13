@@ -3,6 +3,12 @@ class Pet < ApplicationRecord
   belongs_to :report, optional: true
   has_many :likes, dependent: :destroy
 
+  delegate :user, to: :report
+
+  def like!(user)
+    likes.where(user: user).first_or_create
+  end
+
   enum :species, {
     dog: 0,
     cat: 1,

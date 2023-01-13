@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :likes
+  # resources :likes
 
   post :feedback, to: "feedback#create"
 

@@ -17,5 +17,9 @@ class User < ApplicationRecord
     likes.where(pet_id: pet.id).any?
   end
 
+  def like!(pet)
+    likes.where(pet: pet).first_or_create
+  end
+
   before_save { email&.downcase }
 end
