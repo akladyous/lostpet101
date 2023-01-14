@@ -8,14 +8,21 @@ def show
 end
 
 def create
+  # system 'clear'
   # debugger
+  # puts "totale likes count : #{@pet.likes.count}"
+  @pet.likes.where(user: current_user).destroy_all
+  # puts "totale likes count : #{@pet.likes.count}"
   @pet.likes.where(user: current_user).first_or_create
   render json: @pet.likes, status: :created, location: @pets_like
 end
 
 def destroy
-  debugger
+  # system 'clear'
+  # debugger
+  # puts "totale likes count : #{@pet.likes.count}"
   @pet.likes.where(user: current_user).destroy_all
+  # puts "totale likes count : #{@pet.likes.count}"
   render json: @pet.likes, status: :ok, location: @pet
 end
 

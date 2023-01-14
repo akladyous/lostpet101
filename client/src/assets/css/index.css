@@ -37,3 +37,19 @@
 .dot {
   @apply my-12 mx-1 h-4 w-4 rounded-full bg-orange-400;
 }
+.petCardBody {
+  position: relative;
+}
+
+.petCardBody::before {
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  border-radius: 60% 60% 0 0;
+  bottom: calc(100% - 10px);
+  content: '';
+  height: 25px;
+  width: 100%;
+}

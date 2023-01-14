@@ -9,12 +9,12 @@ export default function StoriesSide() {
   return (
     <div className="flex flex-col my-2 sm:mx-4 space-y-3">
       <div className="search p-2 border rounded-xl bg-orange-50 opacity-90 ">
-        <form>
+        <form action="/listings">
           <div className="relative mt-1 rounded-md shadow-sm">
             <input
               type="text"
-              name="account-number"
-              id="account-number"
+              name="name"
+              id="name"
               className="peer mt-1 block w-full rounded-md border-orange-200 py-3 px-4 h-12 text-base text-gray-900 focus:border-orange-500 focus:outline-none focus:ring-orange-500 sm:text-sm placeholder:italic placeholder:text-xs placeholder:text-gray-400 disabled:opacity-75 disabled:bg-slate-100"
               placeholder="Search pet by name"
             />

@@ -1,8 +1,3 @@
-import {
-  useGetLikesQuery,
-  useLikeMutation,
-  useDislikeMutation,
-} from '../../../state/api/likesSlice.js';
 import { useCallback, useEffect, useRef } from 'react';
 import { useState, useMemo } from 'react';
 import clsx from 'clsx';
@@ -10,7 +5,7 @@ import clsx from 'clsx';
 import { HeartIcon } from '@heroicons/react/24/outline';
 import { useSelector } from 'react-redux';
 
-export default function LikesCount({ likes }) {
+export default function LikesCount({ likes, currentUserEmail }) {
   const state = useSelector((state) => state.users);
 
   return likes ? (
@@ -23,7 +18,7 @@ export default function LikesCount({ likes }) {
               {
                 ['text-red-500']: Boolean(
                   likes.filter((like) => {
-                    return like.user_email === state.user.email;
+                    return like.user_email === currentUserEmail;
                   }).length
                 ),
               }

@@ -20,7 +20,7 @@ export default function ReportPreview({ report }) {
           {report.report_type}
         </p>
       </div> */}
-      <div className="h-[20rem]">
+      <div className="petCardImage h-[20rem]">
         {isLoading && <BouncingLoader />}
         <img
           className="rounded-t-lg h-full w-full object-cover"
@@ -31,16 +31,18 @@ export default function ReportPreview({ report }) {
           }}
         />
       </div>
-      <div className="py-4 px-3">
-        <div
-          id="petCard-body"
-          className="before:rouned-tl-[50%] before:rouned-tr[50%]"
+      <div className="petCardBody py-3 px-3 text-center bg-white">
+        <Link
+          to={`/reports/${report.pet.name}`}
+          state={report}
+          key={report.pet.name}
+          // className="btn btn-secondary w-full py-3"
         >
-          <div id="petCard-detail">
-            <h4 className="mb-2 text-2xl font-bold tracking-tight text-[#dd2834] uppercase">
-              {report.pet.name}
-            </h4>
-
+          <h4 className="text-2xl font-bold tracking-tight text-[#dd2834] uppercase leading-8">
+            {report.pet.name}
+          </h4>
+        </Link>
+        {/*
             <p className="mb-2">
               <span className="capitalize text-slate-800 leading-5 font-semibold text-sm">
                 {report.pet.gender}
@@ -60,19 +62,18 @@ export default function ReportPreview({ report }) {
               <span className="capitalize text-sm text-slate-500 leading-5 font-semibold">
                 {moment(report.lost_found_date).format('MMM Do YY')}
               </span>
-            </p>
-          </div>
-        </div>
-        <div className="pt-3">
-          <Link
+            </p> */}
+        {/* </div> */}
+      </div>
+      <div className="">
+        {/* <Link
             to={`/reports/${report.pet.name}`}
             state={report}
             key={report.pet.name}
-            className="btn btn-secondary w-full"
+            className="btn btn-secondary w-full py-3"
           >
             Pet Info
-          </Link>
-        </div>
+          </Link> */}
       </div>
     </div>
   ) : null;

@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux';
 import {
-  useGetLikesQuery,
   useLikeMutation,
   useDislikeMutation,
 } from '../../../state/api/likesSlice.js';
@@ -9,81 +8,55 @@ import { useCallback, useEffect, useRef } from 'react';
 import { useState, useMemo } from 'react';
 import clsx from 'clsx';
 
-export default function LikePet({ petId }) {
-  const isMounted = useRef(false);
+export default function LikePet(props) {
+  const { petId, likes: initialLikes } = props || {};
+  const [likes, setLikes] = useState(initialLikes || []);
+
   const state = useSelector((state) => state.users);
-  const {
-    data: likes,
-    error,
-    isFetching,
-    isSuccess,
-    isError,
-  } = useGetLikesQuery(petId);
+  const isMounted = useRef(false);
 
-  if (isError) <div className="">{JSON.stringify(error, null, 2)}</div>;
-  // const currentUserLikes = useMemo(() => {
-  //   Boolean(
-  //     likes.filter((like) => {
-  //       return like.user_email === state.user.email;
-  //     }).length
-  //   );
-  // }, [isSuccess, likes]);
+  const [likePet] = useLikeMutation();
+  const [dislikePet] = useDislikeMutation();
 
-  const handleLike = useCallback(() => {
-    // console.log('data : ', likes);
-    const currentUserLikes = Boolean(
+  const currentUserLikes = useMemo(() => {
+    return Boolean(
       likes.filter((like) => {
-        return like.user_email === state.user.email;
+        if (state.isAuthenticated) {
+          return like.user_email === state.user.email;
+        }
       }).length
     );
+  }, [likes]);
 
-    // if (isMounted.current) {
-    //   const currentUserLikes = Boolean(
-    //     data.filter(({ user_email }) => user_email === state.user.email).length
-    //   );
-    //   if (currentUserLikes) {
-    //     console.log('dislike');
-    //     request({
-    //       method: 'delete',
-    //       url: `pets/${petId}/likes`,
-    //       data: { pet_id: petId },
-    //     });
-    //   } else {
-    //     console.log('like');
-    //     request({
-    //       method: 'post',
-    //       url: `pets/${petId}/likes`,
-    //       data: { pet_id: petId },
-    //     });
-    //   }
-    // }
-  }, []);
+  const handleLike = useCallback(async () => {
+    if (currentUserLikes) {
+      const data = await dislikePet(petId).unwrap();
+      setLikes(data);
+    } else {
+      const data = await likePet(petId).unwrap();
 
-  // useEffect(() => {
-  //   if (isMounted.current) request();
+      setLikes(data);
+    }
+  }, [likes.length, likePet, dislikePet, currentUserLikes]);
 
-  //   return () => {
-  //     isMounted.current = false;
-  //   };
-  // }, [request, data]);
+  useEffect(() => {
+    isMounted.current = true;
 
-  if (isSuccess) {
-    //
-  }
+    return () => {
+      isMounted.current = false;
+    };
+  }, [likes]);
 
-  return isSuccess && likes ? (
+  return likes ? (
     <>
       <div className="relative rounded-ful">
         <button onClick={handleLike} disabled={!state.isAuthenticated}>
           <HeartIcon
             className={clsx(
-              'h-7 w-7 mt-1 text-gray-400 transition duration-500 ease-in-out transform hover:text-gray-500 hover:fill-red-300 disabled:bg-slate-500',
+              'h-7 w-7 mt-1 text-gray-400 transition duration-500 ease-in-out transform hover:text-gray-500  disabled:bg-slate-500',
               {
-                ['text-red-500']: Boolean(
-                  likes.filter((like) => {
-                    return like.user_email === state.user.email;
-                  }).length
-                ),
+                ['text-red-500']: currentUserLikes,
+                ['hover:fill-red-300']: currentUserLikes,
               }
             )}
           />
