@@ -4,13 +4,17 @@ import { useAxios } from '../../../hooks/useAxios.jsx';
 import { useCallback, useEffect, useRef } from 'react';
 import { useState } from 'react';
 
-export default function LikePet({ pet_id }) {
+export default function LikePet({ petId }) {
   const isMounted = useRef(false);
   const [likes, setLikes] = useState(0);
   const state = useSelector((state) => state.users);
   const [request, { isLoading, isError, error, isSuccess, data }] = useAxios(
-    null,
-    { manual: false }
+    {
+      method: 'get',
+      url: `pets/${petId}/likes`,
+      data: { pet_id: petId },
+    },
+    { manual: true }
   );
 
   const handleLike = useCallback(() => {
@@ -23,48 +27,38 @@ export default function LikePet({ pet_id }) {
         console.log('dislike');
         request({
           method: 'delete',
-          url: `pets/${pet_id}/likes`,
-          data: { pet_id: pet_id },
+          url: `pets/${petId}/likes`,
+          data: { pet_id: petId },
         });
       } else {
         console.log('like');
         request({
           method: 'post',
-          url: `pets/${pet_id}/likes`,
-          data: { pet_id: pet_id },
+          url: `pets/${petId}/likes`,
+          data: { pet_id: petId },
         });
       }
     }
   }, [request]);
 
   useEffect(() => {
-    request({
-      method: 'get',
-      url: `pets/${pet_id}/likes`,
-      data: { pet_id: pet_id },
-    });
-  }, [request, pet_id]);
+    if (isMounted.current) request();
 
-  useEffect(() => {
-    isMounted.current = true;
-    if (!isMounted.current) return;
-    if (isSuccess && data) {
-      setLikes(data.length);
-    }
-  }, [isSuccess, isLoading, data]);
-  return isMounted.current ? (
+    return () => {
+      isMounted.current = false;
+    };
+  }, [request, data]);
+
+  return (
     <>
       <div className="relative rounded-full bg-slate-50">
         <button onClick={handleLike} disabled={!state.isAuthenticated}>
           <HeartIcon className="h-7 w-7 mt-1 text-gray-400 transition duration-500 ease-in-out transform hover:text-gray-500 hover:fill-red-300" />
         </button>
         <div className="absolute -top-3 left-3 px-1 py-1 text-[9px] font-bold ring-1 ring-white leading-none text-red-100 transform bg-red-600 rounded-full">
-          {/* <p>{likes.length}</p> */}
-          <p>{data.length}</p>
+          <p>{data?.length}</p>
         </div>
       </div>
     </>
-  ) : (
-    <></>
   );
 }

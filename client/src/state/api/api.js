@@ -6,7 +6,7 @@ const baseQuery = fetchBaseQuery({
   headers: { 'Content-Type': 'application/json' },
 });
 
-export const apiSlice = createApi({
+export const api = createApi({
   reducerPath: 'api',
   baseQuery: baseQuery,
   tagTypes: ['api'],

@@ -57,7 +57,7 @@ function App() {
             <Route index element={<Stories />} />
           </Route>
           <Route path="pets" element={<StoriesRoot />}>
-            <Route path=":name" element={<ReportInfo />} />
+            <Route path=":pet_id" element={<ReportInfo />} />
             <Route index element={<Stories />} />
           </Route>
         </Route>

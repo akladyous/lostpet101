@@ -1,6 +1,6 @@
-import { apiSlice } from './apiSlice.js';
+import { api } from './api.js';
 
-export const requestSlice = apiSlice.injectEndpoints({
+export const request = api.injectEndpoints({
   endpoints: (build) => ({
     get: build.query({
       query: (url) => ({ url: url }),
@@ -53,4 +53,4 @@ export const {
   usePostMutation,
   usePatchMutation,
   useDeleteMutation,
-} = requestSlice;
+} = request;

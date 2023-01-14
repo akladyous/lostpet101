@@ -1,6 +1,6 @@
-import { apiSlice } from './apiSlice.js';
+import { api } from './api.js';
 
-export const authSlice = apiSlice.injectEndpoints({
+export const auth = api.injectEndpoints({
   endpoints: (build) => ({
     signIn: build.mutation({
       query: ({ email, password }) => ({
@@ -60,4 +60,4 @@ export const {
   useUpdatePasswordMutation,
   useResetPasswordMutation,
   useDeleteUserMutation,
-} = authSlice;
+} = auth;

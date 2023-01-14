@@ -9,6 +9,10 @@ class Pet < ApplicationRecord
     likes.where(user: user).first_or_create
   end
 
+  def likes?(user)
+    likes.where(user: user)
+  end
+
   enum :species, {
     dog: 0,
     cat: 1,

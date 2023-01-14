@@ -39,9 +39,11 @@ export default function Listings() {
       isMounted.current = false;
     };
   }, [request]);
+
   if (isError) {
     console.error('error: ', error);
   }
+
   return isMounted.current ? (
     <>
       <section className="relative border-orange-100 bg-white shadow-xl rounded-2xl border mb-5 p-5">

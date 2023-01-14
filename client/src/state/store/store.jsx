@@ -3,23 +3,18 @@ import { loadState } from './localStorage.jsx';
 import usersSlice, {
   initialState as userInitialState,
 } from '../slices/usersSlice.jsx';
-import { authSlice } from '../api/authSlice.js';
-import { reportsSlice } from '../api/reportsSlice.js';
-import { requestSlice } from '../api/requestSlice.js';
+
+import { api } from '../api/api.js';
+import { auth } from '../api/authSlice.js';
+import { request } from '../api/requestSlice.js';
 
 export const store = configureStore({
   reducer: {
     users: usersSlice,
-    [authSlice.reducerPath]: authSlice.reducer,
-    [requestSlice.reducerPath]: requestSlice.reducer,
-    [reportsSlice.reducerPath]: reportsSlice.reducer,
+    [api.reducerPath]: api.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(
-      authSlice.middleware,
-      requestSlice.middleware,
-      reportsSlice.middleware
-    ),
+    getDefaultMiddleware().concat(api.middleware, request.middleware),
 
   preloadedState: {
     users: loadState()?.users || userInitialState,
