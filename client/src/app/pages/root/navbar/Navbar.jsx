@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import MainMenu from './MainMenu.jsx';
 import MobileMenu from './MobileMenu.jsx';
 import IsAuthenticated from './IsAuthenticated.jsx';
-import { getImageUrl } from '../../../../lib/util.jsx';
+// import { getImageUrl } from '../../../../lib/util.jsx';
 import logo2 from '../../../../assets/images/icons/logo2.png?inline';
 
 export default function Navbar() {
@@ -24,7 +24,9 @@ export default function Navbar() {
                     src={logo2}
                     alt="Pet Finder"
                   />
-                  <h4 className="text-xl">Pet Finder</h4>
+                  <Link to="/" className="p-0">
+                    <h4 className="text-xl">Pet Finder</h4>
+                  </Link>
                 </div>
               </div>
               <MainMenu />
