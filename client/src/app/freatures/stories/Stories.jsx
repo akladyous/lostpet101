@@ -1,7 +1,5 @@
 import { useGetPetsQuery } from '../../../state/api/petsSlice.js';
-import { useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAxios } from '../../../hooks/useAxios.jsx';
 import { BouncingLoader } from '../../../components/ui/BouncingLoader.jsx';
 import ListMapper from '../../../hooks/ListMapper.jsx';
 import Story from './Story.jsx';

@@ -5,8 +5,6 @@ import usersSlice, {
 } from '../slices/usersSlice.jsx';
 
 import { api } from '../api/api.js';
-import { auth } from '../api/authSlice.js';
-import { request } from '../api/requestSlice.js';
 
 export const store = configureStore({
   reducer: {
@@ -14,7 +12,7 @@ export const store = configureStore({
     [api.reducerPath]: api.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(api.middleware, request.middleware),
+    getDefaultMiddleware().concat(api.middleware),
 
   preloadedState: {
     users: loadState()?.users || userInitialState,

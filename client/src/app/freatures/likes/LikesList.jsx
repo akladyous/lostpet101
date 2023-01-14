@@ -1,4 +1,7 @@
-export default function LikesList({ likes = [] }) {
+export default function LikesList(props) {
+  const {
+    pet: { likes },
+  } = props || {};
   return likes.length >= 1 ? (
     <div className="likes relative">
       <div className="relative isolate flex -space-x-2 overflow-visible px-1 py-2 w-fit">

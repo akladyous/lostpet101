@@ -1,4 +1,4 @@
-import { ChatBubbleLeftIcon, HeartIcon } from '@heroicons/react/24/outline';
+import { ChatBubbleLeftIcon } from '@heroicons/react/24/outline';
 import LikesList from '../likes/LikesList.jsx';
 import LikePet from '../likes/LikePet.jsx';
 export default function Story({ pet }) {
@@ -30,7 +30,7 @@ export default function Story({ pet }) {
         </div>
 
         <div className="flex items-center justify-between">
-          <LikesList likes={pet.likes} />
+          <LikesList pet={pet} />
           <div className="flex space-x-4 mr-3">
             <LikePet petId={pet.id} likes={pet.likes} />
             <div className="relative">

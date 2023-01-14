@@ -36,4 +36,8 @@ class Pet < ApplicationRecord
       errors.add(:image, 'invalida image format')
     end
   end
+
+  def pet_likes(user_id)
+    Pet.joins(:likes).where(likes: {user_id: user_id})
+  end
 end
