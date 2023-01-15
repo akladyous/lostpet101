@@ -2,7 +2,7 @@ import { ToghetherSVG } from '../../../assets/images/icons/Toghether.jsx';
 import { LocationSVG } from '../../../assets/images/icons/LocationSVG.jsx';
 import { LetterSVG } from '../../../assets/images/icons/LetterSVG.jsx';
 import { PhoneSVG } from '../../../assets/images/icons/PhoneSVG.jsx';
-import { useOutletContext } from 'react-router-dom';
+// import { useOutletContext } from 'react-router-dom';
 export default function ReportRequest({ report }) {
   // const {
   //   location: { state },
@@ -46,7 +46,7 @@ export default function ReportRequest({ report }) {
               </div>
               <div className="col-span-11">
                 <p className="inline-block align-middle col-span-10">
-                  Location Address
+                  &nbsp;Location Address
                 </p>
                 <p className="">{report.address}</p>
               </div>
@@ -56,7 +56,9 @@ export default function ReportRequest({ report }) {
                 <LetterSVG classes={'inline-block'} />
               </div>
               <div className="col-span-11">
-                <p className="inline-block align-middle">{report.user.email}</p>
+                <p className="inline-block align-middle">
+                  &nbsp;{report.user.email}
+                </p>
               </div>
             </div>
             <div className="border-b pb-4 mb-4 grid grid-cols-12 space-x-1">
@@ -64,7 +66,9 @@ export default function ReportRequest({ report }) {
                 <PhoneSVG classes={'inline-block'} />
               </div>
               <div className="col-span-11">
-                <p className="inline-block align-middle">{'624-731-8644'}</p>
+                <p className="inline-block align-middle">
+                  &nbsp;{'624-731-8644'}
+                </p>
               </div>
             </div>
             <div>
