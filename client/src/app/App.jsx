@@ -19,8 +19,8 @@ import Stories from './freatures/stories/Stories.jsx';
 
 import { withLocationProps } from '../hooks/withLocationProps.jsx';
 import ReportDetail from './freatures/reports/ReportDetail.jsx';
-const ReportInfoWrapper = withLocationProps(ReportDetail);
 import ReportRequest from './freatures/requests/ReportRequest.jsx';
+const ReportInfoWrapper = withLocationProps(ReportDetail);
 const ReportRequestWrapper = withLocationProps(ReportRequest);
 
 function App() {
