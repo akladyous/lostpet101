@@ -4,21 +4,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends --assume-yes \
   sudo bash curl git gnupg2 bash-completion libpq-dev \
   build-essential patch ruby-dev zlib1g-dev liblzma-dev \
   pkg-config libglib2.0-dev libexpat1-dev libvips \
-  && rm -rf /var/lib/apt/lists/*
+  && rm -rf /var/lib/apt/lists/* \
+  && sudo adduser --disabled-password deploy \
+  # INSTALL NODE-JS
+  && sudo \curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash - \
+  && apt-get update -yq && sudo apt-get install -y nodejs
 
-RUN sudo adduser --disabled-password deploy
-
-# INSTALL NODE-JS
-RUN sudo \curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash -
-RUN sudo apt-get install -y nodejs
-RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | sudo tee /usr/share/keyrings/yarnkey.gpg >/dev/null
-RUN echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-RUN sudo apt-get update && sudo apt-get install yarn
 
 ENV BUNDLE_PATH /usr/local/bundle/gems
 ENV TMP_PATH /tmp/
 ENV RAILS_LOG_TO_STDOUT true
-ENV APP_PATH /petfinder
+ENV APP_PATH /pet-finder
 ENV RAILS_PORT 3000
 ENV RAILS_ENV production
 ENV RAILS_SERVE_STATIC_FILES true
@@ -44,8 +40,15 @@ RUN bundle instal --jobs=2 --retry=2 \
   && rm -rf /usr/local/bundle/cache && rm -rf /usr/local/bundle/cache
 
 COPY docker/* /usr/bin/
+COPY client/package.json ./client/package.json
+COPY client/package-lock.json ./client/package-lock.json
+
 RUN chmod +x /usr/bin/entrypoint.sh
 RUN chmod +x /usr/bin/react.sh
+RUN npm ci --prefix ./client
+COPY . ./
+RUN /usr/bin/react.sh
+
 ENTRYPOINT ["entrypoint.sh"]
 EXPOSE $RAILS_PORT
 
