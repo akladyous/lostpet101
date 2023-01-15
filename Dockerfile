@@ -45,6 +45,7 @@ RUN bundle instal --jobs=2 --retry=2 \
 
 COPY docker/* /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
+RUN chmod +x /usr/bin/react.sh
 ENTRYPOINT ["entrypoint.sh"]
 EXPOSE $RAILS_PORT
 
