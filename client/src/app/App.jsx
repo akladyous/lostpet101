@@ -17,10 +17,11 @@ import ListingWizard from './freatures/listings/steps/ListingWizard.jsx';
 import Listings from './freatures/listings/Listings.jsx';
 import Stories from './freatures/stories/Stories.jsx';
 
-import ReportDetail from './freatures/reports/ReportDetail.jsx';
 import { withLocationProps } from '../hooks/withLocationProps.jsx';
-const ReportInfo = withLocationProps(ReportDetail);
+import ReportDetail from './freatures/reports/ReportDetail.jsx';
+const ReportInfoWrapper = withLocationProps(ReportDetail);
 import ReportRequest from './freatures/requests/ReportRequest.jsx';
+const ReportRequestWrapper = withLocationProps(ReportRequest);
 
 function App() {
   return (
@@ -46,8 +47,8 @@ function App() {
               path=":name"
               element={
                 <>
-                  <ReportInfo resourceName="report" />
-                  <ReportRequest />
+                  <ReportInfoWrapper resourceName="report" />
+                  <ReportRequestWrapper resourceName="report" />
                 </>
               }
             />
@@ -57,7 +58,7 @@ function App() {
             <Route index element={<Stories />} />
           </Route>
           <Route path="pets" element={<StoriesRoot />}>
-            <Route path=":pet_id" element={<ReportInfo />} />
+            <Route path=":pet_id" element={<ReportInfoWrapper />} />
             <Route index element={<Stories />} />
           </Route>
         </Route>

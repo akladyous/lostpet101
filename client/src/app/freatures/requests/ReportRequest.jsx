@@ -3,11 +3,11 @@ import { LocationSVG } from '../../../assets/images/icons/LocationSVG.jsx';
 import { LetterSVG } from '../../../assets/images/icons/LetterSVG.jsx';
 import { PhoneSVG } from '../../../assets/images/icons/PhoneSVG.jsx';
 import { useOutletContext } from 'react-router-dom';
-export default function ReportRequest(props) {
-  const {
-    location: { state },
-  } = useOutletContext();
-  debugger;
+export default function ReportRequest({ report }) {
+  // const {
+  //   location: { state },
+  // } = useOutletContext();
+
   return (
     <div className="grid grid-cols-3 mt-10">
       <div className="col-span-2 flex flex-col justify-between p-4">
@@ -48,7 +48,7 @@ export default function ReportRequest(props) {
                 <p className="inline-block align-middle col-span-10">
                   Location Address
                 </p>
-                <p className="">{state.address}</p>
+                <p className="">{report.address}</p>
               </div>
             </div>
             <div className="border-b pb-4 mb-4 grid grid-cols-12 space-x-1">
@@ -56,7 +56,7 @@ export default function ReportRequest(props) {
                 <LetterSVG classes={'inline-block'} />
               </div>
               <div className="col-span-11">
-                <p className="inline-block align-middle">{state.user.email}</p>
+                <p className="inline-block align-middle">{report.user.email}</p>
               </div>
             </div>
             <div className="border-b pb-4 mb-4 grid grid-cols-12 space-x-1">
