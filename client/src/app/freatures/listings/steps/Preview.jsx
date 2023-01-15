@@ -62,8 +62,7 @@ export default function Preview(props) {
     if (isSuccess && data) {
       setMessage('Listing successfully created');
       setTimeout(() => {
-        debugger;
-        navigate(`/listings/${getStepData[1].name}`, {
+        navigate(`/reports/${getStepData[1].name}`, {
           state: data,
         });
       }, 3000);

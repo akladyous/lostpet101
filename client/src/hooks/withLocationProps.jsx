@@ -8,8 +8,9 @@ export function withLocationProps(WrappedComponent) {
 
     const { state } = useLocation();
     const { name } = useParams();
-    console.log('useLocation : ', useLocation());
-    console.log('useParams : ', useParams());
+    // console.log('useLocation(); : ', useLocation());
+    // console.log('useParams(); : ', useParams());
+
     return (
       <WrappedComponent
         {...{ [resourceName]: state }}

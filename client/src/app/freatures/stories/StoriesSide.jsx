@@ -9,7 +9,7 @@ export default function StoriesSide() {
   return (
     <div className="flex flex-col my-2 sm:mx-4 space-y-3">
       <div className="search p-2 border rounded-xl bg-orange-50 opacity-90 ">
-        <form action="/listings">
+        <form action="/reports">
           <div className="relative mt-1 rounded-md shadow-sm">
             <input
               type="text"

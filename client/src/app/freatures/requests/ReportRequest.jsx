@@ -7,7 +7,7 @@ export default function ReportRequest(props) {
   const {
     location: { state },
   } = useOutletContext();
-  console.log('outletContext : ', useOutletContext());
+  debugger;
   return (
     <div className="grid grid-cols-3 mt-10">
       <div className="col-span-2 flex flex-col justify-between p-4">

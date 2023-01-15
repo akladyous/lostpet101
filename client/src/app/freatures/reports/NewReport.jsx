@@ -4,8 +4,10 @@ import { TextField } from '../../../components/form/TextField.jsx';
 import { TextAreaField } from '../../../components/form/TextAreaField.jsx';
 import { SelectField } from '../../../components/form/SelectField.jsx';
 import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 
 export default function NewReport(props) {
+  const { isAuthenticated } = useSelector((state) => state.users);
   const {
     currentStep,
     lastStep,
@@ -109,14 +111,18 @@ export default function NewReport(props) {
                 e.preventDefault();
                 prev();
               }}
-              disabled={isFirstStep}
+              disabled={isFirstStep || !isAuthenticated}
               className="btn btn-secondary px-8"
             >
               back
             </button>
             <button
               type="submit"
-              // disabled={isSubmitting || (isValid && isSubmitSuccessful)}
+              disabled={[
+                // isSubmitting,
+                // isValid && isSubmitSuccessful,
+                !isAuthenticated,
+              ].some(Boolean)}
               className="btn btn-secondary px-8"
               // className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto"
             >

@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState, useEffect, useReducer } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { petSchema as schema } from './form/petSchema.jsx';
 import { FileField } from '../../../components/form/FileField.jsx';
 import { TextField } from '../../../components/form/TextField.jsx';
@@ -6,8 +6,11 @@ import { TextAreaField } from '../../../components/form/TextAreaField.jsx';
 import { SelectField } from '../../../components/form/SelectField.jsx';
 import DogPlaceholder from '../../../assets/images/icons/DogPlaceholder.jsx';
 import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 
 function NewPetForm(props) {
+  const { isAuthenticated } = useSelector((state) => state.users);
+
   const {
     currentStep,
     lastStep,
@@ -190,7 +193,11 @@ function NewPetForm(props) {
               </button>
               <button
                 type="submit"
-                // disabled={isSubmitting || (isValid && isSubmitSuccessful)}
+                disabled={[
+                  // isSubmitting,
+                  // isValid && isSubmitSuccessful,
+                  !isAuthenticated,
+                ].some(Boolean)}
                 className="btn btn-secondary px-8"
               >
                 Next
