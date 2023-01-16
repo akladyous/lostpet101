@@ -1,6 +1,6 @@
 # git reset --hard HEAD
 # git fetch --all
-git pull
+# git pull
 
 docker stop $(docker ps -a -q)
 docker rmi -f $(docker images -aq)
