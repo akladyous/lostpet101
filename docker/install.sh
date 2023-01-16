@@ -17,3 +17,7 @@ docker build -t petfinder .
 docker start -d petfinder
 docker exec -it petfinder bash
 
+
+docker stop $(docker ps -a -q)
+docker rmi -f $(docker images -aq)
+docker system prune
