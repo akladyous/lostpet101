@@ -4,12 +4,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends --assume-yes \
   sudo bash curl git gnupg2 bash-completion libpq-dev \
   build-essential patch ruby-dev zlib1g-dev liblzma-dev \
   pkg-config libglib2.0-dev libexpat1-dev libvips \
-  && rm -rf /var/lib/apt/lists/* \
-  && sudo adduser --disabled-password deploy \
-  # INSTALL NODE-JS
-  && sudo \curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash - \
-  && apt-get update -yq && sudo apt-get install -y nodejs
+  && rm -rf /var/lib/apt/lists/*
 
+# RUN sudo adduser --disabled-password deploy
+
+# INSTALL NODE-JS
+RUN sudo \curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash -
+RUN sudo apt-get install -y nodejs
+RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | sudo tee /usr/share/keyrings/yarnkey.gpg >/dev/null
+RUN echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+RUN sudo apt-get update && sudo apt-get install yarn
 
 ENV BUNDLE_PATH /usr/local/bundle/gems
 ENV TMP_PATH /tmp/
@@ -53,4 +57,3 @@ ENTRYPOINT ["entrypoint.sh"]
 EXPOSE $RAILS_PORT
 
 CMD ["rails", "server", "-b", "0.0.0.0"]
-

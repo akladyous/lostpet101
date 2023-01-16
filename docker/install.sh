@@ -4,9 +4,10 @@ bundle lock --add-platform ruby
 bundle lock --add-platform x86_64-linux
 bundle install
 
+docker volume create postgres_data
+docker-compose up
 
 docker-compose build
-docker-compose up
 docker run --name petfinder -it --rm petfinder /bin/bash
 docker run --name petfinder -it petfinder
 docker run -it --entrypoint /bin/bash petfinder -c bash

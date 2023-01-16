@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
-  # resources :likes
+
+  # root 'home#index'
+  get "*path", to: "home#index", constraints: ->(req) { !req.xhr? && req.format.html? }
 
   post :feedback, to: "feedback#create"
 
+  # resources :likes
   resources :report_requests
   resources :user_profiles
   resources :user_addresses
