@@ -12,19 +12,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends --assume-yes \
   sudo bash curl git gnupg2 bash-completion libpq-dev \
   build-essential patch ruby-dev zlib1g-dev liblzma-dev \
   pkg-config libglib2.0-dev libexpat1-dev libvips \
+  nginx \
   && rm -rf /var/lib/apt/lists/*
+
 
 ENV BUNDLE_PATH /usr/local/bundle/gems
 ENV TMP_PATH /tmp/
-ENV RAILS_LOG_TO_STDOUT true
 ENV APP_PATH /pet-finder
-ENV RAILS_PORT 3000
-ENV RAILS_ENV production
-ENV RAILS_SERVE_STATIC_FILES true
-ENV RAILS_LOG_TO_STDOUT true
-ENV BUNDLE_WITHOUT development
-
-
 RUN mkdir -p $APP_PATH
 WORKDIR $APP_PATH
 
@@ -36,19 +30,16 @@ RUN gem install rubygems-update --no-document
 RUN gem install bundler
 RUN gem install rails
 RUN bundle instal --jobs=2 --retry=2 \
-  # && rm -rf /usr/local/bundle/cache/*.gem \
+  && rm -rf /usr/local/bundle/cache/*.gem \
   && find /usr/local/bundle/gems/ -name "*.c" -delete \
   && find /usr/local/bundle/gems/ -name "*.o" -delete \
   && rm -rf /usr/local/bundle/cache && rm -rf /usr/local/bundle/cache
 
 RUN chmod +x /usr/bin/entrypoint.sh
 RUN chmod +x /usr/bin/petfinder.sh
-# RUN chmod +x /usr/bin/react.sh
-# RUN npm ci --prefix ./client
 COPY . ./
 RUN rm -rf ./public/**
 COPY --from=node_build app/build ./public
-# RUN /usr/bin/react.sh
 
 ENTRYPOINT ["entrypoint.sh"]
 EXPOSE $RAILS_PORT
