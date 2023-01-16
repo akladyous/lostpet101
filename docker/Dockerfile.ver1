@@ -4,6 +4,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends --assume-yes \
   sudo bash curl git gnupg2 bash-completion libpq-dev \
   build-essential patch ruby-dev zlib1g-dev liblzma-dev \
   pkg-config libglib2.0-dev libexpat1-dev libvips \
+  nginx \
   && rm -rf /var/lib/apt/lists/*
 
 # RUN sudo adduser --disabled-password deploy
