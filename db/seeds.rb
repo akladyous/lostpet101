@@ -11,8 +11,6 @@ end
 require 'faker'
 Faker::Config.locale = :en
 
-
-
 def generate_pet
   species = -> { %w[dog cat].sample }.call
   coat_list = lambda {
