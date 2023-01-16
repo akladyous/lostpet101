@@ -1,13 +1,17 @@
-require 'ruby-progressbar' if ENV['RAILS_ENV'] == development
-require 'faker'
-Faker::Config.locale = :en
-
 system('clear')
 REPORTS_TO_CREATE = ENV['records'] || 20
 system('clear')
 puts "🌱 Start Seeding ..."
 
-# user_progress = ProgressBar.create(title: "  #{REPORTS_TO_CREATE} reports ⏱️", total: REPORTS_TO_CREATE)
+if ENV['RAILS_ENV'] == "development"
+  require 'ruby-progressbar'
+  progressbar = ProgressBar.create(title: "  #{REPORTS_TO_CREATE} reports ⏱️", total: REPORTS_TO_CREATE)
+end
+
+require 'faker'
+Faker::Config.locale = :en
+
+
 
 def generate_pet
   species = -> { %w[dog cat].sample }.call
@@ -85,7 +89,7 @@ uuid = -> { SecureRandom.uuid }
 
       report.save
     end
-    # user_progress.increment
+    progressbar.increment if progressbar
   end
 end
 

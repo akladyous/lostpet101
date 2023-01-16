@@ -1,19 +1,18 @@
-FROM ruby:3.2.0-slim-bullseye as build
+FROM node:19-alpine as node_build
+WORKDIR /app
+COPY ./client/package.json ./package.json
+COPY ./client/package-lock.json ./package-lock.json
+COPY ./client /app
+RUN npm ci
+RUN npm run build
+
+FROM ruby:3.2.0-slim-bullseye as ruby_build
 
 RUN apt-get update && apt-get install -y --no-install-recommends --assume-yes \
   sudo bash curl git gnupg2 bash-completion libpq-dev \
   build-essential patch ruby-dev zlib1g-dev liblzma-dev \
   pkg-config libglib2.0-dev libexpat1-dev libvips \
   && rm -rf /var/lib/apt/lists/*
-
-# RUN sudo adduser --disabled-password deploy
-
-# INSTALL NODE-JS
-RUN sudo \curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash -
-RUN sudo apt-get install -y nodejs
-RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | sudo tee /usr/share/keyrings/yarnkey.gpg >/dev/null
-RUN echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-RUN sudo apt-get update && sudo apt-get install yarn
 
 ENV BUNDLE_PATH /usr/local/bundle/gems
 ENV TMP_PATH /tmp/
@@ -29,11 +28,10 @@ ENV BUNDLE_WITHOUT development
 RUN mkdir -p $APP_PATH
 WORKDIR $APP_PATH
 
-COPY ./Gemfile $APP_PATH/Gemfile
 ADD Gemfile $APP_PATH/Gemfile
 ADD Gemfile.lock $APP_PATH/Gemfile.lock
+ADD docker/* /usr/bin/
 
-RUN npm install npm@latest -g
 RUN gem install rubygems-update --no-document
 RUN gem install bundler
 RUN gem install rails
@@ -43,16 +41,13 @@ RUN bundle instal --jobs=2 --retry=2 \
   && find /usr/local/bundle/gems/ -name "*.o" -delete \
   && rm -rf /usr/local/bundle/cache && rm -rf /usr/local/bundle/cache
 
-COPY docker/* /usr/bin/
-COPY client/package.json ./client/package.json
-COPY client/package-lock.json ./client/package-lock.json
-
 RUN chmod +x /usr/bin/entrypoint.sh
 RUN chmod +x /usr/bin/petfinder.sh
-RUN chmod +x /usr/bin/react.sh
-RUN npm ci --prefix ./client
+# RUN chmod +x /usr/bin/react.sh
+# RUN npm ci --prefix ./client
 COPY . ./
-RUN /usr/bin/react.sh
+COPY --from=node_build app/build ./public
+# RUN /usr/bin/react.sh
 
 ENTRYPOINT ["entrypoint.sh"]
 EXPOSE $RAILS_PORT
