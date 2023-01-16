@@ -37,7 +37,6 @@ RUN bundle instal --jobs=2 --retry=2 \
 COPY . ./
 COPY ./docker/* /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
-RUN chmod +x /usr/bin/petfinder.sh
 RUN rm -rf ./public/**
 COPY --from=node_build app/build ./public
 
