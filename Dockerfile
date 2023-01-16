@@ -48,6 +48,7 @@ COPY client/package.json ./client/package.json
 COPY client/package-lock.json ./client/package-lock.json
 
 RUN chmod +x /usr/bin/entrypoint.sh
+RUN chmod +x /usr/bin/petfinder.sh
 RUN chmod +x /usr/bin/react.sh
 RUN npm ci --prefix ./client
 COPY . ./
