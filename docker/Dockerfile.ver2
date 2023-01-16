@@ -24,7 +24,6 @@ WORKDIR $APP_PATH
 
 ADD Gemfile $APP_PATH/Gemfile
 ADD Gemfile.lock $APP_PATH/Gemfile.lock
-ADD docker/* /usr/bin/
 
 RUN gem install rubygems-update --no-document
 RUN gem install bundler
@@ -35,9 +34,10 @@ RUN bundle instal --jobs=2 --retry=2 \
   && find /usr/local/bundle/gems/ -name "*.o" -delete \
   && rm -rf /usr/local/bundle/cache && rm -rf /usr/local/bundle/cache
 
+COPY . ./
+COPY docker/* /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 RUN chmod +x /usr/bin/petfinder.sh
-COPY . ./
 RUN rm -rf ./public/**
 COPY --from=node_build app/build ./public
 
