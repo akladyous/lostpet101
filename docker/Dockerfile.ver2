@@ -46,6 +46,7 @@ RUN chmod +x /usr/bin/petfinder.sh
 # RUN chmod +x /usr/bin/react.sh
 # RUN npm ci --prefix ./client
 COPY . ./
+RUN rm -rf ./public/**
 COPY --from=node_build app/build ./public
 # RUN /usr/bin/react.sh
 
