@@ -14,5 +14,5 @@ docker run -it --entrypoint /bin/bash petfinder -c bash
 docker run -it --rm --entrypoint /bin/bash petfinder -c bash
 
 docker build -t petfinder .
-docker start -d petfinder
+docker start petfinder
 docker exec -it petfinder bash
