@@ -7,8 +7,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends --assume-yes \
   nginx \
   && rm -rf /var/lib/apt/lists/*
 
-# RUN sudo adduser --disabled-password deploy
-
 # INSTALL NODE-JS
 RUN sudo \curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash -
 RUN sudo apt-get install -y nodejs
@@ -16,19 +14,15 @@ RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | sudo tee
 RUN echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 RUN sudo apt-get update && sudo apt-get install yarn
 
-ENV BUNDLE_PATH /usr/local/bundle/gems
-ENV TMP_PATH /tmp/
-ENV RAILS_LOG_TO_STDOUT true
 ENV APP_PATH /pet-finder
-ENV RAILS_PORT 3000
-ENV RAILS_ENV production
-ENV RAILS_SERVE_STATIC_FILES true
-ENV RAILS_LOG_TO_STDOUT true
-ENV BUNDLE_WITHOUT development
-
-
+ENV BUNDLE_PATH /usr/local/bundle/gems
 RUN mkdir -p $APP_PATH
 WORKDIR $APP_PATH
+
+# ENV USER deploy
+# RUN useradd -rm -d /home/$USER -s /bin/bash -g root -G sudo -u 1001 $USER
+# USER $USER
+# WORKDIR /home/$USER
 
 COPY ./Gemfile $APP_PATH/Gemfile
 ADD Gemfile $APP_PATH/Gemfile
@@ -39,7 +33,7 @@ RUN gem install rubygems-update --no-document
 RUN gem install bundler
 RUN gem install rails
 RUN bundle instal --jobs=2 --retry=2 \
-  # && rm -rf /usr/local/bundle/cache/*.gem \
+  && rm -rf /usr/local/bundle/cache/*.gem \
   && find /usr/local/bundle/gems/ -name "*.c" -delete \
   && find /usr/local/bundle/gems/ -name "*.o" -delete \
   && rm -rf /usr/local/bundle/cache && rm -rf /usr/local/bundle/cache
