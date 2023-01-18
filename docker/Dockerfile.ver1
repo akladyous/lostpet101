@@ -1,15 +1,16 @@
 FROM ruby:3.2.0-slim-bullseye as build
 
-RUN apt-get update && apt-get install -y --no-install-recommends --assume-yes \
-  sudo bash curl git gnupg2 bash-completion libpq-dev \
-  build-essential patch ruby-dev zlib1g-dev liblzma-dev \
-  pkg-config libglib2.0-dev libexpat1-dev libvips \
-  nginx \
+RUN apt-get update && apt-get install -y sudo bash curl git gnupg2 libpq-dev
+RUN sudo apt-get update && apt-get install -y --no-install-recommends --assume-yes \
+  build-essential patch ruby-dev zlib1g-dev liblzma-dev
+RUN sudo apt-get update && apt-get install -y --no-install-recommends --assume-yes \
+  pkg-config libglib2.0-dev libexpat1-dev libvips
+RUN sudo apt-get update && apt-get install -y --no-install-recommends --assume-yes \
+  nodejs npm \
   && rm -rf /var/lib/apt/lists/*
+RUN sudo apt-get upgrade -y
 
-# INSTALL NODE-JS
-RUN sudo \curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash -
-RUN sudo apt-get install -y nodejs && apt
+# RUN sudo \curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash -
 # RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | sudo tee /usr/share/keyrings/yarnkey.gpg >/dev/null
 # RUN echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 # RUN sudo apt-get update && sudo apt-get install yarn
