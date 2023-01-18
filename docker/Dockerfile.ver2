@@ -5,24 +5,15 @@ RUN npm install
 RUN npm run build
 
 FROM ruby:3.2.0-slim-bullseye as ruby_build
+WORKDIR /pet-finder
 
 RUN apt-get update && apt-get install -y --no-install-recommends --assume-yes \
   sudo bash curl git gnupg2 bash-completion libpq-dev \
   build-essential patch ruby-dev zlib1g-dev liblzma-dev \
   pkg-config libglib2.0-dev libexpat1-dev libvips \
-  nginx \
   && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /pet-finder
-# ENV APP_PATH /pet-finder
-# RUN mkdir -p $APP_PATH
-# WORKDIR $APP_PATH
 ENV BUNDLE_PATH /usr/local/bundle/gems
-
-# ENV USER deploy
-# RUN useradd -rm -d /home/$USER -s /bin/bash -g root -G sudo -u 1001 $USER
-# USER $USER
-# WORKDIR /home/$USER
 
 ADD Gemfile $APP_PATH/Gemfile
 ADD Gemfile.lock $APP_PATH/Gemfile.lock
@@ -40,7 +31,9 @@ COPY . ./
 COPY ./docker/* /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 # RUN rm -rf ./public/**
+RUN mkdir ./prova
 COPY --from=builder /app/build ./public
+COPY --from=builder /app/build ./prova
 
 ENTRYPOINT ["entrypoint.sh"]
 EXPOSE $RAILS_PORT
