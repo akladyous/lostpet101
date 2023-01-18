@@ -1,6 +1,6 @@
 FROM ruby:3.2.0-slim-bullseye as build
 
-RUN apt-get update && apt-get install -y sudo bash curl git gnupg2 libpq-dev
+RUN apt-get update && apt-get install -y sudo bash curl git gnupg2 libpq-dev apt-utils
 RUN sudo apt-get update && apt-get install -y --no-install-recommends --assume-yes \
   build-essential patch ruby-dev zlib1g-dev liblzma-dev
 RUN sudo apt-get update && apt-get install -y --no-install-recommends --assume-yes \
@@ -9,12 +9,6 @@ RUN sudo apt-get update && apt-get install -y --no-install-recommends --assume-y
   nodejs npm \
   && rm -rf /var/lib/apt/lists/*
 RUN sudo apt-get upgrade -y
-
-# RUN sudo \curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash -
-# RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | sudo tee /usr/share/keyrings/yarnkey.gpg >/dev/null
-# RUN echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-# RUN sudo apt-get update && sudo apt-get install yarn
-
 
 ENV APP_PATH /pet-finder
 ENV BUNDLE_PATH /usr/local/bundle/gems
