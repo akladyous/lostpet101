@@ -9,10 +9,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends --assume-yes \
 
 # INSTALL NODE-JS
 RUN sudo \curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash -
-RUN sudo apt-get install -y nodejs
-RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | sudo tee /usr/share/keyrings/yarnkey.gpg >/dev/null
-RUN echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-RUN sudo apt-get update && sudo apt-get install yarn
+RUN sudo apt-get install -y nodejs && apt
+# RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | sudo tee /usr/share/keyrings/yarnkey.gpg >/dev/null
+# RUN echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+# RUN sudo apt-get update && sudo apt-get install yarn
+
 
 ENV APP_PATH /pet-finder
 ENV BUNDLE_PATH /usr/local/bundle/gems
@@ -44,8 +45,8 @@ COPY client/package-lock.json ./client/package-lock.json
 
 RUN chmod +x /usr/bin/entrypoint.sh
 RUN chmod +x /usr/bin/react.sh
-RUN npm ci --prefix ./client
-COPY . ./
+# RUN npm ci --prefix ./client
+# COPY . ./
 RUN /usr/bin/react.sh
 
 ENTRYPOINT ["entrypoint.sh"]

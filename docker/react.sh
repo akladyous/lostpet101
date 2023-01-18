@@ -1,5 +1,5 @@
 
-rm -rf ./public/**
+rm -rfv ./public/*
 npm ci --prefix ./client
 npm run build --prefix ./client
 cp -a ./client/build/.  ./public
