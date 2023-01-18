@@ -9,10 +9,6 @@ RUN sudo apt-get update && apt-get install -y --no-install-recommends --assume-y
 RUN sudo curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash -
 RUN sudo apt-get install -y nodejs
 RUN npm install npm@latest -g
-# -------------------------------- YARN --------------------------------
-# RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | sudo tee /usr/share/keyrings/yarnkey.gpg >/dev/null
-# RUN echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-# RUN sudo apt-get update && sudo apt-get install yarn
 # -------------------------------- ENV --------------------------------
 ENV APP_PATH /pet-finder
 ENV BUNDLE_PATH /usr/local/bundle/gems
@@ -24,9 +20,12 @@ WORKDIR $APP_PATH
 # USER $USER
 # WORKDIR /home/$USER
 # -------------------------------- GEMS --------------------------------
+
 COPY ./Gemfile $APP_PATH/Gemfile
 ADD Gemfile $APP_PATH/Gemfile
 ADD Gemfile.lock $APP_PATH/Gemfile.lock
+
+RUN npm install npm@latest -g
 RUN gem install rubygems-update --no-document
 RUN gem install bundler
 RUN gem install rails
@@ -42,15 +41,9 @@ COPY client/package-lock.json ./client/package-lock.json
 
 RUN chmod +x /usr/bin/entrypoint.sh
 RUN chmod +x /usr/bin/react.sh
-
-RUN npm ci --prefix ./client
-RUN npm run build --prefix ./client
-# RUN rm -rfv ./public/*
-RUN cp -a ./client/build/.  ./public
-
-
-# COPY . ./
-# RUN /usr/bin/react.sh
+# RUN npm ci --prefix ./client
+COPY . ./
+RUN /usr/bin/react.sh
 
 ENTRYPOINT ["entrypoint.sh"]
 EXPOSE $RAILS_PORT

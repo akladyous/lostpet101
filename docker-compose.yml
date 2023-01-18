@@ -16,7 +16,7 @@ services:
   petfinder:
     build:
       context: .
-      dockerfile: ./docker/Dockerfile.ver1
+      dockerfile: ./docker/Dockerfile.ver2
     container_name: petfinder
     volumes:
       - .:/pet-finder

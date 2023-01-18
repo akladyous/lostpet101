@@ -1,9 +1,7 @@
-FROM node:19-alpine as node_build
+FROM node:latest AS builder
 WORKDIR /app
-COPY ./client/package.json ./package.json
-COPY ./client/package-lock.json ./package-lock.json
-COPY ./client /app
-RUN npm ci
+ADD client ./
+RUN npm install
 RUN npm run build
 
 FROM ruby:3.2.0-slim-bullseye as ruby_build
@@ -15,10 +13,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends --assume-yes \
   nginx \
   && rm -rf /var/lib/apt/lists/*
 
-ENV APP_PATH /pet-finder
+WORKDIR /pet-finder
+# ENV APP_PATH /pet-finder
+# RUN mkdir -p $APP_PATH
+# WORKDIR $APP_PATH
 ENV BUNDLE_PATH /usr/local/bundle/gems
-RUN mkdir -p $APP_PATH
-WORKDIR $APP_PATH
 
 # ENV USER deploy
 # RUN useradd -rm -d /home/$USER -s /bin/bash -g root -G sudo -u 1001 $USER
@@ -40,8 +39,8 @@ RUN bundle instal --jobs=2 --retry=2 \
 COPY . ./
 COPY ./docker/* /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
-RUN rm -rf ./public/**
-COPY --from=node_build app/build ./public
+# RUN rm -rf ./public/**
+COPY --from=builder /app/build ./public
 
 ENTRYPOINT ["entrypoint.sh"]
 EXPOSE $RAILS_PORT
