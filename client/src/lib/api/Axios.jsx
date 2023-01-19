@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const Axios = axios.create({
   headers: { 'Content-Type': 'application/json' },
-  baseURL: 'http://127.0.0.1:3000',
+  baseURL: 'http://localhost:3000',
   withCredentials: true,
   // Accept: 'application/json',
   // delayed: true

@@ -23,10 +23,10 @@ COPY Gemfile Gemfile.lock ./
 RUN gem install bundler
 RUN gem install rubygems-update --no-document
 RUN gem install rails
-# RUN bundle instal --jobs=2 --retry=2 \
-#   && find /usr/local/bundle/gems/ -name "*.c" -delete \
-#   && find /usr/local/bundle/gems/ -name "*.o" -delete \
-#   && rm -rf /usr/local/bundle/cache && rm -rf /usr/local/bundle/cache
+RUN bundle instal --jobs=2 --retry=2 \
+  && find /usr/local/bundle/gems/ -name "*.c" -delete \
+  && find /usr/local/bundle/gems/ -name "*.o" -delete \
+  && rm -rf /usr/local/bundle/cache && rm -rf /usr/local/bundle/cache
 
 COPY . ./
 COPY ./docker/* /usr/bin/
