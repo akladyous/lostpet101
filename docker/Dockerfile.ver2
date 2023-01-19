@@ -1,11 +1,17 @@
-FROM node:latest AS builder
+FROM node:latest as builder
 WORKDIR /app
 ADD client ./
 RUN npm install
 RUN npm run build
 
 FROM ruby:3.2.0-slim-bullseye as ruby_build
-WORKDIR /pet-finder
+
+ENV APP_PATH=/petfinder/
+ENV TMP_PATH=/tmp/
+ENV RAILS_PORT=3000
+ENV RAILS_LOG_TO_STDOUT=true
+ENV BUNDLE_PATH=/usr/local/bundle/gems
+WORKDIR ${APP_PATH}
 
 RUN apt-get update && apt-get install -y --no-install-recommends --assume-yes \
   sudo bash curl git gnupg2 bash-completion libpq-dev \
@@ -13,27 +19,20 @@ RUN apt-get update && apt-get install -y --no-install-recommends --assume-yes \
   pkg-config libglib2.0-dev libexpat1-dev libvips \
   && rm -rf /var/lib/apt/lists/*
 
-ENV BUNDLE_PATH /usr/local/bundle/gems
-
-ADD Gemfile $APP_PATH/Gemfile
-ADD Gemfile.lock $APP_PATH/Gemfile.lock
-
-RUN gem install rubygems-update --no-document
+COPY Gemfile Gemfile.lock ./
 RUN gem install bundler
+RUN gem install rubygems-update --no-document
 RUN gem install rails
-RUN bundle instal --jobs=2 --retry=2 \
-  && rm -rf /usr/local/bundle/cache/*.gem \
-  && find /usr/local/bundle/gems/ -name "*.c" -delete \
-  && find /usr/local/bundle/gems/ -name "*.o" -delete \
-  && rm -rf /usr/local/bundle/cache && rm -rf /usr/local/bundle/cache
+# RUN bundle instal --jobs=2 --retry=2 \
+#   && find /usr/local/bundle/gems/ -name "*.c" -delete \
+#   && find /usr/local/bundle/gems/ -name "*.o" -delete \
+#   && rm -rf /usr/local/bundle/cache && rm -rf /usr/local/bundle/cache
 
 COPY . ./
 COPY ./docker/* /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
-# RUN rm -rf ./public/**
-RUN mkdir ./prova
-COPY --from=builder /app/build ./public
-COPY --from=builder /app/build ./prova
+RUN rm -rfv ./public/*
+COPY --from=builder /app/build/ ${APP_PATH}/public
 
 ENTRYPOINT ["entrypoint.sh"]
 EXPOSE $RAILS_PORT

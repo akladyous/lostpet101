@@ -13,20 +13,21 @@ ENV BUNDLE_PATH=/usr/local/bundle/gems
 WORKDIR ${APP_PATH}
 
 RUN apk update && apk upgrade
-RUN apk -U add --no-cache sudo bash curl git vim nodejs npm openssh
+RUN apk -U add --no-cache sudo bash curl git vim openssh
+#  nodejs npm
 # --------------------------- RAILS ---------------------------
 RUN apk --update add build-base nodejs tzdata postgresql-dev postgresql-client libxslt-dev libxml2-dev imagemagick
 RUN rm -f /var/cache/apk/*
 
 COPY Gemfile Gemfile.lock ./
-RUN gem install rubygems-update --no-document
 RUN gem install bundler
-RUN gem install rails
-RUN bundle instal --jobs=2 --retry=2 \
-  && rm -rf /usr/local/bundle/cache/*.gem \
-  && find /usr/local/bundle/gems/ -name "*.c" -delete \
-  && find /usr/local/bundle/gems/ -name "*.o" -delete \
-  && rm -rf /usr/local/bundle/cache && rm -rf /usr/local/bundle/cache
+# RUN gem install rails
+# RUN gem install rubygems-update --no-document
+# RUN bundle instal --jobs=2 --retry=2 \
+#   && rm -rf /usr/local/bundle/cache/*.gem \
+#   && find /usr/local/bundle/gems/ -name "*.c" -delete \
+#   && find /usr/local/bundle/gems/ -name "*.o" -delete \
+#   && rm -rf /usr/local/bundle/cache && rm -rf /usr/local/bundle/cache
 
 COPY . ./
 COPY ./docker/* /usr/bin/
