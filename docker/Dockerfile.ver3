@@ -1,51 +1,42 @@
-FROM ruby:3.2.0-slim-bullseye as build
+FROM node:latest as builder
+WORKDIR /app
+ADD client ./
+RUN npm install
+RUN npm run build
 
-RUN apt-get update && apt-get install -y sudo bash curl git gnupg2
-RUN sudo apt-get update && apt-get install -y --no-install-recommends --assume-yes \
-  libpq-dev build-essential patch ruby-dev zlib1g-dev liblzma-dev
-RUN sudo apt-get update && apt-get install -y --no-install-recommends --assume-yes \
-  pkg-config libglib2.0-dev libexpat1-dev libvips
-# -------------------------------- NODE-JS --------------------------------
-RUN sudo curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash -
-RUN sudo apt-get install -y nodejs
-RUN npm install npm@latest -g
-# -------------------------------- ENV --------------------------------
-ENV APP_PATH /pet-finder
-ENV BUNDLE_PATH /usr/local/bundle/gems
-RUN mkdir -p $APP_PATH
-WORKDIR $APP_PATH
-# -------------------------------- USER --------------------------------
-# ENV USER deploy
-# RUN useradd -rm -d /home/$USER -s /bin/bash -g root -G sudo -u 1001 $USER
-# USER $USER
-# WORKDIR /home/$USER
-# -------------------------------- GEMS --------------------------------
+FROM ruby:3.2.0-alpine
+ENV APP_PATH=/petfinder/
+ENV TMP_PATH=/tmp/
+ENV RAILS_PORT=3000
+ENV RAILS_LOG_TO_STDOUT=true
+ENV BUNDLE_PATH=/usr/local/bundle/gems
+# RUN mkdir -p /public
+WORKDIR ${APP_PATH}
 
-COPY ./Gemfile $APP_PATH/Gemfile
-ADD Gemfile $APP_PATH/Gemfile
-ADD Gemfile.lock $APP_PATH/Gemfile.lock
+RUN apk update && apk upgrade
+RUN apk -U add --no-cache sudo bash curl git vim nodejs npm openssh
+# --------------------------- RAILS ---------------------------
+RUN apk --update add build-base nodejs tzdata postgresql-dev postgresql-client libxslt-dev libxml2-dev imagemagick
+RUN rm -f /var/cache/apk/*
 
-RUN npm install npm@latest -g
-RUN gem install rubygems-update --no-document
-RUN gem install bundler
-RUN gem install rails
-RUN bundle instal --jobs=2 --retry=2 \
-  && rm -rf /usr/local/bundle/cache/*.gem \
-  && find /usr/local/bundle/gems/ -name "*.c" -delete \
-  && find /usr/local/bundle/gems/ -name "*.o" -delete \
-  && rm -rf /usr/local/bundle/cache && rm -rf /usr/local/bundle/cache
+# COPY Gemfile Gemfile.lock ./
+# RUN gem install rubygems-update --no-document
+# RUN gem install bundler
+# RUN gem install rails
+# RUN bundle instal --jobs=2 --retry=2 \
+#   && rm -rf /usr/local/bundle/cache/*.gem \
+#   && find /usr/local/bundle/gems/ -name "*.c" -delete \
+#   && find /usr/local/bundle/gems/ -name "*.o" -delete \
+#   && rm -rf /usr/local/bundle/cache && rm -rf /usr/local/bundle/cache
 
-COPY docker/* /usr/bin/
-COPY client/package.json ./client/package.json
-COPY client/package-lock.json ./client/package-lock.json
-
-RUN chmod +x /usr/bin/entrypoint.sh
-RUN chmod +x /usr/bin/react.sh
-# RUN npm ci --prefix ./client
 COPY . ./
-RUN /usr/bin/react.sh
+COPY ./docker/* /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
+# RUN rm -rf ./public/**
+RUN touch ${APP_PATH}/prova.txt
+COPY --from=builder /app/build/ ./public
 
 ENTRYPOINT ["entrypoint.sh"]
-EXPOSE $RAILS_PORT
+EXPOSE ${RAILS_PORT}
 
 CMD ["rails", "server", "-b", "0.0.0.0"]

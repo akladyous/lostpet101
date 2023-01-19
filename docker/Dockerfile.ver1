@@ -14,13 +14,7 @@ ENV APP_PATH /pet-finder
 ENV BUNDLE_PATH /usr/local/bundle/gems
 RUN mkdir -p $APP_PATH
 WORKDIR $APP_PATH
-# -------------------------------- USER --------------------------------
-# ENV USER deploy
-# RUN useradd -rm -d /home/$USER -s /bin/bash -g root -G sudo -u 1001 $USER
-# USER $USER
-# WORKDIR /home/$USER
 # -------------------------------- GEMS --------------------------------
-
 COPY ./Gemfile $APP_PATH/Gemfile
 ADD Gemfile $APP_PATH/Gemfile
 ADD Gemfile.lock $APP_PATH/Gemfile.lock
