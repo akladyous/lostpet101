@@ -1,8 +1,0 @@
-FROM node:19-alpine AS builder
-WORKDIR /app
-ADD client ./
-RUN apk update && apk upgrade && npm install npm@latest
-RUN npm install
-RUN npm run build
-
-ENTRYPOINT ["react.sh"]

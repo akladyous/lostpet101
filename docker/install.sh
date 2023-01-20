@@ -22,6 +22,9 @@ docker-compose up
 docker-compose build
 docker-compose up
 
+#  frontend
+DOCKER_BUILDKIT=1 docker build  --file ./docker/Dockerfile.frontend --tag react --output public .
+
 docker run --env-file .env.production -d --name postgres postgres:15-alpine
 docker run --name petfinder -it --rm petfinder /bin/bash
 docker run --name petfinder -it petfinder

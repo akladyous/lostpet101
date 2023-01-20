@@ -1,0 +1,14 @@
+FROM node:19-alpine AS builder
+WORKDIR /app
+
+RUN apk update && apk upgrade && apk -U add --no-cache sudo bash
+ADD client ./
+RUN apk update && apk upgrade && npm install npm@latest
+RUN npm install
+RUN npm run build
+RUN rm -rf node_modules
+
+FROM scratch AS export-stage
+COPY --from=builder /app/build .
+
+
