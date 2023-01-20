@@ -5,4 +5,4 @@ RUN apk update && apk upgrade && npm install npm@latest
 RUN npm install
 RUN npm run build
 
-# ENTRYPOINT ["react.sh"]
+ENTRYPOINT ["react.sh"]
