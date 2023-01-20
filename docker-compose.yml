@@ -10,20 +10,6 @@ networks:
   test:
 
 services:
-  frontend:
-    build:
-      context: .
-      dockerfile: ./docker/Dockerfile.react
-    container_name: frontend
-    volumes:
-      - .:/pet-finder
-      - shared_data:/var/shared
-    networks:
-      - production
-      - development
-    # environment:
-    # DOCKER_BUILDKIT: 1
-
   postgres:
     image: postgres:15-alpine
     container_name: postgres

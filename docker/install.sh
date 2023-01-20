@@ -19,11 +19,12 @@ docker volume create postgres_data
 docker volume create petfinder_data
 docker-compose up
 
-docker-compose build
-docker-compose up
 
-#  frontend
+
 DOCKER_BUILDKIT=1 docker build  --file ./docker/Dockerfile.frontend --tag react --output public .
+docker-compose up
+docker exec -it petfinder rails db:seed
+
 
 docker run --env-file .env.production -d --name postgres postgres:15-alpine
 docker run --name petfinder -it --rm petfinder /bin/bash

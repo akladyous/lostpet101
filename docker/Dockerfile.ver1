@@ -18,25 +18,13 @@ RUN apk -U add --no-cache \
   build-base tzdata postgresql-dev postgresql-client libxslt-dev libxml2-dev imagemagick \
   && rm -f /var/cache/apk/*
 # -------------------------------- GEMS --------------------------------
-RUN gem install bundler \
-  && gem install rubygems-update --no-document && \
-  gem install rails \
-  && rm -rf $GEM_HOME/cache/*
-# RUN bundle instal --jobs=2 --retry=2
+RUN gem install bundler
+RUN gem install rubygems-update --no-document && gem install rails
 # -------------------------------- Scripts --------------------------------
-# FROM build as rails
-
-
-# COPY client/package.json ./client/package.json
-# COPY client/package-lock.json ./client/package-lock.json
-
-# RUN npm ci --prefix ./client
-# COPY . ./
-# RUN /usr/bin/react.sh
 
 WORKDIR ${APP_PATH}
 EXPOSE $RAILS_PORT
 
 # ENTRYPOINT ["entrypoint.sh"]
-ENTRYPOINT [ "/bin/bash"]
+ENTRYPOINT [ "bundle", "exec" ]
 # CMD ["rails", "server", "-b", "0.0.0.0"]
