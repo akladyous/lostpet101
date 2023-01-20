@@ -7,4 +7,5 @@ rm -f $APP_PATH/tmp/pids/server.pid
 
 ./bin/rails db:create db:migrate
 
-exec "$@"
+bundle exec ${@}
+# exec "$@"

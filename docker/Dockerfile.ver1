@@ -1,43 +1,42 @@
-FROM ruby:3.2.0-slim-bullseye as build
+FROM ruby:3.2.0-alpine as build
 
 # -------------------------------- ENV --------------------------------
 ENV APP_PATH=/pet-finder/
-ENV TMP_PATH=/tmp/
+ENV TMP_PATH /tmp/
 ENV RAILS_PORT=3000
 ENV RAILS_LOG_TO_STDOUT=true
-ENV BUNDLE_PATH=/usr/local/bundle/gems
-WORKDIR ${APP_PATH}
-# -------------------------------- Dependencies --------------------------------
-RUN apt-get update && apt-get install -y --no-install-recommends --assume-yes \
-  sudo bash curl git gnupg2 bash-completion libpq-dev \
-  build-essential patch ruby-dev zlib1g-dev liblzma-dev \
-  pkg-config libglib2.0-dev libexpat1-dev libvips \
-  && rm -rf /var/lib/apt/lists/*
-# # -------------------------------- NODE-JS --------------------------------
-# RUN sudo curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash -
-# RUN sudo apt-get install -y nodejs
-# RUN npm install npm@latest -g
-# -------------------------------- GEMS --------------------------------
-COPY Gemfile Gemfile.lock ./
-RUN gem install bundler
-RUN gem install rubygems-update --no-document
-RUN gem install rails
-RUN bundle instal --jobs=2 --retry=2 \
-  && find /usr/local/bundle/gems/ -name "*.c" -delete \
-  && find /usr/local/bundle/gems/ -name "*.o" -delete \
-  && rm -rf /usr/local/bundle/cache && rm -rf /usr/local/bundle/cache
-# -------------------------------- Scripts --------------------------------
+ENV BUNDLE_PATH /usr/local/bundle/gems
+
 COPY docker/* /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
+RUN chmod +x /usr/bin/react.sh
+RUN mkdir -p $APP_PATH
+# -------------------------------- Dependencies --------------------------------
+RUN apk update && apk upgrade
+RUN apk -U add --no-cache sudo bash curl git vim openssh vim nano
+RUN apk -U add --no-cache \
+  build-base tzdata postgresql-dev postgresql-client libxslt-dev libxml2-dev imagemagick \
+  && rm -f /var/cache/apk/*
+# -------------------------------- GEMS --------------------------------
+RUN gem install bundler \
+  && gem install rubygems-update --no-document && \
+  gem install rails
+  && rm -rf $GEM_HOME/cache/*
+# RUN bundle instal --jobs=2 --retry=2
+# -------------------------------- Scripts --------------------------------
+# FROM build as rails
+
+
 # COPY client/package.json ./client/package.json
 # COPY client/package-lock.json ./client/package-lock.json
 
-RUN chmod +x /usr/bin/entrypoint.sh
-RUN chmod +x /usr/bin/react.sh
 # RUN npm ci --prefix ./client
 # COPY . ./
 # RUN /usr/bin/react.sh
 
-ENTRYPOINT ["entrypoint.sh"]
+WORKDIR ${APP_PATH}
 EXPOSE $RAILS_PORT
 
-CMD ["rails", "server", "-b", "0.0.0.0"]
+# ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT [ "/bin/bash"]
+# CMD ["rails", "server", "-b", "0.0.0.0"]

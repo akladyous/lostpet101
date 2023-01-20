@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - production
+    env_file: .env.production
+    restart: always
+    ports:
+      - "5432:5432"
+
+  petfinder:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.ver1
+    container_name: petfinder
+    volumes:
+      - .:/pet-finder
+    env_file: .env.production
+    environment:
+      RAILS_ENV: production
+    networks:
+      - production
+    command:
+      bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b
+      '0.0.0.0'"
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
+    external: true
+  petfinder_data:
+    external: true
+networks:
+  development:
+  production:
+  test:

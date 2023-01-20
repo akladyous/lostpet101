@@ -1,13 +1,38 @@
 version: "3.8"
 
+volumes:
+  postgres_data:
+  gem_cache:
+  shared_data:
+networks:
+  development:
+  production:
+  test:
+
 services:
+  frontend:
+  image: node:19-alpine
+  build:
+    context: .
+      dockerfile: ./docker/Dockerfile.react
+    container_name: frontend
+    volumes:
+      - .:/pet-finder
+      - shared_data:/var/shared
+    networks:
+      - production
+      - development
+    entrypoint: react.sh
   postgres:
     image: postgres:15-alpine
     container_name: postgres
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - shared_data:/var/shared
     networks:
       - production
+      - development
+      - test
     env_file: .env.production
     restart: always
     ports:
@@ -20,27 +45,24 @@ services:
     container_name: petfinder
     volumes:
       - .:/pet-finder
+      - shared_data:/var/shared
+      - gem_cache:/usr/local/bundle/gems
+    env_file: .env.production
+    networks:
+      - production
+      - development
+    ports:
+      - 3000:3000
     env_file: .env.production
     environment:
       RAILS_ENV: production
-    networks:
-      - production
-    command:
-      bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b
-      '0.0.0.0'"
-    ports:
-      - "3000:3000"
+    entrypoint: entrypoint.sh
+    command: ['rails', 'server', '-p', '3000', '-b', '0.0.0.0']
+    # command:
+    #   bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b
+    #   '0.0.0.0'"
     stdin_open: true
     tty: true
     depends_on:
       - postgres
 
-volumes:
-  postgres_data:
-    external: true
-  petfinder_data:
-    external: true
-networks:
-  development:
-  production:
-  test:
