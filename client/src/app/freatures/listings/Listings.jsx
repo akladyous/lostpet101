@@ -4,13 +4,15 @@ import ListingsSearch from './lost-found/ListingsSearch.jsx';
 import ListMapper from '../../../hooks/ListMapper.jsx';
 import ReportPreview from '../reports/ReportPreview.jsx';
 import { BouncingLoader } from '../../../components/ui/BouncingLoader.jsx';
+import { useSearchReportsMutation } from '../../../state/api/reportsSlice.js';
 
 export default function Listings() {
   const isMounted = useRef(false);
-  const [request, { isLoading, isError, error, isSuccess, data }] = useAxios(
-    null,
-    { manual: true }
-  );
+  // const [request, { isLoading, isError, error, isSuccess, data }] = useAxios(
+  //   null,
+  //   { manual: true }
+  // );
+  const [request, { isLoading, isError, error, isSuccess, data }] = useSearchReportsMutation()
 
   const onSubmit = useCallback(
     async (values) => {
