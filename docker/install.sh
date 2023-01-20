@@ -21,12 +21,14 @@ docker-compose up
 
 docker-compose build
 docker-compose up
+
+docker run --env-file .env.production -d --name postgres postgres:15-alpine
 docker run --name petfinder -it --rm petfinder /bin/bash
 docker run --name petfinder -it petfinder
 docker run -it --entrypoint /bin/bash petfinder -c bash
 docker run -it --rm --entrypoint /bin/bash petfinder -c bash
 
-docker build --no-cache -f ./docker/Dockerfile.ver3 --target rails -t petfinder .
+docker build --no-cache -f ./docker/Dockerfile.ver1 --target rails -t petfinder .
 docker run -it --rm petfinder bash
 
 docker build -t petfinder .
