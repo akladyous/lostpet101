@@ -10,19 +10,6 @@ networks:
   test:
 
 services:
-  frontend:
-  image: node:19-alpine
-  build:
-    context: .
-      dockerfile: ./docker/Dockerfile.react
-    container_name: frontend
-    volumes:
-      - .:/pet-finder
-      - shared_data:/var/shared
-    networks:
-      - production
-      - development
-    entrypoint: react.sh
   postgres:
     image: postgres:15-alpine
     container_name: postgres
@@ -65,4 +52,3 @@ services:
     tty: true
     depends_on:
       - postgres
-

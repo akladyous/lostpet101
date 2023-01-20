@@ -20,7 +20,7 @@ RUN apk -U add --no-cache \
 # -------------------------------- GEMS --------------------------------
 RUN gem install bundler \
   && gem install rubygems-update --no-document && \
-  gem install rails
+  gem install rails \
   && rm -rf $GEM_HOME/cache/*
 # RUN bundle instal --jobs=2 --retry=2
 # -------------------------------- Scripts --------------------------------
