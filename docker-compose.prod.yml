@@ -33,6 +33,7 @@ services:
       context: .
       dockerfile: ./docker/Dockerfile.ver1
     container_name: petfinder
+    image: petfinder
     volumes:
       - .:/pet-finder
       - shared_data:/var/shared
