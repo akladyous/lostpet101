@@ -12,7 +12,8 @@ export default function Listings() {
   //   null,
   //   { manual: true }
   // );
-  const [request, { isLoading, isError, error, isSuccess, data }] = useSearchReportsMutation()
+  const [request, { isLoading, isError, error, isSuccess, data }] =
+    useSearchReportsMutation();
 
   const onSubmit = useCallback(
     async (values) => {
@@ -55,7 +56,7 @@ export default function Listings() {
       <section className="relative border-orange-100 bg-white shadow-xl rounded-2xl border p-5">
         {isLoading ? <BouncingLoader /> : null}
         {isError && error ? (
-          <div className="text-center">{error.data.message}</div>
+          <div className="text-center">{error.data}</div>
         ) : null}
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
           {isSuccess && !isError ? (

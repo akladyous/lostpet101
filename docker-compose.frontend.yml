@@ -8,7 +8,7 @@ services:
     container_name: frontend
     image: frontend
     ports:
-      - "3000:3000"
+      - "3300:3300"
     volumes:
       # - ./:/frontend:delegated
       - ./frontend:/app

@@ -15,11 +15,11 @@ gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'main', req
 
 group :development, :test do
   gem 'dotenv-rails', '~> 2.8', '>= 2.8.1'
+  gem 'ruby-progressbar', '~> 1.8', '>= 1.8.1'
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
 end
 
 group :development do
-  gem 'ruby-progressbar', '~> 1.8', '>= 1.8.1'
   gem 'solargraph', '~> 0.45.0'
   gem 'solargraph-rails', '~> 0.3.1'
 end
