@@ -44,13 +44,13 @@ RUN bundle instal --jobs=2 --retry=2 \
   && rm -rf /usr/local/bundle/cache && rm -rf /usr/local/bundle/cache
 
 COPY docker/* /usr/bin/
-COPY client/package.json ./client/package.json
-COPY client/package-lock.json ./client/package-lock.json
+COPY frontend/package.json ./frontend/package.json
+COPY frontend/package-lock.json ./frontend/package-lock.json
 
 RUN chmod +x /usr/bin/entrypoint.sh
 RUN chmod +x /usr/bin/petfinder.sh
 RUN chmod +x /usr/bin/react.sh
-RUN npm ci --prefix ./client
+RUN npm ci --prefix ./frontend
 COPY . ./
 RUN /usr/bin/react.sh
 
