@@ -6,7 +6,7 @@ volumes:
   gem_cache:
     external: true
   shared_data:
-  external: true
+    external: true
 networks:
   development:
   production:
