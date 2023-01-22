@@ -11,7 +11,7 @@ gem "bootsnap", require: false
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem 'active_model_serializers', '~> 0.10.13'
 # gem "image_processing", "~> 1.2"
-gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'main', require: false
+gem 'faker', '~> 3.1', require: false
 
 group :development, :test do
   gem 'dotenv-rails', '~> 2.8', '>= 2.8.1'

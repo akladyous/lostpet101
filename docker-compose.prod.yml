@@ -2,15 +2,11 @@ version: "3.8"
 
 volumes:
   postgres_data:
-    external: true
   gem_cache:
-    external: true
   shared_data:
-    external: true
 networks:
   development:
   production:
-  test:
 
 services:
   postgres:
@@ -22,7 +18,6 @@ services:
     networks:
       - production
       - development
-      - test
     env_file: .env.production
     restart: always
     ports:
