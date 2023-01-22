@@ -19,9 +19,11 @@ export default function About() {
                 </div>
                 <div>
                   <p className="py-10 text-lg">
-                    Lorem ipsum dolor sit , consectetur adipiscing elit, sed do
-                    iusmod tempor incididunt ut labore et dolore magna aliqua.
-                    Quis ipsum suspendisse ultrices.
+                    Help reuniting lost pets by placing lost and found pet
+                    flyers in your neghbourhood. Supporting our mission, <br />
+                    <br />
+                    We collaborate with Pet finder to help ensure more animals
+                    find their forever homes.
                   </p>
                 </div>
                 <div>

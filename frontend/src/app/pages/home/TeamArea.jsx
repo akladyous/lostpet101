@@ -13,7 +13,7 @@ export default function TeamArea() {
           post your animals!
         </p>
       </div>
-      <div className="text-center py-5">
+      <div className="text-center py-5 mb-4">
         <Link
           to="users/signup"
           state={{ title: 'Contact Us' }}

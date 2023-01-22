@@ -6,7 +6,7 @@ import MainMenu from './MainMenu.jsx';
 import MobileMenu from './MobileMenu.jsx';
 import IsAuthenticated from './IsAuthenticated.jsx';
 // import { getImageUrl } from '../../../../lib/util.jsx';
-import logo2 from '../../../../assets/images/icons/logo2.png?inline';
+import logo from '../../../../assets/images/icons/logo.png?inline';
 
 export default function Navbar() {
   const state = useSelector((state) => state.users);
@@ -21,7 +21,7 @@ export default function Navbar() {
                 <div className="flex flex-shrink-0 items-center">
                   <img
                     className="mr-2 block h-9 w-auto"
-                    src={logo2}
+                    src={logo}
                     alt="Pet Finder"
                   />
                   <Link to="/" className="p-0">

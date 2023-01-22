@@ -4,30 +4,32 @@ import pet_care from '../../../assets/images/about/pet_care.png';
 export default function PetCare() {
   return (
     <Container>
-      <div className="grid-col-1 grid rounded-xl border border-orange-200 md:grid-cols-2 md:border-none">
+      <div className="grid-col-1 grid rounded-xl border border-orange-200 md:grid-cols-2 md:border-none mb-6">
         <div className="">
           <div className="">
             <img src={pet_care} alt="pet-care" />
           </div>
         </div>
-        <div className="flex h-full flex-col items-center md:items-start md:py-36">
+        <div className="flex h-full flex-col items-center md:items-start md:py-36 px-5">
           <h2 className="py-1 text-3xl font-medium tracking-tight text-slate-600 md:text-4xl">
             We care your pet
           </h2>
           <h1 className="py-3 text-5xl font-semibold tracking-tight text-slate-600 md:text-7xl">
             As you care
           </h1>
+
           <p className="py-3 text-center md:text-start">
             Help reuniting lost pets by placing lost and found pet flyers in
             your neghbourhood.
+            <br />
             <br />
             Supporting our mission, we collaborate with Pet finder to help
             ensure more animals find their forever homes.
             {/* Get your pet home sooner. */}
           </p>
-          <div className="py-5">
+          <div className="py-5 mb-3">
             <Link
-              to="users/about"
+              to="/about"
               state={'About Us'}
               className="btn btn-primary rounded-full px-8"
             >

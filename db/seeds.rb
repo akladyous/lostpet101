@@ -1,5 +1,5 @@
 system('clear')
-REPORTS_TO_CREATE = ENV['records'] || 20
+REPORTS_TO_CREATE = ENV['records'].to_i > 0 ? ENV['records'].to_i : 20
 system('clear')
 puts "🌱 Start Seeding ..."
 
