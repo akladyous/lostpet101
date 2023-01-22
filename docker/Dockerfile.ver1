@@ -16,13 +16,14 @@ RUN apk -U add --no-cache \
   build-base tzdata postgresql-dev postgresql-client libxslt-dev libxml2-dev imagemagick \
   && rm -f /var/cache/apk/*
 # -------------------------------- GEMS --------------------------------
-RUN gem install bundler
-RUN gem install rubygems-update --no-document && gem install rails
+RUN sudo gem install bundler --no-document
+RUN sudo gem install rubygems-update --no-document
+RUN sudo gem install rails --no-document
 # -------------------------------- Scripts --------------------------------
 
 WORKDIR ${APP_PATH}
 EXPOSE ${RAILS_PORT}
 
-# ENTRYPOINT ["entrypoint.sh"]
-ENTRYPOINT [ "bundle", "exec" ]
+ENTRYPOINT ["entrypoint.sh"]
+# ENTRYPOINT [ "bundle", "exec" ]
 # CMD ["rails", "server", "-b", "0.0.0.0"]
