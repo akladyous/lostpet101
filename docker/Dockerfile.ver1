@@ -1,6 +1,5 @@
 FROM ruby:3.2.0-alpine as builder
 
-# -------------------------------- ENV --------------------------------
 ENV APP_PATH /lostpet101
 ENV TMP_PATH /tmp/
 ENV BUNDLER_VERSION 2.4.5
@@ -8,23 +7,17 @@ ENV RAILS_PORT 3000
 ENV RAILS_ENV production
 ENV RAILS_LOG_TO_STDOUT true
 
-# COPY Gemfile Gemfile.lock ./
 COPY script/entrypoint.sh /usr/bin/entrypoint.sh
 RUN chmod +x /usr/bin/entrypoint.sh
-# -------------------------------- Dependencies --------------------------------
+
 RUN apk update && apk upgrade
 RUN apk -U add --no-cache sudo bash curl git vim openssh vim nano \
   && apk add build-base tzdata postgresql-dev postgresql-client imagemagick \
   && rm -f /var/cache/apk/* \
   && mkdir -p $APP_PATH
-# -------------------------------- GEMS --------------------------------
+
 RUN gem install bundler -v $BUNDLER_VERSION \
   && rm -rf $GEM_HOME/cache/*
-
-# RUN sudo gem install rubygems-update
-# RUN bundle install
-# RUN sudo gem install rails
-# -------------------------------- Scripts --------------------------------
 
 WORKDIR ${APP_PATH}
 EXPOSE ${RAILS_PORT}
