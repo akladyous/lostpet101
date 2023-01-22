@@ -1,7 +1,7 @@
 FROM ruby:3.2.0-alpine as build
 
 # -------------------------------- ENV --------------------------------
-ENV APP_PATH=/pet-finder/
+ENV APP_PATH=/lostpet101/
 ENV TMP_PATH /tmp/
 ENV RAILS_PORT=3000
 ENV RAILS_LOG_TO_STDOUT=true

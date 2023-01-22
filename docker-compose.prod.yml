@@ -28,12 +28,12 @@ services:
     ports:
       - "5432:5432"
 
-  petfinder:
+  lostpet101:
     build:
       context: .
       dockerfile: ./docker/Dockerfile.ver1
-    container_name: petfinder
-    image: petfinder
+    container_name: lostpet101
+    image: lostpet101
     volumes:
       - .:/pet-finder
       - shared_data:/var/shared

@@ -2,11 +2,11 @@ server {
 	listen 80 default_server;
 	server_name 52.7.79.130;
 	index index.html;
-	root /home/ubuntu/petfinder/public;
+	root /home/ubuntu/lostpet101/public;
 	try_files $uri $uri/ /index.html =404;
 
-	access_log /var/log/nginx/petfinder.access.log;
-	error_log /var/log/nginx/petfinder.error.log;
+	access_log /var/log/nginx/lostpet101.access.log;
+	error_log /var/log/nginx/lostpet101.error.log;
 
 	error_page 404 /404.html;
 	location = /404.html {
@@ -23,7 +23,7 @@ server {
 	}
 	location / {
         try_files $uri $uri/ /index.html$is_args$args;
-		#root /home/ubuntu/petfinder/public;
+		#root /home/ubuntu/lostpet101/public;
 		#index index.html;
 		#proxy_pass http://localhost:3000;
 		#try_files $uri /index.html;

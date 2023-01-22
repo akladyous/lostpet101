@@ -15,10 +15,10 @@ RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | sudo tee
 RUN echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 RUN sudo apt-get update && sudo apt-get install yarn
 
-ENV BUNDLE_PATH /usr/local/bundle/gems
+ENV APP_PATH /lostpet101
 ENV TMP_PATH /tmp/
+ENV BUNDLE_PATH /usr/local/bundle/gems
 ENV RAILS_LOG_TO_STDOUT true
-ENV APP_PATH /pet-finder
 ENV RAILS_PORT 3000
 ENV RAILS_ENV production
 ENV RAILS_SERVE_STATIC_FILES true

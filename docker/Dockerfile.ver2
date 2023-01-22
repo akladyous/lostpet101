@@ -6,7 +6,7 @@ RUN npm run build
 
 FROM ruby:3.2.0-slim-bullseye as ruby_build
 
-ENV APP_PATH=/petfinder/
+ENV APP_PATH=/lostpet101/
 ENV TMP_PATH=/tmp/
 ENV RAILS_PORT=3000
 ENV RAILS_LOG_TO_STDOUT=true

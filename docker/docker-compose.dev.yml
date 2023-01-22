@@ -19,7 +19,7 @@ services:
       dockerfile: ./docker/Dockerfile.ver1
     container_name: petfinder
     volumes:
-      - .:/pet-finder
+      - .:/lostpet101
     env_file: .env.production
     environment:
       RAILS_ENV: production
