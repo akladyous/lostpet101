@@ -1,29 +1,33 @@
-FROM ruby:3.2.0-alpine as build
+FROM ruby:3.2.0-alpine as builder
 
 # -------------------------------- ENV --------------------------------
 ENV APP_PATH=/lostpet101/
 ENV TMP_PATH /tmp/
-ENV RAILS_LOG_TO_STDOUT=true
-ENV BUNDLE_PATH /usr/local/bundle/gems
+ENV BUNDLER_VERSION 2.4.5
+ENV BUNDLE_JOBS 8
+ENV BUNDLE_RETRY 5
+ENV BUNDLE_CACHE_ALL true
+ENV RAILS_LOG_TO_STDOUT true
+ENV RAILS_ENV=production
+RUN mkdir -p $APP_PATH
+WORKDIR ${APP_PATH}
 
+# COPY Gemfile Gemfile.lock ./
 COPY script/* /usr/bin/
 RUN chmod +x /usr/bin/*.sh
-RUN mkdir -p $APP_PATH
 # -------------------------------- Dependencies --------------------------------
 RUN apk update && apk upgrade
-RUN apk -U add --no-cache sudo bash curl git vim openssh vim nano
-RUN apk -U add --no-cache \
-  build-base tzdata postgresql-dev postgresql-client libxslt-dev libxml2-dev imagemagick \
+RUN apk -U add --no-cache sudo bash curl git vim openssh vim nano \
+  && apk add build-base tzdata postgresql-dev postgresql-client imagemagick \
   && rm -f /var/cache/apk/*
+
 # -------------------------------- GEMS --------------------------------
-RUN sudo gem install bundler --no-document
-RUN sudo gem install rubygems-update --no-document
-RUN sudo gem install rails --no-document
+RUN sudo gem install bundler -v $BUNDLER_VERSION
+RUN sudo gem install rubygems-update
+RUN sudo gem install rails
 # -------------------------------- Scripts --------------------------------
 
-WORKDIR ${APP_PATH}
 EXPOSE ${RAILS_PORT}
 
-ENTRYPOINT ["entrypoint.sh"]
-# ENTRYPOINT [ "bundle", "exec" ]
+ENTRYPOINT [ "bundle", "exec" ]
 # CMD ["rails", "server", "-b", "0.0.0.0"]
