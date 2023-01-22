@@ -1,7 +1,7 @@
 
 
 docker build -t lostpet101 .
-docker build --no-cache -f ./docker/Dockerfile.ver1 --target rails -t lostpet101 .
+docker build --no-cache -f ~/lostpet101/docker/Dockerfile.ver1 -t lostpet101 .
 
 docker run -it --rm lostpet101 bash
 docker run -it --rm --entrypoint /bin/bash lostpet101 -c bash
