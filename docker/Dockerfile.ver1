@@ -3,13 +3,11 @@ FROM ruby:3.2.0-alpine as build
 # -------------------------------- ENV --------------------------------
 ENV APP_PATH=/lostpet101/
 ENV TMP_PATH /tmp/
-ENV RAILS_PORT=3000
 ENV RAILS_LOG_TO_STDOUT=true
 ENV BUNDLE_PATH /usr/local/bundle/gems
 
-COPY docker/* /usr/bin/
-RUN chmod +x /usr/bin/entrypoint.sh
-RUN chmod +x /usr/bin/react.sh
+COPY script/* /usr/bin/
+RUN chmod +x /usr/bin/*.sh
 RUN mkdir -p $APP_PATH
 # -------------------------------- Dependencies --------------------------------
 RUN apk update && apk upgrade
@@ -23,7 +21,7 @@ RUN gem install rubygems-update --no-document && gem install rails
 # -------------------------------- Scripts --------------------------------
 
 WORKDIR ${APP_PATH}
-EXPOSE $RAILS_PORT
+EXPOSE ${RAILS_PORT}
 
 # ENTRYPOINT ["entrypoint.sh"]
 ENTRYPOINT [ "bundle", "exec" ]
