@@ -16,7 +16,7 @@ module Lostpet101
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-    # config.time_zone = "Central Time (US & Canada)"
+    # config.time_zone = 'Eastern Time (US & Canada)'
     # config.eager_load_paths << Rails.root.join("extras")
 
     # Only loads a smaller set of middleware suitable for API only apps.
@@ -25,9 +25,7 @@ module Lostpet101
     config.api_only = true
     config.action_controller.always_permitted_parameters = ["controller", "action", "format"]
     config.middleware.use ActionDispatch::Cookies
-    # config.middleware.use ActionDispatch::Session::CookieStore
     config.middleware.use ActionDispatch::Session::CookieStore, key: '_app', expire_after: 1.day
-    # config.middleware.insert_after(ActionDispatch::Cookies, ActionDispatch::Session::CookieStore)
 
     # Rails.application.config.active_storage.variant_processor = :vips
   end
