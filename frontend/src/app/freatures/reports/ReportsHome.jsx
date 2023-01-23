@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useRef } from 'react';
-import { useAxios } from '../../../hooks/useAxios.jsx';
-import ListingsSearch from './lost-found/ListingsSearch.jsx';
+// import { useAxios } from '../../../hooks/useAxios.jsx';
+import ReportsSearch from './ReportsSearch.jsx';
 import ListMapper from '../../../hooks/ListMapper.jsx';
-import ReportPreview from '../reports/ReportPreview.jsx';
+import ReportCard from './ReportCard.jsx';
 import { BouncingLoader } from '../../../components/ui/BouncingLoader.jsx';
 import { useSearchReportsMutation } from '../../../state/api/reportsSlice.js';
 
-export default function Listings() {
+export default function ReportsHome() {
   const isMounted = useRef(false);
   // const [request, { isLoading, isError, error, isSuccess, data }] = useAxios(
   //   null,
@@ -18,8 +18,6 @@ export default function Listings() {
   const onSubmit = useCallback(
     async (values) => {
       await request({
-        method: 'post',
-        url: 'reports/search',
         data: values,
       });
     },
@@ -31,13 +29,8 @@ export default function Listings() {
 
   useEffect(() => {
     isMounted.current = true;
-    if (isMounted.current) {
-      request({
-        method: 'post',
-        url: 'reports/search',
-        data: null,
-      });
-    }
+    if (isMounted.current) request({ data: null });
+
     return () => {
       isMounted.current = false;
     };
@@ -50,7 +43,7 @@ export default function Listings() {
   return isMounted.current ? (
     <>
       <section className="relative border-orange-100 bg-white shadow-xl rounded-2xl border mb-5 p-5">
-        <ListingsSearch onSubmit={onSubmit} onError={onError} />
+        <ReportsSearch onSubmit={onSubmit} onError={onError} />
       </section>
 
       <section className="relative border-orange-100 bg-white shadow-xl rounded-2xl border p-5">
@@ -63,7 +56,7 @@ export default function Listings() {
             <ListMapper
               items={data}
               resourceName="report"
-              itemComponent={ReportPreview}
+              itemComponent={ReportCard}
             />
           ) : null}
         </div>

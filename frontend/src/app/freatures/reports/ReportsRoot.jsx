@@ -1,15 +1,15 @@
 import {
   Outlet,
-  useOutlet,
+  // useOutlet,
   useParams,
   useLocation,
-  Navigate,
+  // Navigate,
 } from 'react-router-dom';
 
 export default function ReportsRoot() {
   const location = useLocation();
   const params = useParams();
-  const currentChildren = useOutlet();
+  // const currentChildren = useOutlet();
 
   // if (!currentChildren) return <Navigate to="/" replace />;
   return (

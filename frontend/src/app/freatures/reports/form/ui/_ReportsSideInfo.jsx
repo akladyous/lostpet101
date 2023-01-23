@@ -1,6 +1,4 @@
-import React from 'react';
-
-export default function SideInfo() {
+export default function ReportsSideInfo() {
   return (
     <div className="relative overflow-hidden bg-csOrange py-10 px-6 sm:px-10 md:rounded-tl-xl md:rounded-bl-xl xl:p-12">
       <div

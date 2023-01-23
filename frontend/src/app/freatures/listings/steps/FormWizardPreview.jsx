@@ -5,9 +5,9 @@ import { SpinnerCircleSVG } from '../../../../assets/images/icons/SpinnerCircleS
 import { MessageField } from '../../../../components/form/MessageField.jsx';
 import ReportDetail from '../../reports/ReportDetail.jsx';
 import { useEffect, useState, useRef, useCallback } from 'react';
-import { setFormData } from '../lost-found/form/lostFoundFormData.js';
+import { setFormData } from '../../reports/form/lostFoundFormData.js';
 
-export default function Preview(props) {
+export default function FormWizardPreview(props) {
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
   const isMounted = useRef(false);
@@ -62,7 +62,7 @@ export default function Preview(props) {
     if (isSuccess && data) {
       setMessage('Listing successfully created');
       setTimeout(() => {
-        navigate(`/reports/${getStepData[1].name}`, {
+        navigate(`/reports/pet/${getStepData[1].name}`, {
           state: data,
         });
       }, 3000);

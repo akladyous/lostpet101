@@ -5,7 +5,6 @@ export default function ListingSide() {
         'relative overflow-hidden bg-gradient-to-b from-orange-400 to-orange-500 py-10 px-6 sm:px-10 md:rounded-tl-2xl md:rounded-bl-2xl xl:p-12'
       }
     >
-      {/* Decorative angle backgrounds */}
       <div
         className="pointer-events-none absolute inset-0 sm:hidden"
         aria-hidden="true"

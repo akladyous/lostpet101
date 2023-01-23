@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
-export const lostFoundSchema = {
+export const searchSchema = {
   name: 'reports',
   fields: {
     name: {
@@ -70,5 +70,5 @@ const handler = {
     }
   },
 };
-export const petSchemaProxy = new Proxy(lostFoundSchema, handler);
-export const petIntialValues = lostFoundSchema.initialValues;
+export const petSchemaProxy = new Proxy(searchSchema, handler);
+export const petIntialValues = searchSchema.initialValues;

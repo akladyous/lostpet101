@@ -29,7 +29,6 @@ module Lostpet101
     config.middleware.use ActionDispatch::Session::CookieStore, key: '_app', expire_after: 1.day
     # config.middleware.insert_after(ActionDispatch::Cookies, ActionDispatch::Session::CookieStore)
 
-    Rails.application.config.active_storage.variant_processor = :vips
-
+    # Rails.application.config.active_storage.variant_processor = :vips
   end
 end

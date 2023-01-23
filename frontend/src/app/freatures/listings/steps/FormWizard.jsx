@@ -1,12 +1,12 @@
 import { useFormSteps } from '../../../../components/form/formWizard/useFormSteps.jsx';
 import FormStpesProvider from '../../../../components/form/formWizard/FormStpesProvider.jsx';
-import Decorative from './Decorative.jsx';
+import FormWizardDecorative from './FormWizardDecorative.jsx';
 import { reportInitialValues } from '../../reports/form/reportSchema.jsx';
 import { petIntialValues } from '../../pets/form/petSchema.jsx';
 import NewPet from '../../pets/NewPet.jsx';
 import NewReport from '../../reports/NewReport.jsx';
-import Preview from './Preview.jsx';
-import { setFormData } from '../lost-found/form/lostFoundFormData.js';
+import FormWizardPreview from './FormWizardPreview.jsx';
+import { setFormData } from '../../reports/form/lostFoundFormData.js';
 
 const steps = [
   { name: 'report', title: '', href: '#', status: 'upcoming' },
@@ -14,7 +14,7 @@ const steps = [
   { name: 'preview', title: '', href: '#', status: 'upcoming' },
 ];
 
-export default function ListingWizard() {
+export default function FormWizard() {
   const { currentStep, ...rest } = useFormSteps({
     steps: steps,
     initialValues: [reportInitialValues, petIntialValues],
@@ -32,13 +32,13 @@ export default function ListingWizard() {
             Let us take care of the rest so you can have some peace of mind that
             you are doing all that you can to bring your pet home safely
           </p>
-          <Decorative />
+          <FormWizardDecorative />
         </div>
         <main className="mx-auto max-w-7xl px-4 sm:px-6 md:space-x-8">
           <FormStpesProvider currentStep={currentStep} {...rest}>
             <NewReport initialValues={reportInitialValues} />
             <NewPet initialValues={petIntialValues} />
-            <Preview />
+            <FormWizardPreview />
           </FormStpesProvider>
         </main>
       </div>

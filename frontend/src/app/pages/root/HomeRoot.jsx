@@ -4,7 +4,7 @@ import Navbar from './navbar/Navbar.jsx';
 import Header from './Header.jsx';
 import Footer from './Footer.jsx';
 
-export default function Root() {
+export default function HomeRoot() {
   return (
     <div className="app">
       <Navbar />

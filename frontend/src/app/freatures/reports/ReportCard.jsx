@@ -4,7 +4,7 @@ import { useState } from 'react';
 // import moment from 'moment';
 import { BouncingLoader } from '../../../components/ui/BouncingLoader.jsx';
 
-export default function ReportPreview({ report }) {
+export default function ReportCard({ report }) {
   const [isLoading, setIsLoading] = useState(true);
 
   return report ? (
@@ -33,7 +33,7 @@ export default function ReportPreview({ report }) {
       </div>
       <div className="petCardBody py-3 px-3 text-center bg-white">
         <Link
-          to={`/reports/${report.pet.name}`}
+          to={`/reports/pet/${report.pet.name}`}
           state={report}
           key={report.pet.name}
           // className="btn btn-secondary w-full py-3"

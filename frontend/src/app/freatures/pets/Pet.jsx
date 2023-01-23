@@ -1,7 +1,7 @@
 import { ChatBubbleLeftIcon } from '@heroicons/react/24/outline';
 import LikesList from '../likes/LikesList.jsx';
 import LikePet from '../likes/LikePet.jsx';
-export default function Story({ pet }) {
+export default function Pet({ pet }) {
   return pet ? (
     <div
       className="bg-white border border-orange-100 rounded-lg shadow-md relative

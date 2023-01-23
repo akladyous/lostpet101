@@ -2,10 +2,10 @@ import { useGetPetsQuery } from '../../../state/api/petsSlice.js';
 import { useNavigate } from 'react-router-dom';
 import { BouncingLoader } from '../../../components/ui/BouncingLoader.jsx';
 import ListMapper from '../../../hooks/ListMapper.jsx';
-import Story from './Story.jsx';
-import StoriesSide from './StoriesSide.jsx';
+import Pet from './Pet.jsx';
+import PetsSide from './PetsSide.jsx';
 
-export default function Stories() {
+export default function PetsHome() {
   const navigate = useNavigate();
   const {
     data: pets,
@@ -31,16 +31,12 @@ export default function Stories() {
         <div className="col-span-12 sm:col-span-8 sm:order-first order-last">
           <div className="flex flex-col">
             {isSuccess && !isError ? (
-              <ListMapper
-                items={pets}
-                resourceName="pet"
-                itemComponent={Story}
-              />
+              <ListMapper items={pets} resourceName="pet" itemComponent={Pet} />
             ) : null}
           </div>
         </div>
         <div className="col-span-12 sm:col-span-4">
-          <StoriesSide />
+          <PetsSide />
         </div>
       </div>
     </main>

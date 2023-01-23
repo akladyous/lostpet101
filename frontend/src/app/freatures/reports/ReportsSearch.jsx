@@ -1,9 +1,9 @@
-import { lostFoundSchema as schema } from './form/lostFoundSchema.js';
-import { TextField } from '../../../../components/form/TextField.jsx';
-import { SelectField } from '../../../../components/form/SelectField.jsx';
+import { searchSchema as schema } from './form/searchSchema.js';
+import { TextField } from '../../../components/form/TextField.jsx';
+import { SelectField } from '../../../components/form/SelectField.jsx';
 import { useForm } from 'react-hook-form';
 
-export default function ListingsSearch({ onSubmit, onError }) {
+export default function ReportsSearch({ onSubmit, onError }) {
   const { handleSubmit, control } = useForm({
     defaultValues: schema.initialValues,
     resolver: schema.validation,
