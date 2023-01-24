@@ -7,17 +7,17 @@ default: &default
 
 development:
   <<: *default
-  database: <%= ENV["POSTGRES_DB_DEVELOPMENT"] %>
+  database: <%= ENV["DB_DEVELOPMENT"] %>
   host: localhost
 
 test:
   <<: *default
-  database: <%= ENV["POSTGRES_DB_TEST"] %>
+  database: <%= ENV["DB_TEST"] %>
   host: localhost
 
 production:
   <<: *default
-  database: <%= ENV["POSTGRES_DB_PRODUCTION"] %>
+  database: <%= ENV["DB_PRODUCTION"] %>
   host: <%= ENV["POSTGRES_HOST"] %>
   port: <%= ENV["POSTGRES_PORT"] %>
   timeout: 5000

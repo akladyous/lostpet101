@@ -18,7 +18,7 @@ services:
     networks:
       - production
       - development
-    env_file: .env.production
+    env_file: .env.postgres
     restart: always
     ports:
       - "5432:5432"
