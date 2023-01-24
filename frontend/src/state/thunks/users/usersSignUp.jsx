@@ -1,5 +1,7 @@
+/* eslint-disable no-undef */
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 
 export const usersSignUp = createAsyncThunk(
   'users/signup',
@@ -9,11 +11,10 @@ export const usersSignUp = createAsyncThunk(
 
     try {
       const response = await axios({
-        url: 'http://localhost:3000/users/signup',
+        url: '/users/signup',
         headers: {
           Accept: 'application/json',
           'content-type': 'multipart/form-data',
-          'Access-Control-Allow-Origin': '*',
         },
         data: formData,
         method: 'post',

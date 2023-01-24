@@ -1,5 +1,7 @@
+/* eslint-disable no-undef */
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 
 export const usersSignOut = createAsyncThunk(
   'users/signout',
@@ -8,11 +10,10 @@ export const usersSignOut = createAsyncThunk(
     controller ??= new AbortController();
     try {
       const response = await axios({
-        url: 'http://localhost:3000/users/signout',
+        url: '/users/signout',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
         },
         method: 'delete',
         withCredentials: true,

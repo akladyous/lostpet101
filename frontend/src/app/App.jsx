@@ -25,8 +25,6 @@ const ReportInfoWrapper = withLocationProps(ReportDetail);
 const ReportRequestWrapper = withLocationProps(ReportRequest);
 
 function App() {
-  console.log('enviroment : ', process.env.NODE_ENV);
-  console.log('enviroment : ', process.env.REACT_APP_BASE_URL);
   return (
     <div className="main">
       <Routes>

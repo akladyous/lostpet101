@@ -8,7 +8,7 @@ const baseQuery = fetchBaseQuery({
     headers.set('Access-Control-Allow-Origin', '*');
     return headers;
   },
-  // credentials: 'include',
+  credentials: 'include',
 });
 
 export const api = createApi({
@@ -17,4 +17,3 @@ export const api = createApi({
   tagTypes: ['api'],
   endpoints: () => ({}),
 });
-// baseUrl: 'http://localhost:3000/',
