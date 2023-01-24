@@ -30,6 +30,7 @@ class ApplicationController < ActionController::API
     session[:expire_at] = 20.seconds.from_now
   end
 
+  # enable on : active_storage.service = :local
   # def set_url_options
   #   ActiveStorage::Current.url_options = { protocol: request.protocol, host: request.host, port: request.port }
   # end

@@ -1,6 +1,7 @@
 class Users::RegistrationController < UsersController
   skip_before_action :authenticate_user, only: :create
 
+  # enable on : active_storage.service = :local
   # before_action do
   #     ActiveStorage::Current.url_options = { protocol: request.protocol, host: request.host, port: request.port }
   # end
