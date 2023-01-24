@@ -1,7 +1,8 @@
+/* eslint-disable no-undef */
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'http://www.lostpet101.net',
+  baseUrl: process.env.REACT_APP_BASE_URL,
   prepareHeaders(headers) {
     headers.set('Content-Type', 'application/json');
     headers.set('Access-Control-Allow-Origin', '*');

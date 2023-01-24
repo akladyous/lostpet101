@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { Routes, Route } from 'react-router-dom';
 
 import HomeRoot from './pages/root/HomeRoot.jsx';
@@ -24,6 +25,8 @@ const ReportInfoWrapper = withLocationProps(ReportDetail);
 const ReportRequestWrapper = withLocationProps(ReportRequest);
 
 function App() {
+  console.log('enviroment : ', process.env.NODE_ENV);
+  console.log('enviroment : ', process.env.REACT_APP_BASE_URL);
   return (
     <div className="main">
       <Routes>
