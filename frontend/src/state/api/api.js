@@ -7,7 +7,7 @@ const baseQuery = fetchBaseQuery({
     headers.set('Access-Control-Allow-Origin', '*');
     return headers;
   },
-  credentials: 'include',
+  // credentials: 'include',
 });
 
 export const api = createApi({

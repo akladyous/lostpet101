@@ -8,12 +8,12 @@ import { useSearchReportsMutation } from '../../../state/api/reportsSlice.js';
 
 export default function ReportsHome() {
   const isMounted = useRef(false);
-  const [request, { isLoading, isError, error, isSuccess, data }] = useAxios(
-    null,
-    { manual: true }
-  );
-  // const [request, { isLoading, isError, error, isSuccess, data }] =
-  //   useSearchReportsMutation();
+  // const [request, { isLoading, isError, error, isSuccess, data }] = useAxios(
+  //   null,
+  //   { manual: true }
+  // );
+  const [request, { isLoading, isError, error, isSuccess, data }] =
+    useSearchReportsMutation();
 
   const onSubmit = useCallback(
     async (values) => {
@@ -29,19 +29,19 @@ export default function ReportsHome() {
 
   useEffect(() => {
     isMounted.current = true;
-    // if (isMounted.current) request({ data: null });
-    if (isMounted.current)
-      request({
-        url: 'http://localhost:3000/reports/search',
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-        },
-        data: null,
-        method: 'post',
-        withCredentials: true,
-        credentials: 'same-origin',
-      });
+    if (isMounted.current) request({ data: null });
+    // if (isMounted.current)
+    //   request({
+    //     url: 'http://localhost:3000/reports/search',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       'Access-Control-Allow-Origin': '*',
+    //     },
+    //     data: null,
+    //     method: 'post',
+    //     withCredentials: true,
+    //     credentials: 'same-origin',
+    //   });
 
     return () => {
       isMounted.current = false;
