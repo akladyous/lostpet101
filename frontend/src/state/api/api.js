@@ -5,6 +5,7 @@ const baseQuery = fetchBaseQuery({
   prepareHeaders(headers) {
     headers.set('Content-Type', 'application/json');
     headers.set('Accept', 'application/json');
+    headers.set('Access-Control-Allow-Origin', '*');
     return headers;
   },
   credentials: 'include',
