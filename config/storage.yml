@@ -15,3 +15,4 @@ amazon:
     <%= Rails.application.credentials.dig(:amazon, :secret_access_key) %>
   region: <%= Rails.application.credentials.dig(:amazon, :region) %>
   bucket: <%= Rails.application.credentials.dig(:amazon, :bucket) %>
+#   bucket: your_own_bucket-<%= Rails.env %>
