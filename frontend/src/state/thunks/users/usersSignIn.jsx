@@ -12,6 +12,7 @@ export const usersSignIn = createAsyncThunk(
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
         },
         data: user,
         method: 'post',

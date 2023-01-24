@@ -12,6 +12,7 @@ export const usersSignOut = createAsyncThunk(
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
         },
         method: 'delete',
         withCredentials: true,

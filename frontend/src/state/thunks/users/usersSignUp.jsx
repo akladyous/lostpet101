@@ -13,6 +13,7 @@ export const usersSignUp = createAsyncThunk(
         headers: {
           Accept: 'application/json',
           'content-type': 'multipart/form-data',
+          'Access-Control-Allow-Origin': '*',
         },
         data: formData,
         method: 'post',
