@@ -1,6 +1,6 @@
 import { Outlet, useParams, useLocation } from 'react-router-dom';
 
-export default function LikesRoot() {
+export default function PetsRoot() {
   const location = useLocation();
   const params = useParams();
   return (

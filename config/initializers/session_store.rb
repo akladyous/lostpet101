@@ -1,1 +1,3 @@
-# Rails.application.config.session_store :cookie_store, expire_after: 1.day
+
+# Specify cookies SameSite protection level: either :none, :lax, or :strict.
+# Rails.application.config.action_dispatch.cookies_same_site_protection = :strict

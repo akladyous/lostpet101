@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user
+  skip_before_action :verify_authenticity_token
+
     def password_params
         params.require(:user).permit(:password, :password_confirmation)
     end

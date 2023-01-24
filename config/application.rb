@@ -25,8 +25,9 @@ module Lostpet101
     config.api_only = true
     config.action_controller.always_permitted_parameters = ["controller", "action", "format"]
     config.middleware.use ActionDispatch::Cookies
-    config.middleware.use ActionDispatch::Session::CookieStore, key: '_app', expire_after: 1.day
+    config.middleware.use ActionDispatch::Session::CookieStore, key: '_lostpet101_session'
 
+    config.action_dispatch.cookies_same_site_protection = :strict
     # Rails.application.config.active_storage.variant_processor = :vips
   end
 end

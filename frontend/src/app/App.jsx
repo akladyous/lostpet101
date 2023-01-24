@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 
 import HomeRoot from './pages/root/HomeRoot.jsx';
-import StoriesRoot from './freatures/stories/StoriesRoot.jsx';
+import PetsRoot from './freatures/pets/PetsRoot.jsx';
 import ReportRoot from './freatures/reports/ReportsRoot.jsx';
 
 import Home from './pages/home/Home.jsx';
@@ -42,7 +42,7 @@ function App() {
           <Route path="reports" element={<ReportRoot />}>
             <Route index element={<ReportsHome />} />
             <Route path="new" element={<FormWizard />} />
-            <Route path="pet" element={<StoriesRoot />}>
+            <Route path="pet" element={<PetsRoot />}>
               <Route
                 caseSensitive
                 path=":name"
@@ -56,7 +56,7 @@ function App() {
             </Route>
           </Route>
 
-          <Route path="pets" element={<StoriesRoot />}>
+          <Route path="pets" element={<PetsRoot />}>
             <Route index element={<PetsHome />} />
             <Route path=":pet_id" element={<ReportInfoWrapper />} />
             <Route index element={<PetsHome />} />

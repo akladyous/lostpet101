@@ -1,4 +1,5 @@
 class PetsController < ApplicationController
+  skip_before_action :verify_authenticity_token
   skip_before_action :authenticate_user, only: [:index, :show]
   before_action :set_pet, only: %i[ show update destroy ]
 

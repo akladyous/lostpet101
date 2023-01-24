@@ -1,6 +1,6 @@
 class FeedbackController < ApplicationController
-  skip_before_action :authenticate_user
   skip_before_action :verify_authenticity_token
+  skip_before_action :authenticate_user
 
   def create
     @contact = Feedback.new(feedback_params)

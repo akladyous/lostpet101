@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { Axios } from '../../../lib/api/Axios.jsx';
+import axios from 'axios';
 
 export const usersSignUp = createAsyncThunk(
   'users/signup',
@@ -8,13 +8,18 @@ export const usersSignUp = createAsyncThunk(
     controller ??= new AbortController();
 
     try {
-      const response = await Axios.request({
-        method: 'post',
-        url: 'users/signup',
-        headers: { 'content-type': 'multipart/form-data' },
+      const response = await axios({
+        url: 'http://localhost:3000/users/signup',
+        headers: {
+          Accept: 'application/json',
+          'content-type': 'multipart/form-data',
+        },
         data: formData,
+        method: 'post',
+        withCredentials: true,
         signal: controller.signal,
       });
+
       return thunkAPI.fulfillWithValue(await response.data);
     } catch (error) {
       if (error.response) {

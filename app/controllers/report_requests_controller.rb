@@ -1,4 +1,5 @@
 class ReportRequestsController < ApplicationController
+  skip_before_action :verify_authenticity_token
 
   def create
     @report_request = ReportRequest.new(request_params)

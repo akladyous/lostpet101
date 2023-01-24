@@ -4,10 +4,10 @@ const baseQuery = fetchBaseQuery({
   baseUrl: 'http://localhost:3000/',
   prepareHeaders(headers) {
     headers.set('Content-Type', 'application/json');
-    headers.set('Access-Control-Allow-Origin', '*');
+    headers.set('Accept', 'application/json');
     return headers;
   },
-  // credentials: 'include',
+  credentials: 'include',
 });
 
 export const api = createApi({
