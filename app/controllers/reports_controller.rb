@@ -27,7 +27,6 @@ class ReportsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /reports/1
   def update
     if @report.update(report_params)
       render json: @report
