@@ -45,7 +45,6 @@ class ReportsController < ApplicationController
       @report = Report.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def search_params
       params.permit(:name, :species, :breed).reject! { |_, v| v.blank? }
     end
