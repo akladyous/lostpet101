@@ -23,7 +23,9 @@ export default function PetsHome() {
       return <div className="">{JSON.stringify(error, null, 2)}</div>;
     }
   }
-
+  if (isSuccess && pets) {
+    console.log('PetsHome - fetched pets : ', pets);
+  }
   return (
     <main>
       {isFetching ? <BouncingLoader /> : null}
