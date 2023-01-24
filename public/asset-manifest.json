@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.0f86fea5.css",
-    "main.js": "/static/js/main.65660ea1.js",
+    "main.js": "/static/js/main.c06a8177.js",
     "static/media/Trending-Tale.png": "/static/media/Trending-Tale.1ab2f8748fc3701d51e2.png",
     "static/media/take-action.png": "/static/media/take-action.c99ba39d9a9291c767c0.png",
     "static/media/ways-to-give.png": "/static/media/ways-to-give.c6c08350637b865828b1.png",
@@ -17,10 +17,10 @@
     "static/media/service_icon_bg_1.png": "/static/media/service_icon_bg_1.b407aa19167fa2dfb490.png",
     "index.html": "/index.html",
     "main.0f86fea5.css.map": "/static/css/main.0f86fea5.css.map",
-    "main.65660ea1.js.map": "/static/js/main.65660ea1.js.map"
+    "main.c06a8177.js.map": "/static/js/main.c06a8177.js.map"
   },
   "entrypoints": [
     "static/css/main.0f86fea5.css",
-    "static/js/main.65660ea1.js"
+    "static/js/main.c06a8177.js"
   ]
 }

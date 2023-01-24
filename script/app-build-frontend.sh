@@ -1,5 +1,5 @@
 
 rm -rfv ./public/*
-npm ci --prefix ./frontend
+rm -r ./frontend/build
 npm run build --prefix ./frontend
 cp -a ./frontend/build/.  ./public
