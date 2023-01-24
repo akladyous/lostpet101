@@ -41,18 +41,20 @@ class ReportsController < ApplicationController
   end
 
   private
-    def set_report
-      @report = Report.find(params[:id])
-    end
 
-    def search_params
-      params.permit(:name, :species, :breed).reject! { |_, v| v.blank? }
-    end
-    def report_params
-      params
-        .require(:report)
-        .permit( :report_type,  :lost_found_date,  :address,  :crossroads,  :comment,  :user_id,
-          pet_attributes: [:image, :name, :species, :gender, :size, :breed, :color, :coat, :age, :height, :weight, :microchip, :collar, :description]
-        )
-    end
+  def set_report
+    @report = Report.find(params[:id])
+  end
+
+  def search_params
+    params.permit(:name, :species, :breed).reject! { |_, v| v.blank? }
+  end
+
+  def report_params
+    params
+      .require(:report)
+      .permit( :report_type,  :lost_found_date,  :address,  :crossroads,  :comment,  :user_id,
+        pet_attributes: [:image, :name, :species, :gender, :size, :breed, :color, :coat, :age, :height, :weight, :microchip, :collar, :description]
+      )
+  end
 end
