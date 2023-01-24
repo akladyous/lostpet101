@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'http://127.0.0.1:3000/',
+  baseUrl: 'http://www.lostpet101.net',
   prepareHeaders(headers) {
     headers.set('Content-Type', 'application/json');
     headers.set('Access-Control-Allow-Origin', '*');
@@ -16,3 +16,4 @@ export const api = createApi({
   tagTypes: ['api'],
   endpoints: () => ({}),
 });
+// baseUrl: 'http://localhost:3000/',
