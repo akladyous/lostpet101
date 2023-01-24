@@ -6,7 +6,7 @@ class ApplicationController < ActionController::API
 
 
   before_action :authenticate_user
-  before_action :set_url_options
+  # before_action :set_url_options
 
   private
 
@@ -30,8 +30,8 @@ class ApplicationController < ActionController::API
     session[:expire_at] = 20.seconds.from_now
   end
 
-  def set_url_options
-    ActiveStorage::Current.url_options = { protocol: request.protocol, host: request.host, port: request.port }
-  end
+  # def set_url_options
+  #   ActiveStorage::Current.url_options = { protocol: request.protocol, host: request.host, port: request.port }
+  # end
 
 end

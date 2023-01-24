@@ -72,6 +72,22 @@ GEM
       minitest (>= 5.1)
       tzinfo (~> 2.0)
     ast (2.4.2)
+    aws-eventstream (1.2.0)
+    aws-partitions (1.699.0)
+    aws-sdk-core (3.169.0)
+      aws-eventstream (~> 1, >= 1.0.2)
+      aws-partitions (~> 1, >= 1.651.0)
+      aws-sigv4 (~> 1.5)
+      jmespath (~> 1, >= 1.6.1)
+    aws-sdk-kms (1.62.0)
+      aws-sdk-core (~> 3, >= 3.165.0)
+      aws-sigv4 (~> 1.1)
+    aws-sdk-s3 (1.118.0)
+      aws-sdk-core (~> 3, >= 3.165.0)
+      aws-sdk-kms (~> 1)
+      aws-sigv4 (~> 1.4)
+    aws-sigv4 (1.5.2)
+      aws-eventstream (~> 1, >= 1.0.2)
     backport (1.2.0)
     bcrypt (3.1.18)
     benchmark (0.2.1)
@@ -103,6 +119,7 @@ GEM
     irb (1.6.2)
       reline (>= 0.3.0)
     jaro_winkler (1.5.4)
+    jmespath (1.6.2)
     json (2.6.3)
     jsonapi-renderer (0.2.2)
     kramdown (2.4.0)
@@ -238,6 +255,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers (~> 0.10.13)
+  aws-sdk-s3 (~> 1.114)
   bcrypt (~> 3.1.7)
   bootsnap
   debug

@@ -1,5 +1,5 @@
 class Pet < ApplicationRecord
-  has_one_attached :image
+  has_one_attached :image, service: :amazon
   belongs_to :report, optional: true
   has_many :likes, dependent: :destroy
 

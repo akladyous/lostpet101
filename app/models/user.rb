@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
 
-  has_one_attached :avatar #, service: :amazon
+  has_one_attached :avatar, service: :amazon
   has_many :reports, dependent: :destroy
   has_many :pets, through: :reports
   has_many :report_requests, dependent: :destroy
