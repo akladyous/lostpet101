@@ -1,0 +1,1035 @@
+    1  2023-11-08 15:41:14 ls
+    2  2023-11-08 15:41:14 ls -lt
+    3  2023-11-08 15:41:14 exit
+    4  2023-11-08 15:41:14 systemctl
+    5  2023-11-08 15:41:14 systemctl status postgresql
+    6  2023-11-08 15:41:14 sudo
+    7  2023-11-08 15:41:14 sudo passwd root
+    8  2023-11-08 15:41:14 sudo usermod -aG sudo ubuntu
+    9  2023-11-08 15:41:14 sudo passwd ubuntu
+   10  2023-11-08 15:41:14 exit
+   11  2023-11-08 15:41:14 su
+   12  2023-11-08 15:41:14 su passwd root
+   13  2023-11-08 15:41:14 sudo passwd root
+   14  2023-11-08 15:41:14 sudo passwd ubuntu
+   15  2023-11-08 15:41:14 sudo passwd rort
+   16  2023-11-08 15:41:14 sudo passwd root
+   17  2023-11-08 15:41:14 exit
+   18  2023-01-20 15:15:41 shutdown -r now
+   19  2023-01-20 15:15:50 shutdown -r now 'asdsaasdasd'
+   20  2023-01-20 15:16:04 sudo shutdown -r now
+   21  2023-11-08 15:41:14 ls
+   22  2023-11-08 15:41:14 ls ~/.ssh
+   23  2023-11-08 15:41:14 su
+   24  2023-11-08 15:41:14 sudo apt-get update && apt-get install -y --no-install-recommends --assume-yes   bash curl git wget gnupg2 ca-certificates lsb-release && apt-get clean all
+   25  2023-11-08 15:41:14 sudo apt-get clean all && autoremove -y && apt-get autoclean -y
+   26  2023-11-08 15:41:14 sudo apt-get autoremove -y
+   27  2023-11-08 15:41:14 sudo apt-get clean all
+   28  2023-11-08 15:41:14 sudo apt-get clean all && sudo autoremove -y && sudo apt-get autoclean -y
+   29  2023-11-08 15:41:14 sudo autoremove -y
+   30  2023-11-08 15:41:14 sudo apt-get autoremove -y
+   31  2023-11-08 15:41:14 sudo apt-get clean all && sudo apt-get autoremove -y && sudo apt-get autoclean -y
+   32  2023-11-08 15:41:14 sudo apt-get update && apt-get install -y bash curl git wget gnupg2 ca-certificates lsb-release
+   33  2023-11-08 15:41:14 sudo usermod -aG sudo ubuntu
+   34  2023-11-08 15:41:14 sudo apt-get update && apt-get install -y bash curl git wget gnupg2 ca-certificates lsb-release
+   35  2023-11-08 15:41:14 sudo apt-get install lsb-release
+   36  2023-11-08 15:41:14 sudo apt-get update && apt-get install -y bash curl git wget gnupg2 ca-certificates
+   37  2023-11-08 15:41:14 sudo apt-get install ca-certificates
+   38  2023-11-08 15:41:14 sudo apt-get install -y ca-certificates lsb-release
+   39  2023-11-08 15:41:14 sudo apt-get update && apt-get install -y bash curl git wget gnupg2
+   40  2023-11-08 15:41:14 sudo apt-get install wget
+   41  2023-11-08 15:41:14 sudo apt-get update && apt-get install -y bash curl git wget gnupg2
+   42  2023-11-08 15:41:14 su
+   43  2023-11-08 15:41:14 su -
+   44  2023-11-08 15:41:14 su
+   45  2023-11-08 15:41:14 vim
+   46  2023-11-08 15:41:14 ls ~/.ssh
+   47  2023-11-08 15:41:14 ssh-keygen -t ed25519 -C "akladyous@gmail.com"
+   48  2023-11-08 15:41:14 ls ~/.ssh
+   49  2023-11-08 15:41:14 eval "$(ssh-agent -s)"
+   50  2023-11-08 15:41:14 ssh-add ~/.ssh/id_ed25519
+   51  2023-11-08 15:41:14 cat ~/.ssh/id_ed25519.pub
+   52  2023-11-08 15:41:14 curl -fsSL https://get.docker.com -o get-docker.sh
+   53  2023-11-08 15:41:14 sudo sh ./get-docker.sh
+   54  2023-11-08 15:41:14 sudo usermod -aG docker ${USER}
+   55  2023-11-08 15:41:14 sudo systemctl enable docker.service
+   56  2023-11-08 15:41:14 sudo systemctl enable containerd.service
+   57  2023-11-08 15:41:14 sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+   58  2023-11-08 15:41:14 sudo chmod +x /usr/local/bin/docker-compose
+   59  2023-11-08 15:41:14 bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
+   60  2023-01-20 15:17:46 git config --list --show-origin
+   61  2023-01-20 15:17:53 git config --global user.name "Boula Akladyous"
+   62  2023-01-20 15:17:54 git config --list --show-origin
+   63  2023-01-20 15:18:07 git config --global user.email akladyous@gmail.com
+   64  2023-01-20 15:18:11 git config --list --show-origin
+   65  2023-01-20 15:18:53 ssh -T git@github.com
+   66  2023-01-20 15:19:28 docker
+   67  2023-01-20 15:20:04 git clone git@github.com:akladyous/pet-finder.git
+   68  2023-01-20 15:20:07 ls -lt
+   69  2023-01-20 15:20:14 rm -rf get-docker.sh
+   70  2023-01-20 15:27:42 printenv APP_PATH
+   71  2023-01-20 15:28:02 git status
+   72  2023-01-20 15:30:31 cd pet-finder/
+   73  2023-01-20 15:30:37 docker-compose up --build
+   74  2023-01-20 15:31:08 docker volume create postgres_data
+   75  2023-01-20 15:31:08 docker volume create petfinder_data
+   76  2023-01-20 15:31:13 docker volume ls
+   77  2023-01-20 15:37:38 docker run -it --rm --entrypoint /bin/bash petfinder -c bash
+   78  2023-01-20 15:38:08 docker ps -a
+   79  2023-01-20 15:31:17 docker-compose up --build
+   80  2023-01-20 15:42:32 docker-compose --help
+   81  2023-01-20 16:17:21 docker stop $(docker ps -a -q)
+   82  2023-01-20 16:17:21 docker rmi -f $(docker images -aq)
+   83  2023-01-20 16:17:21 docker system prune --force
+   84  2023-01-20 16:17:26 docker images -a
+   85  2023-01-20 16:17:28 docker ps -a
+   86  2023-01-20 16:18:06 s
+   87  2023-01-20 16:18:12 docker-compose up --build
+   88  2023-01-20 16:25:11 docker stop $(docker ps -a -q)
+   89  2023-01-20 16:25:11 docker rmi -f $(docker images -aq)
+   90  2023-01-20 16:25:11 docker system prune --force
+   91  2023-01-20 16:25:13 docker volume rm $(docker volume ls -qf dangling=true)
+   92  2023-01-20 16:25:20 docker network ls
+   93  2023-01-20 16:25:29 docker-compose up --build
+   94  2023-01-20 16:27:04 docker system prune --forcedocker stop $(docker ps -a -q)
+   95  2023-01-20 16:27:05 docker rmi -f $(docker images -aq)
+   96  2023-01-20 16:27:05 docker system prune --force
+   97  2023-01-20 16:27:07 Cdocker stop $(docker ps -a -q)
+   98  2023-01-20 16:27:08 docker rmi -f $(docker images -aq)
+   99  2023-01-20 16:27:08 docker system prune --force
+  100  2023-01-20 16:27:10 docker stop $(docker ps -a -q)
+  101  2023-01-20 16:27:10 docker rmi -f $(docker images -aq)
+  102  2023-01-20 16:27:10 docker system prune --force
+  103  2023-01-20 16:28:55 docker-compose up --build
+  104  2023-01-20 16:35:13 docker stop $(docker ps -a -q)
+  105  2023-01-20 16:35:13 docker rmi -f $(docker images -aq)
+  106  2023-01-20 16:35:13 docker system prune --force
+  107  2023-01-20 16:35:55 docker-compose up --build
+  108  2023-01-20 16:47:13 docker stop $(docker ps -a -q)
+  109  2023-01-20 16:47:13 docker rmi -f $(docker images -aq)
+  110  2023-01-20 16:47:13 docker system prune --force
+  111  2023-01-20 16:47:17 docker stop $(docker ps -a -q)
+  112  2023-01-20 16:47:18 docker rmi -f $(docker images -aq)
+  113  2023-01-20 16:47:18 docker system prune --force
+  114  2023-01-20 16:47:20 docker ps -a
+  115  2023-01-20 16:47:23 docker images -a
+  116  2023-01-20 16:47:28 docker-compose up --builld
+  117  2023-01-20 16:49:56 docker ps -
+  118  2023-01-20 16:49:57 docker ps -a
+  119  2023-01-20 16:50:06 docker images -a
+  120  2023-01-20 16:51:34 docker attach petfinder
+  121  2023-01-20 16:53:11 docker exec -it petfinder bash
+  122  2023-01-20 16:53:15 docker ps -a
+  123  2023-01-20 16:53:23 docker start petfinder
+  124  2023-01-20 16:53:25 docker ps -a
+  125  2023-01-20 16:53:28 docker exec -it petfinder bash
+  126  2023-01-20 16:55:32 docker ps -a
+  127  2023-01-20 16:55:38 docker exec -it petfinder rails db:seed
+  128  2023-01-20 16:55:44 docker ps -a
+  129  2023-01-20 16:57:25 docker exec -it petfinder bash
+  130  2023-01-20 17:13:14 cd public/
+  131  2023-01-20 17:13:15 ls -lt
+  132  2023-01-20 17:13:19 rm -rf **
+  133  2023-01-20 17:13:21 ls -lt
+  134  2023-01-20 17:13:25 cd ..
+  135  2023-01-20 17:13:31 ls -la public/
+  136  2023-01-20 17:15:16 git status
+  137  2023-01-20 17:15:34 git add .
+  138  2023-01-20 17:15:39 git commit -m 'added react builder script'
+  139  2023-01-20 17:15:42 git push
+  140  2023-01-20 17:15:50 git status
+  141  2023-01-20 17:52:13 git pull
+  142  2023-01-20 16:47:36 docker-compose up --build
+  143  2023-01-20 19:46:34 docker ps -a
+  144  2023-01-20 19:47:03 docker stop $(docker ps -a -q)
+  145  2023-01-20 19:47:13 docker rmi -f $(docker images -aq)
+  146  2023-01-20 19:47:13 docker system prune --force
+  147  2023-01-20 19:47:15 DOCKER_BUILDKIT=1 docker build  --file ./docker/Dockerfile.frontend --tag react --output public .
+  148  2023-01-20 19:50:19 docker-compose up --build
+  149  2023-01-20 19:50:47 history
+  150  2023-01-20 19:51:09 docker-compose up --build
+  151  2023-01-20 20:04:56 docker run -it --rm --entrypoint rails db:seed
+  152  2023-01-20 20:05:03 docker run -it --rm --entrypoint rails db:seed petfinder
+  153  2023-01-20 20:05:34 docker run -it --rm  petfinder
+  154  2023-01-20 20:05:40 docker run -it --rm  petfinder rails db:seed
+  155  2023-01-20 20:05:43 docker run -it --rm  petfinder rails db:seed petfinder
+  156  2023-01-20 20:05:48 docker ps -a
+  157  2023-01-20 20:05:58 docker rm 3749b364168f
+  158  2023-01-20 20:06:01 d96f11b61967
+  159  2023-01-20 20:06:07 docker rm 8e1da7b7b982
+  160  2023-01-20 20:06:09 docker ps -a
+  161  2023-01-20 20:06:18 docker rm 7d9429842461
+  162  2023-01-20 20:06:28 docker rm d96f11b61967
+  163  2023-01-20 20:06:31 docker ps -a
+  164  2023-01-20 20:06:35 docker images -a
+  165  2023-01-20 20:07:20 docker exec -it petfinder rails db:seed
+  166  2023-01-20 20:03:02 docker-compose up
+  167  2023-01-20 20:21:44 docker-compose up -d
+  168  2023-01-20 20:31:04 git status
+  169  2023-01-20 20:32:14 sudo nano ~/.bashrc
+  170  2023-01-20 20:33:24 git status
+  171  2023-01-20 20:33:40 gitall . 'added report redux/query'
+  172  2023-01-20 20:38:53 sudo nano ~/.bashrc
+  173  2023-01-20 20:39:57 rm ./public/* -rf
+  174  2023-01-20 20:40:00 ls public
+  175  2023-01-20 20:42:10 docker ps -a
+  176  2023-01-20 20:40:11 frontend
+  177  2023-01-20 20:42:24 docker stop petfinder
+  178  2023-01-20 20:42:38 docker ps -a
+  179  2023-01-20 20:42:41 docker start petfinder
+  180  2023-01-20 20:42:45 docker ps -a
+  181  2023-01-20 20:43:00 docker stop petfinder
+  182  2023-01-20 20:43:16 docker-compose up
+  183  2023-01-20 20:48:15 docker stop petfinder
+  184  2023-01-20 20:48:20 docker compose up
+  185  2023-01-20 20:48:55 docker stop $(docker ps -a -q)
+  186  2023-01-20 20:48:55 docker rmi -f $(docker images -aq)
+  187  2023-01-20 20:48:59 docker system prune --force
+  188  2023-01-20 20:49:14 docker volume rm $(docker volume ls -qf dangling=true)
+  189  2023-01-20 20:49:15 docker o
+  190  2023-01-20 20:49:18 docker ps -a
+  191  2023-01-20 20:49:20 docker images -a
+  192  2023-01-20 20:49:51 docker-compose up -d && docker exec -it petfinder rails db:seed
+  193  2023-01-20 20:52:00 docker stop $(docker ps -a -q)
+  194  2023-01-20 20:52:10 docker rmi -f $(docker images -aq)
+  195  2023-01-20 20:52:10 docker system prune --force
+  196  2023-01-20 20:52:39 docker-compose up -d
+  197  2023-01-20 20:54:38 docker exec -it petfinder rails db:seed
+  198  2023-01-20 20:54:45 docker ps -a
+  199  2023-01-20 20:54:52 docker exec -it petfinder rails db:seed
+  200  2023-01-20 20:55:22 docker exec -it petfinder bash
+  201  2023-01-20 20:57:02 git status
+  202  2023-01-20 20:57:37 gitall . updates listing xhr using redux query'
+  203  2023-01-20 20:58:16 cd public/
+  204  2023-01-20 20:58:21 touch .keep
+  205  2023-01-20 20:58:26 git status
+  206  2023-01-20 20:58:41 gitall . 'listings-use redux query'
+  207  2023-01-20 20:58:44 git status
+  208  2023-01-20 20:58:49 git add .
+  209  2023-01-20 20:58:57 git commit -m "listings"
+  210  2023-01-20 20:59:01 cd ..
+  211  2023-01-20 20:59:04 git commit -m "listings"
+  212  2023-01-20 20:59:08 gitall . 'listings-use redux query'
+  213  2023-01-20 20:59:10 git status
+  214  2023-01-20 21:00:26 docker ps -a
+  215  2023-01-20 21:00:30 docker images -a
+  216  2023-01-20 21:00:38 docker rmi 342d4be888dc
+  217  2023-01-21 18:21:58 docker ps -a
+  218  2023-01-21 18:22:08 docker_delete_all
+  219  2023-01-21 18:23:13 docker ps -a
+  220  2023-01-21 18:23:16 docker images -a
+  221  2023-01-21 18:23:30 docker volume create postgres_data
+  222  2023-01-21 18:23:30 docker volume create shared_data
+  223  2023-01-21 18:23:30 docker volume create gem_cache
+  224  2023-01-21 18:23:36 docker volume ls
+  225  2023-01-21 18:24:03 docker volume rm $(docker volume ls -qf dangling=true)
+  226  2023-01-21 18:24:10 docker volume ls
+  227  2023-01-21 18:24:11 docker volume create postgres_data
+  228  2023-01-21 18:24:11 docker volume create shared_data
+  229  2023-01-21 18:24:11 docker volume create gem_cache
+  230  2023-01-21 18:24:12 docker volume create shared_data
+  231  2023-01-21 18:24:17 docker volume ls
+  232  2023-01-21 18:24:54 git fetch --all
+  233  2023-01-21 18:25:06 cd pet-finder/
+  234  2023-01-21 18:25:08 git fetch --all
+  235  2023-01-21 18:25:11 git pull
+  236  2023-01-21 18:25:17 ls -lt
+  237  2023-01-21 18:25:42 ls -la
+  238  2023-01-21 18:25:49 cat .env
+  239  2023-01-21 18:25:56 cat .env.production
+  240  2023-01-21 18:26:11 rm -rf .env.production
+  241  2023-01-21 18:26:24 sudo nano .env.production
+  242  2023-01-21 18:26:46 git pull
+  243  2023-01-21 18:27:05 ls public
+  244  2023-01-21 18:27:09 cd public
+  245  2023-01-21 18:27:10 ls -la
+  246  2023-01-21 18:27:14 rm -rf static
+  247  2023-01-21 18:27:16 ls -
+  248  2023-01-21 18:27:19 ls -la
+  249  2023-01-21 18:27:22 cd ..
+  250  2023-01-21 18:27:30 DOCKER_BUILDKIT=1 docker build  --file ./docker/Dockerfile.frontend.prod --tag react --output public .
+  251  2023-01-21 18:32:43 git pull
+  252  2023-01-21 18:33:46 ls -lt ./docker/run_app.sh
+  253  2023-01-21 18:34:30 cd docker/
+  254  2023-01-21 18:34:32 cd ..
+  255  2023-01-21 18:34:42 chmod +x ./docker/*.sh
+  256  2023-01-21 18:34:57 ./docker/run_app.sh
+  257  2023-01-21 18:37:34 git pull
+  258  2023-01-21 18:41:15 ls public
+  259  2023-01-21 18:41:18 cd pet-finder/
+  260  2023-01-21 18:41:19 ls public
+  261  2023-01-21 18:41:21 ls -lt
+  262  2023-01-21 18:41:28 ls -lt public/
+  263  2023-01-21 18:37:37 ./docker/run_app.sh
+  264  2023-01-21 18:42:08 docker-compose up
+  265  2023-01-21 18:42:31 docker-compose ./docker-compose.prod.yml up
+  266  2023-01-21 18:42:37 ./docker/run_app.sh
+  267  2023-01-21 18:44:47 docker ps -a
+  268  2023-01-21 18:44:50 docker start postgres
+  269  2023-01-21 18:44:52 docker ps -a
+  270  2023-01-21 18:45:19 docker start petfinder
+  271  2023-01-21 18:45:23 docker ps -a
+  272  2023-01-21 18:45:29 docker start petfinder
+  273  2023-01-21 18:45:31 docker ps -a
+  274  2023-01-21 18:45:58 ./docker/run_app.sh
+  275  2023-01-21 18:50:10 docker start postgres
+  276  2023-01-21 18:50:13 docker ps -a
+  277  2023-01-21 18:50:48 docker run -it petfinder
+  278  2023-01-21 18:50:52 docker ps -a
+  279  2023-01-21 18:50:57 docker images -a
+  280  2023-01-21 18:51:16 docker run -it --rm --name petfinder petfinder
+  281  2023-01-21 18:51:26 docker images -a
+  282  2023-01-21 18:52:47 docker run -it --rm --name petfinder pet-finder_petfinder
+  283  2023-01-21 18:52:58 docker run -it petfinder
+  284  2023-01-21 18:53:12 ./docker/run_app.sh
+  285  2023-01-21 18:53:27 docker images -a
+  286  2023-01-21 18:53:35 docker rmi 5a63d3bade0a
+  287  2023-01-21 18:53:38 docker ps -a
+  288  2023-01-21 18:53:43 docmer rm petfinder
+  289  2023-01-21 18:53:47 docker ps -a
+  290  2023-01-21 18:53:51 docker rm petfinder
+  291  2023-01-21 18:53:53 docker ps -a
+  292  2023-01-21 18:53:59 docker images -a
+  293  2023-01-21 18:54:07 docker rmi 5a63d3bade0a
+  294  2023-01-21 18:54:09 docker rmi 5a63d3bade0a -f
+  295  2023-01-21 18:54:13 docker imagfes -a
+  296  2023-01-21 18:54:18 docker images -a
+  297  2023-01-21 18:54:22 docker ps -a
+  298  2023-01-21 18:54:29 ./docker/run_app.sh
+  299  2023-01-21 18:56:29 docker ps -a
+  300  2023-01-21 18:56:32 docker images -a
+  301  2023-01-21 18:56:37 ./docker/run_app.sh
+  302  2023-01-21 18:59:03 docker exec -it petfinder rails db:seed
+  303  2023-01-21 19:51:38 nslookup www.akladyous.dev
+  304  2023-01-21 20:09:14 apt get update
+  305  2023-01-21 20:09:22 gpt-get update
+  306  2023-01-21 20:09:40 apk update && apk upgrade
+  307  2023-01-21 20:09:54 apt update
+  308  2023-01-21 20:10:02 sudo apt update
+  309  2023-01-21 20:10:21 sudo apt upgrade
+  310  2023-01-21 20:11:45 sudo apt update
+  311  2023-01-21 20:11:47 sudo apt install nginx
+  312  2023-01-21 20:14:07 sudo scp -i ~/.ssh/petfinder.pem ./docker/petfinder.conf ubuntu@44.201.135.142:/home/ubuntu # from local
+  313  2023-01-21 20:17:24 ls /etc/nginx/sites-enabled/
+  314  2023-01-21 20:17:33 sudo unlink /etc/nginx/sites-enabled/
+  315  2023-01-21 20:17:37 sudo unlink /etc/nginx/sites-enabled/default
+  316  2023-01-21 20:17:40 ls /etc/nginx/sites-enabled/
+  317  2023-01-21 20:17:56 ls /etc/nginx/conf.d/
+  318  2023-01-21 20:18:39 sudo nano /etc/nginx/conf.d/petfinder.conf
+  319  2023-01-21 20:19:15 sudo service nginx restart
+  320  2023-01-21 20:19:41 sudo service nginx stop
+  321  2023-01-21 20:19:45 sudo service nginx start
+  322  2023-01-21 20:19:53 sudo nginx -t
+  323  2023-01-21 20:20:07 su -
+  324  2023-01-21 20:41:40 sudo systemctl nginx status
+  325  2023-01-21 20:41:45 sudo nginx -t
+  326  2023-01-21 20:42:23 sudo systemctl nginx status
+  327  2023-01-21 20:42:29 sudo systemctl status nginx
+  328  2023-01-21 20:43:44 sudo vi /etc/nginx/conf.d/petfinder.conf
+  329  2023-01-21 20:44:26 sudo nano /etc/nginx/conf.d/petfinder.conf
+  330  2023-01-21 20:45:04 cd pet-finder/log
+  331  2023-01-21 20:45:13 mkdir nginx
+  332  2023-01-21 20:45:25 sudo systemctl nginx restart
+  333  2023-01-21 20:45:41 sudo systemctl nginx stop
+  334  2023-01-21 20:45:57 sudo service nginx restart
+  335  2023-01-21 20:46:20 sudo systemctl status nginx
+  336  2023-01-21 20:46:45 docker ps -a
+  337  2023-01-21 20:47:01 pet-finder
+  338  2023-01-21 20:47:05 cd pet-finder
+  339  2023-01-21 20:47:08 cd ..
+  340  2023-01-21 20:47:26 docker_delete_all
+  341  2023-01-21 20:48:05 ./docker/run_app.sh
+  342  2023-01-21 20:54:37 cd log
+  343  2023-01-21 20:54:40 cd nginx/
+  344  2023-01-21 20:54:41 ls -lt
+  345  2023-01-21 20:54:49 cat petfinder.error.log
+  346  2023-01-21 20:54:56 cat petfinder.access.log
+  347  2023-01-21 20:55:11 sudo systemctl nginx start
+  348  2023-01-21 20:55:29 sudo service nginx restart
+  349  2023-01-21 21:04:55 docker-compose up
+  350  2023-01-21 21:05:19 docker
+  351  2023-01-21 21:07:43 sudo nano /etc/nginx/conf.d/petfinder.conf
+  352  2023-01-21 21:09:27 sudo service nginx restart
+  353  2023-01-21 21:09:31 sudo systemctl status nginx
+  354  2023-01-21 21:16:53 sudo service nginx stop
+  355  2023-01-21 21:05:31 ./docker/run_app.sh
+  356  2023-01-21 21:21:02 docker start postgres
+  357  2023-01-21 21:24:24 ./docker/run_app.sh
+  358  2023-01-21 21:29:08 nslookup akladyous.dev
+  359  2023-01-21 21:33:09 sudo service nginx start
+  360  2023-01-21 21:33:23 sudo systemctl status nginx
+  361  2023-01-21 21:39:58 docker exec -it petfinder rails db:seed
+  362  2023-01-21 21:44:01 cat /etc/nginx/conf.d/petfinder.conf
+  363  2023-01-21 21:44:18 git status
+  364  2023-01-21 21:44:22 git add .
+  365  2023-01-21 21:44:28 git add .
+  366  2023-01-21 21:44:37 git status
+  367  2023-01-21 21:44:42 cd ..
+  368  2023-01-21 21:44:47 git status
+  369  2023-01-21 21:44:51 git add .
+  370  2023-01-21 21:45:03 git commit -m "updated nginx configuration"
+  371  2023-01-21 21:45:06 git push
+  372  2023-01-21 21:45:08 git status
+  373  2023-01-21 21:48:41 git status
+  374  2023-01-21 21:49:06 cat ./docker/run_app.sh
+  375  2023-01-21 21:49:15 docker-compose -f ./docker-compose.prod.yml up
+  376  2023-01-21 21:49:33 docker-compose -f ./docker-compose.prod.yml up -d
+  377  2023-01-21 21:49:51 git status
+  378  2023-01-22 06:04:06 cd pet-finder/
+  379  2023-01-22 06:04:08 git status
+  380  2023-01-22 17:35:00 docker_delete_all
+  381  2023-01-22 17:37:40 docker ps -a
+  382  2023-01-22 17:37:43 docker images -a
+  383  2023-01-22 17:37:47 docker volume -ls
+  384  2023-01-22 17:37:50 docker volume ls
+  385  2023-01-22 20:16:45 docker ps -a
+  386  2023-01-22 20:16:47 docker images -a
+  387  2023-01-22 20:16:54 git fetch --all
+  388  2023-01-22 20:17:00 cd ..
+  389  2023-01-22 20:17:06 rm -rf pet-finder/
+  390  2023-01-22 20:18:18 git clone git@github.com:akladyous/lostpet101.git
+  391  2023-01-22 20:19:36 ls
+  392  2023-01-22 20:20:56 echo $PATH
+  393  2023-01-22 20:21:08 which whoami
+  394  2023-01-22 20:22:28 ls
+  395  2023-01-22 20:22:29 ~/
+  396  2023-01-22 20:22:35 cd ~
+  397  2023-01-22 20:22:45 ~/lostpet101
+  398  2023-01-22 20:22:55 ~/lostpet101/script
+  399  2023-01-22 20:22:57 cd ..
+  400  2023-01-22 20:23:18 export PATH="~/lostpet101/script:$PATH"
+  401  2023-01-22 20:23:23 echo %PATH
+  402  2023-01-22 20:23:29 EXIT
+  403  2023-01-22 20:23:42 echo $PATH
+  404  2023-01-22 20:24:22 export PATH="~/lostpet101/script:$PATH"
+  405  2023-01-22 20:24:23 echo $PATH
+  406  2023-01-22 20:24:54 app-seed
+  407  2023-01-22 20:25:13 chmod +x ./script/*.sh
+  408  2023-01-22 20:25:16 app-seed
+  409  2023-01-22 20:25:26 echo $PATH
+  410  2023-01-22 20:26:49 sudo nano ~/.bashrc
+  411  2023-01-22 20:28:54 echo %PATH
+  412  2023-01-22 20:28:59 echo $PATH
+  413  2023-01-22 20:29:09 app-seed
+  414  2023-01-22 20:29:16 app-seed.sh
+  415  2023-01-22 20:29:20 app-seed
+  416  2023-01-22 20:29:34 app-seed.sh
+  417  2023-01-22 20:29:37 ./app-seed.sh
+  418  2023-01-22 20:29:54 ./script/app-seed.sh
+  419  2023-01-22 20:30:04 ./script/app-seed
+  420  2023-01-22 20:30:08 ./script/app-seed.sh
+  421  2023-01-22 20:30:11 app-seed.sh
+  422  2023-01-22 20:31:30 docker-build-frontend.sh
+  423  2023-01-22 20:33:58 lostpet101.sh
+  424  2023-01-22 20:35:50 docker ps -a
+  425  2023-01-22 20:36:32 docker images -a
+  426  2023-01-22 20:37:52 docker-delete-app.sh
+  427  2023-01-22 20:37:55 docker ps -a
+  428  2023-01-22 20:37:57 docker images -a
+  429  2023-01-22 20:38:00 lostpet101.sh
+  430  2023-01-22 20:39:08 docker ps -a
+  431  2023-01-22 20:39:20 docker-compose -f ${PWD}/docker-compose.prod.yml up --build -d
+  432  2023-01-22 20:39:31 docker ps -a
+  433  2023-01-22 20:39:55 docker-compose -f ${PWD}/docker-compose.prod.yml up --build -d
+  434  2023-01-22 20:40:00 docker ps -a
+  435  2023-01-22 20:40:13 docker-delete-app.sh
+  436  2023-01-22 20:40:15 docker-compose -f ${PWD}/docker-compose.prod.yml up --build
+  437  2023-01-22 20:41:55 docker ps -a
+  438  2023-01-22 20:42:37 docker-compose -f ${PWD}/docker-compose.prod.yml up --build
+  439  2023-01-22 20:43:40 docker-delete-all
+  440  2023-01-22 20:43:44 docker-delete-all.sh
+  441  2023-01-22 20:44:01 docker ps -a
+  442  2023-01-22 20:44:03 docker images -a
+  443  2023-01-22 20:44:07 docker-compose -f ${PWD}/docker-compose.prod.yml up --build
+  444  2023-01-22 20:46:39 docker-delete-app.sh
+  445  2023-01-22 20:46:58 docker build --no-cache -f ./docker/Dockerfile.ver1 --target rails -t lostpet101 .
+  446  2023-01-22 20:47:39 ls ./docker/
+  447  2023-01-22 20:47:41 ls ./docker/ -lt
+  448  2023-01-22 20:48:05 docker build --no-cache -f ./docker/Dockerfile.ver1 -t lostpet101 .
+  449  2023-01-22 20:49:00 docker images -a
+  450  2023-01-22 20:50:11 docker ps -a
+  451  2023-01-22 20:50:13 docker run -it --rm --entrypoint /bin/bash -v ${PWD}/:/lostpet101 lostpet101 -c bash
+  452  2023-01-22 20:51:14 docker run -it --rm -v ${PWD}/:/lostpet101 lostpet101
+  453  2023-01-22 20:52:41 docker run -it --rm --entrypoint /bin/bash -v ${PWD}/:/lostpet101 lostpet101 -c bash
+  454  2023-01-22 20:59:02 git status
+  455  2023-01-22 20:59:47 git status
+  456  2023-01-22 20:59:51 git add .
+  457  2023-01-22 21:00:05 git commit -m "updated bundler version'
+  458  2023-01-22 21:00:08 git commit -m "updated bundler version"
+  459  2023-01-22 21:00:10 git push
+  460  2023-01-22 21:01:11 bundle version
+  461  2023-01-22 21:01:26 docker run -it --rm --entrypoint /bin/bash -v ${PWD}/:/lostpet101 lostpet101 -c bash
+  462  2023-01-22 21:03:16 docker ps -a
+  463  2023-01-22 21:04:27 docker-delete-app.sh
+  464  2023-01-22 21:04:53 lostpet101.sh
+  465  2023-01-22 21:07:02 docker-compose -f ${PWD}/docker-compose.prod.yml up --build
+  466  2023-01-22 21:07:41 app-bundle.sh
+  467  2023-01-22 21:08:12 git status
+  468  2023-01-22 21:09:31 git pull
+  469  2023-01-22 21:10:03 docker-compose -f ${PWD}/docker-compose.prod.yml up --build
+  470  2023-01-22 21:10:29 docker-delete-app.sh
+  471  2023-01-22 21:10:54 docker-compose -f ${PWD}/docker-compose.prod.yml up --build
+  472  2023-01-22 21:11:09 docker-delete-all.sh
+  473  2023-01-22 21:11:15 docker-compose -f ${PWD}/docker-compose.prod.yml up --build
+  474  2023-01-22 21:13:31 git status
+  475  2023-01-22 21:14:03 git fetch --all
+  476  2023-01-22 21:14:13 git pull
+  477  2023-01-22 21:14:21 docker-delete-all
+  478  2023-01-22 21:14:29 docker-delete-all.sh
+  479  2023-01-22 21:19:18 docker-compose -f ${PWD}/docker-compose.prod.yml up --build
+  480  2023-01-22 21:19:52 echo $(cat Gemfile.lock | tail -1 | tr -d " ")
+  481  2023-01-22 21:21:15 docker-compose -f ${PWD}/docker-compose.prod.yml up --build
+  482  2023-01-22 21:25:01 bundle version
+  483  2023-01-22 21:25:06 docker-compose -f ${PWD}/docker-compose.prod.yml up --build
+  484  2023-01-22 21:28:45 docker-delete-app
+  485  2023-01-22 21:28:53 docker-delete-app.sh
+  486  2023-01-22 21:29:08 git status
+  487  2023-01-22 21:29:17 docker build --no-cache -f ~/lostpet101/docker/Dockerfile.ver1 -t lostpet101 .
+  488  2023-01-22 21:30:19 docker run -it --rm --entrypoint /bin/bash -v ${PWD}/:/lostpet101 lostpet101
+  489  2023-01-22 21:32:00 docker ps -a
+  490  2023-01-22 21:32:10 docker start lostpet101
+  491  2023-01-22 21:32:34 docker rm e2620f43ff85
+  492  2023-01-22 21:32:38 docker ps -a
+  493  2023-01-22 21:32:41 docker images -a
+  494  2023-01-22 21:32:46 docker run -it --rm --entrypoint /bin/bash -v ${PWD}/:/lostpet101 lostpet101
+  495  2023-01-22 21:32:51 docker ps -a
+  496  2023-01-22 21:32:54 docker run -it --rm --entrypoint /bin/bash -v ${PWD}/:/lostpet101 lostpet101
+  497  2023-01-22 21:33:26 docker-delete-app.sh
+  498  2023-01-22 21:33:46 docker-compose -f ${PWD}/docker-compose.prod.yml up
+  499  2023-01-22 21:36:58 git status
+  500  2023-01-22 21:39:15 docker-delete-app.sh
+  501  2023-01-22 21:39:21 docker-compose -f ${PWD}/docker-compose.prod.yml up
+  502  2023-01-22 21:41:14 docker-delete-app.sh
+  503  2023-01-22 21:41:37 git status
+  504  2023-01-22 21:41:43 gitall . 'update gem config'
+  505  2023-01-22 21:41:46 git status
+  506  2023-01-22 21:41:57 docker ps -a
+  507  2023-01-22 21:41:59 docker images -a
+  508  2023-01-22 21:42:06 docker-delete-all.sh
+  509  2023-01-22 21:42:47 lostpet101.sh
+  510  2023-01-22 21:44:25 app-terminal.sh
+  511  2023-01-22 21:45:44 docker ps -a
+  512  2023-01-22 21:45:52 lostpet101.sh
+  513  2023-01-22 21:48:01 git status
+  514  2023-01-22 21:51:33 chmod +x ./script/*.sh
+  515  2023-01-22 21:51:35 git status
+  516  2023-01-22 21:51:38 gitall .
+  517  2023-01-22 21:51:48 gitall . "app credentials'
+  518  2023-01-22 21:51:50 gitall . "app credentials"
+  519  2023-01-22 21:52:04 app-credentials.sh
+  520  2023-01-22 21:52:19 git status
+  521  2023-01-22 21:54:15 app-terminal.sh
+  522  2023-01-22 22:01:35 docker-delete-app.sh
+  523  2023-01-22 22:06:38 gem install -v 2.4.5 --no-documents
+  524  2023-01-22 22:06:42 gem install -v 2.4.5 --no-document
+  525  2023-01-22 22:13:54 apkt
+  526  2023-01-22 22:14:02 app-terminal.sh
+  527  2023-01-22 22:14:07 docker ps -a
+  528  2023-01-22 22:22:09 docker-compose -f ${PWD}/docker-compose.prod.yml up --build
+  529  2023-01-22 22:27:24 docker ps -a
+  530  2023-01-22 22:27:27 docker images -a
+  531  2023-01-22 22:28:23 docker-compose -f ${PWD}/docker-compose.prod.yml up --build
+  532  2023-01-22 22:29:46 docker-delete-all
+  533  2023-01-22 22:29:49 docker-delete-all.sh
+  534  2023-01-22 22:32:06 docker ps -a
+  535  2023-01-22 22:32:09 docker images -a
+  536  2023-01-22 22:29:57 docker-compose -f ${PWD}/docker-compose.prod.yml up --build
+  537  2023-01-22 22:36:04 docker-delete-all
+  538  2023-01-22 22:36:06 docker-delete-all.sh
+  539  2023-01-22 22:36:26 docker-compose -f ${PWD}/docker-compose.prod.yml up --build
+  540  2023-01-22 22:38:30 docker images -as
+  541  2023-01-22 22:38:32 docker images -a
+  542  2023-01-22 22:38:58 docker ps -a
+  543  2023-01-22 22:39:02 docker-delete-all
+  544  2023-01-22 22:39:09 docker-delete-all.sh
+  545  2023-01-22 22:39:19 lostpet101.sh
+  546  2023-01-22 22:41:09 docker-delete-all.sh
+  547  2023-01-22 22:41:32 lostpet101.sh
+  548  2023-01-22 22:45:11 docker-delete-app.sh
+  549  2023-01-22 22:45:31 lostpet101.sh
+  550  2023-01-22 22:45:46 docker-delete-all.sh
+  551  2023-01-22 22:45:56 lostpet101.sh
+  552  2023-01-22 22:46:46 docker ps -a
+  553  2023-01-22 22:46:49 docker images -a
+  554  2023-01-22 22:46:51 git status
+  555  2023-01-22 22:47:00 gitall . 'docker file updated'
+  556  2023-01-22 22:47:02 git status
+  557  2023-01-22 22:47:19 shutdown --help
+  558  2023-01-22 22:47:30 sudo shutdown -r now
+  559  2023-01-22 22:49:38 docker ps -a
+  560  2023-01-22 22:49:48 lostpet101.sh
+  561  2023-01-22 22:49:59 ls tmp
+  562  2023-01-22 22:50:08 cd tmp
+  563  2023-01-22 22:50:09 ls
+  564  2023-01-22 22:50:12 ls -la
+  565  2023-01-22 22:50:25 rm -rf *
+  566  2023-01-22 22:50:29 sudo rm -rf *
+  567  2023-01-22 22:50:32 ls -la
+  568  2023-01-22 22:50:38 cd ..
+  569  2023-01-22 22:50:51 ls -lt
+  570  2023-01-22 22:50:55 lostpet101.sh
+  571  2023-01-22 22:54:02 docker-delete-all.sh
+  572  2023-01-22 22:54:13 lostpet101.sh
+  573  2023-01-22 22:58:13 docker-delete-app.sh
+  574  2023-01-22 22:58:24 docker-compose -f ${PWD}/docker-compose.prod.yml up --build
+  575  2023-01-22 23:01:38 docker run -it --rm --entrypoint /bin/bash -v ${PWD}/:/lostpet101 lostpet101 -c bash
+  576  2023-01-22 23:02:06 docker ps -a
+  577  2023-01-22 23:02:17 docker rm 8888969fec4a
+  578  2023-01-22 23:02:22 docker rm ebbc640ad3b8
+  579  2023-01-22 23:02:24 docker ps -a
+  580  2023-01-22 23:02:34 docker start lostpet101
+  581  2023-01-22 23:02:38 docker ps -a
+  582  2023-01-22 23:03:29 docker logs lostpet101
+  583  2023-01-22 23:04:36 docker-delete-app.sh
+  584  2023-01-22 23:04:39 docker ps -a
+  585  2023-01-22 23:04:42 docker images -a
+  586  2023-01-22 23:04:59 docker-compose -f ${PWD}/docker-compose.prod.yml up --build
+  587  2023-01-22 23:08:40 docker-delete-app.sh
+  588  2023-01-22 23:09:02 docker ps -a
+  589  2023-01-22 23:09:06 docker images -a
+  590  2023-01-22 23:09:13 docker-delete-all.sh
+  591  2023-01-22 23:09:18 docker build --no-cache -f ~/lostpet101/docker/Dockerfile.ver1 -t lostpet101 .
+  592  2023-01-22 23:11:17 docker ps -a
+  593  2023-01-22 23:11:19 docker images -a
+  594  2023-01-22 23:11:29 lostpet101.sh
+  595  2023-01-22 23:12:19 docker ps -a
+  596  2023-01-22 23:12:20 docker run -it --rm --entrypoint /bin/bash -v ${PWD}/:/lostpet101 lostpet101 -c bash
+  597  2023-01-22 23:12:59 docker-delete-app.sh
+  598  2023-01-22 23:13:16 docker-compose -f ${PWD}/docker-compose.prod.yml up --build
+  599  2023-01-22 23:15:58 docker-delete-app.sh
+  600  2023-01-22 23:16:02 docker-compose -f ${PWD}/docker-compose.prod.yml up --build
+  601  2023-01-22 23:20:13 docker-delete-app.sh
+  602  2023-01-22 23:20:17 docker-compose -f ${PWD}/docker-compose.prod.yml up --build
+  603  2023-01-22 23:29:57 git status
+  604  2023-01-22 23:30:04 gitall . 'updated docker file'
+  605  2023-01-22 23:30:07 git status
+  606  2023-01-22 23:30:10 docker ps -a
+  607  2023-01-22 23:30:17 docker-delete-all.sh
+  608  2023-01-22 23:32:42 docker run -it --rm --entrypoint /bin/bash -v ${PWD}/:/lostpet101 lostpet101 -c bash
+  609  2023-01-22 23:34:11 docker ps -a
+  610  2023-01-22 23:35:56 git status
+  611  2023-01-22 23:36:09 gitall . 'docker file'
+  612  2023-01-22 23:36:31 app-credentials.sh
+  613  2023-01-22 23:36:47 git stagtus
+  614  2023-01-22 23:38:15 git pull
+  615  2023-01-22 23:30:39 docker-compose -f ${PWD}/docker-compose.prod.yml up --build
+  616  2023-01-22 23:38:31 lostpet101.sh
+  617  2023-01-22 23:39:29 docker-delete-all.sh
+  618  2023-01-22 23:39:37 git pyll
+  619  2023-01-22 23:39:39 git pull
+  620  2023-01-22 23:40:05 lostpet101.sh
+  621  2023-01-22 23:41:33 docker-delete-app.sh
+  622  2023-01-22 23:41:49 docker-compose -f ${PWD}/docker-compose.prod.yml up --build -d
+  623  2023-01-22 23:42:36 docker ps -a
+  624  2023-01-22 23:42:57 docker exec -it lostpet101 rails db:seed
+  625  2023-01-22 23:43:11 docker ps -a
+  626  2023-01-22 23:43:12 docker exec -it lostpet101 rails db:seed
+  627  2023-01-22 23:43:46 docker stop lostpet101
+  628  2023-01-22 23:43:54 docker-compose run lostpet101
+  629  2023-01-22 23:44:14 docker-compose -f ${PWD}/docker-compose.prod.yml up
+  630  2023-01-22 23:44:27 docker-compose -f ${PWD}/docker-compose.prod.yml up -d
+  631  2023-01-22 23:44:33 docker ps -a
+  632  2023-01-22 23:44:40 docker exec -it lostpet101 rails db:seed
+  633  2023-01-22 23:45:04 docker ps -a
+  634  2023-01-22 23:45:07 docker images -a
+  635  2023-01-22 23:45:49 sudo nginx -t
+  636  2023-01-22 23:46:24 sudo cat /etc/nginx/conf.d/petfinder.conf
+  637  2023-01-22 23:47:21 sudo rm  /etc/nginx/conf.d/petfinder.conf
+  638  2023-01-22 23:47:43 sudo touch  /etc/nginx/conf.d/lostpet101.conf
+  639  2023-01-22 23:47:51 sudo nano  /etc/nginx/conf.d/lostpet101.conf
+  640  2023-01-22 23:48:18 sudo systemctl nginx load
+  641  2023-01-22 23:48:36 sudo systemctl nginx restart
+  642  2023-01-22 23:49:00 sudo systemctl reload nginx
+  643  2023-01-22 23:49:17 sudo service nginx stop
+  644  2023-01-22 23:49:22 sudo service nginx start
+  645  2023-01-22 23:49:27 sudo nginx -t
+  646  2023-01-22 23:49:30 sudo systemctl status nginx
+  647  2023-01-22 23:49:46 /home/ubuntu/lostpet101/
+  648  2023-01-22 23:49:49 cd /home/ubuntu/lostpet101/
+  649  2023-01-22 23:50:20 sudo systemctl reload nginx
+  650  2023-01-22 23:50:29 sudo service nginx restart
+  651  2023-01-22 23:50:34 sudo systemctl status nginx
+  652  2023-01-22 23:50:44 docker ps -a
+  653  2023-01-22 23:50:50 git status
+  654  2023-01-22 23:50:56 gitall . 'added nginx config'
+  655  2023-01-22 23:52:50 git status
+  656  2023-01-22 23:53:31 git pull
+  657  2023-01-22 23:53:53 docker restart lostpet101
+  658  2023-01-22 23:54:11 docker stop lostpet101
+  659  2023-01-22 23:54:13 git pull
+  660  2023-01-22 23:54:23 rocker start lostpet101
+  661  2023-01-22 23:54:27 docker ps -a
+  662  2023-01-22 23:54:35 docker start lostpet101
+  663  2023-01-22 23:54:37 docker ps -a
+  664  2023-01-22 23:57:30 git pull
+  665  2023-01-22 23:57:49 cd public/
+  666  2023-01-22 23:57:52 ls -la
+  667  2023-01-22 23:58:00 touch .keep
+  668  2023-01-22 23:58:02 rm *
+  669  2023-01-22 23:58:05 rm **
+  670  2023-01-22 23:58:07 ls -lt
+  671  2023-01-22 23:58:12 rm static
+  672  2023-01-22 23:58:15 rm -rf static
+  673  2023-01-22 23:58:16 ls -lt
+  674  2023-01-22 23:58:20 cd ..
+  675  2023-01-23 00:00:37 docker stop lostpet101
+  676  2023-01-23 00:00:42 docker ps -a
+  677  2023-01-22 23:58:51 docker-build-frontend.sh
+  678  2023-01-23 00:01:19 docker start lostpet101
+  679  2023-01-23 00:01:22 docker ps -a
+  680  2023-01-23 00:01:52 git status
+  681  2023-01-23 00:01:57 cd lostpet101/
+  682  2023-01-23 00:01:59 git status
+  683  2023-01-24 04:43:03 docker-delete-all
+  684  2023-01-24 04:43:11 docker-delete-all.sh
+  685  2023-01-24 04:43:23 docker ps -a
+  686  2023-01-24 04:43:26 docker images -a
+  687  2023-01-24 04:43:34 rm -rf pet-finder/
+  688  2023-01-24 04:43:35 ls -lt
+  689  2023-01-24 04:43:39 cd lostpet101/
+  690  2023-01-24 04:43:44 git pull
+  691  2023-01-24 04:44:06 git status
+  692  2023-01-24 04:46:23 rm -rf ./public/**
+  693  2023-01-24 04:46:27 git status
+  694  2023-01-24 04:46:34 git reset --hard
+  695  2023-01-24 04:46:37 git status
+  696  2023-01-24 04:46:39 git pull
+  697  2023-01-24 04:46:52 git fetch --all
+  698  2023-01-24 04:47:17 git clean -fd
+  699  2023-01-24 04:47:25 ls -lt
+  700  2023-01-24 04:47:27 git clean -fd
+  701  2023-01-24 04:47:34 git clean --help
+  702  2023-01-24 04:48:28 git status
+  703  2023-01-24 04:48:31 touch prova
+  704  2023-01-24 04:48:33 git status
+  705  2023-01-24 04:48:45 git clean -fdi
+  706  2023-01-24 04:49:06 git status
+  707  2023-01-24 04:49:14 git clean --help
+  708  2023-01-24 04:51:54 git status
+  709  2023-01-24 04:51:57 git pull
+  710  2023-01-24 04:55:55 docker-build-frontend.sh
+  711  2023-01-24 04:59:44 git status
+  712  2023-01-24 05:05:50 app-seed.sh
+  713  2023-01-24 05:06:43 git status
+  714  2023-01-24 05:07:45 docker run -it --rm --entrypoint /bin/bash -v ${PWD}/:/lostpet101 lostpet101 -c bash
+  715  2023-01-24 05:12:59 app-seed.sh records=1
+  716  2023-01-24 05:16:03 git status
+  717  2023-01-24 05:21:26 git pull
+  718  2023-01-24 05:21:47 docker stop lostpet101 101
+  719  2023-01-24 05:21:51 docker ps -a
+  720  2023-01-24 05:22:02 docker images -a
+  721  2023-01-24 05:22:17 docker start lostpet101
+  722  2023-01-24 05:22:23 docker ps -a
+  723  2023-01-24 05:23:17 git status
+  724  2023-01-24 05:24:01 docker stop lostpet101
+  725  2023-01-24 05:24:10 docker ps -a
+  726  2023-01-24 05:24:14 docker start lostpet101
+  727  2023-01-24 05:24:16 docker ps -a
+  728  2023-01-24 05:26:13 docker stop lostpet101
+  729  2023-01-24 05:26:24 docker start lostpet101
+  730  2023-01-24 05:26:27 dcoer ps -a
+  731  2023-01-24 05:26:32 docker pa -a
+  732  2023-01-24 05:26:34 docker ps a
+  733  2023-01-24 05:26:38 docker ps -a
+  734  2023-01-24 05:00:58 docker-compose -f ${PWD}/docker-compose.prod.yml up --build
+  735  2023-01-24 05:34:35 app-terminal.sh
+  736  2023-01-24 05:36:45 docker stop lostpet101
+  737  2023-01-24 05:36:55 docker start lostpet101
+  738  2023-01-24 05:36:58 docker ps -a
+  739  2023-01-24 05:40:27 git status
+  740  2023-01-24 05:41:18 gitall . 'cors'
+  741  2023-01-24 05:47:08 git status
+  742  2023-01-24 05:48:03 docker stop lostpet101
+  743  2023-01-24 05:48:11 docker start lostpet101
+  744  2023-01-24 05:48:15 dcoker ps -a
+  745  2023-01-24 05:48:19 docker pa -s
+  746  2023-01-24 05:48:22 docker ps -a
+  747  2023-01-24 05:48:30 docker logs lostpet101
+  748  2023-01-24 05:53:29 docker start lostpet101
+  749  2023-01-24 05:53:32 docker ps -a
+  750  2023-01-24 05:53:36 docker logs lostpet101
+  751  2023-01-24 05:54:00 docker start lostpet101
+  752  2023-01-24 05:54:04 docker ps -a
+  753  2023-01-24 05:58:20 docker stop lostpet101
+  754  2023-01-24 05:58:45 docker start lostpet101
+  755  2023-01-24 05:58:50 1docker ps -a
+  756  2023-01-24 05:59:03 docker stop lostpet101
+  757  2023-01-24 05:59:13 docker start lostpet101
+  758  2023-01-24 05:59:23 docker ps -a
+  759  2023-01-24 14:27:37 app-credentials.sh
+  760  2023-01-24 14:28:18 git status
+  761  2023-01-24 14:30:47 gitall . 'cors'
+  762  2023-01-24 14:31:51 git pull
+  763  2023-01-24 14:31:53 git status
+  764  2023-01-24 14:32:02 docker-delete-all.sh
+  765  2023-01-24 14:51:14 git status
+  766  2023-01-24 14:54:57 gitlog
+  767  2023-01-24 14:55:01 git log
+  768  2023-01-24 14:55:05 cd lostpet101/
+  769  2023-01-24 14:55:07 gitlog
+  770  2023-01-24 14:59:22 git pull
+  771  2023-01-24 14:59:25 git status
+  772  2023-01-24 14:59:29 git pull
+  773  2023-01-24 15:13:15 rm -rf ./public/**
+  774  2023-01-24 15:13:25 ls public
+  775  2023-01-24 15:13:33 git status
+  776  2023-01-24 15:13:38 cd public
+  777  2023-01-24 15:13:42 mkdir public
+  778  2023-01-24 15:13:48 ls public
+  779  2023-01-24 15:14:06 git pull
+  780  2023-01-24 15:14:08 docker ps -a
+  781  2023-01-24 15:18:05 git status
+  782  2023-01-24 15:18:07 git pull
+  783  2023-01-24 15:38:44 docker ps -a
+  784  2023-01-24 15:39:13 git status
+  785  2023-01-24 15:43:54 docker_delete_all
+  786  2023-01-24 15:43:56 git pull
+  787  2023-01-24 15:44:05 docker-del-volumes.sh
+  788  2023-01-24 15:44:11 docker ps -a
+  789  2023-01-24 15:44:13 docker images -a
+  790  2023-01-24 15:44:27 docker-create-volumes.sh
+  791  2023-01-24 15:44:57 docker-run-postgres.sh
+  792  2023-01-24 15:45:11 docker ps -a
+  793  2023-01-24 15:45:29 docker-run-app
+  794  2023-01-24 15:46:16 ./script/docker-run-app.sh
+  795  2023-01-24 15:46:29 chmod +x ./script/*
+  796  2023-01-24 15:46:35 docker-run-app.sh
+  797  2023-01-24 15:50:06 docker_delete_all
+  798  2023-01-24 15:50:12 docker images -a
+  799  2023-01-24 15:50:16 docker ps -a
+  800  2023-01-24 15:50:24 docker-run-app.sh
+  801  2023-01-24 16:00:09 docker_delete_all
+  802  2023-01-24 16:00:13 docker-run-app.sh
+  803  2023-01-24 16:03:40 docker_delete_all
+  804  2023-01-24 16:06:26 app-seed.sh
+  805  2023-01-24 16:07:21 docker-build-frontend.sh
+  806  2023-01-24 16:09:51 ls public/
+  807  2023-01-24 16:03:43 docker-run-app.sh
+  808  2023-01-24 16:15:52 docker-del-app
+  809  2023-01-24 16:15:59 docker-del-app.sh
+  810  2023-01-24 16:16:02 docker ps -a
+  811  2023-01-24 16:16:04 docker images -a
+  812  2023-01-24 16:16:11 git status
+  813  2023-01-24 16:21:31 git rm --cached .env.postgres
+  814  2023-01-24 16:21:34 git status
+  815  2023-01-24 16:22:04 gitall . 'ec2 run-app'
+  816  2023-01-24 16:22:08 git status
+  817  2023-01-24 16:23:00 docker ps -a
+  818  2023-01-24 16:23:03 docker images -a
+  819  2023-01-24 16:24:52 git status
+  820  2023-01-24 16:36:36 port
+  821  2023-01-24 14:55:09 git log
+  822  2023-01-24 16:37:04 git status
+  823  2023-01-24 16:43:14 git pull
+  824  2023-01-24 16:43:33 docker-del-app
+  825  2023-01-24 16:43:35 docker-del-app.sh
+  826  2023-01-24 16:43:38 docker ps -a
+  827  2023-01-24 16:43:51 git pull
+  828  2023-01-24 16:44:06 rm -rfv /public/*
+  829  2023-01-24 16:44:19 rm -rfv ./public/*
+  830  2023-01-24 16:44:42 docker-build-frontend.sh
+  831  2023-01-24 16:46:46 git status
+  832  2023-01-24 16:46:58 docker-run-app.sh
+  833  2023-01-24 17:09:02 git pull
+  834  2023-01-24 17:09:19 git status
+  835  2023-01-24 17:09:47 git reset --hard HEAD~1
+  836  2023-01-24 17:09:51 git pull
+  837  2023-01-24 17:09:54 git status
+  838  2023-01-24 17:10:02 cd public/
+  839  2023-01-24 17:10:05 rm -rf *.*
+  840  2023-01-24 17:10:09 cd ..
+  841  2023-01-24 17:10:12 git pull
+  842  2023-01-24 17:10:48 git status
+  843  2023-01-24 17:10:57 git reset --hard
+  844  2023-01-24 17:11:02 git status
+  845  2023-01-24 17:11:04 git pull
+  846  2023-01-24 17:11:10 git fetch --all
+  847  2023-01-24 17:11:12 git status
+  848  2023-01-24 17:11:14 git pull
+  849  2023-01-24 17:11:40 git status
+  850  2023-01-24 17:11:43 git pull
+  851  2023-01-24 17:12:27 git status
+  852  2023-01-24 17:12:33 git pull
+  853  2023-01-24 17:14:19 git status
+  854  2023-01-24 17:14:22 git pull
+  855  2023-01-24 17:14:29 docker ps -a
+  856  2023-01-24 17:15:04 docker-del--app.sh
+  857  2023-01-24 17:15:12 docker-del-app.sh
+  858  2023-01-24 17:15:16 docker-run-app.sh
+  859  2023-01-24 17:32:22 git pull
+  860  2023-01-24 17:32:27 docker-run-app.sh
+  861  2023-01-24 17:32:43 app-credentials.sh
+  862  2023-01-24 17:33:04 docker-run-app.sh
+  863  2023-01-24 18:26:18 sudo systemctl nginx stop
+  864  2023-01-24 18:27:30 sudo service nginx
+  865  2023-01-24 18:27:41 sudo service nginx stop
+  866  2023-01-24 18:27:48 sudo systemctl status nginx
+  867  2023-01-24 18:27:57 sudo service nginx stop
+  868  2023-01-24 18:29:58 sudo service nginx start
+  869  2023-01-24 18:40:26 docker-del-app.sh
+  870  2023-01-24 18:42:42 git pull
+  871  2023-01-24 18:42:53 docker-run-app.sh
+  872  2023-01-24 19:12:47 git status
+  873  2023-01-24 19:13:03 gitall . 'updatged cors.rb'
+  874  2023-01-24 19:21:50 git pull
+  875  2023-01-24 19:22:03 docker-run-app.sh
+  876  2023-01-24 19:26:34 git pull
+  877  2023-01-24 19:26:38 docker-run-app.sh
+  878  2023-01-24 19:54:28 cd lostpet101/
+  879  2023-01-24 19:54:30 git pull
+  880  2023-01-24 19:54:37 ls frontend/
+  881  2023-01-24 19:54:39 ls frontend/ -la
+  882  2023-01-24 19:56:11 git status
+  883  2023-01-24 19:56:35 git pull
+  884  2023-01-24 19:56:41 docker-run-app.sh
+  885  2023-01-24 20:16:11 git fetch --all
+  886  2023-01-24 20:16:17 git fech --all
+  887  2023-01-24 20:16:21 git fetch --all
+  888  2023-01-24 20:16:24 git pull
+  889  2023-01-24 20:16:29 git status
+  890  2023-01-24 20:16:31 git pull
+  891  2023-01-24 20:17:06 docker exec -it lostpet101 rails db:reset
+  892  2023-01-24 20:16:38 docker-run-app.sh
+  893  2023-01-24 20:17:38 docker-del-volumes.sh
+  894  2023-01-24 20:17:49 docker-del-all.sh
+  895  2023-01-24 20:18:17 docker-del-volumes.sh
+  896  2023-01-24 20:18:24 docker-create-volumes.sh
+  897  2023-01-24 20:18:29 docker ps -a
+  898  2023-01-24 20:18:31 docker images -a
+  899  2023-01-24 20:18:46 git pull
+  900  2023-01-24 20:21:22 app-seed.sh
+  901  2023-01-24 20:18:49 docker-run-app.sh
+  902  2023-01-24 20:22:14 docker-run-app.sh -d
+  903  2023-01-24 20:22:43 app-terminal.sh
+  904  2023-01-24 20:24:52 docker exec -it lostpet101 rails db:seed
+  905  2023-01-24 20:27:02 docker-del-all.sh
+  906  2023-01-24 20:27:07 docker-del-volumes.sh
+  907  2023-01-24 20:27:25 git pull
+  908  2023-01-24 20:28:21 docker-create-volumes.sh
+  909  2023-01-24 20:28:45 docker-run-app.sh -d
+  910  2023-01-24 20:30:24 docker ps -a
+  911  2023-01-24 20:30:55 sudo systemctl status nginx
+  912  2023-01-24 20:32:22 docker-del-all.sh
+  913  2023-01-24 20:32:28 docker-del-volumes.sh
+  914  2023-01-24 20:32:31 docker ps -a
+  915  2023-01-24 20:32:36 docker images -a
+  916  2023-01-24 20:33:09 git status
+  917  2023-01-24 20:33:29 bundle
+  918  2023-01-24 20:33:56 git status
+  919  2023-01-24 20:34:16 git reset hard
+  920  2023-01-24 20:34:19 git reset --hard
+  921  2023-01-24 20:34:22 git status
+  922  2023-01-24 20:35:15 git pull
+  923  2023-01-24 20:35:43 docker-del-volumes.sh
+  924  2023-01-24 20:35:48 docker-create-volumes.sh
+  925  2023-01-24 20:35:52 docker-run-app.sh
+  926  2023-01-24 20:41:22 docker start postgres
+  927  2023-01-24 20:41:25 docker ps -a
+  928  2023-01-24 20:41:30 docker start lostpet101
+  929  2023-01-24 20:41:33 docker ps -a
+  930  2023-01-24 20:44:34 git status
+  931  2023-01-24 21:12:25 docker ps -a
+  932  2023-01-24 21:12:31 docker-del-app.sh
+  933  2023-01-24 21:12:40 docker-del-volumes.sh
+  934  2023-01-24 21:12:53 docker-create-volumes.sh
+  935  2023-01-24 21:12:57 git status
+  936  2023-01-24 21:13:01 git pull
+  937  2023-01-24 21:13:31 docker-run-app.sh
+  938  2023-01-24 21:20:58 docker-del-app.sh
+  939  2023-01-24 21:21:02 git pull
+  940  2023-01-24 21:21:49 docker ps -a
+  941  2023-01-24 21:21:51 docker images -a
+  942  2023-01-24 21:21:57 git pull
+  943  2023-01-24 21:22:03 docker-run-app.sh
+  944  2023-01-24 21:45:58 docker-del-all.sh
+  945  2023-01-24 21:46:06 docker-del-volumes.sh
+  946  2023-01-24 21:46:10 docker-del-app.sh
+  947  2023-01-24 21:46:13 docker ps -a
+  948  2023-01-24 21:46:17 dokcer images -a
+  949  2023-01-24 21:46:21 docker images -a
+  950  2023-01-24 23:22:04 git pull
+  951  2023-01-24 23:22:09 docker ps -a
+  952  2023-01-24 23:22:11 docker images -a
+  953  2023-01-24 23:22:55 git status
+  954  2023-01-24 23:22:57 git pull
+  955  2023-01-24 23:23:06 docker-del-volumes.sh
+  956  2023-01-24 23:23:11 docker-create-volumes.sh
+  957  2023-01-24 23:24:07 docker pull
+  958  2023-01-24 23:24:11 git pull
+  959  2023-01-24 23:24:13 git status
+  960  2023-01-24 23:24:16 git fetch --all
+  961  2023-01-24 23:24:26 docker pull
+  962  2023-01-24 23:24:28 git pull
+  963  2023-01-24 23:27:52 git pull
+  964  2023-01-24 23:28:00 git status
+  965  2023-01-24 23:28:19 app-seed.sh
+  966  2023-01-24 23:24:38 docker-run-app.sh
+  967  2023-01-24 23:42:21 docker-del-all.sh
+  968  2023-01-24 23:42:27 docker-del-volumes.sh
+  969  2023-01-24 23:42:31 docker-create-volumes.sh
+  970  2023-01-24 23:42:36 docker ps -a
+  971  2023-01-24 23:42:39 docker images -a
+  972  2023-01-24 23:44:56 git pull
+  973  2023-01-24 23:42:43 docker-run-app.sh
+  974  2023-01-24 23:45:46 app-seed.sh
+  975  2023-01-24 23:46:44 docker ps -a
+  976  2023-01-24 23:46:46 docker-run-app.sh
+  977  2023-01-24 23:46:50 docker status
+  978  2023-01-24 23:46:53 docker ps -a
+  979  2023-01-24 23:46:56 docker images -a
+  980  2023-01-24 23:47:18 git status
+  981  2023-01-24 23:47:20 git pull
+  982  2023-01-24 23:47:07 docker-run-app.sh -d
+  983  2023-01-24 23:49:51 git status
+  984  2023-01-24 23:49:55 git pull
+  985  2023-02-06 20:28:48 cd lostpet101/
+  986  2023-02-06 20:28:50 git status
+  987  2023-02-06 20:28:55 git fetch --all
+  988  2023-02-06 20:29:01 git pull
+  989  2023-02-25 20:59:24 cd lostpet101/
+  990  2023-02-25 20:59:26 ls -lt
+  991  2023-02-25 20:59:29 rails c
+  992  2023-02-25 21:00:22 docker ps -a
+  993  2023-02-25 21:02:04 docker run -it --rm lostpet101 bash
+  994  2023-02-25 21:02:19 docker run -it --rm --entrypoint /bin/bash lostpet101 -c bash
+  995  2023-02-25 21:02:46 docker ps -a
+  996  2023-02-25 21:03:17 docker run -it --rm --entrypoint /bin/bash lostpet101 -c bash
+  997  2023-02-25 21:04:06 docker run -it --rm -v ./:/lostpet101 --entrypoint /bin/bash lostpet101 -c bash
+  998  2023-02-25 21:04:17 docker run -it --rm -v .:/lostpet101 --entrypoint /bin/bash lostpet101 -c bash
+  999  2023-02-25 21:04:28 cd ..
+ 1000  2023-02-25 21:04:38 docker run -it --rm -v ./lostpet101/:/lostpet101 --entrypoint /bin/bash lostpet101 -c bash
+ 1001  2023-02-25 21:04:44 docker run -it --rm -v ./lostpet101:/lostpet101 --entrypoint /bin/bash lostpet101 -c bash
+ 1002  2023-02-25 21:04:57 docker run -it --rm -v lostpet101:/lostpet101 --entrypoint /bin/bash lostpet101 -c bash
+ 1003  2023-02-25 21:05:16 docker ps -a
+ 1004  2023-02-25 21:05:58 docker run -it --rm -v .:/lostpet101 --entrypoint /bin/bash lostpet101 -c bash
+ 1005  2023-02-25 21:06:16 docker run -it --rm -v ${PWD}:/lostpet101 --entrypoint /bin/bash lostpet101 -c bash
+ 1006  2023-02-25 21:06:27 cd lostpet101/
+ 1007  2023-02-25 21:06:29 docker run -it --rm -v ${PWD}:/lostpet101 --entrypoint /bin/bash lostpet101 -c bash
+ 1008  2023-02-25 21:07:41 docker exec -it -v ${PWD}:/lostpet101 --entrypoint /bin/bash lostpet101 -c bash
+ 1009  2023-02-25 21:07:53 docker exec -it --entrypoint /bin/bash lostpet101 -c bash
+ 1010  2023-02-25 21:08:02 docker exec -it lostpet101
+ 1011  2023-02-25 21:08:09 docker exec -it lostpet101 bash
+ 1012  2023-02-25 21:10:19 docker ps -a
+ 1013  2023-11-08 15:41:16 pwd
+----------------------------------------------------------------------------------------------------------------------
+.bashrc
+----------------------------------------------------------------------------------------------------------------------
+export PATH="~/lostpet101/script:$PATH"
+
+frontend(){
+        DOCKER_BUILDKIT=1 docker build  --file ./docker/Dockerfile.frontend --tag react --output public .
+}
+
+docker_delete_all(){
+  docker stop $(docker ps -a -q)
+  docker rmi -f $(docker images -aq)
+  docker system prune --force
+}
+gitall() {
+    branch="$(git branch --show-current)"
+    # echo "current branch is $branch"
+    git add $1
+    git commit -m "$2"
+    git push origin $branch
+}
+----------------------------------------------------------------------------------------------------------------------
