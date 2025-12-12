@@ -1,23 +1,21 @@
 default: &default
-  adapter: postgresql
-  encoding: unicode
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: <%= ENV["POSTGRES_USER"] %>
-  password: <%= ENV["POSTGRES_PASSWORD"] %>
+    adapter: postgresql
+    encoding: unicode
+    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+    host: <%= ENV.fetch("POSTGRES_HOST", "localhost") %>
+    port: <%= ENV.fetch("POSTGRES_PORT", 5432) %>
+    username: <%= ENV.fetch("POSTGRES_USER") %>
+    password: <%= ENV.fetch("POSTGRES_PASSWORD") %>
 
 development:
-  <<: *default
-  database: <%= ENV["DB_DEVELOPMENT"] %>
-  host: localhost
+    <<: *default
+    database: <%= ENV.fetch("DB_DEVELOPMENT", "lostpet101_development") %>
 
 test:
-  <<: *default
-  database: <%= ENV["DB_TEST"] %>
-  host: localhost
+    <<: *default
+    database: <%= ENV.fetch("DB_TEST", "lostpet101_test") %>
 
 production:
-  <<: *default
-  database: <%= ENV["DB_PRODUCTION"] %>
-  host: <%= ENV["POSTGRES_HOST"] %>
-  port: <%= ENV["POSTGRES_PORT"] %>
-  timeout: 5000
+    <<: *default
+    database: <%= ENV.fetch("DB_PRODUCTION", "lostpet101") %>
+    timeout: 5000

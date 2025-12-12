@@ -1,52 +1,55 @@
 version: "3.8"
 
 volumes:
-  postgres_data:
-  gem_cache:
-  shared_data:
+    postgres_data:
+    gem_cache:
+    shared_data:
+
 networks:
-  development:
-  production:
+    production:
 
 services:
-  postgres:
-    image: postgres:15-alpine
-    container_name: postgres
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-      - shared_data:/var/shared
-    networks:
-      - production
-      - development
-    env_file: .env.postgres
-    restart: always
-    ports:
-      - "5432:5432"
+    postgres:
+        image: postgres:15-alpine
+        container_name: postgres
+        environment:
+            - LANG=en_US.utf8
+            - LC_ALL=en_US.utf8
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+            - shared_data:/var/shared
+        networks:
+            - production
+        env_file: .env.postgres
+        restart: always
+        ports:
+            - "5432:5432"
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U $POSTGRES_USER -d $POSTGRES_DB"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
 
-  lostpet101:
-    build:
-      context: .
-      dockerfile: ./docker/Dockerfile.ver1
-    container_name: lostpet101
-    image: lostpet101
-    volumes:
-      - .:/lostpet101
-      - shared_data:/var/shared
-      - gem_cache:/usr/local/bundle/gems
-    networks:
-      - production
-      - development
-    ports:
-      - 3000:3000
-    env_file: .env.production
-    environment:
-      RAILS_ENV: production
-    entrypoint: entrypoint.sh
-    command: ["rails", "server", "-p", "3000", "-b", "0.0.0.0"]
-    # command:
-    #   bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b
-    #   '0.0.0.0'"
-    stdin_open: true
-    tty: true
-    depends_on:
-      - postgres
+    lostpet101:
+        build:
+            context: .
+            dockerfile: ./docker/Dockerfile.ver1
+        container_name: lostpet101
+        image: lostpet101
+        volumes:
+            - .:/lostpet101
+            - shared_data:/var/shared
+            - gem_cache:/usr/local/bundle/gems
+        networks:
+            - production
+        ports:
+            - "3000:3000"
+        env_file: .env.production
+        environment:
+            RAILS_ENV: production
+        entrypoint: entrypoint.sh
+        command: ["rails", "server", "-p", "3000", "-b", "0.0.0.0"]
+        stdin_open: true
+        tty: true
+        depends_on:
+            - postgres
