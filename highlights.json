@@ -1,0 +1,18 @@
+{
+    "highlights": [
+        "Ruby on Rails (API-only)",
+        "PostgreSQL",
+        "Puma (web server)",
+        "bcrypt (authentication)",
+        "AWS S3",
+        "Active Storage",
+        "React.js",
+        "Redux Toolkit",
+        "React Router DOM",
+        "Tailwind CSS",
+        "Axios",
+        "React Hook Form",
+        "Yup (validation)",
+        "Docker"
+    ]
+}
